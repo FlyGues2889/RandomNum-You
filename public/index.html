@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="shortcut icon" href="../docs/image/logo/usual_circle.svg" type="image/x-icon">
+    <title>FlyGuesWeb - 随机数抽取器</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+    <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+    <!-- Filled -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Outlined -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <!-- Rounded -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- Sharp -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <!-- Two Tone -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/font.css">
+    <script src="../src/RandomMum.js"></script>
+
+    <style>
+        mdui-card.title {
+            padding: 1rem;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            margin-bottom: 1rem;
+            border-radius: 2rem
+        }
+
+        mdui-card.text {
+            padding: 1rem;
+        }
+
+        body,
+        html {
+            background-color: rgb(var(--mdui-color-surface-container-low));
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+        }
+    </style>
+
+    <style>
+        :root,
+        :host {
+            --mdui-color-primary-light: 54, 84, 200;
+            --mdui-color-on-primary-light: 255, 255, 255;
+            --mdui-color-primary-container-light: 221, 225, 255;
+            --mdui-color-on-primary-container-light: 0, 19, 85;
+            --mdui-color-secondary-light: 90, 93, 114;
+            --mdui-color-on-secondary-light: 255, 255, 255;
+            --mdui-color-secondary-container-light: 223, 225, 249;
+            --mdui-color-on-secondary-container-light: 23, 27, 44;
+            --mdui-color-tertiary-light: 118, 84, 110;
+            --mdui-color-on-tertiary-light: 255, 255, 255;
+            --mdui-color-tertiary-container-light: 255, 215, 243;
+            --mdui-color-on-tertiary-container-light: 44, 18, 41;
+            --mdui-color-error-light: 186, 26, 26;
+            --mdui-color-on-error-light: 255, 255, 255;
+            --mdui-color-error-container-light: 255, 218, 214;
+            --mdui-color-on-error-container-light: 65, 0, 2;
+            --mdui-color-background-light: 254, 251, 255;
+            --mdui-color-on-background-light: 27, 27, 31;
+            --mdui-color-surface-light: 254, 251, 255;
+            --mdui-color-on-surface-light: 27, 27, 31;
+            --mdui-color-surface-variant-light: 226, 225, 236;
+            --mdui-color-on-surface-variant-light: 69, 70, 79;
+            --mdui-color-outline-light: 118, 118, 128;
+            --mdui-color-outline-variant-light: 198, 197, 208;
+            --mdui-color-shadow-light: 0, 0, 0;
+            --mdui-color-scrim-light: 0, 0, 0;
+            --mdui-color-inverse-surface-light: 48, 48, 52;
+            --mdui-color-inverse-on-surface-light: 242, 240, 244;
+            --mdui-color-inverse-primary-light: 184, 196, 255;
+            --mdui-color-surface-dim-light: 219, 217, 222;
+            --mdui-color-surface-bright-light: 251, 248, 253;
+            --mdui-color-surface-container-lowest-light: 255, 255, 255;
+            --mdui-color-surface-container-low-light: 245, 243, 247;
+            --mdui-color-surface-container-light: 240, 237, 241;
+            --mdui-color-surface-container-high-light: 234, 231, 236;
+            --mdui-color-surface-container-highest-light: 228, 225, 230;
+            --mdui-color-surface-tint-color-light: 54, 84, 200;
+            --mdui-color-primary-dark: 184, 196, 255;
+            --mdui-color-on-primary-dark: 0, 36, 134;
+            --mdui-color-primary-container-dark: 20, 57, 175;
+            --mdui-color-on-primary-container-dark: 221, 225, 255;
+            --mdui-color-secondary-dark: 194, 197, 221;
+            --mdui-color-on-secondary-dark: 44, 47, 66;
+            --mdui-color-secondary-container-dark: 66, 70, 89;
+            --mdui-color-on-secondary-container-dark: 223, 225, 249;
+            --mdui-color-tertiary-dark: 228, 186, 217;
+            --mdui-color-on-tertiary-dark: 68, 39, 63;
+            --mdui-color-tertiary-container-dark: 92, 61, 86;
+            --mdui-color-on-tertiary-container-dark: 255, 215, 243;
+            --mdui-color-error-dark: 255, 180, 171;
+            --mdui-color-on-error-dark: 105, 0, 5;
+            --mdui-color-error-container-dark: 147, 0, 10;
+            --mdui-color-on-error-container-dark: 255, 180, 171;
+            --mdui-color-background-dark: 27, 27, 31;
+            --mdui-color-on-background-dark: 228, 225, 230;
+            --mdui-color-surface-dark: 27, 27, 31;
+            --mdui-color-on-surface-dark: 228, 225, 230;
+            --mdui-color-surface-variant-dark: 69, 70, 79;
+            --mdui-color-on-surface-variant-dark: 198, 197, 208;
+            --mdui-color-outline-dark: 144, 144, 154;
+            --mdui-color-outline-variant-dark: 69, 70, 79;
+            --mdui-color-shadow-dark: 0, 0, 0;
+            --mdui-color-scrim-dark: 0, 0, 0;
+            --mdui-color-inverse-surface-dark: 228, 225, 230;
+            --mdui-color-inverse-on-surface-dark: 48, 48, 52;
+            --mdui-color-inverse-primary-dark: 54, 84, 200;
+            --mdui-color-surface-dim-dark: 19, 19, 22;
+            --mdui-color-surface-bright-dark: 57, 57, 60;
+            --mdui-color-surface-container-lowest-dark: 14, 14, 17;
+            --mdui-color-surface-container-low-dark: 27, 27, 31;
+            --mdui-color-surface-container-dark: 31, 31, 35;
+            --mdui-color-surface-container-high-dark: 42, 42, 45;
+            --mdui-color-surface-container-highest-dark: 52, 52, 56;
+            --mdui-color-surface-tint-color-dark: 184, 196, 255;
+            --mdui-color-primary: var(--mdui-color-primary-light);
+            --mdui-color-on-primary: var(--mdui-color-on-primary-light);
+            --mdui-color-primary-container: var(--mdui-color-primary-container-light);
+            --mdui-color-on-primary-container: var(--mdui-color-on-primary-container-light);
+            --mdui-color-secondary: var(--mdui-color-secondary-light);
+            --mdui-color-on-secondary: var(--mdui-color-on-secondary-light);
+            --mdui-color-secondary-container: var(--mdui-color-secondary-container-light);
+            --mdui-color-on-secondary-container: var(--mdui-color-on-secondary-container-light);
+            --mdui-color-tertiary: var(--mdui-color-tertiary-light);
+            --mdui-color-on-tertiary: var(--mdui-color-on-tertiary-light);
+            --mdui-color-tertiary-container: var(--mdui-color-tertiary-container-light);
+            --mdui-color-on-tertiary-container: var(--mdui-color-on-tertiary-container-light);
+            --mdui-color-error: var(--mdui-color-error-light);
+            --mdui-color-on-error: var(--mdui-color-on-error-light);
+            --mdui-color-error-container: var(--mdui-color-error-container-light);
+            --mdui-color-on-error-container: var(--mdui-color-on-error-container-light);
+            --mdui-color-background: var(--mdui-color-background-light);
+            --mdui-color-on-background: var(--mdui-color-on-background-light);
+            --mdui-color-surface: var(--mdui-color-surface-light);
+            --mdui-color-on-surface: var(--mdui-color-on-surface-light);
+            --mdui-color-surface-variant: var(--mdui-color-surface-variant-light);
+            --mdui-color-on-surface-variant: var(--mdui-color-on-surface-variant-light);
+            --mdui-color-outline: var(--mdui-color-outline-light);
+            --mdui-color-outline-variant: var(--mdui-color-outline-variant-light);
+            --mdui-color-shadow: var(--mdui-color-shadow-light);
+            --mdui-color-scrim: var(--mdui-color-scrim-light);
+            --mdui-color-inverse-surface: var(--mdui-color-inverse-surface-light);
+            --mdui-color-inverse-on-surface: var(--mdui-color-inverse-on-surface-light);
+            --mdui-color-inverse-primary: var(--mdui-color-inverse-primary-light);
+            --mdui-color-surface-dim: var(--mdui-color-surface-dim-light);
+            --mdui-color-surface-bright: var(--mdui-color-surface-bright-light);
+            --mdui-color-surface-container-lowest: var(--mdui-color-surface-container-lowest-light);
+            --mdui-color-surface-container-low: var(--mdui-color-surface-container-low-light);
+            --mdui-color-surface-container: var(--mdui-color-surface-container-light);
+            --mdui-color-surface-container-high: var(--mdui-color-surface-container-high-light);
+            --mdui-color-surface-container-highest: var(--mdui-color-surface-container-highest-light);
+            --mdui-color-surface-tint-color: var(--mdui-color-surface-tint-color-light);
+            color: rgb(var(--mdui-color-on-background));
+            background-color: rgb(var(--mdui-color-background));
+        }
+
+        div.bottomBar {
+            display: flex;
+            width: 10vw;
+            height: 5vh;
+            position: fixed;
+            right: 2.5rem;
+            bottom: 2rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+
+        div#topWindowBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4rem;
+            padding-left: 1rem;
+            margin-left: 5rem;
+            z-index: 999;
+
+            /* background-color: rgb(var(--mdui-color-surface-container)); */
+            font-family: 'Harmony Sans SC';
+            color: #00000050;
+
+            display: flex;
+            align-items: center;
+            justify-content: left;
+
+            -webkit-app-region: drag;
+            user-select: none;
+        }
+
+        mdui-layout-main {
+            margin-left: 5rem;
+        }
+
+        div.page {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 6rem;
+            margin-top: 3rem;
+
+            overflow: auto;
+            min-height: 600px;
+        }
+
+        mdui-navigation-rail {
+            background-color: rgb(var(--mdui-color-surface-container));
+        }
+
+        mdui-card.container {
+            margin: 0.5rem;
+            margin-left: 0;
+            padding: 2rem 1rem;
+
+            width: 98%;
+            border-radius: var(--mdui-shape-corner-extra-large);
+            background-color: rgb(var(--mdui-color-secondary-container), 0.3);
+        }
+
+        h1 {
+            user-select: none;
+        }
+
+        mdui-list-subheader {
+            font-size: small;
+        }
+    </style>
+
+
+</head>
+
+<body style="margin: 0;">
+    <mdui-layout style="height: 100vh;">
+        <mdui-linear-progress class="loading" style="position: fixed;top: 0;z-index: 90;"></mdui-linear-progress>
+
+        <mdui-navigation-rail value="mainPage" divider alignment="center">
+            <mdui-button-icon icon="all_inclusive" disabled slot="top"></mdui-button-icon>
+
+            <mdui-navigation-rail-item icon="home--outlined" active-icon="home" value="mainPage"
+                href="javascript:void(0);" onclick="navigate('mainPage')"></mdui-navigation-rail-item>
+            <mdui-navigation-rail-item icon="history--outlined" active-icon="history" value="historyPage"
+                href="javascript:void(0);" onclick="navigate('historyPage')"></mdui-navigation-rail-item>
+            <mdui-navigation-rail-item icon="settings--outlined" active-icon="settings" value="settingPage"
+                href="javascript:void(0);" onclick="navigate('settingPage')"></mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div id="topWindowBar">
+            随机数抽取器
+        </div>
+
+
+
+        <div class="page" id="mainPage">
+            <h1>数字抽取</h1>
+
+            <div class="bottomBar">
+                <mdui-button-icon icon="help_outline--outlined" onclick="openDialog1()"></mdui-button-icon>
+                <mdui-button-icon icon="fullscreen" id="btn-fullscreen-icon"
+                    onclick="handleFullScreen()"></mdui-button-icon>
+
+                <div style="flex-grow: 1"></div>
+                <mdui-fab icon="play_arrow--outlined" id="btn" onclick="getNum()"
+                    style="margin-left: 1.6rem;"></mdui-fab>
+
+            </div>
+
+            <mdui-layout-main class="main">
+                <mdui-dropdown trigger="contextmenu" open-on-pointer>
+                    <div id="out" slot="trigger" style="
+                            font-family: 'Product Sans Bold';
+                            margin-left: 2rem;
+                            color:rgb(var(--mdui-color-secondary-dark));
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 20vw">
+                        -
+                    </div>
+                    <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
+                        <mdui-menu-item icon="content_copy" id="copy1" onclick="copyToClipboard1()">复制</mdui-menu-item>
+                    </mdui-menu>
+                </mdui-dropdown>
+
+            </mdui-layout-main>
+
+        </div>
+
+        <div class="page" id="historyPage" style="display: none;">
+            <h1>历史记录</h1>
+
+            <mdui-card class="container" variant="filled" style="width: 90%;margin: 0 auto;padding: 1rem;">
+                <div id="notes">
+                    <div
+                        style="padding: 1rem;color: rgb(var(--mdui-color-on-primary-container),0.5);font-family: 'Product Sans';">
+                        <span><small>开始抽取以显示记录</small></span>
+                    </div>
+                </div>
+                <mdui-divider style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
+                <mdui-button icon="content_copy" id="copy2" onclick="copyToClipboard2()" variant="text">复制</mdui-button>
+            </mdui-card>
+
+        </div>
+
+        <div class="page" id="settingPage" style="display: none;">
+            <h1>设置</h1>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-subheader style="margin-bottom: -1.4rem;margin-top: -1rem;">抽取设置</mdui-list-subheader>
+                <mdui-list-item nonclickable icon="numbers">
+                    抽取数字范围
+                    <span slot="description">格式为 最小值-最大值 ，范围 （0 - 999999）</span>
+                    <mdui-text-field type="input" id="num" value="1-55"
+                        style="font-family: 'Product Sans';max-width: 16em;" slot="end-icon"
+                        variant="outlined"></mdui-text-field>
+                </mdui-list-item>
+                <mdui-divider inset middle></mdui-divider>
+                <mdui-list-item nonclickable style="text-align: left;" icon="snooze--outlined">
+                    时间延迟
+                    <mdui-select value="750" slot="end-icon" variant="outlined"
+                        style="line-height: 1.375rem;font-family: 'Product Sans';max-width: 16em;"
+                        end-icon="keyboard_arrow_down" class="GETTIME"
+                        onchange="tm=false;settime(this.value,0);storage(0)" id="settime">
+                        <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
+                        <mdui-menu-item value="500">0.50s</mdui-menu-item>
+                        <mdui-menu-item value="750">0.75s</mdui-menu-item>
+                        <mdui-menu-item value="1000">1s</mdui-menu-item>
+                        <mdui-menu-item value="1500">1.50s</mdui-menu-item>
+                        <mdui-menu-item value="2000">2s</mdui-menu-item>
+                        <mdui-menu-item value="5000">5s</mdui-menu-item>
+                    </mdui-select>
+                </mdui-list-item>
+
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;" icon="touch_app--outlined">
+                    是否手动
+                    <span slot="description">按钮/回车/空格键以启停</span>
+                    <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+
+                <mdui-list-item nonclickable style="text-align: left;" icon="replay">
+                    周期内不重复
+                    <label for="repeat"></label>
+                    <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
+                        onchange="if(this.checked)add=[];storage(0)" onclick="if(c){alert('运行中不可设置！');return false}"
+                        slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+
+            </mdui-card>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-subheader style="margin-bottom: -1.4rem;margin-top: -1rem;">个性化</mdui-list-subheader>
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;" icon="color_lens--outlined">
+                    数字颜色（滚动）
+                    <mdui-text-field id="tc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                        style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
+                        value="#c2c5dd" slot="end-icon"></mdui-text-field>
+                </mdui-list-item>
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;" icon="color_lens">
+                    数字颜色（抽中）
+                    <mdui-text-field id="tsc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                        style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
+                        value="#002fa7" slot="end-icon"></mdui-text-field>
+                </mdui-list-item>
+            </mdui-card>
+
+            <mdui-list-item nonclickable icon="info--outlined">
+                关于 随机数抽取器
+                <span slot="description">版本：1.0.0</span>
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem;margin-bottom: 10rem;">
+                <mdui-list-item nonclickable>
+                    <mdui-button href="https://github.com/FlyGues2889/random-number" icon="thumb_up--outlined" variant="tonal">支持项目</mdui-button>
+                    <mdui-button href="https://flygues2889.github.io/" icon="open_in_new" variant="text">转到作者的小站</mdui-button>
+                </mdui-list-item>
+            </div>
+        </div>
+
+    </mdui-layout>
+
+    <mdui-snackbar close-on-outside-click class="errorSnackbar" placement="top-start" close-icon="error_outline"
+        style="border-radius: 1rem;">
+        <div style="display: flex;align-items: center;">
+            <mdui-icon name="error_outline" style="margin-right: 0.5rem;"></mdui-icon>
+            抽取数字范围错误
+        </div>
+    </mdui-snackbar>
+
+    <mdui-button-icon icon="help_outline--outlined" style="display: none;"></mdui-button-icon>
+
+    <mdui-dialog close-on-overlay-click headline="使用指南" class="example-action">
+        <mdui-icon slot="icon" name="help_outline--outlined"></mdui-icon>
+        <div>
+            1.点击 <b>
+                <mdui-icon name="play_arrow--outlined" style="font-size: small;"></mdui-icon>
+                开始抽取
+                按钮/回车键/空格键</b> 开始抽取数字。<br>
+            2.在 <b>
+                <mdui-icon name="settings--outlined" style="font-size: small;"></mdui-icon>
+                设置 按钮</b>
+            设置抽取数字范围、抽取时长、是否重复和是否手动抽取。<br>
+            3.点击 <b>
+                <mdui-icon name="fullscreen--outlined" style="font-size: small;"></mdui-icon>
+                全屏 按钮</b>
+            以全屏网页。<br>
+            <mdui-divider style="margin: 1em;"></mdui-divider>
+            <small>
+                随机抽号基于内置的随机数发生器，在预设数字范围内，采用平均分布的抽取方式产生一个随机数。人的主观意念认为数字范围的最小端和最大端抽取到的概率更低，实际上它们和中间段数字出现的概率相同。<br><br>
+                该页面作为一个通用的抽号在线工具，供需要的用户使用。抽号工具默认开启了去重处理，即在一个周期内不会抽取到重复的数字。例如抽取1-9，在第10次抽取前不会出现重复数字。关闭“周期内不重复”选项，可取消此限制。
+            </small>
+        </div>
+        <mdui-button slot="action" variant="tonal">确定</mdui-button>
+    </mdui-dialog>
+
+    <script>
+        const loading = document.querySelector(".loading");
+        const main = document.querySelector(".screen")
+        // 页面加载完成后隐藏进度指示条
+        window.onload = function () {
+            loading.style.display = "none";
+        };
+
+        function navigate(pageId) {
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            document.getElementById(pageId).style.display = 'block';
+        }
+    </script>
+
+    <script>
+        if (navigator.onLine = false) {
+            // 网络异常
+            alert('网络异常，请检查网络连接');
+        }
+    </script>
+
+</body>
+
+</html>
