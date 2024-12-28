@@ -1,21 +1,20 @@
 {
   "name": "random-number",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A random number picker",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "electron .",
+    "pack": "electron-packager . random-number --platform=win32 --arch=x64 --out=out --icon=assets/app.ico --asar --overwrite --ignore=.git",
+    "packager": "electron-packager ./out/ randomNum --win --out ./outputs"
   },
   "author": "FlyGues",
   "license": "MIT",
   "devDependencies": {
-    "@electron-forge/cli": "^7.6.0",
-    "electron": "^33.2.1"
+    "electron": "^33.2.1",
+    "electron-packager": "^17.1.2"
   },
   "dependencies": {
-    "mdui": "^2.1.3"
   }
 }

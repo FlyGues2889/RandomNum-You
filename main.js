@@ -18,12 +18,8 @@ const createWindow = () => {
     minWidth: 800,
   })
 
-  win.loadFile('public/index.html')
+  win.loadFile('index.html')
 }
-
-app.whenReady().then(() => {
-  createWindow()
-})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
