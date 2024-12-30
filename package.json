@@ -1,6 +1,6 @@
 {
   "name": "random-number",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A random number picker",
   "main": "main.js",
   "scripts": {
