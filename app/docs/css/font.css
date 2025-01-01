@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Product Sans";
+    src: url("../fonts/Product Sans Regular.ttf");
+}
+@font-face {
+    font-family: "Harmony Sans SC";
+    src: url("../fonts/HarmonyOS_Sans_SC_Regular.ttf");
+}
+@font-face {
+    font-family: "Harmony Sans SC M";
+    src: url("../fonts/HarmonyOS_Sans_SC_Medium.ttf");
+}
+@font-face {
+    font-family: "Harmony Sans SC Bold";
+    src: url("../fonts/HarmonyOS_Sans_SC_Bold.ttf");
+}
+@font-face {
+    font-family: "Harmony Sans SC Black";
+    src: url("../fonts/HarmonyOS_Sans_SC_Black.ttf");
+}
+@font-face {
+    font-family: "Product Sans Bold";
+    src: url("../fonts/Product Sans Bold.ttf");
+}
+@font-face {
+    font-family: "Segoe Fluent Icons";
+    src: url("../fonts/Segoe Fluent Icons.ttf");
+}

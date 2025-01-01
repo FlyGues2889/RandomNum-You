@@ -1,13 +1,9 @@
 {
   "name": "random-number",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A random number picker",
-  "main": "main.js",
+  "main": "app/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "pack": "electron-packager . random-number --platform=win32 --arch=x64 --out=out --icon=assets/app.ico --asar --overwrite --ignore=.git",
-    "packager": "electron-packager ./out/ randomNum --win --out ./outputs"
   },
   "author": "FlyGues",
   "license": "MIT",

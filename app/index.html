@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="mdui-theme-auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>随机数抽取器</title>
+
+    <script src="./mdui/mdui.global.js"></script> 
+    <link rel="stylesheet" href="./mdui/mdui.css">
+
+    <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/font.css">
+    <script src="src/RandomMum.js"></script>
+
+    <style>
+        mdui-card.title {
+            padding: 1rem;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+            margin-bottom: 1rem;
+            border-radius: 2rem
+        }
+
+        mdui-card.text {
+            padding: 1rem;
+        }
+
+        body,
+        html {
+            background-color: rgb(var(--mdui-color-surface-container-low));
+            font-family: 'HarmonyOS Sans SC', sans-serif;
+        }
+
+        div.bottomBar {
+            display: flex;
+            width: 10vw;
+            height: 5vh;
+            position: fixed;
+            right: 2.5rem;
+            bottom: 2rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+
+        div#topWindowBar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4rem;
+            padding-left: 1rem;
+            margin-left: 5rem;
+            z-index: 999;
+
+            /* background-color: rgb(var(--mdui-color-surface-container)); */
+            font-family: 'Harmony Sans SC';
+            color: #00000050;
+
+            display: flex;
+            align-items: center;
+            justify-content: left;
+
+            -webkit-app-region: drag;
+            user-select: none;
+        }
+
+        mdui-layout-main {
+            margin-left: 5rem;
+        }
+
+        div.page {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-left: 6rem;
+            margin-top: 3rem;
+
+            overflow: auto;
+            min-height: 600px;
+        }
+
+        mdui-navigation-rail {
+            background-color: rgb(var(--mdui-color-surface-container));
+        }
+
+        mdui-card.container {
+            margin: 0.5rem;
+            margin-left: 0;
+            padding: 2rem 1rem;
+
+            width: 98%;
+            border-radius: var(--mdui-shape-corner-extra-large);
+            background-color: rgb(var(--mdui-color-secondary-container), 0.3);
+        }
+
+        h1 {
+            user-select: none;
+        }
+
+        mdui-list-subheader {
+            font-size: small;
+        }
+    </style>
+</head>
+
+<body style="margin: 0;">
+    <mdui-layout style="height: 100vh;">
+        <mdui-linear-progress class="loading" style="position: fixed;top: 0;z-index: 90;"></mdui-linear-progress>
+
+        <mdui-navigation-rail value="mainPage" divider alignment="center">
+            <mdui-button-icon disabled slot="top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#00000050"
+                        d="M5.5 17.5q-2.3 0-3.9-1.6T0 12t1.6-3.9t3.9-1.6q.925 0 1.775.325T8.8 7.75l1.7 1.55L9 10.65l-1.55-1.4q-.4-.35-.9-.55T5.5 8.5q-1.45 0-2.475 1.025T2 12t1.025 2.475T5.5 15.5q.55 0 1.05-.2t.9-.55l7.75-7q.675-.6 1.525-.925T18.5 6.5q2.3 0 3.9 1.6T24 12t-1.6 3.9t-3.9 1.6q-.925 0-1.775-.325T15.2 16.25l-1.7-1.55l1.5-1.35l1.55 1.4q.4.35.9.55t1.05.2q1.45 0 2.475-1.025T22 12t-1.025-2.475T18.5 8.5q-.55 0-1.05.2t-.9.55l-7.75 7q-.675.6-1.525.925T5.5 17.5" />
+                </svg>
+            </mdui-button-icon>
+
+            <mdui-navigation-rail-item value="mainPage" href="javascript:void(0);" onclick="navigate('mainPage')">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M6 19h3v-5q0-.425.288-.712T10 13h4q.425 0 .713.288T15 14v5h3v-9l-6-4.5L6 10zm-2 0v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-4q-.425 0-.712-.288T13 20v-5h-2v5q0 .425-.288.713T10 21H6q-.825 0-1.412-.587T4 19m8-6.75" />
+                </svg>
+                <svg slot="active-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M4 19v-9q0-.475.213-.9t.587-.7l6-4.5q.525-.4 1.2-.4t1.2.4l6 4.5q.375.275.588.7T20 10v9q0 .825-.588 1.413T18 21h-3q-.425 0-.712-.288T14 20v-5q0-.425-.288-.712T13 14h-2q-.425 0-.712.288T10 15v5q0 .425-.288.713T9 21H6q-.825 0-1.412-.587T4 19" />
+                </svg>
+            </mdui-navigation-rail-item>
+            <mdui-navigation-rail-item value="historyPage" href="javascript:void(0);" onclick="navigate('historyPage')">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M12 21q-3.15 0-5.575-1.912T3.275 14.2q-.1-.375.15-.687t.675-.363q.4-.05.725.15t.45.6q.6 2.25 2.475 3.675T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H8q.425 0 .713.288T9 9t-.288.713T8 10H4q-.425 0-.712-.288T3 9V5q0-.425.288-.712T4 4t.713.288T5 5v1.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m1-9.4l2.5 2.5q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.8-2.8q-.15-.15-.225-.337T11 11.975V8q0-.425.288-.712T12 7t.713.288T13 8z" />
+                </svg>
+                <svg slot="active-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M12 21q-3.15 0-5.575-1.912T3.275 14.2q-.1-.375.15-.687t.675-.363q.4-.05.725.15t.45.6q.6 2.25 2.475 3.675T12 19q2.925 0 4.963-2.037T19 12t-2.037-4.962T12 5q-1.725 0-3.225.8T6.25 8H8q.425 0 .713.288T9 9t-.288.713T8 10H4q-.425 0-.712-.288T3 9V5q0-.425.288-.712T4 4t.713.288T5 5v1.35q1.275-1.6 3.113-2.475T12 3q1.875 0 3.513.713t2.85 1.924t1.925 2.85T21 12t-.712 3.513t-1.925 2.85t-2.85 1.925T12 21m1-9.4l2.5 2.5q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.8-2.8q-.15-.15-.225-.337T11 11.975V8q0-.425.288-.712T12 7t.713.288T13 8z" />
+                </svg>
+            </mdui-navigation-rail-item>
+            <mdui-navigation-rail-item value="settingPage" href="javascript:void(0);" onclick="navigate('settingPage')">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M10.825 22q-.675 0-1.162-.45t-.588-1.1L8.85 18.8q-.325-.125-.612-.3t-.563-.375l-1.55.65q-.625.275-1.25.05t-.975-.8l-1.175-2.05q-.35-.575-.2-1.225t.675-1.075l1.325-1Q4.5 12.5 4.5 12.337v-.675q0-.162.025-.337l-1.325-1Q2.675 9.9 2.525 9.25t.2-1.225L3.9 5.975q.35-.575.975-.8t1.25.05l1.55.65q.275-.2.575-.375t.6-.3l.225-1.65q.1-.65.588-1.1T10.825 2h2.35q.675 0 1.163.45t.587 1.1l.225 1.65q.325.125.613.3t.562.375l1.55-.65q.625-.275 1.25-.05t.975.8l1.175 2.05q.35.575.2 1.225t-.675 1.075l-1.325 1q.025.175.025.338v.674q0 .163-.05.338l1.325 1q.525.425.675 1.075t-.2 1.225l-1.2 2.05q-.35.575-.975.8t-1.25-.05l-1.5-.65q-.275.2-.575.375t-.6.3l-.225 1.65q-.1.65-.587 1.1t-1.163.45zM11 20h1.975l.35-2.65q.775-.2 1.438-.587t1.212-.938l2.475 1.025l.975-1.7l-2.15-1.625q.125-.35.175-.737T17.5 12t-.05-.787t-.175-.738l2.15-1.625l-.975-1.7l-2.475 1.05q-.55-.575-1.212-.962t-1.438-.588L13 4h-1.975l-.35 2.65q-.775.2-1.437.588t-1.213.937L5.55 7.15l-.975 1.7l2.15 1.6q-.125.375-.175.75t-.05.8q0 .4.05.775t.175.75l-2.15 1.625l.975 1.7l2.475-1.05q.55.575 1.213.963t1.437.587zm1.05-4.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.487 1.025T8.55 12t1.013 2.475T12.05 15.5M12 12" />
+                </svg>
+                <svg slot="active-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="#171b2c"
+                        d="M10.825 22q-.675 0-1.162-.45t-.588-1.1L8.85 18.8q-.325-.125-.612-.3t-.563-.375l-1.55.65q-.625.275-1.25.05t-.975-.8l-1.175-2.05q-.35-.575-.2-1.225t.675-1.075l1.325-1Q4.5 12.5 4.5 12.337v-.675q0-.162.025-.337l-1.325-1Q2.675 9.9 2.525 9.25t.2-1.225L3.9 5.975q.35-.575.975-.8t1.25.05l1.55.65q.275-.2.575-.375t.6-.3l.225-1.65q.1-.65.588-1.1T10.825 2h2.35q.675 0 1.163.45t.587 1.1l.225 1.65q.325.125.613.3t.562.375l1.55-.65q.625-.275 1.25-.05t.975.8l1.175 2.05q.35.575.2 1.225t-.675 1.075l-1.325 1q.025.175.025.338v.674q0 .163-.05.338l1.325 1q.525.425.675 1.075t-.2 1.225l-1.2 2.05q-.35.575-.975.8t-1.25-.05l-1.5-.65q-.275.2-.575.375t-.6.3l-.225 1.65q-.1.65-.587 1.1t-1.163.45zm1.225-6.5q1.45 0 2.475-1.025T15.55 12t-1.025-2.475T12.05 8.5q-1.475 0-2.488 1.025T8.55 12t1.013 2.475T12.05 15.5" />
+                </svg>
+            </mdui-navigation-rail-item>
+        </mdui-navigation-rail>
+        <div id="topWindowBar">
+            随机数抽取器
+        </div>
+
+
+
+        <div class="page" id="mainPage">
+            <h1>数字抽取</h1>
+
+            <div class="bottomBar">
+                <mdui-button-icon onclick="openDialog1()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#171b2c"
+                            d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m.05 4q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m.1-12.3q.625 0 1.088.4t.462 1q0 .55-.337.975t-.763.8q-.575.5-1.012 1.1t-.438 1.35q0 .35.263.588t.612.237q.375 0 .638-.25t.337-.625q.1-.525.45-.937t.75-.788q.575-.55.988-1.2t.412-1.45q0-1.275-1.037-2.087T12.1 6q-.95 0-1.812.4T8.975 7.625q-.175.3-.112.638t.337.512q.35.2.725.125t.625-.425q.275-.375.688-.575t.862-.2" />
+                    </svg>
+                </mdui-button-icon>
+                <mdui-button-icon id="btn-fullscreen-icon" onclick="handleFullScreen()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#171b2c"
+                            d="M4 21q-.425 0-.712-.288T3 20v-6q0-.425.288-.712T4 13t.713.288T5 14v3.6L17.6 5H14q-.425 0-.712-.288T13 4t.288-.712T14 3h6q.425 0 .713.288T21 4v6q0 .425-.288.713T20 11t-.712-.288T19 10V6.4L6.4 19H10q.425 0 .713.288T11 20t-.288.713T10 21z" />
+                    </svg> </mdui-button-icon>
+
+                <div style="flex-grow: 1"></div>
+                <mdui-fab id="btn" onclick="getNum()"
+                    style="margin-left: 1.6rem;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M10.475 22q-.7 0-1.312-.3t-1.038-.85l-5.45-6.925l.475-.5q.5-.525 1.2-.625t1.3.275L7.5 14.2V6q0-.425.288-.712T8.5 5t.725.288t.3.712v5H17q1.25 0 2.125.875T20 14v4q0 1.65-1.175 2.825T16 22zm-6.3-13.5q-.325-.55-.5-1.187T3.5 6q0-2.075 1.463-3.537T8.5 1t3.538 1.463T13.5 6q0 .675-.175 1.313t-.5 1.187l-1.725-1q.2-.35.3-.712T11.5 6q0-1.25-.875-2.125T8.5 3t-2.125.875T5.5 6q0 .425.1.788t.3.712z"/></svg>
+                </mdui-fab>
+
+            </div>
+
+            <mdui-layout-main class="main">
+                <mdui-dropdown trigger="contextmenu" open-on-pointer>
+                    <div id="out" slot="trigger" style="
+                            font-family: 'Product Sans Bold';
+                            margin-left: 2rem;
+                            color:rgb(var(--mdui-color-secondary-dark));
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 20vw">
+                        -
+                    </div>
+                    <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
+                        <mdui-menu-item icon="content_copy" id="copy1" onclick="copyToClipboard1()">复制</mdui-menu-item>
+                    </mdui-menu>
+                </mdui-dropdown>
+
+            </mdui-layout-main>
+
+        </div>
+
+        <div class="page" id="historyPage" style="display: none;">
+            <h1>历史记录</h1>
+
+            <mdui-card class="container" variant="filled" style="width: 90%;margin: 0 auto;padding: 1rem;">
+                <div id="notes">
+                    <div
+                        style="padding: 1rem;color: rgb(var(--mdui-color-on-primary-container),0.5);font-family: 'Product Sans';">
+                        <span><small>开始抽取以显示记录</small></span>
+                    </div>
+                </div>
+                <mdui-divider style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
+                <mdui-button id="copy2" onclick="copyToClipboard2()" variant="text">
+                    复制内容
+                </mdui-button>
+            </mdui-card>
+
+        </div>
+
+        <div class="page" id="settingPage" style="display: none;">
+            <h1>设置</h1>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-subheader style="margin-bottom: -1.4rem;margin-top: -1rem;">抽取设置</mdui-list-subheader>
+                <mdui-list-item nonclickable>
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></svg>
+                    抽取数字范围
+                    <span slot="description">格式为 最小值-最大值 ，范围 （0 - 999999）</span>
+                    <mdui-text-field type="input" id="num" value="1-55"
+                        style="font-family: 'Product Sans';max-width: 16em;" slot="end-icon"
+                        variant="outlined"></mdui-text-field>
+                </mdui-list-item>
+                <mdui-divider inset middle></mdui-divider>
+                <mdui-list-item nonclickable style="text-align: left;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="m11.7 14.15l2.675-3q.025-.025.125-.35v-.4q0-.325-.212-.537t-.538-.213h-3.5q-.325 0-.537.213T9.5 10.4t.213.538t.537.212h2.1L9.625 14.2q-.025.025-.125.35v.35q0 .325.213.538t.537.212h3.5q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213zM12 22q-1.875 0-3.512-.712t-2.85-1.925t-1.925-2.85T3 13t.713-3.512t1.924-2.85t2.85-1.925T12 4t3.513.713t2.85 1.925t1.925 2.85T21 13t-.712 3.513t-1.925 2.85t-2.85 1.925T12 22M2.05 7.3q-.275-.275-.275-.7t.275-.7L4.9 3.05q.275-.275.7-.275t.7.275t.275.7t-.275.7L3.45 7.3q-.275.275-.7.275t-.7-.275m19.9 0q-.275.275-.7.275t-.7-.275L17.7 4.45q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l2.85 2.85q.275.275.275.7t-.275.7M12 20q2.925 0 4.963-2.037T19 13t-2.037-4.962T12 6T7.038 8.038T5 13t2.038 4.963T12 20"/></svg>
+                    时间延迟
+                    <mdui-select value="750" slot="end-icon" variant="outlined"
+                        style="line-height: 1.375rem;font-family: 'Product Sans';max-width: 16em;" class="GETTIME"
+                        onchange="tm=false;settime(this.value,0);storage(0)" id="settime">
+                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 14.975q-.2 0-.375-.062T11.3 14.7l-4.6-4.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.9 3.9l3.9-3.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-4.6 4.6q-.15.15-.325.213t-.375.062"/></svg>
+                        <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
+                        <mdui-menu-item value="500">0.50s</mdui-menu-item>
+                        <mdui-menu-item value="750">0.75s</mdui-menu-item>
+                        <mdui-menu-item value="1000">1s</mdui-menu-item>
+                        <mdui-menu-item value="1500">1.50s</mdui-menu-item>
+                        <mdui-menu-item value="2000">2s</mdui-menu-item>
+                        <mdui-menu-item value="5000">5s</mdui-menu-item>
+                    </mdui-select>
+                </mdui-list-item>
+
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M10.475 22q-.7 0-1.312-.3t-1.038-.85L3.1 14.475q-.2-.225-.175-.537t.225-.513q.5-.525 1.2-.625t1.3.275L7.5 14.2V6q0-.425.288-.712T8.5 5t.725.288t.3.712v10q0 .575-.513.863T8 16.85l-.9-.55l2.6 3.325q.15.175.35.275t.425.1H16q.825 0 1.413-.587T18 18v-4q0-.425-.288-.712T17 13h-4.475q-.425 0-.712-.288T11.525 12t.288-.712t.712-.288H17q1.25 0 2.125.875T20 14v4q0 1.65-1.175 2.825T16 22zm1.5-13q-.425 0-.712-.288T10.975 8q0-.05.125-.5q.2-.35.3-.712T11.5 6q0-1.25-.875-2.125T8.5 3t-2.125.875T5.5 6q0 .425.1.788t.3.712q.075.125.1.25t.025.25q0 .425-.275.713T5.05 9q-.275 0-.512-.15t-.363-.375q-.325-.55-.5-1.175T3.5 6q0-2.075 1.463-3.537T8.5 1t3.538 1.463T13.5 6q0 .675-.175 1.3t-.5 1.175q-.125.225-.35.375t-.5.15"/></svg>
+                    是否手动
+                    <span slot="description">按钮/回车/空格键以启停</span>
+                    <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+
+                <mdui-list-item nonclickable style="text-align: left;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M9.825 20.7q-2.575-.725-4.2-2.837T4 13q0-1.425.475-2.713t1.35-2.362q.275-.3.675-.313t.725.313q.275.275.288.675t-.263.75q-.6.775-.925 1.7T6 13q0 2.025 1.188 3.613t3.062 2.162q.325.1.538.375t.212.6q0 .5-.35.788t-.825.162m4.35 0q-.475.125-.825-.175t-.35-.8q0-.3.213-.575t.537-.375q1.875-.6 3.063-2.175T18 13q0-2.5-1.75-4.25T12 7h-.075l.4.4q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.1-2.1q-.15-.15-.212-.325T8.55 6t.063-.375t.212-.325l2.1-2.1q.275-.275.7-.275t.7.275t.275.7t-.275.7l-.4.4H12q3.35 0 5.675 2.325T20 13q0 2.725-1.625 4.85t-4.2 2.85"/></svg>
+                    周期内不重复
+                    <label for="repeat"></label>
+                    <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
+                        onchange="if(this.checked)add=[];storage(0)" onclick="if(c){alert('运行中不可设置！');return false}"
+                        slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+
+            </mdui-card>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-subheader style="margin-bottom: -1.4rem;margin-top: -1rem;">个性化</mdui-list-subheader>
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;"">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 21q-3.325 0-5.663-2.3T4 13.125q0-1.65.625-3.062T6.35 7.55l4.6-4.525q.225-.2.5-.312T12 2.6t.55.113t.5.312l4.6 4.525q1.1 1.1 1.725 2.513T20 13.125q0 3.275-2.337 5.575T12 21m0-2V4.8L7.75 9q-.875.825-1.312 1.875T6 13.125q0 2.425 1.75 4.15T12 19"/></svg>
+                    数字颜色（滚动）
+                    <mdui-text-field id="tc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                    style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
+                    value="#c2c5dd" slot="end-icon"></mdui-text-field>
+                </mdui-list-item>
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 21q-3.325 0-5.663-2.3T4 13.125q0-1.65.625-3.062T6.35 7.55l4.6-4.525q.225-.2.5-.312T12 2.6t.55.113t.5.312l4.6 4.525q1.1 1.1 1.725 2.513T20 13.125q0 3.275-2.337 5.575T12 21m0-2V4.8L7.75 9q-.875.825-1.312 1.875T6 13.125q0 2.425 1.75 4.15T12 19"/></svg>
+                    数字颜色（抽中）
+                    <mdui-text-field id="tsc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                        style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
+                        value="#002fa7" slot="end-icon"></mdui-text-field>
+                </mdui-list-item>
+            </mdui-card>
+
+            <mdui-list-item nonclickable>
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
+                关于 随机数抽取器
+                <span slot="description">版本：0.2.0</span>
+            </mdui-list-item>
+            <mdui-list-item nonclickable>
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M11 19.425v-6.85L5 9.1v6.85zm2 0l6-3.475V9.1l-6 3.475zm-2 2.3L4 17.7q-.475-.275-.737-.725t-.263-1v-7.95q0-.55.263-1T4 6.3l7-4.025Q11.475 2 12 2t1 .275L20 6.3q.475.275.738.725t.262 1v7.95q0 .55-.262 1T20 17.7l-7 4.025Q12.525 22 12 22t-1-.275m5-13.2l1.925-1.1L12 4l-1.95 1.125zm-4 2.325l1.95-1.125L8.025 6.3l-1.95 1.125z"/></svg>
+                使用的开源库
+                <span slot="description">Electron &nbsp; MDUI &nbsp; Iconify</span>
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem;margin-bottom: 10rem;">
+                <mdui-list-item nonclickable>
+                    <mdui-button href="https://github.com/FlyGues2889/random-number" about="_blank"
+                        variant="tonal">支持项目</mdui-button>
+                    <mdui-button href="https://flygues2889.github.io/" about="_blank"
+                        variant="text">转到作者的小站</mdui-button>
+                </mdui-list-item>
+            </div>
+        </div>
+
+    </mdui-layout>
+
+    <mdui-snackbar close-on-outside-click class="errorSnackbar" placement="bottom" close-icon="error_outline"
+        style="border-radius: 1rem;">
+        <div style="display: flex;align-items: center;">
+            <mdui-icon name="error_outline" style="margin-right: 0.5rem;"></mdui-icon>
+            抽取数字范围错误
+        </div>
+    </mdui-snackbar>
+
+    <mdui-button-icon icon="help_outline--outlined" style="display: none;"></mdui-button-icon>
+
+    <mdui-dialog close-on-overlay-click headline="使用指南" class="example-action">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="#171b2c"
+                d="M11.95 18q.525 0 .888-.363t.362-.887t-.362-.888t-.888-.362t-.887.363t-.363.887t.363.888t.887.362m.05 4q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m.1-12.3q.625 0 1.088.4t.462 1q0 .55-.337.975t-.763.8q-.575.5-1.012 1.1t-.438 1.35q0 .35.263.588t.612.237q.375 0 .638-.25t.337-.625q.1-.525.45-.937t.75-.788q.575-.55.988-1.2t.412-1.45q0-1.275-1.037-2.087T12.1 6q-.95 0-1.812.4T8.975 7.625q-.175.3-.112.638t.337.512q.35.2.725.125t.625-.425q.275-.375.688-.575t.862-.2" />
+        </svg>
+        <div>
+            1.点击 <b>
+                <mdui-icon name="play_arrow--outlined" style="font-size: small;"></mdui-icon>
+                开始抽取
+                按钮/回车键/空格键</b> 开始抽取数字。<br>
+            2.在 <b>
+                <mdui-icon name="settings--outlined" style="font-size: small;"></mdui-icon>
+                设置 按钮</b>
+            设置抽取数字范围、抽取时长、是否重复和是否手动抽取。<br>
+            3.点击 <b>
+                <mdui-icon name="fullscreen--outlined" style="font-size: small;"></mdui-icon>
+                全屏 按钮</b>
+            以全屏网页。<br>
+            <mdui-divider style="margin: 1em;"></mdui-divider>
+            <small>
+                随机抽号基于内置的随机数发生器，在预设数字范围内，采用平均分布的抽取方式产生一个随机数。人的主观意念认为数字范围的最小端和最大端抽取到的概率更低，实际上它们和中间段数字出现的概率相同。<br><br>
+                该页面作为一个通用的抽号在线工具，供需要的用户使用。抽号工具默认开启了去重处理，即在一个周期内不会抽取到重复的数字。例如抽取1-9，在第10次抽取前不会出现重复数字。关闭“周期内不重复”选项，可取消此限制。
+            </small>
+        </div>
+        <mdui-button slot="action" variant="tonal">确定</mdui-button>
+    </mdui-dialog>
+
+    <script>
+        const loading = document.querySelector(".loading");
+        const main = document.querySelector(".screen")
+        // 页面加载完成后隐藏进度指示条
+        window.onload = function () {
+            loading.style.display = "none";
+        };
+
+        function navigate(pageId) {
+            var pages = document.querySelectorAll('.page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            document.getElementById(pageId).style.display = 'block';
+        }
+    </script>
+
+    <script>
+        if (navigator.onLine = false) {
+            // 网络异常
+            alert('网络异常，请检查网络连接');
+        }
+    </script>
+
+</body>
+
+</html>

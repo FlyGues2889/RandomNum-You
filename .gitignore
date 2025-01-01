@@ -1,4 +1,2 @@
 node_modules/
-electron-offline-packages/
-out/
-~/
+app/random-number-win32-x64/
