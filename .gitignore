@@ -1,2 +1,3 @@
 node_modules/
 app/random-number-win32-x64/
+app/out/

@@ -3,14 +3,14 @@
   "version": "0.2.0",
   "description": "A random number picker",
   "main": "main.js",
+  "icon": "app/assets/appIcon.ico",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "pack": "electron-packager . random-number --platform=win32 --arch=x64 --out=out --icon=assets/app.ico --asar --overwrite --ignore=.git",
-    "packager": "electron-packager ./ randomNum --win --out ./outputs --overwrite"
+    "packager": "electron-packager . randomNum --win --out ./out --icon=assets/appIcon.ico --overwrite"
   },
   "author": "FlyGues",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "electron": "^33.2.1",
     "electron-packager": "^17.1.2"

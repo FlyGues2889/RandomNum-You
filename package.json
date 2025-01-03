@@ -6,7 +6,7 @@
   "scripts": {
   },
   "author": "FlyGues",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "electron": "^33.2.1",
     "electron-packager": "^17.1.2"

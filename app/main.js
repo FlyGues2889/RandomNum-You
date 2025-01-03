@@ -16,6 +16,8 @@ const createWindow = () => {
     },
     minHeight: 600,
     minWidth: 800,
+
+    icon: path.join(__dirname, 'assets/appIcon.ico')
   })
 
   win.loadFile('index.html')
