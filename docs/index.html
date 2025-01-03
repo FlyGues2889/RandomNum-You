@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="image/appIcon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="image/icon.png" type="image/x-icon">
 
     <title>Random Number</title>
     <!-- 引入 MDUI CSS -->
@@ -21,85 +21,85 @@
     <!-- Two Tone -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="../css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
 
     <style>
         :root,
         :host {
-            --mdui-color-primary-light: 54, 84, 200;
+            --mdui-color-primary-light: 0, 98, 158;
             --mdui-color-on-primary-light: 255, 255, 255;
-            --mdui-color-primary-container-light: 221, 225, 255;
-            --mdui-color-on-primary-container-light: 0, 19, 85;
-            --mdui-color-secondary-light: 90, 93, 114;
+            --mdui-color-primary-container-light: 207, 229, 255;
+            --mdui-color-on-primary-container-light: 0, 29, 52;
+            --mdui-color-secondary-light: 82, 96, 112;
             --mdui-color-on-secondary-light: 255, 255, 255;
-            --mdui-color-secondary-container-light: 223, 225, 249;
-            --mdui-color-on-secondary-container-light: 23, 27, 44;
-            --mdui-color-tertiary-light: 118, 84, 110;
+            --mdui-color-secondary-container-light: 214, 228, 247;
+            --mdui-color-on-secondary-container-light: 15, 29, 42;
+            --mdui-color-tertiary-light: 105, 87, 121;
             --mdui-color-on-tertiary-light: 255, 255, 255;
-            --mdui-color-tertiary-container-light: 255, 215, 243;
-            --mdui-color-on-tertiary-container-light: 44, 18, 41;
+            --mdui-color-tertiary-container-light: 240, 219, 255;
+            --mdui-color-on-tertiary-container-light: 36, 21, 50;
             --mdui-color-error-light: 186, 26, 26;
             --mdui-color-on-error-light: 255, 255, 255;
             --mdui-color-error-container-light: 255, 218, 214;
             --mdui-color-on-error-container-light: 65, 0, 2;
-            --mdui-color-background-light: 254, 251, 255;
-            --mdui-color-on-background-light: 27, 27, 31;
-            --mdui-color-surface-light: 254, 251, 255;
-            --mdui-color-on-surface-light: 27, 27, 31;
-            --mdui-color-surface-variant-light: 226, 225, 236;
-            --mdui-color-on-surface-variant-light: 69, 70, 79;
-            --mdui-color-outline-light: 118, 118, 128;
-            --mdui-color-outline-variant-light: 198, 197, 208;
+            --mdui-color-background-light: 252, 252, 255;
+            --mdui-color-on-background-light: 26, 28, 30;
+            --mdui-color-surface-light: 252, 252, 255;
+            --mdui-color-on-surface-light: 26, 28, 30;
+            --mdui-color-surface-variant-light: 222, 227, 235;
+            --mdui-color-on-surface-variant-light: 66, 71, 78;
+            --mdui-color-outline-light: 115, 119, 127;
+            --mdui-color-outline-variant-light: 194, 199, 207;
             --mdui-color-shadow-light: 0, 0, 0;
             --mdui-color-scrim-light: 0, 0, 0;
-            --mdui-color-inverse-surface-light: 48, 48, 52;
-            --mdui-color-inverse-on-surface-light: 242, 240, 244;
-            --mdui-color-inverse-primary-light: 184, 196, 255;
-            --mdui-color-surface-dim-light: 219, 217, 222;
-            --mdui-color-surface-bright-light: 251, 248, 253;
+            --mdui-color-inverse-surface-light: 47, 48, 51;
+            --mdui-color-inverse-on-surface-light: 241, 240, 244;
+            --mdui-color-inverse-primary-light: 154, 203, 255;
+            --mdui-color-surface-dim-light: 218, 218, 221;
+            --mdui-color-surface-bright-light: 249, 249, 252;
             --mdui-color-surface-container-lowest-light: 255, 255, 255;
-            --mdui-color-surface-container-low-light: 245, 243, 247;
-            --mdui-color-surface-container-light: 240, 237, 241;
-            --mdui-color-surface-container-high-light: 234, 231, 236;
-            --mdui-color-surface-container-highest-light: 228, 225, 230;
-            --mdui-color-surface-tint-color-light: 54, 84, 200;
-            --mdui-color-primary-dark: 184, 196, 255;
-            --mdui-color-on-primary-dark: 0, 36, 134;
-            --mdui-color-primary-container-dark: 20, 57, 175;
-            --mdui-color-on-primary-container-dark: 221, 225, 255;
-            --mdui-color-secondary-dark: 194, 197, 221;
-            --mdui-color-on-secondary-dark: 44, 47, 66;
-            --mdui-color-secondary-container-dark: 66, 70, 89;
-            --mdui-color-on-secondary-container-dark: 223, 225, 249;
-            --mdui-color-tertiary-dark: 228, 186, 217;
-            --mdui-color-on-tertiary-dark: 68, 39, 63;
-            --mdui-color-tertiary-container-dark: 92, 61, 86;
-            --mdui-color-on-tertiary-container-dark: 255, 215, 243;
+            --mdui-color-surface-container-low-light: 244, 243, 247;
+            --mdui-color-surface-container-light: 238, 237, 241;
+            --mdui-color-surface-container-high-light: 232, 232, 235;
+            --mdui-color-surface-container-highest-light: 226, 226, 229;
+            --mdui-color-surface-tint-color-light: 0, 98, 158;
+            --mdui-color-primary-dark: 154, 203, 255;
+            --mdui-color-on-primary-dark: 0, 51, 85;
+            --mdui-color-primary-container-dark: 0, 74, 121;
+            --mdui-color-on-primary-container-dark: 207, 229, 255;
+            --mdui-color-secondary-dark: 186, 200, 218;
+            --mdui-color-on-secondary-dark: 36, 50, 64;
+            --mdui-color-secondary-container-dark: 58, 72, 87;
+            --mdui-color-on-secondary-container-dark: 214, 228, 247;
+            --mdui-color-tertiary-dark: 212, 190, 229;
+            --mdui-color-on-tertiary-dark: 57, 42, 73;
+            --mdui-color-tertiary-container-dark: 81, 64, 96;
+            --mdui-color-on-tertiary-container-dark: 240, 219, 255;
             --mdui-color-error-dark: 255, 180, 171;
             --mdui-color-on-error-dark: 105, 0, 5;
             --mdui-color-error-container-dark: 147, 0, 10;
             --mdui-color-on-error-container-dark: 255, 180, 171;
-            --mdui-color-background-dark: 27, 27, 31;
-            --mdui-color-on-background-dark: 228, 225, 230;
-            --mdui-color-surface-dark: 27, 27, 31;
-            --mdui-color-on-surface-dark: 228, 225, 230;
-            --mdui-color-surface-variant-dark: 69, 70, 79;
-            --mdui-color-on-surface-variant-dark: 198, 197, 208;
-            --mdui-color-outline-dark: 144, 144, 154;
-            --mdui-color-outline-variant-dark: 69, 70, 79;
+            --mdui-color-background-dark: 26, 28, 30;
+            --mdui-color-on-background-dark: 226, 226, 229;
+            --mdui-color-surface-dark: 26, 28, 30;
+            --mdui-color-on-surface-dark: 226, 226, 229;
+            --mdui-color-surface-variant-dark: 66, 71, 78;
+            --mdui-color-on-surface-variant-dark: 194, 199, 207;
+            --mdui-color-outline-dark: 140, 145, 153;
+            --mdui-color-outline-variant-dark: 66, 71, 78;
             --mdui-color-shadow-dark: 0, 0, 0;
             --mdui-color-scrim-dark: 0, 0, 0;
-            --mdui-color-inverse-surface-dark: 228, 225, 230;
-            --mdui-color-inverse-on-surface-dark: 48, 48, 52;
-            --mdui-color-inverse-primary-dark: 54, 84, 200;
-            --mdui-color-surface-dim-dark: 19, 19, 22;
-            --mdui-color-surface-bright-dark: 57, 57, 60;
-            --mdui-color-surface-container-lowest-dark: 14, 14, 17;
-            --mdui-color-surface-container-low-dark: 27, 27, 31;
-            --mdui-color-surface-container-dark: 31, 31, 35;
-            --mdui-color-surface-container-high-dark: 42, 42, 45;
-            --mdui-color-surface-container-highest-dark: 52, 52, 56;
-            --mdui-color-surface-tint-color-dark: 184, 196, 255;
+            --mdui-color-inverse-surface-dark: 226, 226, 229;
+            --mdui-color-inverse-on-surface-dark: 47, 48, 51;
+            --mdui-color-inverse-primary-dark: 0, 98, 158;
+            --mdui-color-surface-dim-dark: 18, 19, 22;
+            --mdui-color-surface-bright-dark: 56, 57, 60;
+            --mdui-color-surface-container-lowest-dark: 12, 14, 17;
+            --mdui-color-surface-container-low-dark: 26, 28, 30;
+            --mdui-color-surface-container-dark: 30, 32, 34;
+            --mdui-color-surface-container-high-dark: 40, 42, 45;
+            --mdui-color-surface-container-highest-dark: 51, 53, 56;
+            --mdui-color-surface-tint-color-dark: 154, 203, 255;
             --mdui-color-primary: var(--mdui-color-primary-light);
             --mdui-color-on-primary: var(--mdui-color-on-primary-light);
             --mdui-color-primary-container: var(--mdui-color-primary-container-light);
@@ -141,6 +141,69 @@
             background-color: rgb(var(--mdui-color-background));
         }
 
+        :root {
+            --mdui-typescale-display-large-weight: 400;
+            --mdui-typescale-display-medium-weight: 400;
+            --mdui-typescale-display-small-weight: 400;
+            --mdui-typescale-display-large-line-height: 4rem;
+            --mdui-typescale-display-medium-line-height: 3.25rem;
+            --mdui-typescale-display-small-line-height: 2.75rem;
+            --mdui-typescale-display-large-size: 3.5625rem;
+            --mdui-typescale-display-medium-size: 2.8125rem;
+            --mdui-typescale-display-small-size: 2.25rem;
+            --mdui-typescale-display-large-tracking: 0rem;
+            --mdui-typescale-display-medium-tracking: 0rem;
+            --mdui-typescale-display-small-tracking: 0rem;
+            --mdui-typescale-headline-large-weight: 400;
+            --mdui-typescale-headline-medium-weight: 400;
+            --mdui-typescale-headline-small-weight: 400;
+            --mdui-typescale-headline-large-line-height: 2.5rem;
+            --mdui-typescale-headline-medium-line-height: 2.25rem;
+            --mdui-typescale-headline-small-line-height: 2rem;
+            --mdui-typescale-headline-large-size: 2rem;
+            --mdui-typescale-headline-medium-size: 1.75rem;
+            --mdui-typescale-headline-small-size: 1.5rem;
+            --mdui-typescale-headline-large-tracking: 0rem;
+            --mdui-typescale-headline-medium-tracking: 0rem;
+            --mdui-typescale-headline-small-tracking: 0rem;
+            --mdui-typescale-title-large-weight: 400;
+            --mdui-typescale-title-medium-weight: 500;
+            --mdui-typescale-title-small-weight: 500;
+            --mdui-typescale-title-large-line-height: 1.75rem;
+            --mdui-typescale-title-medium-line-height: 1.5rem;
+            --mdui-typescale-title-small-line-height: 1.25rem;
+            --mdui-typescale-title-large-size: 1.375rem;
+            --mdui-typescale-title-medium-size: 1rem;
+            --mdui-typescale-title-small-size: .875rem;
+            --mdui-typescale-title-large-tracking: 0rem;
+            --mdui-typescale-title-medium-tracking: .009375rem;
+            --mdui-typescale-title-small-tracking: .00625rem;
+            --mdui-typescale-label-large-weight: 500;
+            --mdui-typescale-label-medium-weight: 500;
+            --mdui-typescale-label-small-weight: 500;
+            --mdui-typescale-label-large-line-height: 1.25rem;
+            --mdui-typescale-label-medium-line-height: 1rem;
+            --mdui-typescale-label-small-line-height: .375rem;
+            --mdui-typescale-label-large-size: .875rem;
+            --mdui-typescale-label-medium-size: .75rem;
+            --mdui-typescale-label-small-size: .6875rem;
+            --mdui-typescale-label-large-tracking: .00625rem;
+            --mdui-typescale-label-medium-tracking: .03125rem;
+            --mdui-typescale-label-small-tracking: .03125rem;
+            --mdui-typescale-body-large-weight: 400;
+            --mdui-typescale-body-medium-weight: 400;
+            --mdui-typescale-body-small-weight: 400;
+            --mdui-typescale-body-large-line-height: 1.5rem;
+            --mdui-typescale-body-medium-line-height: 1.25rem;
+            --mdui-typescale-body-small-line-height: 1rem;
+            --mdui-typescale-body-large-size: 1rem;
+            --mdui-typescale-body-medium-size: .875rem;
+            --mdui-typescale-body-small-size: .75rem;
+            --mdui-typescale-body-large-tracking: .009375rem;
+            --mdui-typescale-body-medium-tracking: .015625rem;
+            --mdui-typescale-body-small-tracking: .025rem;
+        }
+
         :root,
         :host {
             font-family: system-ui;
@@ -174,6 +237,14 @@
             padding-top: 2rem;
         }
 
+        .appName {
+            font-family: 'Product Sans Bold';
+            background: linear-gradient(315deg, #002174, #0094f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
         @media (min-width: 601px) {
             mdui-navigation-bar {
                 background-color: rgb(var(--mdui-color-surface-container));
@@ -185,12 +256,11 @@
             }
 
             .appIcon {
-                font-size: 15rem;
+                width: 10vw;
             }
 
             .appName {
                 font-size: var(--mdui-typescale-display-medium-line-height);
-                font-family: 'Product Sans Bold';
             }
         }
 
@@ -202,12 +272,11 @@
             }
 
             .appIcon {
-                font-size: 10rem;
+                width: 20vw;
             }
 
             .appName {
                 font-size: var(--mdui-typescale-headline-large-size);
-                font-family: 'Product Sans Bold';
             }
         }
 
@@ -251,10 +320,10 @@
                 <mdui-list-item icon="insert_drive_file--rounded" rounded href="javascript:void(0);" value="demo"
                     onclick="navigate('fileAndDemo')">文档</mdui-list-item>
                 <div style="margin-left: 2.5rem;">
-                    <mdui-list-item  href="#user-version" rounded>用户版本安装</mdui-list-item>
-                    <mdui-list-item  href="#developer-version" rounded>开发</mdui-list-item>
-                    <mdui-list-item  href="#use" rounded>使用</mdui-list-item>
-                    <mdui-list-item  href="#license" rounded>许可证</mdui-list-item>
+                    <mdui-list-item href="#user-version" rounded>用户版本安装</mdui-list-item>
+                    <mdui-list-item href="#developer-version" rounded>开发</mdui-list-item>
+                    <mdui-list-item href="#use" rounded>使用</mdui-list-item>
+                    <mdui-list-item href="#license" rounded>许可证</mdui-list-item>
                 </div>
             </mdui-list>
         </mdui-navigation-drawer>
@@ -278,15 +347,16 @@
                 <div
                     style="margin-bottom: 2rem;font-size: var(--mdui-typescale-display-large-size);font-family: 'Product Sans Bold';width: 100%;">
                     <center>
-                        <mdui-icon name="all_inclusive--outlined" class="appIcon"></mdui-icon>
+                        <img src="image/icon.png" class="appIcon">
                     </center>
                 </div>
-                <div style="text-align: center;width: 100%;margin-top: -5rem;">
-                    <span class="appName">RandomNumber</span><br>
+                <div style="text-align: center;width: 100%;margin-top: -rem;">
+                    <h1 class="appName">RandomNumber</h1>
                     使用 Electron 和 MDUI 制作的随机数抽取器<br><br>
                     <mdui-button icon="download--rounded" variant="filled" href="javascript:void(0);#user-version"
                         value="demo" onclick="navigate('fileAndDemo')">下载</mdui-button>
-                    <mdui-button icon="open_in_new" href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html"
+                    <mdui-button icon="open_in_new"
+                        href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html"
                         variant="text">在线示例</mdui-button>
                 </div>
 
@@ -300,7 +370,9 @@
                         }
                     </style>
                     <h1 id="top">文档</h1>
-                    <p>本项目是使用 <a href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html">Electron</a> 和 <a href="https://www.mdui.org/">MDUI</a> 制作的随机数抽取器。</p>
+                    <p>本项目是使用 <a href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html">Electron</a> 和
+                        <a href="https://www.mdui.org/">MDUI</a> 制作的随机数抽取器。
+                    </p>
 
                     <h2 id="user-version">用户版本安装</h2>
                     <p>本项目提供用户版本安装，可以直接下载安装。点击下方按钮或链接以下载安装包。</p>
@@ -324,15 +396,18 @@
                         </li>
                     </ul>
                     <p>或者使用在线示例版本：</p>
-                    <mdui-button href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html" target="_blank" icon="open_in_new">在线示例版本</mdui-button>
+                    <mdui-button href="https://flygues-studio.github.io/FlyGuesWeb/demo/RandomMem.html" target="_blank"
+                        icon="open_in_new">在线示例版本</mdui-button>
 
                     <h2 id="developer-version">开发</h2>
                     <p>本项目使用 electron 和 electron-packager 开发，请确保您的电脑上已安装 Node.js 环境和对应依赖。</p>
-                    <mdui-button icon="open_in_new" href="https://gitee.com/flygues2889/random-number">项目 Gitee 地址</mdui-button>
-                    <mdui-button icon="open_in_new" href="https://github.com/FlyGues2889/random-number" variant="text">项目 GitHub 地址</mdui-button><br>
+                    <mdui-button icon="open_in_new" href="https://gitee.com/flygues2889/random-number">项目 Gitee
+                        地址</mdui-button>
+                    <mdui-button icon="open_in_new" href="https://github.com/FlyGues2889/random-number"
+                        variant="text">项目 GitHub 地址</mdui-button><br>
                     <p class="bold">克隆项目代码：</p>
                     <pre><code>git clone https://gitee.com/flygues2889/random-number.git</code></pre>
-                   
+
                     <p style="font-style: italic;font-size: small;color: rgb(var(--mdui-color-primary));">
                         （GitHub 上的项目代码已不再更新。GitHub上仅提供v0.2.0以前的版本）
                     </p>
@@ -349,7 +424,7 @@
                     <p>打开软件后，点击主页上的“开始”按钮，即可开始随机数抽取。软件默认抽取范围为 1 到 55 之间的数字，所以会随机生成一个 1 到 55 之间的数字，并显示在屏幕上。</p>
                     <ul>
                         <li>
-                            点击 
+                            点击
                             <b>
                                 <mdui-icon name="play_arrow--outlined" style="font-size: medium;"></mdui-icon>
                                 开始抽取
@@ -357,7 +432,7 @@
                             </b> 开始抽取数字。
                         </li>
                         <li>
-                            在 
+                            在
                             <b>
                                 <mdui-icon name="history--outlined" style="font-size: medium;"></mdui-icon>
                                 历史记录
@@ -365,7 +440,7 @@
                             中查看已抽取的数字并复制。
                         </li>
                         <li>
-                            在 
+                            在
                             <b>
                                 <mdui-icon name="settings--outlined" style="font-size: medium;"></mdui-icon>
                                 设置
@@ -375,7 +450,8 @@
                     </ul>
 
                     <h2 id="license">许可证</h2>
-                    <p>本项目使用 <a href="https://gitee.com/flygues2889/random-number/blob/main/LICENSE">AGPL-3.0 许可证。</a> 。</p>
+                    <p>本项目使用 <a href="https://gitee.com/flygues2889/random-number/blob/main/LICENSE">AGPL-3.0 许可证。</a> 。
+                    </p>
                     <p>版权所有 © 2024 FlyGues2889</p>
                 </article>
             </div>

@@ -373,3 +373,18 @@ function copyToClipboard1() {
         alert('复制失败，请手动复制内容。');
     });
 }
+
+function copyToClipboard2() {
+    // 获取 div#notes 的内容
+    const notesContent = document.getElementById('notes').innerText;
+
+    // 使用 Clipboard API 将内容复制到剪贴板
+    navigator.clipboard.writeText(notesContent).then(() => {
+        // 复制成功后给予用户反馈
+        alert('内容已成功复制到剪贴板！');
+    }).catch(err => {
+        // 如果复制失败，提示用户
+        alert('复制失败，请手动复制内容。');
+        console.error('复制失败:', err);
+    });
+}
