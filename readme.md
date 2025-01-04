@@ -1,5 +1,7 @@
-<p style="text-align:center">
-  <img src="https://github.com/user-attachments/assets/cb48b9fc-fcf0-4502-b92c-ceb01ae12124" width="128">
+<p align="center">
+  <a href="https://www.mdui.org/">
+    <img src="https://github.com/user-attachments/assets/cb48b9fc-fcf0-4502-b92c-ceb01ae12124" width="128" alt="RandomNumber logo">
+  </a>
 </p>
 <h1 align="center">RandomNumber</h1>
 <p align="center">使用 Electron 和 MDUI 制作的随机数抽取器</p>
