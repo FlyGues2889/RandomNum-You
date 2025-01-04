@@ -1,6 +1,6 @@
 {
   "name": "random-number",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A random number picker",
   "main": "main.js",
   "icon": "app/assets/appIcon.ico",

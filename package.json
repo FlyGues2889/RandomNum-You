@@ -1,8 +1,4 @@
 {
-  "name": "random-number",
-  "version": "0.2.0",
-  "description": "A random number picker",
-  "main": "app/main.js",
   "scripts": {
   },
   "author": "FlyGues",
