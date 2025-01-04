@@ -362,15 +362,31 @@ function openErrorDialog() {
 }
 
 function copyToClipboard1() {
-    const outContent = document.getElementById('out').innerText; // 获取 div#notes 的内容
+    const outContent = document.getElementById('out').innerText; // 获取 div#out 的内容
 
     navigator.clipboard.writeText(outContent).then(() => {
         // 复制成功的反馈
-        alert('内容已复制到剪贴板！');
+        const copySuccessSnackbar = document.querySelector(".copySuccessSnackbar");
+
+        // 如果当前 SnackBar 正在显示，先关闭它
+        if (copySuccessSnackbar.open) {
+            copySuccessSnackbar.open = false;
+        }
+
+        // 显示新的 SnackBar
+        copySuccessSnackbar.open = true;
     }).catch(err => {
         // 复制失败的反馈
-        console.error('复制失败: ', err);
-        alert('复制失败，请手动复制内容。');
+        const copyErrorSnackbar = document.querySelector(".copyErrorSnackbar");
+
+        // 如果当前 SnackBar 正在显示，先关闭它
+        if (copyErrorSnackbar.open) {
+            copyErrorSnackbar.open = false;
+        }
+
+        // 显示新的 SnackBar
+        copyErrorSnackbar.open = true;
+        console.error('复制失败:', err);
     });
 }
 
@@ -378,13 +394,41 @@ function copyToClipboard2() {
     // 获取 div#notes 的内容
     const notesContent = document.getElementById('notes').innerText;
 
-    // 使用 Clipboard API 将内容复制到剪贴板
     navigator.clipboard.writeText(notesContent).then(() => {
-        // 复制成功后给予用户反馈
-        alert('内容已成功复制到剪贴板！');
+        // 复制成功的反馈
+        const copySuccessSnackbar = document.querySelector(".copySuccessSnackbar");
+
+        // 如果当前 SnackBar 正在显示，先关闭它
+        if (copySuccessSnackbar.open) {
+            copySuccessSnackbar.open = false;
+        }
+
+        // 显示新的 SnackBar
+        copySuccessSnackbar.open = true;
     }).catch(err => {
-        // 如果复制失败，提示用户
-        alert('复制失败，请手动复制内容。');
+        // 复制失败的反馈
+        const copyErrorSnackbar = document.querySelector(".copyErrorSnackbar");
+
+        // 如果当前 SnackBar 正在显示，先关闭它
+        if (copyErrorSnackbar.open) {
+            copyErrorSnackbar.open = false;
+        }
+
+        // 显示新的 SnackBar
+        copyErrorSnackbar.open = true;
         console.error('复制失败:', err);
     });
+}
+
+// 显示设置已保存反馈
+function showSettingsSavedSnackbar() {
+    const settingSnackbar = document.querySelector(".settingsSnackbar");
+
+    // 如果当前 SnackBar 正在显示，先关闭它
+    if (settingSnackbar.open) {
+        settingSnackbar.open = false;
+    }
+
+    // 显示新的 SnackBar
+    settingSnackbar.open = true;
 }

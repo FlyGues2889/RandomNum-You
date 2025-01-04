@@ -332,3 +332,12 @@ mdui-list-subheader {
   margin-top: -1rem;
   font-weight: bold;
 }
+
+mdui-snackbar {
+  border-radius: var(--mdui-shape-corner-medium);
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+}

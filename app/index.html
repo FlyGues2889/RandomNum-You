@@ -137,7 +137,7 @@
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="m9 16l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T6.3 18.8L7 16H4.275q-.5 0-.8-.387T3.3 14.75q.075-.35.35-.55t.625-.2H7.5l1-4H5.775q-.5 0-.8-.387T4.8 8.75q.075-.35.35-.55t.625-.2H9l.825-3.275Q9.9 4.4 10.15 4.2t.6-.2q.475 0 .775.375t.175.825L11 8h4l.825-3.275q.075-.325.325-.525t.6-.2q.475 0 .775.375t.175.825L17 8h2.725q.5 0 .8.387t.175.863q-.075.35-.35.55t-.625.2H16.5l-1 4h2.725q.5 0 .8.388t.175.862q-.075.35-.35.55t-.625.2H15l-.825 3.275q-.075.325-.325.525t-.6.2q-.475 0-.775-.375T12.3 18.8L13 16zm.5-2h4l1-4h-4z"/></svg>
                     抽取数字范围
                     <span slot="description">格式为 最小值-最大值 ，范围 （0 - 999999）</span>
-                    <mdui-text-field type="input" id="num" value="1-55"
+                    <mdui-text-field type="input" id="num" value="1-55" onchange="showSettingsSavedSnackbar()"
                         style="font-family: 'Product Sans';max-width: 16em;" slot="end-icon"
                         variant="outlined"></mdui-text-field>
                 </mdui-list-item>
@@ -147,7 +147,7 @@
                     时间延迟
                     <mdui-select value="750" slot="end-icon" variant="outlined"
                         style="line-height: 1.375rem;font-family: 'Product Sans';max-width: 16em;" class="GETTIME"
-                        onchange="tm=false;settime(this.value,0);storage(0)" id="settime">
+                        onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="settime">
                         <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 14.975q-.2 0-.375-.062T11.3 14.7l-4.6-4.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.9 3.9l3.9-3.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-4.6 4.6q-.15.15-.325.213t-.375.062"/></svg>
                         <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
                         <mdui-menu-item value="500">0.50s</mdui-menu-item>
@@ -163,7 +163,7 @@
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M10.475 22q-.7 0-1.312-.3t-1.038-.85L3.1 14.475q-.2-.225-.175-.537t.225-.513q.5-.525 1.2-.625t1.3.275L7.5 14.2V6q0-.425.288-.712T8.5 5t.725.288t.3.712v10q0 .575-.513.863T8 16.85l-.9-.55l2.6 3.325q.15.175.35.275t.425.1H16q.825 0 1.413-.587T18 18v-4q0-.425-.288-.712T17 13h-4.475q-.425 0-.712-.288T11.525 12t.288-.712t.712-.288H17q1.25 0 2.125.875T20 14v4q0 1.65-1.175 2.825T16 22zm1.5-13q-.425 0-.712-.288T10.975 8q0-.05.125-.5q.2-.35.3-.712T11.5 6q0-1.25-.875-2.125T8.5 3t-2.125.875T5.5 6q0 .425.1.788t.3.712q.075.125.1.25t.025.25q0 .425-.275.713T5.05 9q-.275 0-.512-.15t-.363-.375q-.325-.55-.5-1.175T3.5 6q0-2.075 1.463-3.537T8.5 1t3.538 1.463T13.5 6q0 .675-.175 1.3t-.5 1.175q-.125.225-.35.375t-.5.15"/></svg>
                     是否手动
                     <span slot="description">按钮/回车/空格键以启停</span>
-                    <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
+                    <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon" onchange="showSettingsSavedSnackbar()">
                         <mdui-icon slot="checked-icon" name=""></mdui-icon>
                     </mdui-switch>
                 </mdui-list-item>
@@ -173,7 +173,7 @@
                     周期内不重复
                     <label for="repeat"></label>
                     <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
-                        onchange="if(this.checked)add=[];storage(0)" onclick="if(c){alert('运行中不可设置！');return false}"
+                        onchange="if(this.checked)add=[];storage(0);showSettingsSavedSnackbar()" onclick="if(c){alert('运行中不可设置！');return false}"
                         slot="end-icon">
                         <mdui-icon slot="checked-icon" name=""></mdui-icon>
                     </mdui-switch>
@@ -185,14 +185,14 @@
                 <mdui-list-item nonclickable style="text-align: left;padding: 0;"">
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 21q-3.325 0-5.663-2.3T4 13.125q0-1.65.625-3.062T6.35 7.55l4.6-4.525q.225-.2.5-.312T12 2.6t.55.113t.5.312l4.6 4.525q1.1 1.1 1.725 2.513T20 13.125q0 3.275-2.337 5.575T12 21m0-2V4.8L7.75 9q-.875.825-1.312 1.875T6 13.125q0 2.425 1.75 4.15T12 19"/></svg>
                     数字颜色（滚动）
-                    <mdui-text-field id="tc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                    <mdui-text-field id="tc" onchange="$('out').style.color=this.value;storage(0);showSettingsSavedSnackbar()" variant="outlined"
                     style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
                     value="#BAC8DA" slot="end-icon"></mdui-text-field>
                 </mdui-list-item>
                 <mdui-list-item nonclickable style="text-align: left;padding: 0;">
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#171b2c" d="M12 21q-3.325 0-5.663-2.3T4 13.125q0-1.65.625-3.062T6.35 7.55l4.6-4.525q.225-.2.5-.312T12 2.6t.55.113t.5.312l4.6 4.525q1.1 1.1 1.725 2.513T20 13.125q0 3.275-2.337 5.575T12 21m0-2V4.8L7.75 9q-.875.825-1.312 1.875T6 13.125q0 2.425 1.75 4.15T12 19"/></svg>
                     数字颜色（抽中）
-                    <mdui-text-field id="tsc" onchange="$('out').style.color=this.value;storage(0)" variant="outlined"
+                    <mdui-text-field id="tsc" onchange="$('out').style.color=this.value;storage(0);showSettingsSavedSnackbar()" variant="outlined"
                         style="line-height: 1.375rem;width: 24vw;font-family: 'Product Sans';max-width: 16em;"
                         value="#00629E" slot="end-icon"></mdui-text-field>
                 </mdui-list-item>
@@ -220,11 +220,31 @@
 
     </mdui-layout>
 
-    <mdui-snackbar close-on-outside-click class="errorSnackbar" placement="bottom" close-icon="error_outline"
-        style="border-radius: 1rem;">
-        <div style="display: flex;align-items: center;">
-            <mdui-icon name="error_outline" style="margin-right: 0.5rem;"></mdui-icon>
-            抽取数字范围错误
+    <mdui-snackbar close-on-outside-click class="errorSnackbar" placement="bottom" auto-close-delay="1000">
+        <div>
+            <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7t-.712.288T11 8v4q0 .425.288.713T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
+            抽取数字范围错误，请重新设置
+        </div>
+    </mdui-snackbar>
+    
+    <mdui-snackbar close-on-outside-click class="copySuccessSnackbar" placement="bottom" auto-close-delay="1000">
+        <div>
+            <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z"/></svg>
+            复制内容成功
+        </div>
+    </mdui-snackbar>
+    
+    <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom" auto-close-delay="1000">
+        <div>
+            <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7t-.712.288T11 8v4q0 .425.288.713T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
+            复制内容失败，请手动复制内容
+        </div>
+    </mdui-snackbar>
+
+    <mdui-snackbar close-on-outside-click class="settingsSnackbar" placement="bottom" auto-close-delay="800">
+        <div>
+            <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z"/></svg>
+            设置已保存
         </div>
     </mdui-snackbar>
 
