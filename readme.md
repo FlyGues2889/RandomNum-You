@@ -1,5 +1,5 @@
 <p style="text-align:center">
-  <img src="docs/image/icon.png" width="128">
+  ![icon](https://github.com/user-attachments/assets/cb48b9fc-fcf0-4502-b92c-ceb01ae12124)
 </p>
 <h1 align="center">RandomNumber</h1>
 <p align="center">使用 Electron 和 MDUI 制作的随机数抽取器</p>
