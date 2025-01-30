@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://www.mdui.org/">
+  <a href="https://flygues2889.github.io/random-number/">
     <img src="https://github.com/user-attachments/assets/cb48b9fc-fcf0-4502-b92c-ceb01ae12124" width="128" alt="RandomNumber logo">
   </a>
 </p>
