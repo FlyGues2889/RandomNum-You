@@ -135,35 +135,6 @@ document.onkeydown = function (e) {
         return false;
     }
 }
-window.onresize = function () {
-    var isFull = !!(document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement || document.fullscreenElement);
-    var the = $('out').style;
-    var T = $('t').style;
-    if (isFull == false) {
-        the.position = '';
-        the.width = '';
-        the.height = '';
-        the.fontSize = '100px';
-        the.lineHeight = '';
-        T.display = 'none';
-        document.body.parentNode.style.overflow = 'auto';
-        window.removeEventListener("devicemotion", motionEventHandler, false);
-    } else {
-        the.position = 'fixed';
-        the.width = '100%';
-        the.height = '100%';
-        the.fontSize = '28vw';
-        the.lineHeight = '100vh';
-        the.top = 0;
-        the.left = 0;
-        the.zIndex = 9;
-        T.color = $('ttc').value;
-        if ($('boxbtn').checked) T.display = 'block';
-        T.zIndex = 10;
-        document.body.parentNode.style.overflow = 'hidden';
-    }
-}
-var speed = 30, last_update = 0, x = y = z = lastX = lastY = lastZ = 0, zd = sy = 0;
 
 function motionEventHandler(e) {
     var acceleration = e.accelerationIncludingGravity;
