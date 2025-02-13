@@ -1,43 +1,14 @@
-html,
+* /总体样式 */ html,
 body {
   width: 100vw;
   height: 100vh;
 
-  font-family: 'Product Sans', 'HarmonyOS Sans SC', sans-serif;
-}
-
-
-
-
-mdui-card.title {
-  padding: 1rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  margin-bottom: 1rem;
-  border-radius: 2rem
-}
-
-mdui-card.text {
-  padding: 1rem;
-}
-
-body,
-html {
   background-color: rgb(var(--mdui-color-surface-container-low));
   font-family: 'HarmonyOS Sans SC', sans-serif;
 }
 
-div.bottomBar {
-  display: flex;
-  width: 10vw;
-  height: 5vh;
-  position: fixed;
-  right: 2.5rem;
-  bottom: 3rem;
-  justify-content: flex-end;
-  align-items: center;
-}
 
+/* 主窗口控件 */
 
 div#topWindowBar {
   position: fixed;
@@ -51,7 +22,7 @@ div#topWindowBar {
 
   /* background-color: rgb(var(--mdui-color-surface-container)); */
   font-family: 'Harmony Sans SC';
-  
+
   display: flex;
   align-items: center;
   justify-content: left;
@@ -59,10 +30,52 @@ div#topWindowBar {
   -webkit-app-region: drag;
   user-select: none;
 
-  span{
-    opacity: 0.35;
+  span {
+    opacity: 0.5;
   }
 }
+
+mdui-navigation-rail {
+  background-color: rgb(var(--mdui-color-surface-container));
+
+  font-family: 'Harmony Sans SC M';
+}
+
+div#out {
+  font-family: 'Product Sans';
+  margin-left: 2rem;
+  color: rgb(var(--mdui-color-secondary-dark));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20vw
+}
+
+/* mdui-card.title {
+  padding: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 2rem
+} */
+
+mdui-card.text {
+  padding: 1rem;
+}
+
+
+div.bottomBar {
+  display: flex;
+  width: 10vw;
+  height: 5vh;
+  position: fixed;
+  right: 2.5rem;
+  bottom: 3rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 
 mdui-layout-main {
   margin-left: 5rem;
@@ -79,17 +92,13 @@ div.page {
   min-height: 600px;
 }
 
-mdui-navigation-rail {
-  background-color: rgb(var(--mdui-color-surface-container));
-}
-
 mdui-card.container {
   margin: 0.5rem;
   margin-left: 0;
-  padding: 2rem 1rem;
+  padding: 1rem;
 
   width: 98%;
-  border-radius: var(--mdui-shape-corner-extra-large);
+  border-radius: var(--mdui-shape-corner-large);
   background-color: rgb(var(--mdui-color-secondary-container), 0.3);
 }
 
@@ -118,4 +127,15 @@ mdui-snackbar {
 
 .tips-content {
   padding: 0.2rem;
+}
+
+mdui-tabs {
+  height: 80%;
+
+  mdui-tab-panel {
+    margin-left: 0.5rem;
+    margin-right: 2rem;
+
+    padding-top: 1rem;
+  }
 }

@@ -189,12 +189,6 @@ function storage(n) {
                 $('t').style.color = settings.ttc
             }
             if ('repeat' in settings) $('repeat').checked = (settings.repeat == 1 ? true : false);
-            if ('note' in settings) {
-                if (settings.note == 1) {
-                    $('note').checked = true;
-                    $('notes').style.display = 'block'
-                } else $('note').checked = false
-            }
             if ('manual' in settings) {
                 $('manual').checked = (settings.manual == 1 ? true : false);
                 manuald()
