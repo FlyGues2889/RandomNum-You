@@ -139,3 +139,13 @@ mdui-tabs {
     padding-top: 1rem;
   }
 }
+
+div.page {
+  font-family: 'Harmony Sans SC';
+}
+
+mdui-chip {
+  box-shadow: none;
+
+  font-family: 'Product Sans';
+}

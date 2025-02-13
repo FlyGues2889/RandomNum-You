@@ -73,6 +73,8 @@
                     <mdui-menu>
                         <mdui-menu-item
                             onclick="javascript:document.querySelector('#body').className = 'mdui-theme-auto';">系统默认</mdui-menu-item>
+
+                            <mdui-divider middle></mdui-divider>
                         <mdui-menu-item
                             onclick="javascript:document.querySelector('#body').className = 'mdui-theme-light';">浅色模式</mdui-menu-item>
                         <mdui-menu-item
@@ -132,7 +134,8 @@
         <div class="page" id="historyPage" style="display: none;">
             <h1>历史记录</h1>
 
-            <mdui-card class="container" variant="filled" style="width: 90%;margin: 0 auto;padding: 1rem;">
+            <mdui-card class="container" variant="filled"
+                style="display: none;width: 90%;margin: 0 auto;padding: 1rem;">
                 <div id="notes">
                     <div
                         style="padding: 1rem;color: rgb(var(--mdui-color-on-primary-container),0.5);font-family: 'Product Sans';">
@@ -140,10 +143,16 @@
                     </div>
                 </div>
                 <mdui-divider style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
-                <mdui-button id="copy2" onclick="copyToClipboard2()" variant="text">
-                    复制内容
-                </mdui-button>
             </mdui-card>
+            <mdui-button id="copy2" onclick="copyToClipboard2()" variant="tonal" style="margin-bottom: 2rem;">
+                复制已抽取的数字
+            </mdui-button><br>
+
+            <div style="width: 70%;min-width: 500px;">
+                <small>你已抽取的数字：</small>
+                <mdui-divider style="margin: 1rem 0;"></mdui-divider>
+                <div id="history-list"></div>
+            </div>
 
         </div>
 
@@ -151,7 +160,7 @@
             <h1>设置</h1>
             <mdui-tabs value="general" placement="top-start">
                 <mdui-tab value="general">抽取</mdui-tab>
-                <mdui-tab value="style">个性化</mdui-tab>
+                <!-- <mdui-tab value="style">个性化</mdui-tab> -->
                 <mdui-tab value="info">关于</mdui-tab>
 
                 <mdui-tab-panel slot="panel" value="general">
@@ -163,10 +172,13 @@
                                     d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
                             </svg>
                             抽取数字范围
-                            <span slot="description">格式为 最小值-最大值 ，范围 （0 - 999999）</span>
-                            <mdui-text-field type="input" id="num" value="1-55" onchange="showSettingsSavedSnackbar()"
-                                style="font-family: 'Product Sans';max-width: 16em;" slot="end-icon"
-                                variant="outlined"></mdui-text-field>
+                            <span slot="description">设置抽取极值</span>
+                            <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
+                                <mdui-text-field type="input" id="num" value="1-55"
+                                    onchange="showSettingsSavedSnackbar()"
+                                    style="font-family: 'Product Sans';max-width: 16em;"
+                                    variant="outlined"></mdui-text-field>
+                            </mdui-tooltip>
                         </mdui-list-item>
                     </mdui-card>
                     <mdui-card class="container" variant="filled">
@@ -228,7 +240,7 @@
 
                     </mdui-card>
                 </mdui-tab-panel>
-                <mdui-tab-panel slot="panel" value="style">
+                <!-- <mdui-tab-panel slot="panel" value="style">
                     <mdui-card class="container" variant="filled">
                         <mdui-list-item nonclickable style="text-align: left;padding: 0;">
                             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -244,11 +256,11 @@
                                 value="#00629E" slot="end-icon"></mdui-text-field>
                         </mdui-list-item>
                         <mdui-list-item nonclickable style="text-align: left;padding: 0;margin-left: 2.5rem;">
-                            <!-- <svg slot="icon" xmlns=" http://www.w3.org/2000/svg" width="24" height="24"
+                            <svg slot="icon" xmlns=" http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="m17.66 5.41l.92.92l-2.69 2.69l-.92-.92zM17.67 3c-.26 0-.51.1-.71.29l-3.12 3.12l-1.93-1.91l-1.41 1.41l1.42 1.42L3 16.25V21h4.75l8.92-8.92l1.42 1.42l1.41-1.41l-1.92-1.92l3.12-3.12c.4-.4.4-1.03.01-1.42l-2.34-2.34c-.2-.19-.45-.29-.7-.29M6.92 19L5 17.08l8.06-8.06l1.92 1.92z" />
-                            </svg> -->
+                            </svg>
                             数字颜色（滚动）
                             <mdui-text-field id="tc"
                                 onchange="$('out').style.color=this.value;storage(0);showSettingsSavedSnackbar()"
@@ -258,7 +270,7 @@
                             </mdui-text-field>
                         </mdui-list-item>
                     </mdui-card>
-                </mdui-tab-panel>
+                </mdui-tab-panel> -->
                 <mdui-tab-panel slot="panel" value="info">
                     <mdui-card class="container" variant="filled">
                         <mdui-list-item nonclickable>
@@ -268,7 +280,7 @@
                                     d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
                             </svg>
                             关于 随机数抽取器
-                            <span slot="description">版本 0.3.3</span>
+                            <span slot="description">版本 0.3.4</span>
                         </mdui-list-item>
                         <div style="margin-left: 2.5rem;">
                             <mdui-list-item nonclickable>
