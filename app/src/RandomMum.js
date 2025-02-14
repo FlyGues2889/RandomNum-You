@@ -51,42 +51,68 @@ function stopCount() {
 }
 
 function getNum() {
-  var manual = $("manual").checked;
-  if (c) {
-    if (manual) m = 1;
-    return; // 移除重复的函数定义
-  }
-  m = 0;
-  var nr = $("num").value,
-    out = $("out");
-  if (sessionStorage.getItem("randomIn") != nr) {
-    sessionStorage.setItem("randomIn", nr);
-    add = [];
-  }
-  const errorSnackbar = document.querySelector(".errorSnackbar");
-  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (errorSnackbar.open = true);
-  arr = nr.split("-").map(Number);
-  let in0 = Math.min(arr[0], arr[1]);
-  let in1 = Math.max(arr[0], arr[1]);
-  out.innerHTML = in0 === in1 ? in0 : "";
-
-  numarr = [];
-  for (let i = in0; i <= in1; i++) {
-    if (!$("repeat").checked || !add.includes(i)) {
-      numarr.push(i);
+    var manual = $("manual").checked;
+    if (c) {
+        if (manual) m = 1;
+        return; 
     }
-  }
+    m = 0;
+    var nr = $("num").value,
+        excludeStr = $("excludeNums").value, // 获取排除的数字
+        out = $("out");
 
-  if (numarr.length == 0) {
-    add = [];
-    window.removeEventListener("devicemotion", motionEventHandler, false);
-    out.style.color = "rgb(var(--mdui-color-primary))"; // 修改为变量值
-    out.innerHTML = "Done";
-    return;
-  }
-  sec = new Date().getTime();
-  if (manual) sec += 1000 * 60 * 60 * 24 * 7;
-  timedCount(numarr);
+    // 清空历史记录
+    if (sessionStorage.getItem("randomIn") != nr) {
+        sessionStorage.setItem("randomIn", nr);
+        add = [];
+    }
+
+    const errorSnackbar = document.querySelector(".errorSnackbar");
+    if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (errorSnackbar.open = true);
+
+    arr = nr.split("-").map(Number);
+    let in0 = Math.min(arr[0], arr[1]);
+    let in1 = Math.max(arr[0], arr[1]);
+    out.innerHTML = in0 === in1 ? in0 : "";
+
+    // 处理排除数字
+    let excludedNumbers = excludeStr.split(",").map(num => num.trim()).filter(num => num).map(Number);
+    
+    // 清空当前的排除数字列表
+    const excludeList = document.getElementById('exclude-list');
+    excludeList.innerHTML = '';
+
+    // 将排除的数字添加到 mdui-chip 中
+    excludedNumbers.forEach(num => {
+        const newChip = document.createElement('mdui-chip');
+        newChip.textContent = num;
+        // newChip.selectable = true;
+        newChip.style.margin = "4px";
+        excludeList.appendChild(newChip);
+    });
+
+    numarr = [];
+    for (let i = in0; i <= in1; i++) {
+        // 如果未勾选不重复，则直接添加到 numarr
+        if (!$("repeat").checked || !add.includes(i)) {
+            // 如果该数字不在排除列表中，则添加
+            if (!excludedNumbers.includes(i)) {
+                numarr.push(i);
+            }
+        }
+    }
+
+    if (numarr.length == 0) {
+        add = [];
+        window.removeEventListener("devicemotion", motionEventHandler, false);
+        out.style.color = "rgb(var(--mdui-color-primary))"; 
+        out.innerHTML = "Done";
+        return;
+    }
+
+    sec = new Date().getTime();
+    if (manual) sec += 1000 * 60 * 60 * 24 * 7;
+    timedCount(numarr);
 }
 
 document.onkeydown = function (e) {

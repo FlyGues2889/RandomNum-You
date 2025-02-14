@@ -62,6 +62,14 @@ function openErrorDialog() {
     errorSnackbar.open = true;
 }
 
+function openBlockDialog() {
+    const blockDialog = document.querySelector(".block-dialog");
+    const closeButton2 = blockDialog.querySelector("mdui-button");
+
+    blockDialog.open = true;
+    closeButton2.addEventListener("click", () => blockDialog.open = false);
+}
+
 function copyToClipboard1() {
     const outContent = document.getElementById('out').innerText; // 获取 div#out 的内容
 

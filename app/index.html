@@ -74,7 +74,7 @@
                         <mdui-menu-item
                             onclick="javascript:document.querySelector('#body').className = 'mdui-theme-auto';">系统默认</mdui-menu-item>
 
-                            <mdui-divider middle></mdui-divider>
+                        <mdui-divider middle></mdui-divider>
                         <mdui-menu-item
                             onclick="javascript:document.querySelector('#body').className = 'mdui-theme-light';">浅色模式</mdui-menu-item>
                         <mdui-menu-item
@@ -149,8 +149,10 @@
             </mdui-button><br>
 
             <div style="width: 70%;min-width: 500px;">
-                <small>你已抽取的数字：</small>
+                <small>设置为排除的数字：</small><br>
+                <div id="exclude-list"></div>
                 <mdui-divider style="margin: 1rem 0;"></mdui-divider>
+                <small>你已抽取的数字：</small><br>
                 <div id="history-list"></div>
             </div>
 
@@ -180,6 +182,18 @@
                                     variant="outlined"></mdui-text-field>
                             </mdui-tooltip>
                         </mdui-list-item>
+                        <mdui-list-item nonclickable>
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+                            </svg>
+                            排除数字范围
+                            <span slot="description">抽取过程中要排除的数字</span>
+
+                            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
+                                variant="tonal">打开设置器</mdui-button>
+                        </mdui-list-item>
                     </mdui-card>
                     <mdui-card class="container" variant="filled">
                         <mdui-list-item nonclickable style="text-align: left;">
@@ -194,10 +208,8 @@
                                 class="GETTIME"
                                 onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
                                 id="settime">
-                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24">
-                                    <path fill="#171b2c"
-                                        d="M12 14.975q-.2 0-.375-.062T11.3 14.7l-4.6-4.6q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.9 3.9l3.9-3.9q.275-.275.7-.275t.7.275t.275.7t-.275.7l-4.6 4.6q-.15.15-.325.213t-.375.062" />
+                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
                                 </svg>
                                 <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
                                 <mdui-menu-item value="500">0.50s</mdui-menu-item>
@@ -280,7 +292,7 @@
                                     d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
                             </svg>
                             关于 随机数抽取器
-                            <span slot="description">版本 0.3.4</span>
+                            <span slot="description">版本 0.3.5</span>
                         </mdui-list-item>
                         <div style="margin-left: 2.5rem;">
                             <mdui-list-item nonclickable>
@@ -401,6 +413,19 @@
                 </li>
             </ul>
         </div>
+        <mdui-button slot="action" variant="tonal">确定</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog close-on-overlay-click headline="排除数字设置" class="block-dialog">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+        </svg>
+        <span slot="description">依次输入需要排除的数字，数字间用英文逗号分隔。</span>
+
+        <mdui-text-field autosize onchange="showSettingsSavedSnackbar()" type="input" id="excludeNums" value=""
+            style="font-family: 'Product Sans';" variant="outlined"></mdui-text-field>
+
         <mdui-button slot="action" variant="tonal">确定</mdui-button>
     </mdui-dialog>
 
