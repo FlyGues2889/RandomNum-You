@@ -1,3 +1,5 @@
+import { snackbar } from "mdui/functions/snackbar.js";
+
 var c = 0,
   t,
   add = [],
@@ -46,73 +48,69 @@ function stopCount() {
   clearTimeout(t);
 }
 
-function stopCount() {
-  clearTimeout(t);
-}
-
 function getNum() {
-    var manual = $("manual").checked;
-    if (c) {
-        if (manual) m = 1;
-        return; 
+  var manual = $("manual").checked;
+  if (c) {
+    if (manual) m = 1;
+    return; 
+  }
+  m = 0;
+  var nr = $("num").value,
+      excludeStr = $("excludeNums").value, // 获取排除的数字
+      out = $("out");
+
+  // 清空历史记录
+  if (sessionStorage.getItem("randomIn") != nr) {
+    sessionStorage.setItem("randomIn", nr);
+    add = [];
+  }
+
+  const errorSnackbar = document.querySelector(".errorSnackbar");
+  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (errorSnackbar.open = true);
+
+  arr = nr.split("-").map(Number);
+  let in0 = Math.min(arr[0], arr[1]);
+  let in1 = Math.max(arr[0], arr[1]);
+  out.innerHTML = in0 === in1 ? in0 : "";
+
+  // 处理排除数字
+  let excludedNumbers = getExcludedNumbersFromStorage($("set-exclude-label").value);
+  
+  // 清空当前的排除数字列表
+  const excludeList = document.getElementById('exclude-list');
+  excludeList.innerHTML = '';
+
+  // 将排除的数字添加到 mdui-chip 中
+  excludedNumbers.forEach(num => {
+    const newChip = document.createElement('mdui-chip');
+    newChip.textContent = num;
+    // newChip.selectable = true;
+    newChip.style.margin = "4px";
+    excludeList.appendChild(newChip);
+  });
+
+  numarr = [];
+  for (let i = in0; i <= in1; i++) {
+    // 如果未勾选不重复，则直接添加到 numarr
+    if (!$("repeat").checked || !add.includes(i)) {
+      // 如果该数字不在排除列表中，则添加
+      if (!excludedNumbers.includes(i)) {
+        numarr.push(i);
+      }
     }
-    m = 0;
-    var nr = $("num").value,
-        excludeStr = $("excludeNums").value, // 获取排除的数字
-        out = $("out");
+  }
 
-    // 清空历史记录
-    if (sessionStorage.getItem("randomIn") != nr) {
-        sessionStorage.setItem("randomIn", nr);
-        add = [];
-    }
+  if (numarr.length == 0) {
+    add = [];
+    window.removeEventListener("devicemotion", motionEventHandler, false);
+    out.style.color = "rgb(var(--mdui-color-primary))"; 
+    out.innerHTML = "Done";
+    return;
+  }
 
-    const errorSnackbar = document.querySelector(".errorSnackbar");
-    if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (errorSnackbar.open = true);
-
-    arr = nr.split("-").map(Number);
-    let in0 = Math.min(arr[0], arr[1]);
-    let in1 = Math.max(arr[0], arr[1]);
-    out.innerHTML = in0 === in1 ? in0 : "";
-
-    // 处理排除数字
-    let excludedNumbers = excludeStr.split(",").map(num => num.trim()).filter(num => num).map(Number);
-    
-    // 清空当前的排除数字列表
-    const excludeList = document.getElementById('exclude-list');
-    excludeList.innerHTML = '';
-
-    // 将排除的数字添加到 mdui-chip 中
-    excludedNumbers.forEach(num => {
-        const newChip = document.createElement('mdui-chip');
-        newChip.textContent = num;
-        // newChip.selectable = true;
-        newChip.style.margin = "4px";
-        excludeList.appendChild(newChip);
-    });
-
-    numarr = [];
-    for (let i = in0; i <= in1; i++) {
-        // 如果未勾选不重复，则直接添加到 numarr
-        if (!$("repeat").checked || !add.includes(i)) {
-            // 如果该数字不在排除列表中，则添加
-            if (!excludedNumbers.includes(i)) {
-                numarr.push(i);
-            }
-        }
-    }
-
-    if (numarr.length == 0) {
-        add = [];
-        window.removeEventListener("devicemotion", motionEventHandler, false);
-        out.style.color = "rgb(var(--mdui-color-primary))"; 
-        out.innerHTML = "Done";
-        return;
-    }
-
-    sec = new Date().getTime();
-    if (manual) sec += 1000 * 60 * 60 * 24 * 7;
-    timedCount(numarr);
+  sec = new Date().getTime();
+  if (manual) sec += 1000 * 60 * 60 * 24 * 7;
+  timedCount(numarr);
 }
 
 document.onkeydown = function (e) {
@@ -233,3 +231,48 @@ function setSelectChecked(id, val) {
 
 const slider = document.querySelector(".GETTIME");
 slider.labelFormatter = (value) => `${value} ms`;
+
+// 从 localStorage 获取排除数字数组
+function getExcludedNumbersFromStorage(labelValue) {
+  if (!localStorage.getItem("excludeLabels")) return [];
+  var labels = JSON.parse(localStorage.getItem("excludeLabels"));
+  return labels[labelValue] || [];
+}
+
+// 保存排除标签
+function saveExcludeLabel() {
+  const labelName = $("exclude-label-name").value;
+  const excludeStr = $("excludeNums").value;
+  if (!labelName || !excludeStr) return;
+
+  var labels = localStorage.getItem("excludeLabels") ? JSON.parse(localStorage.getItem("excludeLabels")) : {};
+  labels[labelName] = excludeStr.split(",").map(num => num.trim()).filter(num => num).map(Number);
+  localStorage.setItem("excludeLabels", JSON.stringify(labels));
+
+  const select = $("set-exclude-label");
+  const newMenuItem = document.createElement("mdui-menu-item");
+  newMenuItem.value = labelName;
+  newMenuItem.textContent = labelName;
+  select.appendChild(newMenuItem);
+
+  $("exclude-label-name").value = "";
+  $("excludeNums").value = "";
+  showSettingsSavedSnackbar();
+}
+
+window.onload = function () {
+  loading.style.display = "none";
+
+  // 加载保存的排除标签
+  var excludeLabels = localStorage.getItem("excludeLabels");
+  if (excludeLabels) {
+    excludeLabels = JSON.parse(excludeLabels);
+    const select = $("set-exclude-label");
+    for (let label in excludeLabels) {
+      const newMenuItem = document.createElement("mdui-menu-item");
+      newMenuItem.value = label;
+      newMenuItem.textContent = label;
+      select.appendChild(newMenuItem);
+    }
+  }
+};

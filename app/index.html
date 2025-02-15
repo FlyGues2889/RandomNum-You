@@ -208,7 +208,8 @@
                                 class="GETTIME"
                                 onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
                                 id="settime">
-                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
                                 </svg>
                                 <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
@@ -421,12 +422,23 @@
             <path fill="currentColor"
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
         </svg>
-        <span slot="description">依次输入需要排除的数字，数字间用英文逗号分隔。</span>
+        <small style="display: block;margin-bottom: 1rem;">使用已有的标签：</small>
+        <mdui-select value="" variant="outlined" style="line-height: 1.375rem;" class="GETTIME"
+            onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="set-exclude-label">
+            <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+            </svg>
+            <mdui-menu-item value="">无</mdui-menu-item>
+        </mdui-select>
+        <small style="display: block;margin-bottom: 1rem;margin-top: 1rem;">或自定义新排除项：</small>
+        <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name"></mdui-text-field>
+        <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
+            style="font-family: 'Product Sans';margin-top: 0.8rem;" variant="outlined"></mdui-text-field>
 
-        <mdui-text-field autosize onchange="showSettingsSavedSnackbar()" type="input" id="excludeNums" value=""
-            style="font-family: 'Product Sans';" variant="outlined"></mdui-text-field>
-
-        <mdui-button slot="action" variant="tonal">确定</mdui-button>
+        <mdui-button id="create-exclude-label" slot="action" variant="text"
+            onclick="saveExcludeLabel()">将自定义内容保存为新标签</mdui-button>
+        <mdui-button class="close-block-dialog" onclick="showSettingsSavedSnackbar()" slot="action"
+            variant="tonal">确定</mdui-button>
     </mdui-dialog>
 
     <script>
