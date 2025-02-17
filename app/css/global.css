@@ -24,12 +24,20 @@ body {
     border-radius: 1rem;
     /* 滑块圆角 */
   }
-
-  /* ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  } */
 }
 
+div#settingPage {
+  mdui-select,
+  mdui-text-field {
+    line-height: 1.375rem;
+    font-family: 'Product Sans';
+    max-width: 16em;
+  }
+}
+
+mdui-tabs::part(container) {
+  background-color: unset;
+}
 
 /* 主窗口控件 */
 

@@ -1,5 +1,3 @@
-import { snackbar } from "mdui/functions/snackbar.js";
-
 var c = 0,
   t,
   add = [],
