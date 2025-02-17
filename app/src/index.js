@@ -142,13 +142,6 @@ function showSettingsSavedSnackbar() {
     settingSnackbar.open = true;
 }
 
-const loading = document.querySelector(".loading");
-const main = document.querySelector(".screen")
-// 页面加载完成后隐藏进度指示条
-window.onload = function () {
-    loading.style.display = "none";
-};
-
 function navigate(pageId) {
     var pages = document.querySelectorAll('.page');
     for (var i = 0; i < pages.length; i++) {

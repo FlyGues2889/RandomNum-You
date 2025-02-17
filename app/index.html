@@ -238,7 +238,7 @@
                                         clip-rule="evenodd" />
                                 </g>
                             </svg>
-                            应用程序颜色模式
+                            应用程序主题
                             <mdui-select value="auto" slot="end-icon" variant="outlined"
                                 style="font-family: 'Harmony Sans SC';">
                                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -418,5 +418,13 @@
             variant="tonal">确定</mdui-button>
     </mdui-dialog>
 </body>
+<script>
+    const loading = document.querySelector(".loading");
+    const main = document.querySelector(".screen")
+    // 页面加载完成后隐藏进度指示条
+    window.onload = function () {
+        loading.style.display = "none";
+    };
+</script>
 
 </html>
