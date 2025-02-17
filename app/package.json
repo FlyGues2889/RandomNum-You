@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "packager": "electron-packager . randomNum --win --out ./output --icon=assets/appIcon.ico --overwrite"
+    "packager": "electron-packager . randomNum --win --out ./out --icon=assets/appIcon.ico --overwrite"
   },
   "author": "FlyGues",
   "license": "AGPL-3.0-only",
