@@ -1,6 +1,6 @@
-<p align="center">
+![appIcon](https://github.com/user-attachments/assets/4c571e30-4c46-409c-9219-d42841bebd14)<p align="center">
   <a href="https://flygues2889.github.io/random-number/">
-    <img src="https://github.com/user-attachments/assets/cb48b9fc-fcf0-4502-b92c-ceb01ae12124" width="128" alt="RandomNumber logo">
+    <img src="https://github.com/user-attachments/assets/4c571e30-4c46-409c-9219-d42841bebd14" width="140">
   </a>
 </p>
 <h1 align="center">RandomNumber</h1>
