@@ -54,7 +54,7 @@ function getNum() {
   }
   m = 0;
   var nr = $("num").value,
-      excludeStr = $("excludeNums").value, // 获取排除的数字
+      excludeStr = getExcludedNumbersFromStorage($("set-exclude-label").value), // 获取排除的数字
       out = $("out");
 
   // 清空历史记录
@@ -71,18 +71,14 @@ function getNum() {
   let in1 = Math.max(arr[0], arr[1]);
   out.innerHTML = in0 === in1 ? in0 : "";
 
-  // 处理排除数字
-  let excludedNumbers = getExcludedNumbersFromStorage($("set-exclude-label").value);
-  
   // 清空当前的排除数字列表
   const excludeList = document.getElementById('exclude-list');
   excludeList.innerHTML = '';
 
   // 将排除的数字添加到 mdui-chip 中
-  excludedNumbers.forEach(num => {
+  excludeStr.forEach(num => {
     const newChip = document.createElement('mdui-chip');
     newChip.textContent = num;
-    // newChip.selectable = true;
     newChip.style.margin = "4px";
     excludeList.appendChild(newChip);
   });
@@ -92,7 +88,7 @@ function getNum() {
     // 如果未勾选不重复，则直接添加到 numarr
     if (!$("repeat").checked || !add.includes(i)) {
       // 如果该数字不在排除列表中，则添加
-      if (!excludedNumbers.includes(i)) {
+      if (!excludeStr.includes(i)) {
         numarr.push(i);
       }
     }
@@ -227,9 +223,6 @@ function setSelectChecked(id, val) {
   }
 }
 
-const slider = document.querySelector(".GETTIME");
-slider.labelFormatter = (value) => `${value} ms`;
-
 // 从 localStorage 获取排除数字数组
 function getExcludedNumbersFromStorage(labelValue) {
   if (!localStorage.getItem("excludeLabels")) return [];
@@ -259,6 +252,9 @@ function saveExcludeLabel() {
 }
 
 window.onload = function () {
+  const loading = document.querySelector(".loading");
+  const main = document.querySelector(".screen");
+  // 页面加载完成后隐藏进度指示条
   loading.style.display = "none";
 
   // 加载保存的排除标签
@@ -273,4 +269,7 @@ window.onload = function () {
       select.appendChild(newMenuItem);
     }
   }
+
+  // 加载其他设置
+  storage(1);
 };

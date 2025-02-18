@@ -64,7 +64,7 @@ function openErrorDialog() {
 
 function openBlockDialog() {
     const blockDialog = document.querySelector(".block-dialog");
-    const closeButton2 = blockDialog.querySelector("mdui-button");
+    const closeButton2 = blockDialog.querySelector(".close-block-dialog");
 
     blockDialog.open = true;
     closeButton2.addEventListener("click", () => blockDialog.open = false);

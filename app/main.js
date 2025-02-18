@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, nativeTheme } = require('electron')
 const path = require('node:path')
 
 const createWindow = () => {
@@ -16,11 +16,16 @@ const createWindow = () => {
     },
     minHeight: 600,
     minWidth: 800,
-
     icon: path.join(__dirname, 'assets/appIcon.ico')
   })
 
   win.loadFile('index.html')
+
+  // 监听系统主题的变化
+  nativeTheme.on('updated', () => {
+    const theme = nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
+    win.webContents.send('system-theme-changed', theme)
+  })
 }
 
 app.on('window-all-closed', () => {

@@ -87,6 +87,7 @@ div.page {
 
 h1 {
   user-select: none;
+  font-weight: normal;
 }
 
 mdui-snackbar {
