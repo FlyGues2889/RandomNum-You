@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>随机数抽取器</title>
+    <title>R-Number</title>
 
     <script src="./mdui/mdui.global.js"></script>
 
@@ -20,7 +20,7 @@
     <mdui-layout style="height: 100vh;">
         <mdui-linear-progress class="loading" style="position: fixed;top: 0;z-index: 90;"></mdui-linear-progress>
 
-        <mdui-navigation-rail value="mainPage" divider alignment="center">
+        <mdui-navigation-rail value="mainPage" divider>
             <mdui-button-icon disabled slot="top">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -47,6 +47,12 @@
             </mdui-navigation-rail-item>
 
             <div slot="bottom">
+                <mdui-button-icon onclick="openDialog1()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79c-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67c.32-.89 1.27-1.5 2.3-1.28c.95.2 1.65 1.13 1.57 2.1c-.1 1.34-1.62 1.63-2.45 2.88c0 .01-.01.01-.01.02c-.01.02-.02.03-.03.05c-.09.15-.18.32-.25.5c-.01.03-.03.05-.04.08c-.01.02-.01.04-.02.07c-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07c.02-.03.03-.06.05-.09c.08-.14.18-.27.28-.39c.01-.01.02-.03.03-.04c.1-.12.21-.23.33-.34c.96-.91 2.26-1.65 1.99-3.56c-.24-1.74-1.61-3.21-3.35-3.47" />
+                    </svg>
+                </mdui-button-icon><br>
                 <mdui-button-icon id="toSettings" href="javascript:void(0);" onclick="navigate('settingPage')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -58,7 +64,7 @@
         </mdui-navigation-rail>
 
         <div id="topWindowBar">
-            <span>随机数抽取器</span>
+            <span>R-Number</span>
         </div>
 
 
@@ -67,12 +73,6 @@
             <h1>数字抽取</h1>
 
             <div class="bottomBar">
-                <mdui-button-icon onclick="openDialog1()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79c-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67c.32-.89 1.27-1.5 2.3-1.28c.95.2 1.65 1.13 1.57 2.1c-.1 1.34-1.62 1.63-2.45 2.88c0 .01-.01.01-.01.02c-.01.02-.02.03-.03.05c-.09.15-.18.32-.25.5c-.01.03-.03.05-.04.08c-.01.02-.01.04-.02.07c-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07c.02-.03.03-.06.05-.09c.08-.14.18-.27.28-.39c.01-.01.02-.03.03-.04c.1-.12.21-.23.33-.34c.96-.91 2.26-1.65 1.99-3.56c-.24-1.74-1.61-3.21-3.35-3.47" />
-                    </svg>
-                </mdui-button-icon>
                 <mdui-button-icon id="btn-fullscreen-icon" onclick="handleFullScreen()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -182,7 +182,7 @@
                             </mdui-select>
                         </mdui-list-item>
                     </mdui-card> -->
-                    <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;margin-top: 1rem;">
+                    <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
                         <mdui-list-item nonclickable>
                             <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
@@ -304,7 +304,7 @@
                                 <path fill="currentColor"
                                     d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
                             </svg>
-                            关于 随机数抽取器
+                            关于 R-Number
                             <span slot="description">版本 0.4.1</span>
                         </mdui-list-item>
                         <div style="margin-left: 2.5rem;">

@@ -3,8 +3,8 @@
     <img src="https://github.com/user-attachments/assets/4c571e30-4c46-409c-9219-d42841bebd14" width="140" />
   </a>
 </p>
-<h1 align="center">RandomNumber</h1>
-<p align="center">使用 Electron 和 MDUI 制作的随机数抽取器</p>
+<h1 align="center">R-Number</h1>
+<p align="center">使用 Electron 和 MDUI ，基于 JavaScript 制作的随机数抽取器</p>
 
 <br><br>
 <h2>文档</h2>

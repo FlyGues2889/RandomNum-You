@@ -64,6 +64,8 @@ div#topWindowBar {
 
   span {
     opacity: 0.5;
+
+    font-family: 'Product Sans';
   }
 }
 

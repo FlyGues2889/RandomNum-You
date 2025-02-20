@@ -1,7 +1,7 @@
 {
-  "name": "random-number",
+  "name": "r-number",
   "version": "0.4.1",
-  "description": "A random number picker",
+  "description": "A random number generator",
   "main": "main.js",
   "icon": "app/assets/appIcon.ico",
   "scripts": {
