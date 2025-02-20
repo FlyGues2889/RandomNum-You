@@ -27,6 +27,7 @@ body {
 }
 
 div#settingPage {
+
   mdui-select,
   mdui-text-field {
     line-height: 1.375rem;
@@ -129,19 +130,24 @@ div.bottomBar {
 
 mdui-chip {
   box-shadow: none;
-
   font-family: 'Product Sans';
+  background-color: unset;
+}
+
+div#exclude-list,
+div#history-list {
+  font-size: small;
 }
 
 /* 设置页 */
 
 mdui-card.container {
-  margin: 0.5rem;
+  margin: 0.1rem;
   margin-left: 0;
   padding: 1rem;
 
   width: 98%;
-  border-radius: var(--mdui-shape-corner-large);
+  border-radius: 2rem;
   background-color: rgb(var(--mdui-color-secondary-container), 0.3);
 }
 

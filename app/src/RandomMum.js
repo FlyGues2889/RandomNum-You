@@ -28,7 +28,6 @@ function timedCount(numarr) {
     const newChip = document.createElement("mdui-chip");
     
     newChip.textContent = numarr[rn];
-    newChip.selectable = true;
     newChip.style.margin = "4px";
     historyList.appendChild(newChip);
 

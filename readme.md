@@ -53,6 +53,6 @@
 <pre><code>electron-packager .</code></pre>
 
 <h2 id="license">许可证</h2>
-<p>本项目使用 <a href="https://gitee.com/flygues2889/random-number/blob/main/LICENSE">AGPL-3.0 许可证。</a> 。
+<p>本项目使用 <a href="https://gitee.com/flygues2889/random-number/blob/main/LICENSE">AGPL-3.0 许可证</a> 。
 </p>
 <p>版权所有 © 2024 FlyGues2889</p>
