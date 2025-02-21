@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>R-Number</title>
+    <title>RandomNum</title>
 
     <script src="./mdui/mdui.global.js"></script>
 
@@ -20,7 +20,7 @@
     <mdui-layout style="height: 100vh;">
         <mdui-linear-progress class="loading" style="position: fixed;top: 0;z-index: 90;"></mdui-linear-progress>
 
-        <mdui-navigation-rail value="mainPage" divider>
+        <mdui-navigation-rail value="mainPage" divider alignment="center">
             <mdui-button-icon disabled slot="top">
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
@@ -64,7 +64,7 @@
         </mdui-navigation-rail>
 
         <div id="topWindowBar">
-            <span>R-Number</span>
+            <span>RandomNum</span>
         </div>
 
 
@@ -123,7 +123,7 @@
                     <mdui-list-item nonclickable>
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
                         </svg>
                         已排除数字
                     </mdui-list-item>
@@ -173,10 +173,7 @@
                             语言
                             <mdui-select slot="end-icon" value="cn" variant="outlined"
                                 style="font-family: 'HarmonyOS Sans SC';">
-                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
-                                </svg>
+                                <svg slot="end-icon"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5z"/></svg>
                                 <mdui-menu-item value="cn" href="index.html">简体中文</mdui-menu-item>
                                 <mdui-menu-item value="en" href="en-US.html">English</mdui-menu-item>
                             </mdui-select>
@@ -224,7 +221,7 @@
                                 id="settime">
                                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                                    <path fill="currentColor" d="m7 10l5 5l5-5z" />
                                 </svg>
                                 <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
                                 <mdui-menu-item value="500">0.50s</mdui-menu-item>
@@ -282,7 +279,7 @@
                                 style="font-family: 'Harmony Sans SC';">
                                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                                    <path fill="currentColor" d="m7 10l5 5l5-5z" />
                                 </svg>
                                 <mdui-menu-item value="auto"
                                     onclick="javascript:document.querySelector('#body').className = 'mdui-theme-auto';">自动（默认）</mdui-menu-item>
@@ -304,7 +301,7 @@
                                 <path fill="currentColor"
                                     d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
                             </svg>
-                            关于 R-Number
+                            关于 RandomNum
                             <span slot="description">版本 0.4.1</span>
                         </mdui-list-item>
                         <div style="margin-left: 2.5rem;">
@@ -536,7 +533,7 @@
         <small style="display: block;margin-bottom: 1rem;margin-top: 1rem;">或自定义新排除项：</small>
         <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name"></mdui-text-field>
         <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
-            style="font-family: 'Product Sans';margin-top: 0.8rem;" variant="outlined">
+            style="font-family: 'Product Sans';margin-top: 0.8rem;font-family: 'HarmonyOS Sans SC';" variant="outlined">
             <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
         </mdui-text-field>
 

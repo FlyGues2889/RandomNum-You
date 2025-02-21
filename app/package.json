@@ -1,5 +1,5 @@
 {
-  "name": "r-number",
+  "name": "random-num",
   "version": "0.4.1",
   "description": "A random number generator",
   "main": "main.js",
