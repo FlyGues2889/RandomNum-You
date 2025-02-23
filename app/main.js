@@ -3,7 +3,7 @@ const path = require('node:path')
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 1024,
+    width: 1200,
     height: 680,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -14,7 +14,7 @@ const createWindow = () => {
       height: 48,
       symbolColor: '#828282'
     },
-    minHeight: 600,
+    minHeight: 680,
     minWidth: 800,
     icon: path.join(__dirname, 'assets/appIcon.ico')
   })

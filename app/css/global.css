@@ -79,8 +79,7 @@ div.page {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-left: 6rem;
-  margin-top: 3rem;
+  margin: 4rem 2rem 5rem 8rem;
 
   overflow: auto;
   min-height: 600px;
@@ -127,6 +126,32 @@ div.bottomBar {
   align-items: center;
 }
 
+div.num-progress {
+  width: 16vw;
+  position: absolute;
+  bottom: 2.4rem;
+  left: calc(72px + 2.5rem);
+  padding: 0.8rem 1.5rem;
+
+  font-size: small;
+  font-family: 'Harmony Sans SC';
+  
+  background-color: rgb(var(--mdui-color-surface-container));
+  border-radius: 1.2rem;
+  
+  mdui-linear-progress {
+    margin-left: 0;
+    border-radius: 3rem;
+  }
+
+  span#num-progress-text {
+    position: absolute;
+    right: 1.5rem;
+    text-align: right;
+    font-family: 'Product Sans';
+  }
+}
+
 
 /* 记录页 */
 
@@ -158,13 +183,8 @@ mdui-card.container {
   padding: 0.2rem;
 }
 
-mdui-tabs {
-  height: 80%;
-
-  mdui-tab-panel {
-    margin-left: 0.5rem;
-    margin-right: 2rem;
-
-    padding-top: 1rem;
-  }
+mdui-list-subheader {
+  font-size: medium;
+  color: rgb(var(--mdui-color-primary));
+  font-family: 'Harmony Sans SC M';
 }

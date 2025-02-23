@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>RandomNum</title>
+    <title>RandomNum You</title>
 
     <script src="./mdui/mdui.global.js"></script>
 
@@ -64,7 +64,7 @@
         </mdui-navigation-rail>
 
         <div id="topWindowBar">
-            <span>RandomNum</span>
+            <span>RandomNum You</span>
         </div>
 
 
@@ -87,7 +87,11 @@
                             d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75c-.31 0-.59.13-.79.33l-.79.8l4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2c0-.62-.38-1.16-.91-1.38" />
                     </svg>
                 </mdui-fab>
+            </div>
 
+            <div class="num-progress" id="progressDiv">
+                已抽取的数字数量 <span id="num-progress-text">0</span><br>
+                <mdui-linear-progress id="progress-line" value="0">13</mdui-linear-progress>
             </div>
 
             <mdui-layout-main class="main">
@@ -157,260 +161,238 @@
 
         <div class="page" id="settingPage" style="display: none;">
             <h1>设置</h1>
-            <mdui-tabs value="general" placement="top-start">
-                <mdui-tab value="general">通用</mdui-tab>
-                <mdui-tab value="style">个性化</mdui-tab>
-                <mdui-tab value="info">关于</mdui-tab>
+            <mdui-list-subheader>通用</mdui-list-subheader>
+            <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
+                <mdui-list-item nonclickable>
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
+                    </svg>
+                    抽取数字范围
+                    <span slot="description">设置抽取极值</span>
+                    <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
+                        <mdui-text-field type="input" id="num" value="1-55"
+                            onchange="showSettingsSavedSnackbar();changeNumProgress()"
+                            style="font-family: 'Product Sans';max-width: 16em;" variant="outlined"></mdui-text-field>
+                    </mdui-tooltip>
+                </mdui-list-item>
+                <mdui-list-item nonclickable>
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+                    </svg>
+                    排除数字范围
+                    <span slot="description">抽取过程中要排除的数字</span>
 
-                <mdui-tab-panel slot="panel" value="general">
-                    <!-- <mdui-card class="container" variant="filled">
-                        <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2m6.93 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.92 8M12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96M4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A8 8 0 0 1 5.08 16m2.95-8H5.08a8 8 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.03 8M12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96M14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2m.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2z" />
-                            </svg>
-                            语言
-                            <mdui-select slot="end-icon" value="cn" variant="outlined"
-                                style="font-family: 'HarmonyOS Sans SC';">
-                                <svg slot="end-icon"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m7 10l5 5l5-5z"/></svg>
-                                <mdui-menu-item value="cn" href="index.html">简体中文</mdui-menu-item>
-                                <mdui-menu-item value="en" href="en-US.html">English</mdui-menu-item>
-                            </mdui-select>
-                        </mdui-list-item>
-                    </mdui-card> -->
-                    <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
-                        <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
-                            </svg>
-                            抽取数字范围
-                            <span slot="description">设置抽取极值</span>
-                            <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
-                                <mdui-text-field type="input" id="num" value="1-55"
-                                    onchange="showSettingsSavedSnackbar()"
-                                    style="font-family: 'Product Sans';max-width: 16em;"
-                                    variant="outlined"></mdui-text-field>
-                            </mdui-tooltip>
-                        </mdui-list-item>
-                        <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
-                            </svg>
-                            排除数字范围
-                            <span slot="description">抽取过程中要排除的数字</span>
+                    <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
+                        variant="tonal">打开设置器</mdui-button>
+                </mdui-list-item>
+            </mdui-card>
+            <mdui-card class="container" variant="filled" style="border-radius: 0;">
+                <mdui-list-item nonclickable style="text-align: left;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M9 11h3.63L9 15.2V17h6v-2h-3.63L15 10.8V9H9zm7.056-7.654l1.282-1.535l4.607 3.85l-1.28 1.54zM3.336 7.19l-1.28-1.536L6.662 1.81l1.28 1.536zM12 6c3.86 0 7 3.14 7 7s-3.14 7-7 7s-7-3.14-7-7s3.14-7 7-7m0-2a9 9 0 1 0 .001 18.001A9 9 0 0 0 12 4" />
+                    </svg>
+                    时间延迟
+                    <mdui-select value="750" slot="end-icon" variant="outlined" class="GETTIME"
+                        onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="settime">
+                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                        </svg>
+                        <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
+                        <mdui-menu-item value="500">0.50s</mdui-menu-item>
+                        <mdui-menu-item value="750">0.75s</mdui-menu-item>
+                        <mdui-menu-item value="1000">1s</mdui-menu-item>
+                        <mdui-menu-item value="1500">1.50s</mdui-menu-item>
+                        <mdui-menu-item value="2000">2s</mdui-menu-item>
+                        <mdui-menu-item value="5000">5s</mdui-menu-item>
+                    </mdui-select>
+                </mdui-list-item>
 
-                            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
-                                variant="tonal">打开设置器</mdui-button>
-                        </mdui-list-item>
-                    </mdui-card>
-                    <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
-                        <mdui-list-item nonclickable style="text-align: left;">
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M9 11h3.63L9 15.2V17h6v-2h-3.63L15 10.8V9H9zm7.056-7.654l1.282-1.535l4.607 3.85l-1.28 1.54zM3.336 7.19l-1.28-1.536L6.662 1.81l1.28 1.536zM12 6c3.86 0 7 3.14 7 7s-3.14 7-7 7s-7-3.14-7-7s3.14-7 7-7m0-2a9 9 0 1 0 .001 18.001A9 9 0 0 0 12 4" />
-                            </svg>
-                            时间延迟
-                            <mdui-select value="750" slot="end-icon" variant="outlined" class="GETTIME"
-                                onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
-                                id="settime">
+                <mdui-list-item nonclickable style="text-align: left;padding: 0;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m18.19 12.44l-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44c-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18m-.35 2.85l-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68l4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06M8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5a2.5 2.5 0 0 0-5 0v2.44c-.62-.63-1-1.49-1-2.44" />
+                    </svg>
+                    是否手动
+                    <span slot="description">按钮/回车/空格键以启停</span>
+                    <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+
+                <mdui-list-item nonclickable style="text-align: left;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M6 13c0-1.65.67-3.15 1.76-4.24L6.34 7.34A8 8 0 0 0 4 13c0 4.08 3.05 7.44 7 7.93v-2.02c-2.83-.48-5-2.94-5-5.91m14 0c0-4.42-3.58-8-8-8c-.06 0-.12.01-.18.01l1.09-1.09L11.5 2.5L8 6l3.5 3.5l1.41-1.41l-1.08-1.08c.06 0 .12-.01.17-.01c3.31 0 6 2.69 6 6c0 2.97-2.17 5.43-5 5.91v2.02c3.95-.49 7-3.85 7-7.93" />
+                    </svg>
+                    周期内不重复
+                    <label for="repeat"></label>
+                    <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
+                        onchange="if(this.checked)add=[];storage(0);" onclick="if(c){alert('运行中不可设置！');return false}"
+                        slot="end-icon">
+                        <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                    </mdui-switch>
+                </mdui-list-item>
+            </mdui-card>
+            <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
+                <mdui-list-item nonclickable>
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17 7c-2.41 0-4.43 1.72-4.9 4H6.79c-.39-.88-1.27-1.5-2.29-1.5a2.5 2.5 0 0 0 0 5c1.02 0 1.9-.62 2.29-1.5h5.31A5 5 0 1 0 17 7m0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3s3 1.35 3 3s-1.35 3-3 3" />
+                    </svg>
+                    抽取进度可视化
+                    <span slot="description">显示当前抽取进度和已抽取的数字总量</span>
+                    <mdui-select value="yes" slot="end-icon" variant="outlined"
+                        style="font-family: 'Harmony Sans SC';">
+                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                        </svg>
+                        <mdui-menu-item value="yes"
+                            onclick="javascript:document.querySelector('#progressDiv').style.display = 'block';">显示（默认）</mdui-menu-item>
+
+                        <mdui-divider middle></mdui-divider>
+                        <mdui-menu-item value="no"
+                            onclick="javascript:document.querySelector('#progressDiv').style.display = 'none';">隐藏</mdui-menu-item>
+                    </mdui-select>
+                </mdui-list-item>
+            </mdui-card>
+            <mdui-list-subheader>个性化</mdui-list-subheader>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-item nonclickable style="text-align: left;">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <g fill="currentColor">
+                            <path d="M12 16a4 4 0 0 0 0-8z" />
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m0 2v4a4 4 0 1 0 0 8v4a8 8 0 1 0 0-16"
+                                clip-rule="evenodd" />
+                        </g>
+                    </svg>
+                    应用程序主题
+                    <mdui-select value="auto" slot="end-icon" variant="outlined"
+                        style="font-family: 'Harmony Sans SC';">
+                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                        </svg>
+                        <mdui-menu-item value="auto"
+                            onclick="javascript:document.querySelector('#body').className = 'mdui-theme-auto';">自动（默认）</mdui-menu-item>
+
+                        <mdui-divider middle></mdui-divider>
+                        <mdui-menu-item value="light"
+                            onclick="javascript:document.querySelector('#body').className = 'mdui-theme-light';">浅色模式</mdui-menu-item>
+                        <mdui-menu-item value="dark"
+                            onclick="javascript:document.querySelector('#body').className = 'mdui-theme-dark';">深色模式</mdui-menu-item>
+                    </mdui-select>
+                </mdui-list-item>
+            </mdui-card>
+            <mdui-list-subheader>关于</mdui-list-subheader>
+            <mdui-card class="container" variant="filled">
+                <mdui-list-item nonclickable>
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+                    </svg>
+                    关于 RandomNum You
+                    <span slot="description">版本 0.4.3</span>
+                </mdui-list-item>
+                <div style="margin-left: 2.5rem;">
+                    <mdui-list-item nonclickable>
+                        <mdui-button href="https://github.com/FlyGues2889/random-number" about="_blank"
+                            variant="tonal">项目存储库</mdui-button>
+                        <mdui-button href="https://flygues2889.github.io/" about="_blank"
+                            variant="text">转到作者的小站</mdui-button>
+                    </mdui-list-item>
+                    <mdui-collapse>
+                        <mdui-collapse-item>
+                            <mdui-list-item slot="header" rounded>
                                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
                                 </svg>
-                                <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
-                                <mdui-menu-item value="500">0.50s</mdui-menu-item>
-                                <mdui-menu-item value="750">0.75s</mdui-menu-item>
-                                <mdui-menu-item value="1000">1s</mdui-menu-item>
-                                <mdui-menu-item value="1500">1.50s</mdui-menu-item>
-                                <mdui-menu-item value="2000">2s</mdui-menu-item>
-                                <mdui-menu-item value="5000">5s</mdui-menu-item>
-                            </mdui-select>
-                        </mdui-list-item>
-
-                        <mdui-list-item nonclickable style="text-align: left;padding: 0;">
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="m18.19 12.44l-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44c-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18m-.35 2.85l-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68l4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06M8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5a2.5 2.5 0 0 0-5 0v2.44c-.62-.63-1-1.49-1-2.44" />
-                            </svg>
-                            是否手动
-                            <span slot="description">按钮/回车/空格键以启停</span>
-                            <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
-                                <mdui-icon slot="checked-icon" name=""></mdui-icon>
-                            </mdui-switch>
-                        </mdui-list-item>
-
-                        <mdui-list-item nonclickable style="text-align: left;">
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M6 13c0-1.65.67-3.15 1.76-4.24L6.34 7.34A8 8 0 0 0 4 13c0 4.08 3.05 7.44 7 7.93v-2.02c-2.83-.48-5-2.94-5-5.91m14 0c0-4.42-3.58-8-8-8c-.06 0-.12.01-.18.01l1.09-1.09L11.5 2.5L8 6l3.5 3.5l1.41-1.41l-1.08-1.08c.06 0 .12-.01.17-.01c3.31 0 6 2.69 6 6c0 2.97-2.17 5.43-5 5.91v2.02c3.95-.49 7-3.85 7-7.93" />
-                            </svg>
-                            周期内不重复
-                            <label for="repeat"></label>
-                            <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
-                                onchange="if(this.checked)add=[];storage(0);"
-                                onclick="if(c){alert('运行中不可设置！');return false}" slot="end-icon">
-                                <mdui-icon slot="checked-icon" name=""></mdui-icon>
-                            </mdui-switch>
-                        </mdui-list-item>
-                    </mdui-card>
-                </mdui-tab-panel>
-                <mdui-tab-panel slot="panel" value="style">
-                    <mdui-card class="container" variant="filled">
-                        <mdui-list-item nonclickable style="text-align: left;">
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <g fill="currentColor">
-                                    <path d="M12 16a4 4 0 0 0 0-8z" />
-                                    <path fill-rule="evenodd"
-                                        d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m0 2v4a4 4 0 1 0 0 8v4a8 8 0 1 0 0-16"
-                                        clip-rule="evenodd" />
-                                </g>
-                            </svg>
-                            应用程序主题
-                            <mdui-select value="auto" slot="end-icon" variant="outlined"
-                                style="font-family: 'Harmony Sans SC';">
-                                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="m7 10l5 5l5-5z" />
-                                </svg>
-                                <mdui-menu-item value="auto"
-                                    onclick="javascript:document.querySelector('#body').className = 'mdui-theme-auto';">自动（默认）</mdui-menu-item>
-
-                                <mdui-divider middle></mdui-divider>
-                                <mdui-menu-item value="light"
-                                    onclick="javascript:document.querySelector('#body').className = 'mdui-theme-light';">浅色模式</mdui-menu-item>
-                                <mdui-menu-item value="dark"
-                                    onclick="javascript:document.querySelector('#body').className = 'mdui-theme-dark';">深色模式</mdui-menu-item>
-                            </mdui-select>
-                        </mdui-list-item>
-                    </mdui-card>
-                </mdui-tab-panel>
-                <mdui-tab-panel slot="panel" value="info">
-                    <mdui-card class="container" variant="filled">
-                        <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                viewBox="0 0 24 24">
-                                <path fill="currentColor"
-                                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
-                            </svg>
-                            关于 RandomNum
-                            <span slot="description">版本 0.4.1</span>
-                        </mdui-list-item>
-                        <div style="margin-left: 2.5rem;">
-                            <mdui-list-item nonclickable>
-                                <mdui-button href="https://github.com/FlyGues2889/random-number" about="_blank"
-                                    variant="tonal">项目存储库</mdui-button>
-                                <mdui-button href="https://flygues2889.github.io/" about="_blank"
-                                    variant="text">转到作者的小站</mdui-button>
+                                更多信息
                             </mdui-list-item>
-                            <mdui-collapse>
-                                <mdui-collapse-item>
-                                    <mdui-list-item slot="header" rounded>
-                                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
-                                        </svg>
-                                        更多信息
-                                    </mdui-list-item>
-                                    <div>
-                                        <mdui-list-item nonclickable class="mdui-prose">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="52" viewBox="0 0 1268 455"
-                                                style="margin-left: -0.5rem;">
-                                                <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
-                                                    <g id="组_16" data-name="组 16" transform="translate(2844 195)">
-                                                        <rect id="矩形_7" data-name="矩形 7" width="400" height="400"
-                                                            fill="none" />
-                                                        <g id="组_12" data-name="组 12"
-                                                            transform="translate(-199.587 123.82) rotate(-45)">
-                                                            <path id="矩形_14" data-name="矩形 14"
-                                                                d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
-                                                                transform="translate(306 359) rotate(90)"
-                                                                fill="currentColor" />
-                                                            <path id="矩形_15" data-name="矩形 15"
-                                                                d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
-                                                                transform="translate(106 359)" fill="currentColor" />
-                                                            <path id="矩形_6" data-name="矩形 6"
-                                                                d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
-                                                                transform="translate(351.366 213.836) rotate(90)"
-                                                                fill="currentColor" />
-                                                            <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
-                                                                d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
-                                                                transform="translate(1005.007 123.433)"
-                                                                fill="currentColor" />
-                                                        </g>
-                                                    </g>
-                                                    <g id="组_24" data-name="组 24" transform="translate(3244 168)">
-                                                        <rect id="矩形_9" data-name="矩形 9" width="868" height="455"
-                                                            fill="none" />
-                                                        <g id="组_20" data-name="组 20"
-                                                            transform="translate(-292.473 -194.982)">
-                                                            <path id="路径_1" data-name="路径 1"
-                                                                d="M6261.77,3955.406h-22.3V3837.617h85.634v22.3H6261.77Z"
-                                                                transform="translate(-5863 -3471.376)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_2" data-name="路径 2"
-                                                                d="M6383.571,3836.965h-22.3V3682.917h-121.8v-20.982h144.1Z"
-                                                                transform="translate(-5863 -3352.936)"
-                                                                fill="currentColor" />
-                                                            <path id="联合_2" data-name="联合 2"
-                                                                d="M48.26,150.785l-20.194-9.452L60.9,71.194,23.533,24.031,23.515-11.9,71.46,48.623l28.712-61.341,20.194,9.452Z"
-                                                                transform="translate(511.8 385.179)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_6" data-name="路径 6"
-                                                                d="M7081.973,3972.434c-31.818,0-59.42-17.095-74.118-31.723l-7.456-7.421,14.842-14.911,7.441,7.407c2.311,2.275,53.227,51.229,106.546,7.131l-76.394-72.117h102.133v76.811l-3.08,3.081C7128.51,3964.078,7104.21,3972.432,7081.973,3972.434Z"
-                                                                transform="translate(-6368.233 -3488.339)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_7" data-name="路径 7"
-                                                                d="M7474.866,3972.434c-16.159,0-29.374-8.433-31.127-9.6l-9.276-6.184,12.368-18.552,9.276,6.184c3.545,2.309,14.951,7.793,24.462,5.1,5.656-1.6,10.281-5.892,14.089-13.081v-75.5h22.3v80.618l-1.066,2.259c-6.858,14.532-16.765,23.687-29.445,27.209A43.131,43.131,0,0,1,7474.866,3972.434Z"
-                                                                transform="translate(-6638.482 -3488.339)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_9" data-name="路径 9"
-                                                                d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
-                                                                transform="translate(-6811.923 -3637.767)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_10" data-name="路径 10"
-                                                                d="M7968.042,3925.334h-11.148v-22.3h59c2.38-.427,5.08-2.545,5.08-9.953,0-8.813-4.034-10.154-5.049-10.351h-31.9l-1.017-.19c-9.031-1.691-26.111-10.65-26.111-32.458,0-21.48,16.76-31.077,25.623-33.151l1.253-.293h56.964v22.3h-54.042c-2.495.926-7.5,3.728-7.5,11.147,0,7.46,5.1,9.738,7.153,10.351h30.635l.426.032c8.945.686,25.862,8.386,25.862,32.615,0,22.669-15.636,31.7-26.146,32.235Z"
-                                                                transform="translate(-6966.795 -3441.304)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_9-2" data-name="路径 9"
-                                                                d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
-                                                                transform="translate(-6811.923 -3680.965)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_9-3" data-name="路径 9"
-                                                                d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
-                                                                transform="translate(-6811.923 -3724.163)"
-                                                                fill="currentColor" />
-                                                            <rect id="矩形_16" data-name="矩形 16" width="251.582"
-                                                                height="22.297" transform="translate(535.315 309)"
-                                                                fill="currentColor" />
-                                                            <path id="路径_12" data-name="路径 12"
-                                                                d="M-241.8.8a14.8,14.8,0,0,1-4.4-.65,12.711,12.711,0,0,1-3.85-1.95,13.5,13.5,0,0,1-3.05-3.175,15.37,15.37,0,0,1-2.05-4.375l6.35-2.5a9.7,9.7,0,0,0,2.45,4.475,6.172,6.172,0,0,0,4.6,1.775,7.424,7.424,0,0,0,2.025-.275,6,6,0,0,0,1.75-.8A3.881,3.881,0,0,0-236.75-8a3.709,3.709,0,0,0,.45-1.85,4.446,4.446,0,0,0-.35-1.8,4.209,4.209,0,0,0-1.175-1.5,10.43,10.43,0,0,0-2.15-1.35,32.476,32.476,0,0,0-3.275-1.35l-2.2-.8A16.912,16.912,0,0,1-248.375-18a12.815,12.815,0,0,1-2.675-2.05,10.11,10.11,0,0,1-1.975-2.825,8.433,8.433,0,0,1-.775-3.675,9.417,9.417,0,0,1,.825-3.925,9.592,9.592,0,0,1,2.35-3.2,11.018,11.018,0,0,1,3.65-2.15,13.708,13.708,0,0,1,4.725-.775,13.572,13.572,0,0,1,4.675.725,11.5,11.5,0,0,1,3.35,1.85A10.3,10.3,0,0,1-232-31.55,11.931,11.931,0,0,1-230.75-29l-5.95,2.5a6.336,6.336,0,0,0-1.825-2.7,5.2,5.2,0,0,0-3.625-1.2,6.17,6.17,0,0,0-3.65,1.025,3.139,3.139,0,0,0-1.45,2.675,3.388,3.388,0,0,0,1.4,2.725A15.261,15.261,0,0,0-241.4-21.8l2.25.75a25.776,25.776,0,0,1,3.925,1.725A12.3,12.3,0,0,1-232.175-17a9.458,9.458,0,0,1,1.95,3.075,10.857,10.857,0,0,1,.675,3.975,9.787,9.787,0,0,1-1.125,4.825A10.317,10.317,0,0,1-233.55-1.8,12.5,12.5,0,0,1-237.5.15,15.135,15.135,0,0,1-241.8.8Zm39.9-.8V-29.4h-10v-6.4h26.75v6.4h-10V0Zm49.65.8a15.355,15.355,0,0,1-5.725-1.025A11.8,11.8,0,0,1-162.35-3.2a13.731,13.731,0,0,1-2.8-4.725,18.589,18.589,0,0,1-1-6.325V-35.8h6.75v21.95a11.449,11.449,0,0,0,.45,3.3,7.42,7.42,0,0,0,1.35,2.6,6.256,6.256,0,0,0,2.25,1.725,7.3,7.3,0,0,0,3.1.625,7.43,7.43,0,0,0,3.15-.625,6.257,6.257,0,0,0,2.25-1.725,7.42,7.42,0,0,0,1.35-2.6,11.449,11.449,0,0,0,.45-3.3V-35.8h6.75v21.55a18.372,18.372,0,0,1-.975,6.125,13.487,13.487,0,0,1-2.8,4.75,12.705,12.705,0,0,1-4.4,3.075A14.563,14.563,0,0,1-152.25.8Zm35.35-36.6h12.1a21.286,21.286,0,0,1,7.65,1.3,16.507,16.507,0,0,1,5.8,3.675,15.973,15.973,0,0,1,3.675,5.675A19.956,19.956,0,0,1-86.4-17.9a20.1,20.1,0,0,1-1.275,7.3A15.726,15.726,0,0,1-91.35-4.95a16.692,16.692,0,0,1-5.8,3.65A21.286,21.286,0,0,1-104.8,0h-12.1Zm11.8,29.4a15.066,15.066,0,0,0,5.2-.825A10.158,10.158,0,0,0-96.15-9.55a9.532,9.532,0,0,0,2.25-3.625,14.122,14.122,0,0,0,.75-4.725,14.122,14.122,0,0,0-.75-4.725,9.532,9.532,0,0,0-2.25-3.625,10.158,10.158,0,0,0-3.75-2.325,15.066,15.066,0,0,0-5.2-.825h-5.05v23Zm39.15-29.4h6.75V0h-6.75ZM-20.55.8A18.848,18.848,0,0,1-27.975-.65,18.25,18.25,0,0,1-33.9-4.625a18.41,18.41,0,0,1-3.925-5.95A18.876,18.876,0,0,1-39.25-17.9a18.876,18.876,0,0,1,1.425-7.325,18.41,18.41,0,0,1,3.925-5.95,18.25,18.25,0,0,1,5.925-3.975A18.848,18.848,0,0,1-20.55-36.6a18.848,18.848,0,0,1,7.425,1.45A18.25,18.25,0,0,1-7.2-31.175a18.41,18.41,0,0,1,3.925,5.95A18.876,18.876,0,0,1-1.85-17.9a18.876,18.876,0,0,1-1.425,7.325A18.41,18.41,0,0,1-7.2-4.625,18.25,18.25,0,0,1-13.125-.65,18.848,18.848,0,0,1-20.55.8Zm0-6.4a12.105,12.105,0,0,0,4.675-.9,11.772,11.772,0,0,0,3.8-2.5,11.372,11.372,0,0,0,2.55-3.875A13.223,13.223,0,0,0-8.6-17.9a13.223,13.223,0,0,0-.925-5.025,11.372,11.372,0,0,0-2.55-3.875,11.772,11.772,0,0,0-3.8-2.5,12.105,12.105,0,0,0-4.675-.9,12.105,12.105,0,0,0-4.675.9,11.772,11.772,0,0,0-3.8,2.5,11.372,11.372,0,0,0-2.55,3.875A13.223,13.223,0,0,0-32.5-17.9a13.223,13.223,0,0,0,.925,5.025A11.372,11.372,0,0,0-29.025-9a11.772,11.772,0,0,0,3.8,2.5A12.1,12.1,0,0,0-20.55-5.6Z"
-                                                                transform="translate(1076.473 338.048)"
-                                                                fill="currentColor" />
-                                                        </g>
-                                                    </g>
+                            <div>
+                                <mdui-list-item nonclickable class="mdui-prose">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="52" viewBox="0 0 1268 455"
+                                        style="margin-left: -0.5rem;">
+                                        <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
+                                            <g id="组_16" data-name="组 16" transform="translate(2844 195)">
+                                                <rect id="矩形_7" data-name="矩形 7" width="400" height="400" fill="none" />
+                                                <g id="组_12" data-name="组 12"
+                                                    transform="translate(-199.587 123.82) rotate(-45)">
+                                                    <path id="矩形_14" data-name="矩形 14"
+                                                        d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
+                                                        transform="translate(306 359) rotate(90)" fill="currentColor" />
+                                                    <path id="矩形_15" data-name="矩形 15"
+                                                        d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
+                                                        transform="translate(106 359)" fill="currentColor" />
+                                                    <path id="矩形_6" data-name="矩形 6"
+                                                        d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
+                                                        transform="translate(351.366 213.836) rotate(90)"
+                                                        fill="currentColor" />
+                                                    <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
+                                                        d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
+                                                        transform="translate(1005.007 123.433)" fill="currentColor" />
                                                 </g>
-                                            </svg>
+                                            </g>
+                                            <g id="组_24" data-name="组 24" transform="translate(3244 168)">
+                                                <rect id="矩形_9" data-name="矩形 9" width="868" height="455" fill="none" />
+                                                <g id="组_20" data-name="组 20" transform="translate(-292.473 -194.982)">
+                                                    <path id="路径_1" data-name="路径 1"
+                                                        d="M6261.77,3955.406h-22.3V3837.617h85.634v22.3H6261.77Z"
+                                                        transform="translate(-5863 -3471.376)" fill="currentColor" />
+                                                    <path id="路径_2" data-name="路径 2"
+                                                        d="M6383.571,3836.965h-22.3V3682.917h-121.8v-20.982h144.1Z"
+                                                        transform="translate(-5863 -3352.936)" fill="currentColor" />
+                                                    <path id="联合_2" data-name="联合 2"
+                                                        d="M48.26,150.785l-20.194-9.452L60.9,71.194,23.533,24.031,23.515-11.9,71.46,48.623l28.712-61.341,20.194,9.452Z"
+                                                        transform="translate(511.8 385.179)" fill="currentColor" />
+                                                    <path id="路径_6" data-name="路径 6"
+                                                        d="M7081.973,3972.434c-31.818,0-59.42-17.095-74.118-31.723l-7.456-7.421,14.842-14.911,7.441,7.407c2.311,2.275,53.227,51.229,106.546,7.131l-76.394-72.117h102.133v76.811l-3.08,3.081C7128.51,3964.078,7104.21,3972.432,7081.973,3972.434Z"
+                                                        transform="translate(-6368.233 -3488.339)"
+                                                        fill="currentColor" />
+                                                    <path id="路径_7" data-name="路径 7"
+                                                        d="M7474.866,3972.434c-16.159,0-29.374-8.433-31.127-9.6l-9.276-6.184,12.368-18.552,9.276,6.184c3.545,2.309,14.951,7.793,24.462,5.1,5.656-1.6,10.281-5.892,14.089-13.081v-75.5h22.3v80.618l-1.066,2.259c-6.858,14.532-16.765,23.687-29.445,27.209A43.131,43.131,0,0,1,7474.866,3972.434Z"
+                                                        transform="translate(-6638.482 -3488.339)"
+                                                        fill="currentColor" />
+                                                    <path id="路径_9" data-name="路径 9"
+                                                        d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
+                                                        transform="translate(-6811.923 -3637.767)"
+                                                        fill="currentColor" />
+                                                    <path id="路径_10" data-name="路径 10"
+                                                        d="M7968.042,3925.334h-11.148v-22.3h59c2.38-.427,5.08-2.545,5.08-9.953,0-8.813-4.034-10.154-5.049-10.351h-31.9l-1.017-.19c-9.031-1.691-26.111-10.65-26.111-32.458,0-21.48,16.76-31.077,25.623-33.151l1.253-.293h56.964v22.3h-54.042c-2.495.926-7.5,3.728-7.5,11.147,0,7.46,5.1,9.738,7.153,10.351h30.635l.426.032c8.945.686,25.862,8.386,25.862,32.615,0,22.669-15.636,31.7-26.146,32.235Z"
+                                                        transform="translate(-6966.795 -3441.304)"
+                                                        fill="currentColor" />
+                                                    <path id="路径_9-2" data-name="路径 9"
+                                                        d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
+                                                        transform="translate(-6811.923 -3680.965)"
+                                                        fill="currentColor" />
+                                                    <path id="路径_9-3" data-name="路径 9"
+                                                        d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
+                                                        transform="translate(-6811.923 -3724.163)"
+                                                        fill="currentColor" />
+                                                    <rect id="矩形_16" data-name="矩形 16" width="251.582" height="22.297"
+                                                        transform="translate(535.315 309)" fill="currentColor" />
+                                                    <path id="路径_12" data-name="路径 12"
+                                                        d="M-241.8.8a14.8,14.8,0,0,1-4.4-.65,12.711,12.711,0,0,1-3.85-1.95,13.5,13.5,0,0,1-3.05-3.175,15.37,15.37,0,0,1-2.05-4.375l6.35-2.5a9.7,9.7,0,0,0,2.45,4.475,6.172,6.172,0,0,0,4.6,1.775,7.424,7.424,0,0,0,2.025-.275,6,6,0,0,0,1.75-.8A3.881,3.881,0,0,0-236.75-8a3.709,3.709,0,0,0,.45-1.85,4.446,4.446,0,0,0-.35-1.8,4.209,4.209,0,0,0-1.175-1.5,10.43,10.43,0,0,0-2.15-1.35,32.476,32.476,0,0,0-3.275-1.35l-2.2-.8A16.912,16.912,0,0,1-248.375-18a12.815,12.815,0,0,1-2.675-2.05,10.11,10.11,0,0,1-1.975-2.825,8.433,8.433,0,0,1-.775-3.675,9.417,9.417,0,0,1,.825-3.925,9.592,9.592,0,0,1,2.35-3.2,11.018,11.018,0,0,1,3.65-2.15,13.708,13.708,0,0,1,4.725-.775,13.572,13.572,0,0,1,4.675.725,11.5,11.5,0,0,1,3.35,1.85A10.3,10.3,0,0,1-232-31.55,11.931,11.931,0,0,1-230.75-29l-5.95,2.5a6.336,6.336,0,0,0-1.825-2.7,5.2,5.2,0,0,0-3.625-1.2,6.17,6.17,0,0,0-3.65,1.025,3.139,3.139,0,0,0-1.45,2.675,3.388,3.388,0,0,0,1.4,2.725A15.261,15.261,0,0,0-241.4-21.8l2.25.75a25.776,25.776,0,0,1,3.925,1.725A12.3,12.3,0,0,1-232.175-17a9.458,9.458,0,0,1,1.95,3.075,10.857,10.857,0,0,1,.675,3.975,9.787,9.787,0,0,1-1.125,4.825A10.317,10.317,0,0,1-233.55-1.8,12.5,12.5,0,0,1-237.5.15,15.135,15.135,0,0,1-241.8.8Zm39.9-.8V-29.4h-10v-6.4h26.75v6.4h-10V0Zm49.65.8a15.355,15.355,0,0,1-5.725-1.025A11.8,11.8,0,0,1-162.35-3.2a13.731,13.731,0,0,1-2.8-4.725,18.589,18.589,0,0,1-1-6.325V-35.8h6.75v21.95a11.449,11.449,0,0,0,.45,3.3,7.42,7.42,0,0,0,1.35,2.6,6.256,6.256,0,0,0,2.25,1.725,7.3,7.3,0,0,0,3.1.625,7.43,7.43,0,0,0,3.15-.625,6.257,6.257,0,0,0,2.25-1.725,7.42,7.42,0,0,0,1.35-2.6,11.449,11.449,0,0,0,.45-3.3V-35.8h6.75v21.55a18.372,18.372,0,0,1-.975,6.125,13.487,13.487,0,0,1-2.8,4.75,12.705,12.705,0,0,1-4.4,3.075A14.563,14.563,0,0,1-152.25.8Zm35.35-36.6h12.1a21.286,21.286,0,0,1,7.65,1.3,16.507,16.507,0,0,1,5.8,3.675,15.973,15.973,0,0,1,3.675,5.675A19.956,19.956,0,0,1-86.4-17.9a20.1,20.1,0,0,1-1.275,7.3A15.726,15.726,0,0,1-91.35-4.95a16.692,16.692,0,0,1-5.8,3.65A21.286,21.286,0,0,1-104.8,0h-12.1Zm11.8,29.4a15.066,15.066,0,0,0,5.2-.825A10.158,10.158,0,0,0-96.15-9.55a9.532,9.532,0,0,0,2.25-3.625,14.122,14.122,0,0,0,.75-4.725,14.122,14.122,0,0,0-.75-4.725,9.532,9.532,0,0,0-2.25-3.625,10.158,10.158,0,0,0-3.75-2.325,15.066,15.066,0,0,0-5.2-.825h-5.05v23Zm39.15-29.4h6.75V0h-6.75ZM-20.55.8A18.848,18.848,0,0,1-27.975-.65,18.25,18.25,0,0,1-33.9-4.625a18.41,18.41,0,0,1-3.925-5.95A18.876,18.876,0,0,1-39.25-17.9a18.876,18.876,0,0,1,1.425-7.325,18.41,18.41,0,0,1,3.925-5.95,18.25,18.25,0,0,1,5.925-3.975A18.848,18.848,0,0,1-20.55-36.6a18.848,18.848,0,0,1,7.425,1.45A18.25,18.25,0,0,1-7.2-31.175a18.41,18.41,0,0,1,3.925,5.95A18.876,18.876,0,0,1-1.85-17.9a18.876,18.876,0,0,1-1.425,7.325A18.41,18.41,0,0,1-7.2-4.625,18.25,18.25,0,0,1-13.125-.65,18.848,18.848,0,0,1-20.55.8Zm0-6.4a12.105,12.105,0,0,0,4.675-.9,11.772,11.772,0,0,0,3.8-2.5,11.372,11.372,0,0,0,2.55-3.875A13.223,13.223,0,0,0-8.6-17.9a13.223,13.223,0,0,0-.925-5.025,11.372,11.372,0,0,0-2.55-3.875,11.772,11.772,0,0,0-3.8-2.5,12.105,12.105,0,0,0-4.675-.9,12.105,12.105,0,0,0-4.675.9,11.772,11.772,0,0,0-3.8,2.5,11.372,11.372,0,0,0-2.55,3.875A13.223,13.223,0,0,0-32.5-17.9a13.223,13.223,0,0,0,.925,5.025A11.372,11.372,0,0,0-29.025-9a11.772,11.772,0,0,0,3.8,2.5A12.1,12.1,0,0,0-20.55-5.6Z"
+                                                        transform="translate(1076.473 338.048)" fill="currentColor" />
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
 
-                                            <span slot="description">我们使用 <a href="../LICENSE">AGPL 3.0</a> 协议.</span>
-                                        </mdui-list-item>
-                                    </div>
-                                </mdui-collapse-item>
-                            </mdui-collapse>
+                                    <span slot="description">我们使用 <a href="../LICENSE">AGPL 3.0</a> 协议.</span>
+                                </mdui-list-item>
+                            </div>
+                        </mdui-collapse-item>
+                    </mdui-collapse>
 
-                        </div>
-                    </mdui-card>
-                </mdui-tab-panel>
-            </mdui-tabs>
+                </div>
+            </mdui-card>
         </div>
 
     </mdui-layout>

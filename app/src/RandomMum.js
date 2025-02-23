@@ -3,7 +3,8 @@ var c = 0,
   add = [],
   sec,
   f = 0,
-  m = 0;
+  m = 0,
+  numProgressMaxSet = false; // 新增一个变量来判断进度条的最大值是否已经设置
 
 function $(id) {
   return document.getElementById(id);
@@ -26,7 +27,7 @@ function timedCount(numarr) {
     // 为每个已抽到的数字创建一个mdui-chip元素
     const historyList = document.getElementById("history-list");
     const newChip = document.createElement("mdui-chip");
-    
+
     newChip.textContent = numarr[rn];
     newChip.style.margin = "4px";
     historyList.appendChild(newChip);
@@ -34,6 +35,14 @@ function timedCount(numarr) {
     add.push(numarr[rn]);
     document.querySelector("#notes span").innerHTML = add.join(", ");
     document.querySelector("#notes b").innerHTML = add.length;
+
+    // 更新进度条和进度文本
+    const numProgress = document.querySelector(".num-progress");
+    const numprogressLine = numProgress.querySelector("#progress-line");
+    const numprogressText = numProgress.querySelector("#num-progress-text");
+    numprogressLine.value = add.length;
+    numprogressText.innerHTML =
+      ((add.length / numarr.length) * 100).toFixed(2) + "%";
   } else {
     t = setTimeout(function () {
       timedCount(numarr);
@@ -49,12 +58,12 @@ function getNum() {
   var manual = $("manual").checked;
   if (c) {
     if (manual) m = 1;
-    return; 
+    return;
   }
   m = 0;
   var nr = $("num").value,
-      excludeStr = getExcludedNumbersFromStorage($("set-exclude-label").value), // 获取排除的数字
-      out = $("out");
+    excludeStr = getExcludedNumbersFromStorage($("set-exclude-label").value), // 获取排除的数字
+    out = $("out");
 
   // 清空历史记录
   if (sessionStorage.getItem("randomIn") != nr) {
@@ -71,12 +80,12 @@ function getNum() {
   out.innerHTML = in0 === in1 ? in0 : "";
 
   // 清空当前的排除数字列表
-  const excludeList = document.getElementById('exclude-list');
-  excludeList.innerHTML = '';
+  const excludeList = document.getElementById("exclude-list");
+  excludeList.innerHTML = "";
 
   // 将排除的数字添加到 mdui-chip 中
-  excludeStr.forEach(num => {
-    const newChip = document.createElement('mdui-chip');
+  excludeStr.forEach((num) => {
+    const newChip = document.createElement("mdui-chip");
     newChip.textContent = num;
     newChip.style.margin = "4px";
     excludeList.appendChild(newChip);
@@ -96,10 +105,22 @@ function getNum() {
   if (numarr.length == 0) {
     add = [];
     window.removeEventListener("devicemotion", motionEventHandler, false);
-    out.style.color = "rgb(var(--mdui-color-primary))"; 
+    out.style.color = "rgb(var(--mdui-color-primary))";
     out.innerHTML = "Done";
     return;
   }
+
+  // 设置进度条的最大值（只在第一次运行时设置）
+  const numProgress = document.querySelector(".num-progress");
+  const numprogressLine = numProgress.querySelector("#progress-line");
+  const numprogressText = numProgress.querySelector("#num-progress-text");
+  if (!numProgressMaxSet) {
+    numprogressLine.max = numarr.length;
+    numProgressMaxSet = true; // 设置后将变量置为true，避免重复设置
+  }
+
+  numprogressLine.value++;
+  numprogressText.innerHTML = numprogressLine.value;
 
   sec = new Date().getTime();
   if (manual) sec += 1000 * 60 * 60 * 24 * 7;
@@ -114,29 +135,6 @@ document.onkeydown = function (e) {
     return false;
   }
 };
-
-function motionEventHandler(e) {
-  var acceleration = e.accelerationIncludingGravity;
-  x = acceleration.x;
-  y = acceleration.y;
-  z = acceleration.z;
-  if (
-    Math.abs(x - lastX) > speed ||
-    Math.abs(y - lastY) > speed ||
-    Math.abs(z - lastZ) > speed
-  ) {
-    var curTime = new Date().getTime();
-    if (!c && curTime - last_update > 500) {
-      last_update = curTime;
-      if (sy) $("audio").play();
-      if (zd) window.navigator.vibrate(200);
-      getNum();
-    }
-  }
-  lastX = x;
-  lastY = y;
-  lastZ = z;
-}
 
 var tm = false;
 
@@ -176,14 +174,6 @@ function storage(n) {
       if ("manual" in settings) {
         $("manual").checked = settings.manual == 1 ? true : false;
         manuald();
-      }
-      if ("position" in settings) {
-        setSelectChecked("position", settings.position);
-        Tposition(settings.position);
-      }
-      if ("fs" in settings) {
-        setSelectChecked("fontsize", settings.fs);
-        $("t").style.fontSize = settings.fs + "px";
       }
     }
   }
@@ -235,8 +225,14 @@ function saveExcludeLabel() {
   const excludeStr = $("excludeNums").value;
   if (!labelName || !excludeStr) return;
 
-  var labels = localStorage.getItem("excludeLabels") ? JSON.parse(localStorage.getItem("excludeLabels")) : {};
-  labels[labelName] = excludeStr.split(",").map(num => num.trim()).filter(num => num).map(Number);
+  var labels = localStorage.getItem("excludeLabels")
+    ? JSON.parse(localStorage.getItem("excludeLabels"))
+    : {};
+  labels[labelName] = excludeStr
+    .split(",")
+    .map((num) => num.trim())
+    .filter((num) => num)
+    .map(Number);
   localStorage.setItem("excludeLabels", JSON.stringify(labels));
 
   const select = $("set-exclude-label");
@@ -272,3 +268,15 @@ window.onload = function () {
   // 加载其他设置
   storage(1);
 };
+
+function changeNumProgress() {
+  numProgressMaxSet = false;
+
+  // 重置 progress bar 的值为 0
+  const numProgress = document.querySelector(".num-progress");
+  const numprogressLine = numProgress.querySelector("#progress-line");
+  numprogressLine.value = 0;
+
+  // 将 numProgressMaxSet 设为 true
+  numProgressMaxSet = true;
+}
