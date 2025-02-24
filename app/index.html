@@ -143,15 +143,18 @@
                             <path fill="currentColor"
                                 d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
                         </svg>
-                        已抽取的数字记录
+                        已抽取全部记录
                     </mdui-list-item>
                     <div style="margin-left: 2.5rem;">
                         <mdui-list-item nonclickable>
                             <div id="history-list"></div>
                         </mdui-list-item>
                         <mdui-button id="copy2" onclick="copyToClipboard2()" variant="tonal">
-                            复制所有已抽取数字
+                            复制本轮已抽取数字
                         </mdui-button>
+                        <!-- <mdui-button onclick="copyToClipboard2()" variant="text" disabled>
+                            复制全部已抽取数字
+                        </mdui-button> -->
                     </div>
 
                 </mdui-card>
@@ -185,7 +188,7 @@
                     <span slot="description">抽取过程中要排除的数字</span>
 
                     <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
-                        variant="tonal">打开设置器</mdui-button>
+                        variant="tonal">打开排除菜单</mdui-button>
                 </mdui-list-item>
             </mdui-card>
             <mdui-card class="container" variant="filled" style="border-radius: 0;">
@@ -406,33 +409,33 @@
                 <path fill="currentColor"
                     d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7t-.712.288T11 8v4q0 .425.288.713T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8" />
             </svg>
-            抽取数字范围错误，请重新设置
+            抽取范围格式错误！请检查并重新输入
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="copySuccessSnackbar" placement="bottom" auto-close-delay="1000">
+    <mdui-snackbar close-on-outside-click class="copySuccessSnackbar" placement="bottom-end" auto-close-delay="1000">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
             </svg>
-            复制内容成功
+            复制成功
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom" auto-close-delay="1000">
+    <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom-end" auto-close-delay="1000">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M12 17q.425 0 .713-.288T13 16t-.288-.712T12 15t-.712.288T11 16t.288.713T12 17m0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.712T12 7t-.712.288T11 8v4q0 .425.288.713T12 13m0 9q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8" />
             </svg>
-            复制内容失败，请手动复制内容
+            复制失败！请手动复制内容
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="settingsSnackbar" placement="bottom" auto-close-delay="800">
+    <mdui-snackbar close-on-outside-click class="settingsSnackbar" placement="bottom-end" auto-close-delay="800">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">

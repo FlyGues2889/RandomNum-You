@@ -93,6 +93,7 @@ h1 {
 }
 
 mdui-snackbar {
+  margin-bottom: 5rem;
   border-radius: var(--mdui-shape-corner-medium);
 
   div {

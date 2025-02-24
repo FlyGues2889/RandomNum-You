@@ -50,6 +50,28 @@ function timedCount(numarr) {
   }
 }
 
+function motionEventHandler(e) {
+  var acceleration = e.accelerationIncludingGravity;
+  x = acceleration.x;
+  y = acceleration.y;
+  z = acceleration.z;
+  if (
+    Math.abs(x - lastX) > speed ||
+    Math.abs(y - lastY) > speed ||
+    Math.abs(z - lastZ) > speed
+  ) {
+    var curTime = new Date().getTime();
+    if (!c && curTime - last_update > 500) {
+      last_update = curTime;
+      if (sy) $("audio").play();
+      if (zd) window.navigator.vibrate(200);
+      getNum();
+    }
+  }
+  lastX = x;
+  lastY = y;
+  lastZ = z;
+}
 function stopCount() {
   clearTimeout(t);
 }
