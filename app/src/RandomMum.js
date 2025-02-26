@@ -3,8 +3,7 @@ var c = 0,
   add = [],
   sec,
   f = 0,
-  m = 0,
-  numProgressMaxSet = false; // 新增一个变量来判断进度条的最大值是否已经设置
+  m = 0
 
 function $(id) {
   return document.getElementById(id);
@@ -36,13 +35,6 @@ function timedCount(numarr) {
     document.querySelector("#notes span").innerHTML = add.join(", ");
     document.querySelector("#notes b").innerHTML = add.length;
 
-    // 更新进度条和进度文本
-    const numProgress = document.querySelector(".num-progress");
-    const numprogressLine = numProgress.querySelector("#progress-line");
-    const numprogressText = numProgress.querySelector("#num-progress-text");
-    numprogressLine.value = add.length;
-    numprogressText.innerHTML =
-      ((add.length / numarr.length) * 100).toFixed(2) + "%";
   } else {
     t = setTimeout(function () {
       timedCount(numarr);
@@ -131,18 +123,6 @@ function getNum() {
     out.innerHTML = "Done";
     return;
   }
-
-  // 设置进度条的最大值（只在第一次运行时设置）
-  const numProgress = document.querySelector(".num-progress");
-  const numprogressLine = numProgress.querySelector("#progress-line");
-  const numprogressText = numProgress.querySelector("#num-progress-text");
-  if (!numProgressMaxSet) {
-    numprogressLine.max = numarr.length;
-    numProgressMaxSet = true; // 设置后将变量置为true，避免重复设置
-  }
-
-  numprogressLine.value++;
-  numprogressText.innerHTML = numprogressLine.value;
 
   sec = new Date().getTime();
   if (manual) sec += 1000 * 60 * 60 * 24 * 7;
@@ -290,15 +270,3 @@ window.onload = function () {
   // 加载其他设置
   storage(1);
 };
-
-function changeNumProgress() {
-  numProgressMaxSet = false;
-
-  // 重置 progress bar 的值为 0
-  const numProgress = document.querySelector(".num-progress");
-  const numprogressLine = numProgress.querySelector("#progress-line");
-  numprogressLine.value = 0;
-
-  // 将 numProgressMaxSet 设为 true
-  numProgressMaxSet = true;
-}

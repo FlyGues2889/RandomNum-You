@@ -35,7 +35,7 @@
                     <path fill="currentColor"
                         d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
                 </svg>
-                抽取
+                <!-- 抽取 -->
             </mdui-navigation-rail-item>
             <mdui-navigation-rail-item id="toHistory" value="historyPage" href="javascript:void(0);"
                 onclick="navigate('historyPage')">
@@ -43,7 +43,7 @@
                     <path fill="currentColor"
                         d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89l.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7s-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.95 8.95 0 0 0 13 21a9 9 0 0 0 0-18m-1 5v5l4.28 2.54l.72-1.21l-3.5-2.08V8z" />
                 </svg>
-                记录
+                <!-- 记录 -->
             </mdui-navigation-rail-item>
 
             <div slot="bottom">
@@ -87,11 +87,6 @@
                             d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75c-.31 0-.59.13-.79.33l-.79.8l4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2c0-.62-.38-1.16-.91-1.38" />
                     </svg>
                 </mdui-fab>
-            </div>
-
-            <div class="num-progress" id="progressDiv">
-                已抽取的数字数量 <span id="num-progress-text">0</span><br>
-                <mdui-linear-progress id="progress-line" value="0">13</mdui-linear-progress>
             </div>
 
             <mdui-layout-main class="main">
@@ -191,7 +186,7 @@
                         variant="tonal">打开排除菜单</mdui-button>
                 </mdui-list-item>
             </mdui-card>
-            <mdui-card class="container" variant="filled" style="border-radius: 0;">
+            <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
                 <mdui-list-item nonclickable style="text-align: left;">
                     <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="currentColor"
@@ -238,29 +233,6 @@
                         slot="end-icon">
                         <mdui-icon slot="checked-icon" name=""></mdui-icon>
                     </mdui-switch>
-                </mdui-list-item>
-            </mdui-card>
-            <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
-                <mdui-list-item nonclickable>
-                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M17 7c-2.41 0-4.43 1.72-4.9 4H6.79c-.39-.88-1.27-1.5-2.29-1.5a2.5 2.5 0 0 0 0 5c1.02 0 1.9-.62 2.29-1.5h5.31A5 5 0 1 0 17 7m0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3s3 1.35 3 3s-1.35 3-3 3" />
-                    </svg>
-                    抽取进度可视化
-                    <span slot="description">显示当前抽取进度和已抽取的数字总量</span>
-                    <mdui-select value="yes" slot="end-icon" variant="outlined"
-                        style="font-family: 'Harmony Sans SC';">
-                        <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24">
-                            <path fill="currentColor" d="m7 10l5 5l5-5z" />
-                        </svg>
-                        <mdui-menu-item value="yes"
-                            onclick="javascript:document.querySelector('#progressDiv').style.display = 'block';">显示（默认）</mdui-menu-item>
-
-                        <mdui-divider middle></mdui-divider>
-                        <mdui-menu-item value="no"
-                            onclick="javascript:document.querySelector('#progressDiv').style.display = 'none';">隐藏</mdui-menu-item>
-                    </mdui-select>
                 </mdui-list-item>
             </mdui-card>
             <mdui-list-subheader>个性化</mdui-list-subheader>
@@ -413,7 +385,7 @@
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="copySuccessSnackbar" placement="bottom-end" auto-close-delay="1000">
+    <mdui-snackbar close-on-outside-click class="copySuccessSnackbar" placement="bottom-start" auto-close-delay="1000">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
@@ -424,7 +396,7 @@
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom-end" auto-close-delay="1000">
+    <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom-start" auto-close-delay="1000">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
@@ -435,7 +407,7 @@
         </div>
     </mdui-snackbar>
 
-    <mdui-snackbar close-on-outside-click class="settingsSnackbar" placement="bottom-end" auto-close-delay="800">
+    <mdui-snackbar close-on-outside-click class="settingsSnackbar" placement="bottom-start" auto-close-delay="800">
         <div>
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
