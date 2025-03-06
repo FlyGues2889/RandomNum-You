@@ -1,18 +1,19 @@
 /*总体样式 */
 
 html,
-body {
+body,
+mdui-layout {
   width: 100vw;
   height: 100vh;
 
-  background-color: rgb(var(--mdui-color-surface-container-low));
+  background-color: rgb(var(--mdui-color-surface-container));
   font-family: 'HarmonyOS Sans SC', sans-serif;
 }
 
 :root {
   ::-webkit-scrollbar {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.4rem;
+    height: 0.4rem;
   }
 
   ::-webkit-scrollbar-track {
@@ -41,6 +42,26 @@ mdui-tabs::part(container) {
 }
 
 /* 主窗口控件 */
+mdui-top-app-bar {
+  height: 3rem;
+  align-items: center;
+  /* background-color: rgb(var(--mdui-color-primary-container)); */
+  background-color: rgb(var(--mdui-color-surface-container));
+  color: rgb(var(--mdui-color-primary));
+  
+  mdui-top-app-bar-title {
+    opacity: 0.8;
+    transform: scale(0.8);
+    margin-left: -6.5rem;
+    font-size: medium;
+    
+    font-family: 'Product Sans';
+  }
+  mdui-button-icon {
+    transform: scale(0.8);
+    color: rgb(var(--mdui-color-primary));
+  }
+}
 
 div#topWindowBar {
   position: fixed;
@@ -50,9 +71,7 @@ div#topWindowBar {
   height: 4rem;
   padding-left: 1rem;
   margin-left: 5rem;
-  z-index: 999;
 
-  /* background-color: rgb(var(--mdui-color-surface-container)); */
   font-family: 'Harmony Sans SC';
 
   display: flex;
@@ -62,29 +81,32 @@ div#topWindowBar {
   -webkit-app-region: drag;
   user-select: none;
 
-  span {
-    opacity: 0.5;
-
-    font-family: 'Product Sans';
-  }
 }
 
 mdui-navigation-rail {
   background-color: rgb(var(--mdui-color-surface-container));
 
   font-family: 'Harmony Sans SC M';
+  z-index: 990;
+
+  margin: 1rem 0;
 }
 
 div.page {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 4rem 2rem 5rem 8rem;
-
+  border-radius: 2rem;
+  margin: 4rem 1rem 1rem 5rem;
+  background-color: rgb(var(--mdui-color-surface));
+  
   overflow: auto;
   min-height: 600px;
-
+  
   font-family: 'Harmony Sans SC';
+  div.page-container {
+    margin: 1rem 2rem;
+  }
 }
 
 h1 {
