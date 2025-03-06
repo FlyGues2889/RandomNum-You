@@ -19,7 +19,7 @@
 
 <body id="body" class="mdui-theme-auto" style="margin: 0;">
     <mdui-layout style="height: 100vh;">
-        
+
         <mdui-top-app-bar>
             <!-- <mdui-button-icon disabled>
                 <img src="assets/appIcon_Comparation.svg" width="60%">
@@ -27,9 +27,9 @@
             <mdui-top-app-bar-title>RandomNum You</mdui-top-app-bar-title>
             <div style="flex-grow: 1"></div>
         </mdui-top-app-bar>
-    
+
         <mdui-navigation-rail value="mainPage">
-    
+
             <mdui-navigation-rail-item id="toMain" value="mainPage" href="javascript:void(0);"
                 onclick="navigate('mainPage')">
                 <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -46,22 +46,15 @@
                 </svg>
                 记录
             </mdui-navigation-rail-item>
-    
-            <div slot="bottom">
-                <mdui-button-icon onclick="openDialog1()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79c-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67c.32-.89 1.27-1.5 2.3-1.28c.95.2 1.65 1.13 1.57 2.1c-.1 1.34-1.62 1.63-2.45 2.88c0 .01-.01.01-.01.02c-.01.02-.02.03-.03.05c-.09.15-.18.32-.25.5c-.01.03-.03.05-.04.08c-.01.02-.01.04-.02.07c-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07c.02-.03.03-.06.05-.09c.08-.14.18-.27.28-.39c.01-.01.02-.03.03-.04c.1-.12.21-.23.33-.34c.96-.91 2.26-1.65 1.99-3.56c-.24-1.74-1.61-3.21-3.35-3.47" />
-                    </svg>
-                </mdui-button-icon><br>
-                <mdui-button-icon id="toSettings" href="javascript:void(0);" onclick="navigate('settingPage')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1a.6.6 0 0 0-.18-.03c-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1q.09.03.18.03c.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64zm-1.98-1.71c.04.31.05.52.05.73s-.02.43-.05.73l-.14 1.13l.89.7l1.08.84l-.7 1.21l-1.27-.51l-1.04-.42l-.9.68c-.43.32-.84.56-1.25.73l-1.06.43l-.16 1.13l-.2 1.35h-1.4l-.19-1.35l-.16-1.13l-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7l-1.06.43l-1.27.51l-.7-1.21l1.08-.84l.89-.7l-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13l-.89-.7l-1.08-.84l.7-1.21l1.27.51l1.04.42l.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43l.16-1.13l.2-1.35h1.39l.19 1.35l.16 1.13l1.06.43c.43.18.83.41 1.23.71l.91.7l1.06-.43l1.27-.51l.7 1.21l-1.07.85l-.89.7zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4m0 6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2" />
-                    </svg>
-    
-                </mdui-button-icon>
-            </div>
+
+            <mdui-button-icon slot="bottom" id="toSettings" href="javascript:void(0);"
+                onclick="navigate('settingPage')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46a.5.5 0 0 0-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1a.6.6 0 0 0-.18-.03c-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46a.5.5 0 0 0 .61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1q.09.03.18.03c.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64zm-1.98-1.71c.04.31.05.52.05.73s-.02.43-.05.73l-.14 1.13l.89.7l1.08.84l-.7 1.21l-1.27-.51l-1.04-.42l-.9.68c-.43.32-.84.56-1.25.73l-1.06.43l-.16 1.13l-.2 1.35h-1.4l-.19-1.35l-.16-1.13l-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7l-1.06.43l-1.27.51l-.7-1.21l1.08-.84l.89-.7l-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13l-.89-.7l-1.08-.84l.7-1.21l1.27.51l1.04.42l.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43l.16-1.13l.2-1.35h1.39l.19 1.35l.16 1.13l1.06.43c.43.18.83.41 1.23.71l.91.7l1.06-.43l1.27-.51l.7 1.21l-1.07.85l-.89.7zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4m0 6c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2" />
+                </svg>
+
+            </mdui-button-icon>
         </mdui-navigation-rail>
 
         <div id="topWindowBar">
@@ -71,9 +64,9 @@
 
 
         <div class="page" id="mainPage">
+            <h1>数字抽取</h1>
             <div class="page-container">
-                <h1>数字抽取</h1>
-    
+
                 <div class="bottomBar">
                     <mdui-button-icon id="btn-fullscreen-icon" onclick="handleFullScreen()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -81,7 +74,7 @@
                                 d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z" />
                         </svg>
                     </mdui-button-icon>
-    
+
                     <div style="flex-grow: 1"></div>
                     <mdui-fab id="btn" onclick="getNum()" style="margin-left: 1.6rem;">
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -90,7 +83,7 @@
                         </svg>
                     </mdui-fab>
                 </div>
-    
+
                 <mdui-layout-main class="main">
                     <mdui-dropdown trigger="contextmenu" open-on-pointer>
                         <div id="out" slot="trigger">
@@ -100,7 +93,7 @@
                             <mdui-menu-item id="copy1" onclick="copyToClipboard1()">复制</mdui-menu-item>
                         </mdui-menu>
                     </mdui-dropdown>
-    
+
                 </mdui-layout-main>
             </div>
         </div>
@@ -108,7 +101,7 @@
         <div class="page" id="historyPage" style="display: none;">
             <div class="page-container">
                 <h1>历史记录</h1>
-    
+
                 <mdui-card class="container" variant="filled"
                     style="display: none;width: 90%;margin: 0 auto;padding: 1rem;">
                     <div id="notes">
@@ -117,13 +110,15 @@
                             <span><small>开始抽取以显示记录</small></span>
                         </div>
                     </div>
-                    <mdui-divider style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
+                    <mdui-divider
+                        style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
                 </mdui-card>
-    
+
                 <div style="min-width: 500px;margin-top: 2rem;">
                     <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
                         <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
                             </svg>
@@ -137,7 +132,8 @@
                     </mdui-card>
                     <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
                         <mdui-list-item nonclickable>
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="m20.5 10l.5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4zm-7 4h-4l1-4h4z" />
                             </svg>
@@ -154,7 +150,7 @@
                                 复制全部已抽取数字
                             </mdui-button> -->
                         </div>
-    
+
                     </mdui-card>
                 </div>
             </div>
@@ -175,7 +171,8 @@
                         <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
                             <mdui-text-field type="input" id="num" value="1-55"
                                 onchange="showSettingsSavedSnackbar();changeNumProgress()"
-                                style="font-family: 'Product Sans';max-width: 16em;" variant="outlined"></mdui-text-field>
+                                style="font-family: 'Product Sans';max-width: 16em;"
+                                variant="outlined"></mdui-text-field>
                         </mdui-tooltip>
                     </mdui-list-item>
                     <mdui-list-item nonclickable>
@@ -185,7 +182,7 @@
                         </svg>
                         排除数字范围
                         <span slot="description">抽取过程中要排除的数字</span>
-    
+
                         <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
                             variant="tonal">打开排除菜单</mdui-button>
                     </mdui-list-item>
@@ -198,7 +195,8 @@
                         </svg>
                         时间延迟
                         <mdui-select value="750" slot="end-icon" variant="outlined" class="GETTIME"
-                            onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="settime">
+                            onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
+                            id="settime">
                             <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
                                 <path fill="currentColor" d="m7 10l5 5l5-5z" />
@@ -212,7 +210,7 @@
                             <mdui-menu-item value="5000">5s</mdui-menu-item>
                         </mdui-select>
                     </mdui-list-item>
-    
+
                     <mdui-list-item nonclickable style="text-align: left;padding: 0;">
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
@@ -224,7 +222,7 @@
                             <mdui-icon slot="checked-icon" name=""></mdui-icon>
                         </mdui-switch>
                     </mdui-list-item>
-    
+
                     <mdui-list-item nonclickable style="text-align: left;">
                         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
@@ -233,8 +231,8 @@
                         周期内不重复
                         <label for="repeat"></label>
                         <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
-                            onchange="if(this.checked)add=[];storage(0);" onclick="if(c){alert('运行中不可设置！');return false}"
-                            slot="end-icon">
+                            onchange="if(this.checked)add=[];storage(0);"
+                            onclick="if(c){alert('运行中不可设置！');return false}" slot="end-icon">
                             <mdui-icon slot="checked-icon" name=""></mdui-icon>
                         </mdui-switch>
                     </mdui-list-item>
@@ -275,7 +273,7 @@
                                 </svg>
                             </mdui-segmented-button>
                         </mdui-segmented-button-group>
-    
+
                     </mdui-list-item>
                     <div style="margin-left: 2.5rem;">
                         <mdui-list-item nonclickable>
@@ -338,12 +336,14 @@
                                             style="margin-left: -0.5rem;">
                                             <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
                                                 <g id="组_16" data-name="组 16" transform="translate(2844 195)">
-                                                    <rect id="矩形_7" data-name="矩形 7" width="400" height="400" fill="none" />
+                                                    <rect id="矩形_7" data-name="矩形 7" width="400" height="400"
+                                                        fill="none" />
                                                     <g id="组_12" data-name="组 12"
                                                         transform="translate(-199.587 123.82) rotate(-45)">
                                                         <path id="矩形_14" data-name="矩形 14"
                                                             d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
-                                                            transform="translate(306 359) rotate(90)" fill="currentColor" />
+                                                            transform="translate(306 359) rotate(90)"
+                                                            fill="currentColor" />
                                                         <path id="矩形_15" data-name="矩形 15"
                                                             d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
                                                             transform="translate(106 359)" fill="currentColor" />
@@ -353,18 +353,23 @@
                                                             fill="currentColor" />
                                                         <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
                                                             d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
-                                                            transform="translate(1005.007 123.433)" fill="currentColor" />
+                                                            transform="translate(1005.007 123.433)"
+                                                            fill="currentColor" />
                                                     </g>
                                                 </g>
                                                 <g id="组_24" data-name="组 24" transform="translate(3244 168)">
-                                                    <rect id="矩形_9" data-name="矩形 9" width="868" height="455" fill="none" />
-                                                    <g id="组_20" data-name="组 20" transform="translate(-292.473 -194.982)">
+                                                    <rect id="矩形_9" data-name="矩形 9" width="868" height="455"
+                                                        fill="none" />
+                                                    <g id="组_20" data-name="组 20"
+                                                        transform="translate(-292.473 -194.982)">
                                                         <path id="路径_1" data-name="路径 1"
                                                             d="M6261.77,3955.406h-22.3V3837.617h85.634v22.3H6261.77Z"
-                                                            transform="translate(-5863 -3471.376)" fill="currentColor" />
+                                                            transform="translate(-5863 -3471.376)"
+                                                            fill="currentColor" />
                                                         <path id="路径_2" data-name="路径 2"
                                                             d="M6383.571,3836.965h-22.3V3682.917h-121.8v-20.982h144.1Z"
-                                                            transform="translate(-5863 -3352.936)" fill="currentColor" />
+                                                            transform="translate(-5863 -3352.936)"
+                                                            fill="currentColor" />
                                                         <path id="联合_2" data-name="联合 2"
                                                             d="M48.26,150.785l-20.194-9.452L60.9,71.194,23.533,24.031,23.515-11.9,71.46,48.623l28.712-61.341,20.194,9.452Z"
                                                             transform="translate(511.8 385.179)" fill="currentColor" />
@@ -392,22 +397,24 @@
                                                             d="M7786.944,4121.8h-81.471v-22.3h81.471Z"
                                                             transform="translate(-6811.923 -3724.163)"
                                                             fill="currentColor" />
-                                                        <rect id="矩形_16" data-name="矩形 16" width="251.582" height="22.297"
-                                                            transform="translate(535.315 309)" fill="currentColor" />
+                                                        <rect id="矩形_16" data-name="矩形 16" width="251.582"
+                                                            height="22.297" transform="translate(535.315 309)"
+                                                            fill="currentColor" />
                                                         <path id="路径_12" data-name="路径 12"
                                                             d="M-241.8.8a14.8,14.8,0,0,1-4.4-.65,12.711,12.711,0,0,1-3.85-1.95,13.5,13.5,0,0,1-3.05-3.175,15.37,15.37,0,0,1-2.05-4.375l6.35-2.5a9.7,9.7,0,0,0,2.45,4.475,6.172,6.172,0,0,0,4.6,1.775,7.424,7.424,0,0,0,2.025-.275,6,6,0,0,0,1.75-.8A3.881,3.881,0,0,0-236.75-8a3.709,3.709,0,0,0,.45-1.85,4.446,4.446,0,0,0-.35-1.8,4.209,4.209,0,0,0-1.175-1.5,10.43,10.43,0,0,0-2.15-1.35,32.476,32.476,0,0,0-3.275-1.35l-2.2-.8A16.912,16.912,0,0,1-248.375-18a12.815,12.815,0,0,1-2.675-2.05,10.11,10.11,0,0,1-1.975-2.825,8.433,8.433,0,0,1-.775-3.675,9.417,9.417,0,0,1,.825-3.925,9.592,9.592,0,0,1,2.35-3.2,11.018,11.018,0,0,1,3.65-2.15,13.708,13.708,0,0,1,4.725-.775,13.572,13.572,0,0,1,4.675.725,11.5,11.5,0,0,1,3.35,1.85A10.3,10.3,0,0,1-232-31.55,11.931,11.931,0,0,1-230.75-29l-5.95,2.5a6.336,6.336,0,0,0-1.825-2.7,5.2,5.2,0,0,0-3.625-1.2,6.17,6.17,0,0,0-3.65,1.025,3.139,3.139,0,0,0-1.45,2.675,3.388,3.388,0,0,0,1.4,2.725A15.261,15.261,0,0,0-241.4-21.8l2.25.75a25.776,25.776,0,0,1,3.925,1.725A12.3,12.3,0,0,1-232.175-17a9.458,9.458,0,0,1,1.95,3.075,10.857,10.857,0,0,1,.675,3.975,9.787,9.787,0,0,1-1.125,4.825A10.317,10.317,0,0,1-233.55-1.8,12.5,12.5,0,0,1-237.5.15,15.135,15.135,0,0,1-241.8.8Zm39.9-.8V-29.4h-10v-6.4h26.75v6.4h-10V0Zm49.65.8a15.355,15.355,0,0,1-5.725-1.025A11.8,11.8,0,0,1-162.35-3.2a13.731,13.731,0,0,1-2.8-4.725,18.589,18.589,0,0,1-1-6.325V-35.8h6.75v21.95a11.449,11.449,0,0,0,.45,3.3,7.42,7.42,0,0,0,1.35,2.6,6.256,6.256,0,0,0,2.25,1.725,7.3,7.3,0,0,0,3.1.625,7.43,7.43,0,0,0,3.15-.625,6.257,6.257,0,0,0,2.25-1.725,7.42,7.42,0,0,0,1.35-2.6,11.449,11.449,0,0,0,.45-3.3V-35.8h6.75v21.55a18.372,18.372,0,0,1-.975,6.125,13.487,13.487,0,0,1-2.8,4.75,12.705,12.705,0,0,1-4.4,3.075A14.563,14.563,0,0,1-152.25.8Zm35.35-36.6h12.1a21.286,21.286,0,0,1,7.65,1.3,16.507,16.507,0,0,1,5.8,3.675,15.973,15.973,0,0,1,3.675,5.675A19.956,19.956,0,0,1-86.4-17.9a20.1,20.1,0,0,1-1.275,7.3A15.726,15.726,0,0,1-91.35-4.95a16.692,16.692,0,0,1-5.8,3.65A21.286,21.286,0,0,1-104.8,0h-12.1Zm11.8,29.4a15.066,15.066,0,0,0,5.2-.825A10.158,10.158,0,0,0-96.15-9.55a9.532,9.532,0,0,0,2.25-3.625,14.122,14.122,0,0,0,.75-4.725,14.122,14.122,0,0,0-.75-4.725,9.532,9.532,0,0,0-2.25-3.625,10.158,10.158,0,0,0-3.75-2.325,15.066,15.066,0,0,0-5.2-.825h-5.05v23Zm39.15-29.4h6.75V0h-6.75ZM-20.55.8A18.848,18.848,0,0,1-27.975-.65,18.25,18.25,0,0,1-33.9-4.625a18.41,18.41,0,0,1-3.925-5.95A18.876,18.876,0,0,1-39.25-17.9a18.876,18.876,0,0,1,1.425-7.325,18.41,18.41,0,0,1,3.925-5.95,18.25,18.25,0,0,1,5.925-3.975A18.848,18.848,0,0,1-20.55-36.6a18.848,18.848,0,0,1,7.425,1.45A18.25,18.25,0,0,1-7.2-31.175a18.41,18.41,0,0,1,3.925,5.95A18.876,18.876,0,0,1-1.85-17.9a18.876,18.876,0,0,1-1.425,7.325A18.41,18.41,0,0,1-7.2-4.625,18.25,18.25,0,0,1-13.125-.65,18.848,18.848,0,0,1-20.55.8Zm0-6.4a12.105,12.105,0,0,0,4.675-.9,11.772,11.772,0,0,0,3.8-2.5,11.372,11.372,0,0,0,2.55-3.875A13.223,13.223,0,0,0-8.6-17.9a13.223,13.223,0,0,0-.925-5.025,11.372,11.372,0,0,0-2.55-3.875,11.772,11.772,0,0,0-3.8-2.5,12.105,12.105,0,0,0-4.675-.9,12.105,12.105,0,0,0-4.675.9,11.772,11.772,0,0,0-3.8,2.5,11.372,11.372,0,0,0-2.55,3.875A13.223,13.223,0,0,0-32.5-17.9a13.223,13.223,0,0,0,.925,5.025A11.372,11.372,0,0,0-29.025-9a11.772,11.772,0,0,0,3.8,2.5A12.1,12.1,0,0,0-20.55-5.6Z"
-                                                            transform="translate(1076.473 338.048)" fill="currentColor" />
+                                                            transform="translate(1076.473 338.048)"
+                                                            fill="currentColor" />
                                                     </g>
                                                 </g>
                                             </g>
                                         </svg>
-    
+
                                         <span slot="description">我们使用 <a href="../LICENSE">AGPL 3.0</a> 协议.</span>
                                     </mdui-list-item>
                                 </div>
                             </mdui-collapse-item>
                         </mdui-collapse>
-    
+
                     </div>
                 </mdui-card>
             </div>
@@ -419,7 +426,12 @@
 
     <mdui-snackbar close-on-outside-click class="errorSnackbar" placement="bottom" auto-close-delay="1000">
         <div>
-<svg style="margin-right: 0.5rem;" slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5.99L19.53 19H4.47zM12 2L1 21h22z" stroke-width="0.5" stroke="currentColor"/><path fill="currentColor" d="M13 16h-2v2h2zm0-6h-2v5h2z" stroke-width="0.5" stroke="currentColor"/></svg>            抽取范围格式错误！请检查并重新输入
+            <svg style="margin-right: 0.5rem;" slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 5.99L19.53 19H4.47zM12 2L1 21h22z" stroke-width="0.5"
+                    stroke="currentColor" />
+                <path fill="currentColor" d="M13 16h-2v2h2zm0-6h-2v5h2z" />
+            </svg> 抽取范围格式错误！请检查并重新输入
         </div>
     </mdui-snackbar>
 
@@ -436,7 +448,12 @@
 
     <mdui-snackbar close-on-outside-click class="copyErrorSnackbar" placement="bottom-start" auto-close-delay="1000">
         <div>
-<svg style="margin-right: 0.5rem;" slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5.99L19.53 19H4.47zM12 2L1 21h22z" stroke-width="0.5" stroke="currentColor"/><path fill="currentColor" d="M13 16h-2v2h2zm0-6h-2v5h2z" stroke-width="0.5" stroke="currentColor"/></svg>            复制失败！请手动复制内容
+            <svg style="margin-right: 0.5rem;" slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 5.99L19.53 19H4.47zM12 2L1 21h22z" stroke-width="0.5"
+                    stroke="currentColor" />
+                <path fill="currentColor" d="M13 16h-2v2h2zm0-6h-2v5h2z" />
+            </svg> 复制失败！请手动复制内容
         </div>
     </mdui-snackbar>
 
@@ -445,67 +462,11 @@
             <svg style="margin-right: 0.5rem;" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">
                 <path fill="currentColor"
-                    d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
+                    d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7zm2 16H5V5h11.17L19 7.83zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3M6 6h9v4H6z" />
             </svg>
             设置已保存
         </div>
     </mdui-snackbar>
-
-    <!-- <mdui-button-icon icon="help_outline--outlined" style="display: none;"></mdui-button-icon> -->
-
-    <mdui-dialog close-on-overlay-click headline="使用指南" class="example-action">
-        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill="currentColor"
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79c-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67c.32-.89 1.27-1.5 2.3-1.28c.95.2 1.65 1.13 1.57 2.1c-.1 1.34-1.62 1.63-2.45 2.88c0 .01-.01.01-.01.02c-.01.02-.02.03-.03.05c-.09.15-.18.32-.25.5c-.01.03-.03.05-.04.08c-.01.02-.01.04-.02.07c-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07c.02-.03.03-.06.05-.09c.08-.14.18-.27.28-.39c.01-.01.02-.03.03-.04c.1-.12.21-.23.33-.34c.96-.91 2.26-1.65 1.99-3.56c-.24-1.74-1.61-3.21-3.35-3.47" />
-        </svg>
-        <div class="tips-content">
-            <h4>抽取</h4>
-            <ul>
-                <li>
-                    点击
-                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74m9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75c-.31 0-.59.13-.79.33l-.79.8l4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2c0-.62-.38-1.16-.91-1.38" />
-                    </svg>
-                    <b>抽取</b>
-                    按钮，随机生成指定范围内的随机数。
-                </li>
-                <li>
-                    在已抽取的数字上按下
-                    <b>鼠标右键</b>
-                    ，可以打开复制菜单复制随机数。
-                </li>
-                <li>
-                    点击
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M7 14H5v5h5v-2H7zm-2-4h2V7h3V5H5zm12 7h-3v2h5v-5h-2zM14 5v2h3v3h2V5z" />
-                    </svg>
-                    <b>全屏</b>
-                    按钮可以打开/关闭全屏模式。
-                </li>
-                <li>
-                    点击
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79c-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67c.32-.89 1.27-1.5 2.3-1.28c.95.2 1.65 1.13 1.57 2.1c-.1 1.34-1.62 1.63-2.45 2.88c0 .01-.01.01-.01.02c-.01.02-.02.03-.03.05c-.09.15-.18.32-.25.5c-.01.03-.03.05-.04.08c-.01.02-.01.04-.02.07c-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07c.02-.03.03-.06.05-.09c.08-.14.18-.27.28-.39c.01-.01.02-.03.03-.04c.1-.12.21-.23.33-.34c.96-.91 2.26-1.65 1.99-3.56c-.24-1.74-1.61-3.21-3.35-3.47" />
-                    </svg>
-                    <b>使用指南</b>
-                    按钮，可以查看使用指南。
-                </li>
-            </ul>
-
-            <h4>历史记录</h4>
-            <ul>
-                <li>
-                    点击
-                    <b>复制记录</b>
-                    按钮可以复制已抽取到的数字记录。
-                </li>
-            </ul>
-        </div>
-        <mdui-button slot="action" variant="tonal">确定</mdui-button>
-    </mdui-dialog>
 
     <mdui-dialog close-on-overlay-click headline="排除数字设置" class="block-dialog">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
