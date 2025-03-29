@@ -162,6 +162,7 @@ div.dragBar {
   padding: 1rem;
   padding-top: 2rem;
   padding-bottom: 0.2rem;
+  z-index: 900;
 
   position: fixed;
   right: 2rem;
