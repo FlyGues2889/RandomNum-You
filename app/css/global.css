@@ -41,6 +41,12 @@ mdui-tabs::part(container) {
   background-color: unset;
 }
 
+span[slot="description"] {
+  opacity: 0.6;
+  font-size: small;
+}
+
+
 /* 主窗口控件 */
 mdui-top-app-bar {
   height: 3rem;
@@ -48,15 +54,18 @@ mdui-top-app-bar {
   /* background-color: rgb(var(--mdui-color-primary-container)); */
   background-color: rgb(var(--mdui-color-surface-container));
   color: rgb(var(--mdui-color-primary));
-  
+
+
   mdui-top-app-bar-title {
     opacity: 0.8;
-    transform: scale(0.8);
-    margin-left: -6.5rem;
-    font-size: medium;
-    
+    margin-left: -0.2rem;
+    font-size: small;
+    -webkit-app-region: drag;
+    user-select: none;
+
     font-family: 'Product Sans';
   }
+
   mdui-button-icon {
     transform: scale(0.8);
     color: rgb(var(--mdui-color-primary));
@@ -78,8 +87,6 @@ div#topWindowBar {
   align-items: center;
   justify-content: left;
 
-  -webkit-app-region: drag;
-  user-select: none;
 
 }
 
@@ -90,6 +97,13 @@ mdui-navigation-rail {
   z-index: 990;
 
   margin: 1rem 0;
+
+  div[slot="bottom"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 div.page {
@@ -99,19 +113,22 @@ div.page {
   border-radius: 2rem;
   margin: 4rem 1rem 1rem 5rem;
   background-color: rgb(var(--mdui-color-surface));
-  
+
   overflow: auto;
   min-height: 600px;
-  
+
   font-family: 'Harmony Sans SC';
+
   div.page-container {
-    margin: 1rem 2rem;
+    margin: 1rem 4rem;
   }
 }
 
 h1 {
   user-select: none;
   font-weight: normal;
+
+  font-family: 'Harmony Sans SC M';
 }
 
 mdui-snackbar {
@@ -139,15 +156,53 @@ div#out {
   font-size: 20vw
 }
 
-div.bottomBar {
-  display: flex;
-  width: 10vw;
-  height: 5vh;
+div.dragBar {
+  width: 8rem;
+  height: 4rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 0.2rem;
+
   position: fixed;
-  right: 2.5rem;
-  bottom: 3rem;
-  justify-content: flex-end;
-  align-items: center;
+  right: 2rem;
+  bottom: 2rem;
+
+  border-radius: 1.5rem;
+  color: rgb(var(--mdui-color-outline),0.7);
+  background-color: rgb(var(--mdui-color-surface-container));
+
+  .dragArea {
+    margin: 0;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: rgb(var(--mdui-color-surface-dim));
+    border-radius: 1.5rem 1.5rem 0 0;
+
+    mdui-divider {
+      width: 100%;
+      height: 2px;
+      background-color: rgb(var(--mdui-color-surface));
+    }
+  }
+
+  .controlArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mdui-fab {
+      background-color: rgb(var(--mdui-color-primary));
+      color: rgb(var(--mdui-color-surface-container));
+    }
+  }
 }
 
 
@@ -171,7 +226,7 @@ mdui-card.container {
   margin-left: 0;
   padding: 1rem;
 
-  width: 98%;
+  width: 100%;
   border-radius: 2rem;
   background-color: rgb(var(--mdui-color-secondary-container), 0.3);
 }

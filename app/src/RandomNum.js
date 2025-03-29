@@ -250,7 +250,6 @@ function saveExcludeLabel() {
 
 window.onload = function () {
   const loading = document.querySelector(".loading");
-  const main = document.querySelector(".screen");
   // 页面加载完成后隐藏进度指示条
   loading.style.display = "none";
 
