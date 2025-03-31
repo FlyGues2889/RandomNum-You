@@ -38,6 +38,7 @@ div#settingPage {
 }
 
 mdui-tabs::part(container) {
+  margin-bottom: 0.5rem;
   background-color: unset;
 }
 
@@ -186,6 +187,8 @@ div.dragBar {
 
     background-color: rgb(var(--mdui-color-surface-dim));
     border-radius: 1.5rem 1.5rem 0 0;
+
+    cursor: move;
 
     mdui-divider {
       width: 100%;

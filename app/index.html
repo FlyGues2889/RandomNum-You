@@ -96,7 +96,8 @@
 
                         <div style="flex-grow: 1"></div>
                         <mdui-fab id="btn" onclick="getNum()" style="margin-left: 1.6rem;">
-                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                     d="m18.19 12.44l-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44c-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18m-.35 2.85l-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68l4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06M8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5a2.5 2.5 0 0 0-5 0v2.44c-.62-.63-1-1.49-1-2.44" />
                             </svg>
@@ -204,7 +205,13 @@
                         <span slot="description">抽取过程中要排除的数字</span>
 
                         <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
-                            variant="tonal">打开排除菜单</mdui-button>
+                            variant="tonal">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83l1.41 1.41L19 6.41V10h2V3z" />
+                            </svg>
+                            打开排除项标签设置
+                        </mdui-button>
                     </mdui-list-item>
                 </mdui-card>
                 <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
@@ -487,40 +494,65 @@
         </div>
     </mdui-snackbar>
 
-    <mdui-dialog close-on-overlay-click headline="排除数字设置" class="block-dialog">
+    <mdui-dialog close-on-overlay-click headline="排除项标签设置" class="block-dialog">
         <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path fill="currentColor"
                 d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
         </svg>
-        <small style="display: block;margin-bottom: 1rem;">使用已有的标签：</small>
-        <mdui-select value="" variant="outlined" style="line-height: 1.375rem;" class="GETTIME"
-            onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="set-exclude-label">
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12zM16 17H5V7h11l3.55 5z" />
-            </svg>
-            <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
-            </svg>
-            <mdui-menu-item value="">无</mdui-menu-item>
-        </mdui-select>
-        <small style="display: block;margin-bottom: 1rem;margin-top: 1rem;">或自定义新排除项：</small>
-        <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name">
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M3 18h12v-2H3zM3 6v2h18V6zm0 7h18v-2H3z" />
-            </svg>
-        </mdui-text-field>
-        <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
-            style="font-family: 'Product Sans';margin-top: 0.8rem;font-family: 'HarmonyOS Sans SC';" variant="outlined">
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2zm1-9h1V4H2v1h1zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2zm5-6v2h14V5zm0 14h14v-2H7zm0-6h14v-2H7z" />
-            </svg>
-            <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
-        </mdui-text-field>
+
+        <mdui-tabs value="tab-1" placement="top">
+            <mdui-tab value="tab-1">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7zm2 16H5V5h11.17L19 7.83zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3M6 6h9v4H6z" />
+                </svg>
+                已保存标签
+            </mdui-tab>
+            <mdui-tab value="tab-2">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="m21 12l-4.37 6.16c-.37.52-.98.84-1.63.84h-3v-2h3l3.55-5L15 7H5v3H3V7c0-1.1.9-2 2-2h10c.65 0 1.26.31 1.63.84zm-11 3H7v-3H5v3H2v2h3v3h2v-3h3z" />
+                </svg>
+                新建标签
+            </mdui-tab>
+
+            <mdui-tab-panel slot="panel" value="tab-1">
+                <small style="display: block;margin-bottom: 0.5rem;">选择一个已保存的排除项标签以生效：</small>
+                <mdui-select value="" variant="outlined" style="line-height: 1.375rem;width: 512px;" class="GETTIME"
+                    onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
+                    id="set-exclude-label">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12zM16 17H5V7h11l3.55 5z" />
+                    </svg>
+                    <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                    </svg>
+                    <mdui-menu-item value="">无</mdui-menu-item>
+                </mdui-select>
+            </mdui-tab-panel>
+
+            <mdui-tab-panel slot="panel" value="tab-2">
+                <small style="display: block;margin-bottom: 0.5rem;">新建一个新排除项标签：</small>
+                <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M3 18h12v-2H3zM3 6v2h18V6zm0 7h18v-2H3z" />
+                    </svg>
+                </mdui-text-field>
+                <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
+                    style="font-family: 'Product Sans';margin-top: 0.8rem;font-family: 'HarmonyOS Sans SC';"
+                    variant="outlined">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2zm1-9h1V4H2v1h1zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2zm5-6v2h14V5zm0 14h14v-2H7zm0-6h14v-2H7z" />
+                    </svg>
+                    <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
+                </mdui-text-field>
+            </mdui-tab-panel>
+        </mdui-tabs>
 
         <mdui-button id="create-exclude-label" slot="action" variant="text"
-            onclick="saveExcludeLabel();showSettingsSavedSnackbar()">将自定义内容保存为新标签</mdui-button>
+            onclick="saveExcludeLabel();showSettingsSavedSnackbar()">将新建内容保存为新标签</mdui-button>
         <mdui-button class="close-block-dialog" slot="action" variant="tonal">确定</mdui-button>
     </mdui-dialog>
 </body>
