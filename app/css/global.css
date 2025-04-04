@@ -8,6 +8,8 @@ mdui-layout {
 
   background-color: rgb(var(--mdui-color-surface-container));
   font-family: 'HarmonyOS Sans SC', sans-serif;
+
+  user-select: none;
 }
 
 :root {
@@ -154,7 +156,17 @@ div#out {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 20vw
+  font-size: 20vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  mdui-button {
+    font-family: 'Harmony Sans SC M';
+    transform: scale(0.8);
+  }
 }
 
 div.dragBar {

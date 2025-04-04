@@ -108,10 +108,23 @@
                 <mdui-layout-main class="main">
                     <mdui-dropdown trigger="contextmenu" open-on-pointer>
                         <div id="out" slot="trigger">
-                            -
+                            -<br>
+                            <mdui-button variant="outlined" disabled="">
+                                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+                                </svg>
+                                点击抽取按钮以开始
+                            </mdui-button>
                         </div>
                         <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
-                            <mdui-menu-item id="copy1" onclick="copyToClipboard1()">复制</mdui-menu-item>
+                            <mdui-menu-item id="copy1" onclick="copyToClipboard1()">
+                                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z" />
+                                </svg>
+                                复制
+                            </mdui-menu-item>
                         </mdui-menu>
                     </mdui-dropdown>
 
@@ -312,9 +325,9 @@
                                     <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
                                 </svg>
                             </mdui-button-icon>
-                            <mdui-button-icon class="theme-button" id="greenTheme"
+                            <mdui-button-icon class="theme-button" id="cyanTheme"
                                 style="background-color: #006874;color: white;"
-                                onclick="javascript:document.querySelector('html').className = 'greenTheme'">
+                                onclick="javascript:document.querySelector('html').className = 'cyanTheme'">
                                 <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
@@ -323,6 +336,14 @@
                             <mdui-button-icon class="theme-button" id="purpleTheme"
                                 style="background-color: #6750a4;color: white;"
                                 onclick="javascript:document.querySelector('html').className = 'purpleTheme'">
+                                <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    sssssssss viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
+                                </svg>
+                            </mdui-button-icon>
+                            <mdui-button-icon class="theme-button" id="greenTheme"
+                                style="background-color: #006e1c;color: white;"
+                                onclick="javascript:document.querySelector('html').className = 'greenTheme'">
                                 <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     sssssssss viewBox="0 0 24 24">
                                     <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
