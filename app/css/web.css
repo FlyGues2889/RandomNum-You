@@ -6,7 +6,7 @@ mdui-layout {
   width: 100vw;
   height: 100vh;
 
-  /* background-color: rgb(var(--mdui-color-surface-container)); */
+  background-color: rgb(var(--mdui-color-surface-container));
   font-family: 'HarmonyOS Sans SC', sans-serif;
 
   user-select: none;
@@ -94,10 +94,12 @@ div#topWindowBar {
 }
 
 mdui-navigation-rail {
-  /* background-color: rgb(var(--mdui-color-surface-container)); */
+  background-color: rgb(var(--mdui-color-surface-container));
 
   font-family: 'Harmony Sans SC M';
   z-index: 990;
+
+  margin: 1rem 0;
 
   div[slot="bottom"] {
     display: flex;

@@ -1,6 +1,6 @@
 {
   "name": "random-num-you",
-  "version": "0.4.5",
+  "version": "0.5.0",
   "description": "A random number generator",
   "main": "main.js",
   "icon": "app/assets/appIcon.ico",
