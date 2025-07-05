@@ -1,7 +1,9 @@
 {
   "name": "randomnum-you",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.6.1",
+  "author": "FlyGues",
+  "license": "AGPL-3.0-only",
   "type": "module",
   "scripts": {
     "tauri": "tauri"
