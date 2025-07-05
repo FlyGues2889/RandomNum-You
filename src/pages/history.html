@@ -1,0 +1,40 @@
+<div class="page-container">
+    <h1>历史记录</h1>
+
+    <mdui-card class="container" variant="filled" style="display: none;width: 90%;margin: 0 auto;padding: 1rem;">
+        <div id="notes">
+            <div
+                style="padding: 1rem;color: rgb(var(--mdui-color-on-primary-container),0.5);font-family: 'Product Sans';">
+                <span><small>开始抽取以显示记录</small></span>
+            </div>
+        </div>
+        <mdui-divider style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
+    </mdui-card>
+
+    <div style="min-width: 500px;margin-top: 2rem;">
+        <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
+            <mdui-list-item nonclickable icon="block">
+                已排除数字
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem;">
+                <mdui-list-item nonclickable>
+                    <div id="exclude-list">无</div>
+                </mdui-list-item>
+            </div>
+        </mdui-card>
+        <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
+            <mdui-list-item nonclickable icon="numbers">
+                已抽取全部记录
+            </mdui-list-item>
+            <div style="margin-left: 2.5rem;">
+                <mdui-list-item nonclickable>
+                    <div id="history-list"></div>
+                </mdui-list-item>
+                <mdui-button id="copy2" onclick="copyToClipboard2()" variant="tonal">
+                    复制本轮已抽取数字
+                </mdui-button>
+            </div>
+
+        </mdui-card>
+    </div>
+</div>

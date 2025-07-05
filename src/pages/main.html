@@ -1,0 +1,42 @@
+<div class="page-container">
+    <h1>数字抽取</h1>
+
+    <div class="dragBar">
+        <div class="dragArea">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M20 9H4v2h16zM4 15h16v-2H4z" />
+            </svg>
+            <mdui-divider></mdui-divider>
+        </div>
+
+        <div class="controlArea">
+            <div style="flex-grow: 1"></div>
+            <mdui-fab id="btn" onclick="getNum()" icon="touch_app"></mdui-fab>
+        </div>
+    </div>
+
+    <mdui-layout-main class="main">
+        <mdui-dropdown trigger="contextmenu" open-on-pointer>
+            <div id="out" slot="trigger">
+                -<br>
+                <mdui-button variant="outlined" disabled="">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+                    </svg>
+                    点击抽取按钮以开始
+                </mdui-button>
+            </div>
+            <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
+                <mdui-menu-item id="copy1" onclick="copyToClipboard1()">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z" />
+                    </svg>
+                    复制
+                </mdui-menu-item>
+            </mdui-menu>
+        </mdui-dropdown>
+
+    </mdui-layout-main>
+</div>

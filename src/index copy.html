@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="defaultTheme">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RandomNum You</title>
+
+    <script src="./alpine.js" defer></script>
+
+    <script src="./mdui/mdui.global.js"></script>
+    <script src="src/RandomNum.js"></script>
+    <script src="src/index.js"></script>
+    <script src="src/bgFileSave.js"></script>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/mdui.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/icon.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+
+</head>
+
+<body id="body" class="mdui-theme-auto" style="margin: 0;">
+    <script src="src/settings.js"></script>
+    <mdui-layout style="height: 100vh;">
+
+        <mdui-top-app-bar data-tauri-drag-region>
+            <mdui-button-icon style="color: rgb(var(--mdui-color-on-background));opacity: 0.8;">
+                <svg width="24" viewBox="0 0 2497 2496" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+                    <g transform="translate(-951 11)">
+                        <path
+                            d="M1903.76 158.955C2051.14 2.04106 2297.88-5.7339 2454.87 141.591 2458.12 144.65 2461.33 147.772 2464.49 150.945L2464.49 150.945C2540.68 227.544 2645.26 269.104 2753.25 265.702L2753.25 265.702C2968.46 258.818 3148.53 427.631 3155.4 642.755 3155.55 647.314 3155.62 651.878 3155.6 656.441L3155.6 656.441C3155.29 764.462 3199.84 867.766 3278.62 941.705L3278.62 941.705C3435.61 1089.03 3443.38 1335.66 3295.99 1492.57 3292.93 1495.83 3289.82 1499.04 3286.64 1502.2L3286.64 1502.2C3210.01 1578.36 3168.42 1682.89 3171.83 1790.86L3171.83 1790.86C3178.73 2005.98 3009.86 2185.96 2794.65 2192.85 2790.08 2193 2785.5 2193.07 2780.94 2193.05L2780.94 2193.05C2672.88 2192.74 2569.52 2237.28 2495.56 2316.02L2495.56 2316.02C2348.16 2472.94 2101.44 2480.71 1944.45 2333.39 1941.2 2330.32 1937.99 2327.21 1934.82 2324.04L1934.82 2324.04C1858.64 2247.44 1754.06 2205.87 1646.05 2209.28L1646.05 2209.28C1430.84 2216.18 1250.77 2047.37 1243.88 1832.25 1243.73 1827.69 1243.67 1823.11 1243.68 1818.55L1243.68 1818.55C1244 1710.53 1199.44 1607.22 1120.66 1533.29L1120.66 1533.29C963.676 1385.95 955.904 1139.33 1103.29 982.413 1106.36 979.155 1109.47 975.947 1112.64 972.786L1112.64 972.786C1189.27 896.632 1230.86 792.099 1227.45 684.139L1227.45 684.139C1220.54 469.015 1389.43 289.029 1604.64 282.131 1609.2 281.985 1613.78 281.92 1618.34 281.933L1618.34 281.933C1726.41 282.252 1829.75 237.719 1903.73 158.967Z"
+                            stroke="currentColor" stroke-width="91.6667" stroke-miterlimit="8" fill="none"
+                            fill-rule="evenodd" />
+                        <path
+                            d="M2821.4 1042.13 2822.13 1037.82C2832.01 1001.2 2810.31 963.488 2773.64 953.607 2767.74 952.01 2761.64 951.219 2755.51 951.234L2557.83 951.234 2607.97 751.576C2617.38 714.329 2594.79 676.508 2557.51 667.103 2552 665.709 2546.32 665 2540.64 664.985 2508.4 664.985 2481.2 686.454 2473.31 717.226L2414.58 951.234 2128.08 951.234 2178.21 751.576C2187.63 714.329 2165.04 676.508 2127.76 667.103 2122.25 665.709 2116.57 665 2110.89 664.985 2078.65 664.985 2051.43 686.454 2043.56 717.226L1984.82 951.234 1752.77 951.234C1720.53 951.234 1692.6 972.704 1685.43 1003.47L1684 1007.78C1673.25 1052.13 1706.21 1094.37 1751.32 1094.37L1949.01 1094.37 1877.39 1380.62 1645.32 1380.62C1613.08 1380.62 1585.88 1402.07 1578 1432.86L1576.56 1437.14C1565.82 1481.51 1598.77 1523.73 1643.89 1523.73L1841.57 1523.73 1791.43 1723.39C1780.7 1767.77 1813.64 1809.98 1858.76 1809.98 1891 1809.98 1918.21 1788.51 1926.1 1757.74L1984.82 1523.73 2271.32 1523.73 2221.18 1723.39C2210.45 1767.77 2243.39 1809.98 2288.51 1809.98 2320.75 1809.98 2347.97 1788.51 2355.85 1757.74L2414.58 1523.73 2646.64 1523.73C2678.88 1523.73 2706.1 1502.26 2713.97 1471.49L2714.68 1467.21C2723.94 1429.75 2701.07 1391.9 2663.58 1382.64 2658.28 1381.34 2652.83 1380.66 2647.36 1380.62L2450.39 1380.62 2522.01 1094.37 2754.08 1094.37C2786.32 1094.37 2814.25 1072.89 2821.4 1042.13M2307.14 1380.62 2020.64 1380.62 2092.26 1094.37 2378.76 1094.37Z"
+                            fill="currentColor" fill-rule="evenodd" />
+                    </g>
+                </svg>
+            </mdui-button-icon>
+            <mdui-top-app-bar-title>RandomNum You</mdui-top-app-bar-title>
+            <div style="flex-grow: 1"></div>
+            <mdui-button-icon icon="minimize" id="titlebar-minimize"></mdui-button-icon>
+            <mdui-button-icon icon="crop_square" id="titlebar-maximize"></mdui-button-icon>
+            <mdui-button-icon icon="close" id="titlebar-close"></mdui-button-icon>
+        </mdui-top-app-bar>
+
+        <mdui-navigation-rail value="mainPage">
+
+            <mdui-navigation-rail-item id="toMain" value="mainPage" href="javascript:void(0);" icon="numbers"
+                onclick="navigate('mainPage')">
+                抽取
+            </mdui-navigation-rail-item>
+            <mdui-navigation-rail-item id="toHistory" value="historyPage" href="javascript:void(0);" icon="history"
+                onclick="navigate('historyPage')">
+                记录
+            </mdui-navigation-rail-item>
+
+            <div slot="bottom">
+                <mdui-button-icon class="loading" disabled>
+                    <mdui-circular-progress style="width: 50%;"></mdui-circular-progress>
+                </mdui-button-icon>
+                <mdui-button-icon selectable id="toSettings" href="javascript:void(0);"
+                    onclick="navigate('settingPage')" icon="settings">
+                </mdui-button-icon>
+            </div>
+        </mdui-navigation-rail>
+
+        <div class="page" id="mainPage">
+            <div class="page-container">
+                <h1>数字抽取</h1>
+
+                <div class="dragBar">
+                    <div class="dragArea">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M20 9H4v2h16zM4 15h16v-2H4z" />
+                        </svg>
+                        <mdui-divider></mdui-divider>
+                    </div>
+
+                    <div class="controlArea">
+                        <div style="flex-grow: 1"></div>
+                        <mdui-fab id="btn" onclick="getNum()" style="margin-left: 1.6rem;" icon="touch_app">
+
+                        </mdui-fab>
+                    </div>
+                </div>
+
+                <mdui-layout-main class="main">
+                    <mdui-dropdown trigger="contextmenu" open-on-pointer>
+                        <div id="out" slot="trigger">
+                            -<br>
+                            <mdui-button variant="outlined" disabled="">
+                                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+                                </svg>
+                                点击抽取按钮以开始
+                            </mdui-button>
+                        </div>
+                        <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
+                            <mdui-menu-item id="copy1" onclick="copyToClipboard1()">
+                                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z" />
+                                </svg>
+                                复制
+                            </mdui-menu-item>
+                        </mdui-menu>
+                    </mdui-dropdown>
+
+                </mdui-layout-main>
+            </div>
+        </div>
+
+        <div class="page" id="historyPage">
+            <div class="page-container">
+                <h1>历史记录</h1>
+
+                <mdui-card class="container" variant="filled"
+                    style="display: none;width: 90%;margin: 0 auto;padding: 1rem;">
+                    <div id="notes">
+                        <div
+                            style="padding: 1rem;color: rgb(var(--mdui-color-on-primary-container),0.5);font-family: 'Product Sans';">
+                            <span><small>开始抽取以显示记录</small></span>
+                        </div>
+                    </div>
+                    <mdui-divider
+                        style="margin: 1rem;background-color: rgb(var(--mdui-color-background));"></mdui-divider>
+                </mdui-card>
+
+                <div style="min-width: 500px;margin-top: 2rem;">
+                    <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
+                        <mdui-list-item nonclickable icon="block">
+                            已排除数字
+                        </mdui-list-item>
+                        <div style="margin-left: 2.5rem;">
+                            <mdui-list-item nonclickable>
+                                <div id="exclude-list">无</div>
+                            </mdui-list-item>
+                        </div>
+                    </mdui-card>
+                    <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
+                        <mdui-list-item nonclickable icon="numbers">
+                            已抽取全部记录
+                        </mdui-list-item>
+                        <div style="margin-left: 2.5rem;">
+                            <mdui-list-item nonclickable>
+                                <div id="history-list"></div>
+                            </mdui-list-item>
+                            <mdui-button id="copy2" onclick="copyToClipboard2()" variant="tonal">
+                                复制本轮已抽取数字
+                            </mdui-button>
+                        </div>
+
+                    </mdui-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="settingPage">
+            <div class="page-container">
+                <h1>设置</h1>
+                <mdui-list-subheader>通用</mdui-list-subheader>
+                <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
+                    <mdui-list-item nonclickable icon="numbers">
+                        抽取数字范围
+                        <span slot="description">设置抽取极值</span>
+                        <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
+                            <mdui-text-field type="input" id="num" value="1-55"
+                                onchange="showSettingsSavedSnackbar();changeNumProgress()"
+                                style="font-family: 'Product Sans';max-width: 16em;"
+                                variant="outlined"></mdui-text-field>
+                        </mdui-tooltip>
+                    </mdui-list-item>
+                    <mdui-list-item nonclickable icon="block">
+                        排除数字范围
+                        <span slot="description">抽取过程中要排除的数字</span>
+
+                        <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog"
+                            variant="tonal">
+                            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                    d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83l1.41 1.41L19 6.41V10h2V3z" />
+                            </svg>
+                            打开排除项标签设置
+                        </mdui-button>
+                    </mdui-list-item>
+                </mdui-card>
+                <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
+                    <mdui-list-item nonclickable style="text-align: left;" icon="watch_later">
+                        时间延迟
+                        <mdui-select value="750" slot="end-icon" variant="outlined" class="GETTIME"
+                            onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
+                            id="settime">
+                            <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24">
+                                <path fill="currentColor" d="m7 10l5 5l5-5z" />
+                            </svg>
+                            <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
+                            <mdui-menu-item value="500">0.50s</mdui-menu-item>
+                            <mdui-menu-item value="750">0.75s</mdui-menu-item>
+                            <mdui-menu-item value="1000">1s</mdui-menu-item>
+                            <mdui-menu-item value="1500">1.50s</mdui-menu-item>
+                            <mdui-menu-item value="2000">2s</mdui-menu-item>
+                            <mdui-menu-item value="5000">5s</mdui-menu-item>
+                        </mdui-select>
+                    </mdui-list-item>
+
+                    <mdui-list-item nonclickable style="text-align: left;padding: 0;" icon="touch_app">
+                        是否手动
+                        <span slot="description">按钮/回车/空格键以启停</span>
+                    </mdui-list-item>
+
+                    <mdui-list-item nonclickable style="text-align: left;" icon="loop">
+                        周期内不重复
+                        <label for="repeat"></label>
+                        <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
+                            onchange="if(this.checked)add=[];storage(0);"
+                            onclick="if(c){alert('运行中不可设置！');return false}" slot="end-icon">
+                            <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                        </mdui-switch>
+                    </mdui-list-item>
+                </mdui-card>
+                <mdui-list-subheader>个性化</mdui-list-subheader>
+                <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
+                    <mdui-list-item nonclickable icon="palette">
+                        主题
+                        <span slot="description">切换应用程序光照模式和主题色</span>
+                        <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" value="auto"
+                            id="theme-toggle">
+                            <mdui-segmented-button value="auto" onclick="theme.setTheme('auto');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M20 8.69V4h-4.69L12 .69L8.69 4H4v4.69L.69 12L4 15.31V20h4.69L12 23.31L15.31 20H20v-4.69L23.31 12zm-2 5.79V18h-3.52L12 20.48L9.52 18H6v-3.52L3.52 12L6 9.52V6h3.52L12 3.52L14.48 6H18v3.52L20.48 12zM12 6.5v11c3.03 0 5.5-2.47 5.5-5.5S15.03 6.5 12 6.5" />
+                                </svg>
+                            </mdui-segmented-button>
+                            <mdui-segmented-button value="light" onclick="theme.setTheme('light');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3s-3-1.35-3-3s1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5s5-2.24 5-5s-2.24-5-5-5M2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1m18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1M11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1m0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1M5.99 4.58a.996.996 0 0 0-1.41 0a.996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41zm12.37 12.37a.996.996 0 0 0-1.41 0a.996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41zm1.06-10.96a.996.996 0 0 0 0-1.41a.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0zM7.05 18.36a.996.996 0 0 0 0-1.41a.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0z" />
+                                </svg>
+                            </mdui-segmented-button>
+                            <mdui-segmented-button value="dark" onclick="theme.setTheme('dark');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M9.5 4c4.41 0 8 3.59 8 8s-3.59 8-8 8c-.34 0-.68-.02-1.01-.07c1.91-2.16 3.01-4.98 3.01-7.93s-1.1-5.77-3.01-7.93C8.82 4.02 9.16 4 9.5 4m0-2c-1.82 0-3.53.5-5 1.35c2.99 1.73 5 4.95 5 8.65s-2.01 6.92-5 8.65c1.47.85 3.18 1.35 5 1.35c5.52 0 10-4.48 10-10S15.02 2 9.5 2" />
+                                </svg>
+                            </mdui-segmented-button>
+                        </mdui-segmented-button-group>
+                    </mdui-list-item>
+                    <div style="margin-left: 2.5rem;">
+                        <mdui-list-item nonclickable>
+                            <mdui-button-icon class="theme-button" id="defaultTheme"
+                                style="background-color: #00629e;color: white;"
+                                onclick="theme.setLight('defaultTheme');">
+                                <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
+                                </svg>
+                            </mdui-button-icon>
+                            <mdui-button-icon class="theme-button" id="cyanTheme"
+                                style="background-color: #006874;color: white;" onclick="theme.setLight('cyanTheme');">
+                                <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
+                                </svg>
+                            </mdui-button-icon>
+                            <mdui-button-icon class="theme-button" id="purpleTheme"
+                                style="background-color: #6750a4;color: white;"
+                                onclick="theme.setLight('purpleTheme');">
+                                <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    sssssssss viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
+                                </svg>
+                            </mdui-button-icon>
+                            <mdui-button-icon class="theme-button" id="greenTheme"
+                                style="background-color: #006e1c;color: white;" onclick="theme.setLight('greenTheme');">
+                                <svg slot="selected-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    sssssssss viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M9 16.2L4.8 12l-1.4 1.4L9 19L21 7l-1.4-1.4z" />
+                                </svg>
+                            </mdui-button-icon>
+                            <mdui-tooltip variant="rich" x-data="{ customLight: localStorage.getItem('customLight') }">
+                                <mdui-button-icon variant="outlined" icon="draw"
+                                    onclick="document.querySelector('#customLight').click();"></mdui-button-icon>
+                                <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
+                                    style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;"
+                                    onchange="theme.setCustomLight(this.value);">
+                                <div slot="headline">自定义光照</div>
+                                <div slot="content" id="customLightTip" x-text="customLight || '暂无'"
+                                    style="color: rgb(var(--mdui-color-primary));">
+                                </div>
+                            </mdui-tooltip>
+                    </div>
+
+                </mdui-card>
+                <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
+                    <mdui-list-item nonclickable icon="image">
+                        主页背景图片
+                        <span slot="description">实验性功能</span>
+                        <mdui-button slot="end-icon" variant="outlined"
+                            onclick="theme.backgroundImageChoose()">在设备上选择</mdui-button>
+
+                        <mdui-switch class="toggle" type="checkbox" id="backgroundImage" style="margin-left:1.5rem;"
+                            onchange="theme.backgroundImageSwitchChange()" slot="end-icon" name="" hover=""
+                            x-data="{ isChecked: localStorage.getItem('backgroundImageSwitch') === 'true' }"
+                            :checked="isChecked">
+                            <mdui-icon slot="checked-icon" name=""></mdui-icon>
+                        </mdui-switch>
+
+                    </mdui-list-item>
+                </mdui-card>
+                <mdui-list-subheader>关于</mdui-list-subheader>
+                <mdui-card class="container" variant="filled">
+                    <mdui-collapse>
+                        <mdui-collapse-item>
+                            <mdui-list-item slot="header" rounded icon="info">
+                                关于 RandomNum You
+                                <span slot="description"> 0.5.2 Tauri</span>
+                            </mdui-list-item>
+
+                            <div>
+                                <div style="margin-left: 1.5rem;" class="mdui-prose">
+                                    <mdui-list-item nonclickable>
+                                        <mdui-list-item rounded>
+                                            项目存储库
+                                            <span slot="description">https://github.com/FlyGues2889/random-number</span>
+                                        </mdui-list-item>
+                                        <mdui-list-item rounded>
+                                            许可证
+                                            <span slot="description">我们使用 <a href="../LICENSE">AGPL 3.0</a> 协议</span>
+                                        </mdui-list-item>
+                                    </mdui-list-item>
+                                </div>
+                            </div>
+                        </mdui-collapse-item>
+                    </mdui-collapse>
+                    <mdui-collapse>
+                        <mdui-collapse-item>
+                            <mdui-list-item slot="header" rounded>
+                                项目作者
+                                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 400 400"
+                                    style="margin-left: -0.1rem;">
+                                    <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
+                                        <g id="组_16" data-name="组 16" transform="translate(2844 195)">
+                                            <rect id="矩形_7" data-name="矩形 7" width="400" height="400" fill="none" />
+                                            <g id="组_12" data-name="组 12"
+                                                transform="translate(-199.587 123.82) rotate(-45)">
+                                                <path id="矩形_14" data-name="矩形 14"
+                                                    d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
+                                                    transform="translate(306 359) rotate(90)" fill="currentColor" />
+                                                <path id="矩形_15" data-name="矩形 15"
+                                                    d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
+                                                    transform="translate(106 359)" fill="currentColor" />
+                                                <path id="矩形_6" data-name="矩形 6"
+                                                    d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
+                                                    transform="translate(351.366 213.836) rotate(90)"
+                                                    fill="currentColor" />
+                                                <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
+                                                    d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
+                                                    transform="translate(1005.007 123.433)" fill="currentColor" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </mdui-list-item>
+
+                            <div>
+                                <div style="margin-left: 2.5rem;" class="mdui-prose">
+                                    <mdui-list-item rounded href="https://github.com/FlyGues2889" target="_blank">
+                                        FlyGues2889
+                                        <mdui-avatar src="http://q1.qlogo.cn/g?b=qq&nk=2037432889&s=100"
+                                            slot="icon"></mdui-avatar>
+
+                                        <span slot="description">https://github.com/FlyGues2889</span>
+
+                                    </mdui-list-item>
+                                    <mdui-list-item rounded href="https://github.com/Echoes678" target="_blank">
+                                        Echoes678
+                                        <mdui-avatar src="http://q1.qlogo.cn/g?b=qq&nk=2040244628&s=100"
+                                            slot="icon"></mdui-avatar>
+                                        <span slot="description">https://github.com/Echoes678</span>
+                                    </mdui-list-item>
+                                </div>
+                            </div>
+                        </mdui-collapse-item>
+                    </mdui-collapse>
+                </mdui-card>
+            </div>
+        </div>
+
+    </mdui-layout>
+
+
+    <mdui-dialog close-on-overlay-click headline="排除项标签设置" class="block-dialog">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+        </svg>
+
+        <mdui-tabs value="tab-1" placement="top">
+            <mdui-tab value="tab-1">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7zm2 16H5V5h11.17L19 7.83zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3M6 6h9v4H6z" />
+                </svg>
+                已保存标签
+            </mdui-tab>
+            <mdui-tab value="tab-2">
+                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="m21 12l-4.37 6.16c-.37.52-.98.84-1.63.84h-3v-2h3l3.55-5L15 7H5v3H3V7c0-1.1.9-2 2-2h10c.65 0 1.26.31 1.63.84zm-11 3H7v-3H5v3H2v2h3v3h2v-3h3z" />
+                </svg>
+                新建标签
+            </mdui-tab>
+
+            <mdui-tab-panel slot="panel" value="tab-1">
+                <small style="display: block;margin-bottom: 0.5rem;">选择一个已保存的排除项标签以生效：</small>
+                <mdui-select value="" variant="outlined" style="line-height: 1.375rem;width: 512px;" class="GETTIME"
+                    onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
+                    id="set-exclude-label">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12zM16 17H5V7h11l3.55 5z" />
+                    </svg>
+                    <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6l-6-6z" />
+                    </svg>
+                    <mdui-menu-item value="">无</mdui-menu-item>
+                </mdui-select>
+            </mdui-tab-panel>
+
+            <mdui-tab-panel slot="panel" value="tab-2">
+                <small style="display: block;margin-bottom: 0.5rem;">新建一个新排除项标签：</small>
+                <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M3 18h12v-2H3zM3 6v2h18V6zm0 7h18v-2H3z" />
+                    </svg>
+                </mdui-text-field>
+                <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
+                    style="font-family: 'Product Sans';margin-top: 0.8rem;font-family: 'HarmonyOS Sans SC';"
+                    variant="outlined">
+                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2zm1-9h1V4H2v1h1zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2zm5-6v2h14V5zm0 14h14v-2H7zm0-6h14v-2H7z" />
+                    </svg>
+                    <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
+                </mdui-text-field>
+            </mdui-tab-panel>
+        </mdui-tabs>
+
+        <mdui-button id="create-exclude-label" slot="action" variant="text"
+            onclick="saveExcludeLabel();showSettingsSavedSnackbar()">将新建内容保存为新标签</mdui-button>
+        <mdui-button class="close-block-dialog" slot="action" variant="tonal">确定</mdui-button>
+    </mdui-dialog>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const bottomBar = document.querySelector('.dragBar');
+        let isDragging = false;
+        let offset = { x: 0, y: 0 };
+
+        bottomBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offset = {
+                x: bottomBar.offsetLeft - e.clientX,
+                y: bottomBar.offsetTop - e.clientY,
+            };
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            bottomBar.style.left = (e.clientX + offset.x) + 'px';
+            bottomBar.style.top = (e.clientY + offset.y) + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    });
+</script>
+
+<script src="src/tauri.js"></script>
+
+</html>

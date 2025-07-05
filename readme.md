@@ -4,7 +4,7 @@
   </a>
 </p>
 <h1 align="center">RandomNum You</h1>
-<p align="center">基于JavaScript，使用 Material You 设计风格的随机数抽取器</p>
+<p align="center">基于Tauri，使用 Material You 设计风格的随机数抽取器</p>
 
 <br><br>
 <h2>文档</h2>
@@ -35,24 +35,21 @@
       <mdui-icon name="settings--outlined" style="font-size: medium;"></mdui-icon>
       设置
     </b>
-    中设置抽取数字范围、抽取时长、是否重复和是否手动抽取。
+    中设置抽取数字范围、抽取时长、是否重复和是否手动抽取等。
   </li>
 </ul>
 
 <h2>构建应用程序</h2>
 <p class="bold">克隆项目代码：</p>
-<pre><code>git clone https://gitee.com/flygues2889/random-number.git</code></pre>
-
 <pre><code>git clone https://github.com/FlyGues2889/random-number.git</code></pre>
 <p class="bold">安装依赖：</p>
-<pre><code style="display: inline-block;">cnpm install</code></pre>
-<p>随后请定位到项目内<code>app/</code>目录下，此为项目所在目录。</p>
+<pre><code>pnpm install</code></pre>
 <p class="bold">运行项目：</p>
-<pre><code>npm start</code></pre>
+<pre><code>npm run tauri dev</code></pre>
 <p class="bold">打包安装包：</p>
-<pre><code>electron-packager .</code></pre>
+<pre><code>pnpm run tauri build</code></pre>
 
 <h2 id="license">许可证</h2>
 <p>本项目使用 <a href="https://gitee.com/flygues2889/random-number/blob/main/LICENSE">AGPL-3.0 许可证</a> 。
 </p>
-<p>版权所有 © 2024 FlyGues2889</p>
+<p>版权所有 © 2025 FlyGues2889</p>

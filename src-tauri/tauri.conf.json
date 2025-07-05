@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "randomnum-you",
+  "version": "0.1.0",
+  "identifier": "cpm.flygues.random-you.app",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "randomnum-you",
+        "width": 800,
+        "height": 600,
+        "decorations": false,
+        "transparent": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "../src/assets/appIcon.ico",
+      "../src/assets/appIcon.svg"
+    ]
+  }
+}

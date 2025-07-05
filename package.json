@@ -1,13 +1,12 @@
 {
-  "scripts": {},
-  "author": "FlyGues",
-  "license": "AGPL-3.0-only",
-  "devDependencies": {
-    "electron": "^33.2.1",
-    "@electron/packager": "^18.3.6"
+  "name": "randomnum-you",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "tauri": "tauri"
   },
-  "dependencies": {
-    "electron": "^33.2.1",
-    "@electron/packager": "^18.3.6"
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
   }
 }

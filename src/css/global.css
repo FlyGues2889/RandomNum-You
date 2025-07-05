@@ -1,0 +1,373 @@
+/*==========全局控件样式==========*/
+body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', sans-serif !important;
+}
+
+h1 {
+  font-weight: 550;
+}
+
+.label-container {
+  height: 50px;
+}
+
+.label {
+  font-size: 50px;
+}
+
+mdui-select {
+  max-width: 16em;
+  /*FlyGues2889:默认这些是给settings页面用的，防止框过长遮挡*/
+  line-height: 1.375rem;
+  /*FlyGues2889:修一下mdui的bug，select的选择菜单行高会遮挡文字*/
+}
+
+html,
+body,
+mdui-layout {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgb(var(--mdui-color-surface-container));
+
+  user-select: none;
+}
+
+:root {
+  --scrollbar-width: 0.4rem;
+  --scrollbar-color: rgb(var(--mdui-color-primary), 0.15);
+  --scrollbar-edge-padding: 1.1rem;
+}
+
+::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom,
+      transparent 0,
+      transparent var(--scrollbar-edge-padding),
+      var(--scrollbar-color) var(--scrollbar-edge-padding),
+      var(--scrollbar-color) calc(100% - var(--scrollbar-edge-padding)),
+      transparent calc(100% - var(--scrollbar-edge-padding)),
+      transparent 100%);
+  border-radius: 1rem;
+  background-clip: content-box;
+  border: 0.1rem solid transparent;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: linear-gradient(to right,
+      transparent 0,
+      transparent var(--scrollbar-edge-padding),
+      var(--scrollbar-color) var(--scrollbar-edge-padding),
+      var(--scrollbar-color) calc(100% - var(--scrollbar-edge-padding)),
+      transparent calc(100% - var(--scrollbar-edge-padding)),
+      transparent 100%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom,
+      transparent 0,
+      transparent var(--scrollbar-edge-padding),
+      rgb(var(--mdui-color-primary), 0.3) var(--scrollbar-edge-padding),
+      rgb(var(--mdui-color-primary), 0.3) calc(100% - var(--scrollbar-edge-padding)),
+      transparent calc(100% - var(--scrollbar-edge-padding)),
+      transparent 100%);
+}
+
+::-webkit-scrollbar-thumb:horizontal:hover {
+  background: linear-gradient(to right,
+      transparent 0,
+      transparent var(--scrollbar-edge-padding),
+      rgb(var(--mdui-color-primary), 0.3) var(--scrollbar-edge-padding),
+      rgb(var(--mdui-color-primary), 0.3) calc(100% - var(--scrollbar-edge-padding)),
+      transparent calc(100% - var(--scrollbar-edge-padding)),
+      transparent 100%);
+}
+
+mdui-tabs::part(container) {
+  margin-bottom: 0.5rem;
+  background-color: unset;
+}
+
+span[slot="description"] {
+  opacity: 0.6;
+  font-size: small;
+}
+
+h1 {
+  user-select: none;
+  font-weight: normal;
+
+}
+
+mdui-snackbar {
+  margin-left: 6rem;
+  margin-bottom: 1.6rem;
+  border-radius: var(--mdui-shape-corner-medium);
+
+  div {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+
+
+/*==========多页面设置==========*/
+div#settingPage {
+
+  mdui-select,
+  mdui-text-field {
+    line-height: 1.375rem;
+    max-width: 16em;
+  }
+}
+
+/* div.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2rem;
+  margin: 4rem 1rem 1rem 5rem;
+  background-color: rgb(var(--mdui-color-surface));
+  overflow: auto; */
+
+/* 动画基础状态 */
+/* opacity: 0; */
+/* transform: translateX(20px);
+  pointer-events: none;
+  position: absolute; */
+/* 关键：让页面层叠起来 */
+/* top: 4rem; */
+/* 保持和 margin 顶部对齐 */
+/* left: 5rem; */
+/* 保持和 margin 左侧对齐 */
+/* right: 1rem; */
+/* 保持和 margin 右侧对齐 */
+/* bottom: 1rem; */
+/* 保持和 margin 底部对齐 */
+/* transition: opacity 0.3s ease, transform 0.3s ease; */
+/* } */
+/* 
+div.page.active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+div.page-container {
+  margin: 1rem 4rem;
+} */
+
+div.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2rem;
+  margin: 4rem 1rem 1rem 5rem;
+  /* 恢复原有的 margin 设置 */
+  background-color: rgb(var(--mdui-color-surface));
+  overflow: auto;
+
+  opacity: 0;
+  pointer-events: none;
+  position: relative;
+
+  visibility: hidden;
+
+  margin-top: calc(4rem - 10px);
+  /* 初始状态下略微上移，保持 margin 整体效果 */
+
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0s linear 0.3s;
+}
+
+
+div.page.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+
+  margin-top: 4rem;
+  /* 活动状态下恢复原始 margin-top */
+
+  transition-delay: 0s;
+}
+
+div.page-container {
+  margin: 1rem 4rem;
+}
+
+div#mainPage {
+  /* background-image: url(../assets/image.webp); */
+  background-size: cover;
+  /* 背景铺满整个窗口 */
+  background-repeat: no-repeat;
+  /* 不重复平铺 */
+  background-position: center;
+  /* 居中显示 */
+  background-attachment: fixed;
+  /* 固定背景，滚动时不动 */
+}
+
+/* 主页 */
+
+div#out {
+  margin-left: 2rem;
+  color: rgb(var(--mdui-color-secondary-dark));
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-family: 'Product Sans';
+
+  mdui-button {
+    transform: scale(0.8);
+  }
+}
+
+div.dragBar {
+  width: 3.25rem;
+  height: 4rem;
+  padding: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 0.2rem;
+  z-index: 900;
+
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+
+  border-radius: 1.5rem;
+  color: rgb(var(--mdui-color-outline), 0.7);
+  background-color: rgb(var(--mdui-color-surface-container));
+
+  .dragArea {
+    margin: 0;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    background-color: rgb(var(--mdui-color-surface-dim));
+    border-radius: 1.5rem 1.5rem 0 0;
+
+    cursor: move;
+
+    mdui-divider {
+      width: 100%;
+      height: 2px;
+      background-color: rgb(var(--mdui-color-surface));
+    }
+  }
+
+  .controlArea {
+    mdui-fab {
+      background-color: rgb(var(--mdui-color-primary));
+      color: rgb(var(--mdui-color-surface-container));
+    }
+  }
+}
+
+
+/* 记录页 */
+
+mdui-chip {
+  box-shadow: none;
+  background-color: unset;
+}
+
+div#exclude-list,
+div#history-list {
+  font-size: small;
+}
+
+/* 设置页 */
+
+mdui-card.container {
+  margin: 0rem;
+  margin-left: 0;
+  padding: 1rem;
+
+  width: 100%;
+  border-radius: 2rem;
+  background-color: rgb(var(--mdui-color-secondary-container), 0.3);
+}
+
+
+.tips-content {
+  padding: 0.2rem;
+}
+
+mdui-list-subheader {
+  font-size: medium;
+  color: rgb(var(--mdui-color-primary));
+}
+
+
+
+
+/*==========窗口元素设置==========*/
+mdui-top-app-bar {
+  /* height: 3rem; */
+  align-items: center;
+  /* background-color: rgb(var(--mdui-color-primary-container)); */
+  background-color: rgb(var(--mdui-color-surface-container));
+  color: rgb(var(--mdui-color-primary));
+
+
+  mdui-top-app-bar-title {
+    /* opacity: 0.8; */
+    /* margin-left: -0.2rem; */
+    display: flex;
+    align-items: center;
+
+    font-family: 'Product Sans';
+    font-size: 1.25rem;
+    color: rgb(var(--mdui-color-primary));
+
+    -webkit-app-region: drag;
+    user-select: none;
+  }
+
+  mdui-button-icon {
+    transform: scale(0.9);
+    color: rgb(var(--mdui-color-primary));
+  }
+}
+
+mdui-navigation-rail {
+  margin: 1rem 0;
+  z-index: 990;
+
+  background-color: rgb(var(--mdui-color-surface-container));
+
+  div[slot="bottom"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
