@@ -17,11 +17,8 @@
             排除数字范围
             <span slot="description">抽取过程中要排除的数字</span>
 
-            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog" variant="tonal">
-                <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2zM14 3v2h3.59l-9.83 9.83l1.41 1.41L19 6.41V10h2V3z" />
-                </svg>
+            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog" variant="tonal"
+                icon="open_in_new">
                 打开排除项标签设置
             </mdui-button>
         </mdui-list-item>
@@ -69,7 +66,7 @@
             </svg>
             周期内不重复
             <label for="repeat"></label>
-            <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked=""
+            <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked="true"
                 onchange="if(this.checked)add=[];storage(0);" onclick="if(c){alert('运行中不可设置！');return false}"
                 slot="end-icon">
                 <mdui-icon slot="checked-icon" name=""></mdui-icon>
