@@ -18,14 +18,8 @@
     <mdui-layout-main class="main">
         <mdui-dropdown trigger="contextmenu" open-on-pointer>
             <div id="out" slot="trigger">
-                -<br>
-                <mdui-button variant="outlined" disabled="">
-                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
-                    </svg>
-                    点击抽取按钮以开始
-                </mdui-button>
+                <br>
+
             </div>
             <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
                 <mdui-menu-item id="copy1" onclick="copyToClipboard1()">
@@ -39,4 +33,12 @@
         </mdui-dropdown>
 
     </mdui-layout-main>
+
+    <mdui-button variant="outlined" disabled="">
+        <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+        </svg>
+        点击抽取按钮以开始
+    </mdui-button>
 </div>

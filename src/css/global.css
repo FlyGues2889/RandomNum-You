@@ -234,6 +234,13 @@ div#out {
 
   font-family: 'Manrope';
 
+  /* 高斯模糊背景色 */
+  background: rgba(var(--mdui-color-surface-container), 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border-radius: 2rem;
+
   mdui-button {
     transform: scale(0.8);
   }
