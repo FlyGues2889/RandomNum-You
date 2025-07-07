@@ -11,8 +11,8 @@
     "windows": [
       {
         "title": "RandomNum-You",
-        "width": 1200,
-        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
         "decorations": false,
         "transparent": true,
         "visible": false
