@@ -105,7 +105,6 @@ h1 {
 }
 
 mdui-snackbar {
-  margin-left: 6rem;
   margin-bottom: 1.6rem;
   border-radius: var(--mdui-shape-corner-medium);
 
@@ -219,7 +218,6 @@ div#mainPage {
 /* 主页 */
 
 div#out {
-  margin-left: 2rem;
   color: rgb(var(--mdui-color-secondary-dark));
   position: absolute;
   top: 50%;
@@ -235,15 +233,23 @@ div#out {
   font-family: 'Manrope';
 
   /* 高斯模糊背景色 */
-  background: rgba(var(--mdui-color-surface-container), 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  /* background: rgba(var(--mdui-color-surface-container), 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(16px); */
+  text-shadow: 0 0 20px rgb(var(--mdui-color-surface-container), 0.5);
 
   border-radius: 2rem;
 
-  mdui-button {
-    transform: scale(0.8);
+  mdui-button#mainTip {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+
+    user-select: none;
+    cursor: default;
   }
+
 }
 
 div.dragBar {
