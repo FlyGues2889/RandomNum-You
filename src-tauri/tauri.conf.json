@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "md3desk",
-  "version": "0.1.0",
-  "identifier": "com.md3desk.app",
+  "productName": "RandomNum-You",
+  "version": "0.6.1",
+  "identifier": "com.flygues.randomnum-you.app",
   "build": {
     "frontendDist": "../src"
   },
@@ -24,14 +24,26 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": "nsis",
     "icon": [
-      "icons/32x32.png",
-      "icons/128x128.png",
-      "icons/128x128@2x.png",
-      "icons/icon.icns",
-      "icons/icon.ico"
-    ]
+      "icons/appIcon.ico",
+      "icons/appIcon.svg"
+    ],
+    "category": "Utility",
+    "shortDescription": "随机数抽取器",
+    "longDescription": "使用 Tauri 开发的 Material You 风格的随机数抽取器。",
+    "windows": {
+      "wix": {
+        "language": "zh-CN"
+      },
+      "nsis": {
+        "languages": [
+          "SimpChinese",
+          "English"
+        ],
+        "displayLanguageSelector": true
+      }
+    }
   },
   "plugins": {
     "window": {
