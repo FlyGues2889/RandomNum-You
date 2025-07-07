@@ -74,17 +74,7 @@ function copyToClipboard1() {
     .writeText(outContent)
     .then(() => {
       // 复制成功的反馈
-      const copySuccessSnackbar = document.querySelector(
-        ".copySuccessSnackbar"
-      );
-
-      // 如果当前 SnackBar 正在显示，先关闭它
-      if (copySuccessSnackbar.open) {
-        copySuccessSnackbar.open = false;
-      }
-
-      // 显示新的 SnackBar
-      copySuccessSnackbar.open = true;
+      notice('复制成功')
     })
     .catch((err) => {
       // 复制失败的反馈

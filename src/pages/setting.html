@@ -5,10 +5,12 @@
         <mdui-list-item nonclickable icon="numbers">
             抽取数字范围
             <span slot="description">设置抽取极值</span>
-            <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom">
-                <mdui-text-field type="input" id="num" value="1-55"
-                    onchange="showSettingsSavedSnackbar();changeNumProgress()"
-                    style="font-family: 'Product Sans';max-width: 16em;" variant="outlined"></mdui-text-field>
+            <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom"
+                x-data="{ range: localStorage.getItem('numRange') || '1-55' }">
+                <mdui-text-field type="input" id="num" :value="range"
+                    @input="range = $event.target.value; localStorage.setItem('numRange', range)"
+                    onchange="showSettingsSavedSnackbar();" style="font-family: 'Product Sans';max-width: 16em;"
+                    variant="outlined"></mdui-text-field>
             </mdui-tooltip>
         </mdui-list-item>
         <mdui-list-item nonclickable icon="block">
@@ -28,8 +30,12 @@
         <mdui-list-item nonclickable style="text-align: left;" icon="watch_later">
             时间延迟
 
-            <mdui-select value="750" slot="end-icon" variant="outlined" class="GETTIME"
-                onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()" id="settime">
+
+            <mdui-select x-data="{ 
+        delay: localStorage.getItem('delayTime') || '750',
+        saveDelay() { localStorage.setItem('delayTime', this.delay); }
+    }" x-model="delay" @change="saveDelay(); tm=false; settime(delay,0); showSettingsSavedSnackbar();" :value="delay"
+                slot="end-icon" variant="outlined" class="GETTIME" id="settime">
                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="m7 10l5 5l5-5z" />
                 </svg>
@@ -163,7 +169,7 @@
             <mdui-collapse-item>
                 <mdui-list-item slot="header" rounded icon="info">
                     关于 RandomNum You
-                    <span slot="description"> 0.6.1</span>
+                    <span slot="description"> 0.5.2 Tauri</span>
                 </mdui-list-item>
 
                 <div>

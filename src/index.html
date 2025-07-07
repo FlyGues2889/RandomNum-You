@@ -13,20 +13,17 @@
     <script src="src/bgFileSave.js"></script>
     <script defer src="src/tauri.js"></script>
     <script defer src="./src/settings.js"></script>
-    <!--FlyGues2889：引用文件应该放在一起，如果需要页面完成渲染后再注入，加个defer属性就行了-->
+    <script>
+        window.__TAURI__.window.getCurrentWindow().show();
+    </script>
 
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/mdui.css">
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/icon.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
-
-    <script>
-        window.__TAURI__.window.getCurrentWindow().show();
-    </script>
 </head>
 
 <body id="body" class="mdui-theme-auto" style="margin: 0;">
@@ -34,20 +31,6 @@
     <mdui-layout style="height: 100vh;" x-data="{ pages: pageData }" id="layout">
 
         <mdui-top-app-bar data-tauri-drag-region>
-            <mdui-button-icon>
-                <svg width="24" viewBox="0 0 2497 2496" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
-                    <g transform="translate(-951 11)">
-                        <path
-                            d="M1903.76 158.955C2051.14 2.04106 2297.88-5.7339 2454.87 141.591 2458.12 144.65 2461.33 147.772 2464.49 150.945L2464.49 150.945C2540.68 227.544 2645.26 269.104 2753.25 265.702L2753.25 265.702C2968.46 258.818 3148.53 427.631 3155.4 642.755 3155.55 647.314 3155.62 651.878 3155.6 656.441L3155.6 656.441C3155.29 764.462 3199.84 867.766 3278.62 941.705L3278.62 941.705C3435.61 1089.03 3443.38 1335.66 3295.99 1492.57 3292.93 1495.83 3289.82 1499.04 3286.64 1502.2L3286.64 1502.2C3210.01 1578.36 3168.42 1682.89 3171.83 1790.86L3171.83 1790.86C3178.73 2005.98 3009.86 2185.96 2794.65 2192.85 2790.08 2193 2785.5 2193.07 2780.94 2193.05L2780.94 2193.05C2672.88 2192.74 2569.52 2237.28 2495.56 2316.02L2495.56 2316.02C2348.16 2472.94 2101.44 2480.71 1944.45 2333.39 1941.2 2330.32 1937.99 2327.21 1934.82 2324.04L1934.82 2324.04C1858.64 2247.44 1754.06 2205.87 1646.05 2209.28L1646.05 2209.28C1430.84 2216.18 1250.77 2047.37 1243.88 1832.25 1243.73 1827.69 1243.67 1823.11 1243.68 1818.55L1243.68 1818.55C1244 1710.53 1199.44 1607.22 1120.66 1533.29L1120.66 1533.29C963.676 1385.95 955.904 1139.33 1103.29 982.413 1106.36 979.155 1109.47 975.947 1112.64 972.786L1112.64 972.786C1189.27 896.632 1230.86 792.099 1227.45 684.139L1227.45 684.139C1220.54 469.015 1389.43 289.029 1604.64 282.131 1609.2 281.985 1613.78 281.92 1618.34 281.933L1618.34 281.933C1726.41 282.252 1829.75 237.719 1903.73 158.967Z"
-                            stroke="currentColor" stroke-width="91.6667" stroke-miterlimit="8" fill="none"
-                            fill-rule="evenodd" />
-                        <path
-                            d="M2821.4 1042.13 2822.13 1037.82C2832.01 1001.2 2810.31 963.488 2773.64 953.607 2767.74 952.01 2761.64 951.219 2755.51 951.234L2557.83 951.234 2607.97 751.576C2617.38 714.329 2594.79 676.508 2557.51 667.103 2552 665.709 2546.32 665 2540.64 664.985 2508.4 664.985 2481.2 686.454 2473.31 717.226L2414.58 951.234 2128.08 951.234 2178.21 751.576C2187.63 714.329 2165.04 676.508 2127.76 667.103 2122.25 665.709 2116.57 665 2110.89 664.985 2078.65 664.985 2051.43 686.454 2043.56 717.226L1984.82 951.234 1752.77 951.234C1720.53 951.234 1692.6 972.704 1685.43 1003.47L1684 1007.78C1673.25 1052.13 1706.21 1094.37 1751.32 1094.37L1949.01 1094.37 1877.39 1380.62 1645.32 1380.62C1613.08 1380.62 1585.88 1402.07 1578 1432.86L1576.56 1437.14C1565.82 1481.51 1598.77 1523.73 1643.89 1523.73L1841.57 1523.73 1791.43 1723.39C1780.7 1767.77 1813.64 1809.98 1858.76 1809.98 1891 1809.98 1918.21 1788.51 1926.1 1757.74L1984.82 1523.73 2271.32 1523.73 2221.18 1723.39C2210.45 1767.77 2243.39 1809.98 2288.51 1809.98 2320.75 1809.98 2347.97 1788.51 2355.85 1757.74L2414.58 1523.73 2646.64 1523.73C2678.88 1523.73 2706.1 1502.26 2713.97 1471.49L2714.68 1467.21C2723.94 1429.75 2701.07 1391.9 2663.58 1382.64 2658.28 1381.34 2652.83 1380.66 2647.36 1380.62L2450.39 1380.62 2522.01 1094.37 2754.08 1094.37C2786.32 1094.37 2814.25 1072.89 2821.4 1042.13M2307.14 1380.62 2020.64 1380.62 2092.26 1094.37 2378.76 1094.37Z"
-                            fill="currentColor" fill-rule="evenodd" />
-                    </g>
-                </svg>
-            </mdui-button-icon>
             <mdui-top-app-bar-title>RandomNum You</mdui-top-app-bar-title>
             <div style="flex-grow: 1"></div>
             <mdui-button-icon icon="minimize" id="titlebar-minimize"></mdui-button-icon>
@@ -56,14 +39,6 @@
         </mdui-top-app-bar>
 
         <mdui-navigation-rail value="main">
-            <!-- <mdui-navigation-rail-item value="mainPage" href="javascript:void(0);" icon="numbers"
-                onclick="navigate('mainPage')">
-                抽取
-            </mdui-navigation-rail-item>
-            <mdui-navigation-rail-item value="historyPage" href="javascript:void(0);" icon="history"
-                onclick="navigate('historyPage')">
-                记录
-            </mdui-navigation-rail-item> -->
             <template x-for="page in pages" :key="page.name">
                 <template x-if="page.type !== 'settings'">
                     <mdui-navigation-rail-item :value="page.name" :icon="page.icon" @click="navigate(page.name+'Page')"
@@ -82,10 +57,6 @@
             </div>
 
         </mdui-navigation-rail>
-
-        <!-- <div class="page" id="mainPage" x-data="{ content: mainHtml }" x-effect="$el.innerHTML = content"></div>
-        <div class="page" id="historyPage" x-data="{ content: historyHtml }" x-effect="$el.innerHTML = content"></div>
-        <div class="page" id="settingsPage" x-data="{ content: settingsHtml }" x-effect="$el.innerHTML = content"></div> -->
         <script>pageLoad()</script>
 
     </mdui-layout>
@@ -153,31 +124,6 @@
         <mdui-button class="close-block-dialog" slot="action" variant="tonal">确定</mdui-button>
     </mdui-dialog>
 </body>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const bottomBar = document.querySelector('.dragBar');
-        let isDragging = false;
-        let offset = { x: 0, y: 0 };
-
-        bottomBar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offset = {
-                x: bottomBar.offsetLeft - e.clientX,
-                y: bottomBar.offsetTop - e.clientY,
-            };
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            bottomBar.style.left = (e.clientX + offset.x) + 'px';
-            bottomBar.style.top = (e.clientY + offset.y) + 'px';
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-    });
-</script>
+<!-- Echoes678: 这里原来的script放到RandomNum.js里了 -->
 
 </html>

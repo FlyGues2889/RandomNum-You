@@ -269,3 +269,28 @@ window.onload = function () {
   // 加载其他设置
   storage(1);
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+  const bottomBar = document.querySelector('.dragBar');
+  let isDragging = false;
+  let offset = { x: 0, y: 0 };
+
+  bottomBar.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    offset = {
+      x: bottomBar.offsetLeft - e.clientX,
+      y: bottomBar.offsetTop - e.clientY,
+    };
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    bottomBar.style.left = (e.clientX + offset.x) + 'px';
+    bottomBar.style.top = (e.clientY + offset.y) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+});

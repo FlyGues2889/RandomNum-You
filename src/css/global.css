@@ -1,8 +1,4 @@
 /*==========全局控件样式==========*/
-body {
-  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Heiti SC', sans-serif !important;
-}
-
 h1 {
   font-weight: 550;
 }
@@ -236,7 +232,7 @@ div#out {
   justify-content: center;
   flex-direction: column;
 
-  font-family: 'Product Sans';
+  font-family: 'Manrope';
 
   mdui-button {
     transform: scale(0.8);
@@ -340,12 +336,12 @@ mdui-top-app-bar {
 
   mdui-top-app-bar-title {
     /* opacity: 0.8; */
-    /* margin-left: -0.2rem; */
+    margin-left: 1rem;
     display: flex;
     align-items: center;
 
-    font-family: 'Product Sans';
-    font-size: 1.25rem;
+    font-family: 'Manrope';
+    font-size: 1.325rem;
     color: rgb(var(--mdui-color-primary));
 
     -webkit-app-region: drag;

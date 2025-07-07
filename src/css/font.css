@@ -1,4 +1,2 @@
-@font-face {
-    font-family: "Product Sans";
-    src: url("Product Sans Regular.ttf");
-}
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
