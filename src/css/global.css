@@ -114,6 +114,17 @@ mdui-badge.beta-badge {
   font-family: 'Manrope';
 }
 
+mdui-segmented-button {
+  background-color: rgb(var(--mdui-color-secondary-container));
+  border: none;
+
+  margin: 1px;
+
+  span {
+    transform: scale(0.7);
+  }
+}
+
 
 
 

@@ -1,8 +1,12 @@
+<link rel="stylesheet" href="@material-design-icons/font/index.css">
+
+
 <div class="page-container">
     <h1>设置</h1>
     <mdui-list-subheader>通用</mdui-list-subheader>
     <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
-        <mdui-list-item nonclickable icon="numbers">
+        <mdui-list-item nonclickable>
+            <span slot="icon" class="material-icons-round">numbers</span>
             抽取数字范围
             <span slot="description">设置抽取极值</span>
             <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom"
@@ -13,20 +17,20 @@
                     variant="outlined"></mdui-text-field>
             </mdui-tooltip>
         </mdui-list-item>
-        <mdui-list-item nonclickable icon="block">
+        <mdui-list-item nonclickable>
+            <span slot="icon" class="material-icons-round">block</span>
             排除数字范围
             <span slot="description">抽取过程中要排除的数字</span>
 
-            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog" variant="tonal"
-                icon="open_in_new">
-                打开排除项标签设置
+            <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog" variant="tonal">
+                <span class="material-icons-round">open_in_new</span>
             </mdui-button>
         </mdui-list-item>
     </mdui-card>
     <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
-        <mdui-list-item nonclickable style="text-align: left;" icon="watch_later">
+        <mdui-list-item nonclickable style="text-align: left;">
+            <span slot="icon" class="material-icons-round">access_time</span>
             时间延迟
-
 
             <mdui-select x-data="{ 
         delay: localStorage.getItem('delayTime') || '750',
@@ -48,10 +52,7 @@
         </mdui-list-item>
 
         <mdui-list-item nonclickable style="text-align: left;padding: 0;">
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="m18.19 12.44l-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32c0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44c-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18m-.35 2.85l-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68l4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06M8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5a2.5 2.5 0 0 0-5 0v2.44c-.62-.63-1-1.49-1-2.44" />
-            </svg>
+            <span slot="icon" class="material-icons-outlined">touch_app</span>
             是否手动
             <span slot="description">按钮/回车/空格键以启停</span>
             <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
@@ -60,10 +61,7 @@
         </mdui-list-item>
 
         <mdui-list-item nonclickable style="text-align: left;">
-            <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor"
-                    d="M6 13c0-1.65.67-3.15 1.76-4.24L6.34 7.34A8 8 0 0 0 4 13c0 4.08 3.05 7.44 7 7.93v-2.02c-2.83-.48-5-2.94-5-5.91m14 0c0-4.42-3.58-8-8-8c-.06 0-.12.01-.18.01l1.09-1.09L11.5 2.5L8 6l3.5 3.5l1.41-1.41l-1.08-1.08c.06 0 .12-.01.17-.01c3.31 0 6 2.69 6 6c0 2.97-2.17 5.43-5 5.91v2.02c3.95-.49 7-3.85 7-7.93" />
-            </svg>
+            <span slot="icon" class="material-icons-round">repeat</span>
             周期内不重复
             <label for="repeat"></label>
             <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked="true"
@@ -76,45 +74,44 @@
     </mdui-card>
     <mdui-list-subheader>个性化</mdui-list-subheader>
     <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
-        <mdui-list-item nonclickable icon="palette">
+        <mdui-list-item nonclickable>
+            <span slot="icon" class="material-icons-outlined">palette</span>
             主题
             <span slot="description">切换应用程序光照模式和主题色</span>
             <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single"
                 x-data="{ theme: localStorage.getItem('theme') || 'light' }" x-model="theme"
                 x-init="$watch('theme', value => { theme.setTheme(value); })" :value="theme" id="theme-toggle">
                 <mdui-segmented-button value="auto" onclick="theme.setTheme('auto');">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M20 8.69V4h-4.69L12 .69L8.69 4H4v4.69L.69 12L4 15.31V20h4.69L12 23.31L15.31 20H20v-4.69L23.31 12zm-2 5.79V18h-3.52L12 20.48L9.52 18H6v-3.52L3.52 12L6 9.52V6h3.52L12 3.52L14.48 6H18v3.52L20.48 12zM12 6.5v11c3.03 0 5.5-2.47 5.5-5.5S15.03 6.5 12 6.5" />
-                    </svg>
+                    <span class="material-icons-round">brightness_auto</span>
                 </mdui-segmented-button>
                 <mdui-segmented-button value="light" onclick="theme.setTheme('light');">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3s-3-1.35-3-3s1.35-3 3-3m0-2c-2.76 0-5 2.24-5 5s2.24 5 5 5s5-2.24 5-5s-2.24-5-5-5M2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1m18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1M11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1m0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1M5.99 4.58a.996.996 0 0 0-1.41 0a.996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41zm12.37 12.37a.996.996 0 0 0-1.41 0a.996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41zm1.06-10.96a.996.996 0 0 0 0-1.41a.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0zM7.05 18.36a.996.996 0 0 0 0-1.41a.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0z" />
-                    </svg>
+                    <span class="material-icons-round">brightness_7</span>
                 </mdui-segmented-button>
                 <mdui-segmented-button value="dark" onclick="theme.setTheme('dark');">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M9.5 4c4.41 0 8 3.59 8 8s-3.59 8-8 8c-.34 0-.68-.02-1.01-.07c1.91-2.16 3.01-4.98 3.01-7.93s-1.1-5.77-3.01-7.93C8.82 4.02 9.16 4 9.5 4m0-2c-1.82 0-3.53.5-5 1.35c2.99 1.73 5 4.95 5 8.65s-2.01 6.92-5 8.65c1.47.85 3.18 1.35 5 1.35c5.52 0 10-4.48 10-10S15.02 2 9.5 2" />
-                    </svg>
+                    <span class="material-icons-round">nightlight</span>
                 </mdui-segmented-button>
             </mdui-segmented-button-group>
         </mdui-list-item>
         <div style="margin-left: 2.5rem;">
             <mdui-list-item nonclickable>
-                <mdui-button-icon class="theme-button" id="defaultTheme" style="background-color: #00629e;color: white;" onclick="theme.setLight('defaultTheme');"></mdui-button-icon>
-                <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;color: white;" onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
-                <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;color: white;" onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
-                <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;color: white;" onclick="theme.setLight('greenTheme');"></mdui-button-icon>
-                <mdui-tooltip variant="rich" x-data="{ customLight: localStorage.getItem('customLight') }">
-                    <mdui-button-icon variant="outlined" icon="draw"
-                        onclick="document.querySelector('#customLight').click();"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="defaultTheme" style="background-color: #00629e;color: white;"
+                    onclick="theme.setLight('defaultTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;color: white;"
+                    onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;color: white;"
+                    onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;color: white;"
+                    onclick="theme.setLight('greenTheme');"></mdui-button-icon>
+                <mdui-tooltip variant="rich" placement="left"
+                    x-data="{ customLight: localStorage.getItem('customLight') }">
+                    <mdui-button-icon variant="tonal" style="position: absolute;right: 2rem;"
+                        onclick="document.querySelector('#customLight').click();">
+                        <span class="material-icons-outlined">draw</span>
+                    </mdui-button-icon>
                     <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
                         style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;"
                         onchange="theme.setCustomLight(this.value);">
-                    <div slot="headline">自定义光照</div>
+                    <div slot="headline">自定义主题色</div>
                     <div slot="content" id="customLightTip" x-text="customLight || '暂无'"
                         style="color: rgb(var(--mdui-color-primary));">
                     </div>
@@ -123,11 +120,14 @@
 
     </mdui-card>
     <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
-        <mdui-list-item nonclickable icon="image">
+        <mdui-list-item nonclickable>
+            <span slot="icon" class="material-icons-outlined">image</span>
             主页背景图片
             <mdui-badge class="beta-badge">Beta</mdui-badge>
             <span slot="description">自定义抽取界面背景图片，重新打开开关以应用设置</span>
-            <mdui-button slot="end-icon" variant="outlined" onclick="theme.backgroundImageChoose()">在设备上选择</mdui-button>
+            <mdui-button slot="end-icon" variant="tonal" onclick="theme.backgroundImageChoose()">
+                <span class="material-icons-round">folder_open</span>
+            </mdui-button>
 
             <mdui-switch class="toggle" type="checkbox" id="backgroundImage" style="margin-left:1.5rem;"
                 onchange="theme.backgroundImageSwitchChange()" slot="end-icon" name="" hover=""
@@ -141,7 +141,8 @@
     <mdui-card class="container" variant="filled">
         <mdui-collapse>
             <mdui-collapse-item>
-                <mdui-list-item slot="header" rounded icon="info">
+                <mdui-list-item slot="header" rounded>
+                    <span slot="icon" class="material-icons-outlined">info</span>
                     关于 RandomNum You
                     <span slot="description"> 0.6.1</span>
                 </mdui-list-item>

@@ -19,7 +19,7 @@ const pageData = [
         icon: 'settings',
         type: 'settings'
     }
-]
+];
 
 function getHtmlSync(url) {
     var xhr = new XMLHttpRequest();
@@ -33,15 +33,36 @@ function getHtmlSync(url) {
     }
 }
 
+// 根据 icon 属性生成对应的图标 DOM 元素
+function createIconElement(icon) {
+    const iconElement = document.createElement('span');
+    iconElement.classList.add('material-icons-round');
+    iconElement.textContent = icon;
+    return iconElement;
+}
+
 pageData.forEach(page => {
     eval(`${page.name}Html = getHtmlSync("${page.url}")`);
-    //page.html = getHtmlSync(page.url);
+    // 生成图标元素
+    page.iconElement = createIconElement(page.icon);
 });
 
 function pageLoad() {
     const layout = document.getElementById('layout');
     pageData.forEach(page => {
-        code = `<div class="page" id="${page.name + "Page"}" x-data="{ content: ${page.name + "Html"} }" x-effect="$el.innerHTML = content"></div>`
-        layout.insertAdjacentHTML('beforeend', code);
+        // 创建页面内容
+        const pageDiv = document.createElement('div');
+        pageDiv.classList.add('page');
+        pageDiv.id = `${page.name}Page`;
+        pageDiv.setAttribute('x-data', `{ content: ${page.name}Html }`);
+        pageDiv.setAttribute('x-effect', '$el.innerHTML = content');
+
+        // 将图标元素插入到导航栏项中
+        const navRailItem = document.querySelector(`mdui-navigation-rail-item[value="${page.name}"]`);
+        if (navRailItem) {
+            navRailItem.insertBefore(page.iconElement, navRailItem.firstChild);
+        }
+
+        layout.insertAdjacentElement('beforeend', pageDiv);
     });
 }

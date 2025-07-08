@@ -1,23 +1,27 @@
+<link rel="stylesheet" href="@material-design-icons/font/index.css">
+
+
 <div class="page-container">
     <h1>数字抽取</h1>
 
     <div class="dragBar">
         <div class="dragArea">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M20 9H4v2h16zM4 15h16v-2H4z" />
-            </svg>
+            <span class="material-icons-round">drag_handle</span>
         </div>
 
         <div class="controlArea">
             <div style="flex-grow: 1"></div>
-            <mdui-fab id="btn" onclick="getNum()" icon="touch_app"></mdui-fab>
+            <mdui-fab id="btn" onclick="getNum()">
+                <span slot="icon" class="material-icons-round">touch_app</span>
+            </mdui-fab>
         </div>
     </div>
 
     <mdui-layout-main class="main">
         <mdui-dropdown trigger="contextmenu" open-on-pointer>
             <div id="out" slot="trigger">
-                <mdui-button variant="text" id="mainTip" icon="info">
+                <mdui-button variant="text" id="mainTip">
+                    <span slot="icon" class="material-icons-outlined">info</span>
                     点击右下方按钮开始抽取
                 </mdui-button>
             </div>
