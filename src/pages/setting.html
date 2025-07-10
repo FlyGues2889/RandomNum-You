@@ -31,12 +31,9 @@
         <mdui-list-item nonclickable style="text-align: left;">
             <span slot="icon" class="material-icons-round">access_time</span>
             时间延迟
-
-            <mdui-select x-data="{ 
-        delay: localStorage.getItem('delayTime') || '750',
-        saveDelay() { localStorage.setItem('delayTime', this.delay); }
-    }" x-model="delay" @change="saveDelay(); tm=false; settime(delay,0); showSettingsSavedSnackbar();" :value="delay"
-                slot="end-icon" variant="outlined" class="GETTIME" id="settime">
+            <mdui-select slot="end-icon" variant="outlined" class="GETTIME" id="settime"
+                x-data="{ value: localStorage.getItem('delay') || '500' }" x-init="$el.value = value" x-model="value"
+                @change="localStorage.setItem('delay', document.getElementById('settime').value);tm=false; settime(document.getElementById('settime').value,0); showSettingsSavedSnackbar();">
                 <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="m7 10l5 5l5-5z" />
                 </svg>
@@ -55,7 +52,10 @@
             <span slot="icon" class="material-icons-outlined">touch_app</span>
             是否手动
             <span slot="description">按钮/回车/空格键以启停</span>
-            <mdui-switch class="manual" id="manual" onclick="manuald();storage(0)" slot="end-icon">
+            <mdui-switch class="manual" id="manual" slot="end-icon"
+                x-data="{ ifChecked: localStorage.getItem('manualSwitch') }"
+                :checked="ifChecked == 'true' ? true : false;"
+                onclick="setTimeout(() =>localStorage.setItem('manualSwitch', document.getElementById('manual').checked), 50);manuald();">
                 <mdui-icon slot="checked-icon" name=""></mdui-icon>
             </mdui-switch>
         </mdui-list-item>
@@ -64,8 +64,10 @@
             <span slot="icon" class="material-icons-round">repeat</span>
             周期内不重复
             <label for="repeat"></label>
-            <mdui-switch class="toggle" id="repeat" type="checkbox" value="1" checked="true"
-                onchange="if(this.checked)add=[];storage(0);" onclick="if(c){alert('运行中不可设置！');return false}"
+            <mdui-switch class="toggle" id="repeat" type="checkbox" value="1"
+                x-data="{ ifChecked: localStorage.getItem('repeatSwitch') }"
+                :checked="ifChecked == 'true' ? true : false;" onchange="if(this.checked)add=[];"
+                onclick="setTimeout(() =>localStorage.setItem('repeatSwitch', document.getElementById('repeat').checked), 50);if(c){alert('运行中不可设置！');return false}"
                 slot="end-icon">
                 <mdui-icon slot="checked-icon" name=""></mdui-icon>
             </mdui-switch>
@@ -109,7 +111,7 @@
                         <span class="material-icons-outlined">draw</span>
                     </mdui-button-icon>
                     <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
-                        style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;"
+                        style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;position: absolute;right: 2rem;top: 3rem;"
                         onchange="theme.setCustomLight(this.value);">
                     <div slot="headline">自定义主题色</div>
                     <div slot="content" id="customLightTip" x-text="customLight || '暂无'"
@@ -122,9 +124,9 @@
     <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
         <mdui-list-item nonclickable>
             <span slot="icon" class="material-icons-outlined">image</span>
-            主页背景图片
+            程序背景图片
             <mdui-badge class="beta-badge">Beta</mdui-badge>
-            <span slot="description">自定义抽取界面背景图片，重新打开以应用设置</span>
+            <span slot="description">修改程序背景图片，重新打开以应用设置</span>
             <mdui-button slot="end-icon" variant="text" onclick="theme.backgroundImageChoose()">
                 选择图片
             </mdui-button>
@@ -136,15 +138,28 @@
             </mdui-switch>
         </mdui-list-item>
         <mdui-list-item nonclickable>
+            <span slot="icon" class="material-icons-round">opacity</span>
+            页面背景透明
+            <mdui-badge class="beta-badge">Beta</mdui-badge>
+            <span slot="description">设置页面背景透明度(默认值:80%)</span>
+
+            <mdui-slider class="slider" style="width: 12rem;" id="opacity" min="0" max="100" step="5" slot="end-icon"
+                name="" hover="" x-data="{ opacity: localStorage.getItem('opacity') ?? 80 }"
+                x-init="$el.value = opacity" x-model="opacity"
+                @input="localStorage.setItem('opacity', opacity);theme.opacityChange();">
+            </mdui-slider>
+
+        </mdui-list-item>
+        <mdui-list-item nonclickable>
             <span slot="icon" class="material-icons-round">blur_on</span>
             背景磨砂
             <mdui-badge class="beta-badge">Beta</mdui-badge>
             <span slot="description">设置背景磨砂颗粒数</span>
 
-            <mdui-slider class="slider" style="width: 12rem;" id="blur" min="0" max="15" step="0.5"
-                onchange="BlurChange()" slot="end-icon" name="" hover="">
+            <mdui-slider class="slider" style="width: 12rem;" id="blur" min="0" max="15" step="0.5" slot="end-icon"
+                name="" hover="" x-data="{ blur: localStorage.getItem('blur') ?? 0 }" x-init="$el.value = blur"
+                x-model="blur" @input="localStorage.setItem('blur', blur); theme.blurChange();">
             </mdui-slider>
-
         </mdui-list-item>
     </mdui-card>
     <mdui-list-subheader>关于</mdui-list-subheader>

@@ -296,7 +296,7 @@ mdui-card.container {
 
   width: 100%;
   border-radius: 2rem;
-  background-color: rgb(var(--mdui-color-secondary-container ),0.3);
+  background-color: rgb(var(--mdui-color-secondary-container), 0.3);
 }
 
 

@@ -64,6 +64,8 @@ class ThemeManager {
 
     // 等待dom加载完成
     document.addEventListener("DOMContentLoaded", async () => {
+      this.blurChange();
+      this.opacityChange();
       if (backgroundImageSwitch == "true") {
         await loadBackgroundImage();
       }
@@ -144,14 +146,22 @@ class ThemeManager {
       localStorage.setItem("backgroundImageSwitch", "false");
     }
   }
-}
-function BlurChange() {
-  const blurLayer = document.querySelector("#blur-layer");
-  const blurSlider = document.querySelector("#blur");
-  blurLayer.style.backdropFilter = "blur(" + blurSlider.value + "px)";
-  blurSlider.labelFormatter = (value) => `${value} px`
 
-  localStorage.setItem("blur", blurSlider.value);
+  blurChange() {
+    const blurLayer = document.querySelector("#blur-layer");
+    const blurSlider = document.querySelector("#blur");
+    blurLayer.style.backdropFilter = "blur(" + blurSlider.value + "px)";
+    blurSlider.labelFormatter = (value) => `${value} px`
+  }
+
+  opacityChange() {
+    const opacitySlider = document.querySelector("#opacity");
+    const pages = document.querySelectorAll("div.page");
+    pages.forEach(page => {
+      page.style.backgroundColor = `rgb(var(--mdui-color-surface), ${opacitySlider.value / 100})`;
+    });
+    opacitySlider.labelFormatter = (value) => `${value} %`
+  }
 }
 
 // 挂载主题相关方法到全局对象
