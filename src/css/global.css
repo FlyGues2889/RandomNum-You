@@ -27,7 +27,7 @@ body {
   height: 100vh;
 
   user-select: none;
-  background-color: rgb(var(--mdui-color-surface-container), 0.9);
+  background-color: rgb(var(--mdui-color-surface-container)) !important;
 }
 
 body {
@@ -154,7 +154,7 @@ div.page {
   border-radius: 1rem;
   margin: 0 1rem 1rem 5rem;
   /* 恢复原有的 margin 设置 */
-  background-color: rgb(var(--mdui-color-surface), 0.4);
+  background-color: rgb(var(--mdui-color-surface), 0.8);
   overflow: auto;
 
   opacity: 0;
@@ -296,7 +296,7 @@ mdui-card.container {
 
   width: 100%;
   border-radius: 2rem;
-  background-color: rgb(var(--mdui-color-surface-container), 0.9);
+  background-color: rgb(var(--mdui-color-secondary-container ),0.3);
 }
 
 

@@ -148,7 +148,6 @@ class ThemeManager {
 function BlurChange() {
   const blurLayer = document.querySelector("#blur-layer");
   const blurSlider = document.querySelector("#blur");
-  blurLayer.style.filter = "blur(" + blurSlider.value + "px)";
   blurLayer.style.backdropFilter = "blur(" + blurSlider.value + "px)";
   blurSlider.labelFormatter = (value) => `${value} px`
 

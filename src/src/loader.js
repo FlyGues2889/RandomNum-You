@@ -4,12 +4,14 @@ const pageData = [
         url: './pages/main.html',
         icon: 'numbers',
         type: 'normal',
+        text: '抽取'
     },
     {
         name: 'history',
         url: './pages/history.html',
         icon: 'history',
         type: 'normal',
+        text: '历史'
     },
     {
         name: 'settings',
