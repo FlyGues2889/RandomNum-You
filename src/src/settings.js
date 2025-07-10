@@ -66,6 +66,7 @@ class ThemeManager {
     document.addEventListener("DOMContentLoaded", async () => {
       this.blurChange();
       this.opacityChange();
+      window.__TAURI__.window.getCurrentWindow().show();
       if (backgroundImageSwitch == "true") {
         await loadBackgroundImage();
       }
