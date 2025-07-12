@@ -149,19 +149,25 @@ class ThemeManager {
   }
 
   blurChange() {
-    const blurLayer = document.querySelector("#blur-layer");
-    const blurSlider = document.querySelector("#blur");
-    blurLayer.style.backdropFilter = "blur(" + blurSlider.value + "px)";
-    blurSlider.labelFormatter = (value) => `${value} px`
+    const blurLayer = document.queryselector("#blur-layer");
+    try {
+      const blurSlider = document.queryselector("#blur");
+      blurLayer.style.backdropFilter = 'blur(" + blurSlider.value + "px)';
+      blurSlider.labelFormatter = (value) => "${value} px";
+    } catch {
+      console.info("Settings page not loaded, skipping labelFormatter");
+    }
   }
 
   opacityChange() {
     const opacitySlider = document.querySelector("#opacity");
     const pages = document.querySelectorAll("div.page");
-    pages.forEach(page => {
-      page.style.backgroundColor = `rgb(var(--mdui-color-surface), ${opacitySlider.value / 100})`;
+    pages.forEach((page) => {
+      page.style.backgroundColor = `rgb(var(--mdui-color-surface), ${
+        opacitySlider.value / 100
+      })`;
     });
-    opacitySlider.labelFormatter = (value) => `${value} %`
+    opacitySlider.labelFormatter = (value) => `${value} %`;
   }
 }
 
