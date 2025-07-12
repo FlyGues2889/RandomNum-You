@@ -10,10 +10,10 @@
   基于 Tauri，使用 Material You 设计风格的随机数抽取器
 </center>
 
----
 
-  - [简体中文](https://github.com/FlyGues2889/random-number/readme-cn.md)
-  - [English](https://github.com/FlyGues2889/random-number/readme.md)
+
+  - [简体中文](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme-cn.md)
+  - [English](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme.md)
 
 ## 特点
 

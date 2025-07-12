@@ -10,10 +10,9 @@
   A random number picker based on Tauri with Material You design
 </center>
 
----
 
-  - [简体中文](https://github.com/FlyGues2889/random-number/readme-cn.md)
-  - [English](https://github.com/FlyGues2889/random-number/readme.md)
+  - [简体中文](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme-cn.md)
+  - [English](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme.md)
 
 ## Features
 
@@ -21,7 +20,7 @@
 
 ❇️ Adopts Material You design style
 
-🕥 Can view historical picking records
+🕥 View historical recordings
 
 ⚙️ Various customization options
 
