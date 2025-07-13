@@ -10,7 +10,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "RandomNum-You",
+        "title": "RandomNum You",
         "minWidth": 800,
         "minHeight": 600,
         "decorations": false,
