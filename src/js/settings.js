@@ -149,13 +149,22 @@ class ThemeManager {
   }
 
   blurChange() {
-    const blurLayer = document.queryselector("#blur-layer");
+    const blurLayer = document.querySelector("#blur-layer");
+    const blurSlider = document.querySelector("#blur");
+    if (!blurLayer || !blurSlider) {
+      console.info("Required DOM elements not found, skipping blur change");
+      return;
+    }
     try {
-      const blurSlider = document.queryselector("#blur");
-      blurLayer.style.backdropFilter = 'blur(" + blurSlider.value + "px)';
-      blurSlider.labelFormatter = (value) => "${value} px";
-    } catch {
-      console.info("Settings page not loaded, skipping labelFormatter");
+      const value = parseFloat(blurSlider.value);
+      if (!isNaN(value)) {
+        blurLayer.style.backdropFilter = `blur(${value}px)`;
+      } else {
+        console.warn("Invalid blur value, skipping style update");
+      }
+      blurSlider.labelFormatter = (val) => `${val} px`;
+    } catch (error) {
+      console.error("Error occurred in blurChange:", error);
     }
   }
 
