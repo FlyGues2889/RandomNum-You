@@ -1,18 +1,15 @@
-<link rel="stylesheet" href="@material-design-icons/font/index.css">
-
-
 <div class="page-container">
     <h1>数字抽取</h1>
 
     <div class="dragBar">
         <div class="dragArea">
-            <span class="material-icons-round">drag_handle</span>
+            <span class="material-icons-outlined">drag_handle</span>
         </div>
 
         <div class="controlArea">
             <div style="flex-grow: 1"></div>
             <mdui-fab id="btn" onclick="getNum()">
-                <span slot="icon" class="material-icons-round">touch_app</span>
+                <span slot="icon" class="material-icons-outlined">touch_app</span>
             </mdui-fab>
         </div>
     </div>
@@ -27,10 +24,7 @@
             </div>
             <mdui-menu style="border-radius: var(--mdui-shape-corner-large);" dense>
                 <mdui-menu-item id="copy1" onclick="copyToClipboard1()">
-                    <svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24">
-                        <path fill="currentColor"
-                            d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z" />
-                    </svg>
+                    <span slot="icon" class="material-icons-outlined">copy_all</span>
                     复制
                 </mdui-menu-item>
             </mdui-menu>

@@ -7,36 +7,33 @@
 # <center> RandomNum You
 
 <center>
-  A random number picker based on Tauri with Material You design
+  基于 Tauri，使用 Material You 设计风格的随机数抽取器
 </center>
 
 
-  - [简体中文](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme-cn.md)
-  - [English](https://github.com/FlyGues2889/RandomNum-You/blob/main/readme.md)
+## 特点
 
-## Features
+🚀 Tauri 应用的快速、轻量
 
-🚀 Fast and lightweight Tauri application
+❇️ 使用 Material You 设计风格
 
-❇️ Adopts Material You design style
+🕥 可查看历史抽取记录
 
-🕥 View historical recordings
+⚙️ 多样化的自定义设置
 
-⚙️ Various customization options
+## 安装
 
-## Installation
+目前仅支持 Windows 平台，我们推荐使用 Windows™ 10 或更高版本。
 
-Currently, only the Windows platform is supported, and we recommend using Windows™ 10 or a higher version.
+前往 [Releases](https://github.com/FlyGues2889/random-number/releases/latest) 页面下方的资产（Assets）下载最新版本 .exe 安装包。
 
-Go to the [Releases](https://github.com/FlyGues2889/random-number/releases/latest) page, scroll down to the Assets section, and download the latest version of the .exe installation package.
+## 开发和调试
 
-## Development and Debugging
+1. 前置工作：
 
-1. Preliminary work:
+   安装 [Rust](https://www.rust-lang.org/tools/install) 环境。
 
-   Install the Rust environment; please refer to the [Rust official documentation](https://www.rust-lang.org/tools/install) for installation instructions.
-
-2. Clone the repository:
+2. 克隆项目代码
 
    ```
    git clone https://github.com/FlyGues2889/random-number.git
@@ -44,37 +41,37 @@ Go to the [Releases](https://github.com/FlyGues2889/random-number/releases/lates
    cd random-number
    ```
 
-   And install dependencies:
+   并安装依赖：
    ```
    pnpm install
    ```
 
 
-3. Run the project:
+3. 运行项目：
 
    ```
    pnpm run tauri dev
    ```
 
-4. Package:
+4. 打包安装包：
 
    ```
    pnpm run tauri build
    ```
 
-   The packaged installation package is located in the `/src-tauri/target/release` folder.
+   打包后的安装包位于 `/src-tauri/target/release/bundle` 文件夹下。
 
-## Contribution
+## 贡献
 
-Contributions in the form of [issues](https://github.com/FlyGues2889/random-number/issues) and [PRs](https://github.com/FlyGues2889/random-number/pulls) are welcome.
+欢迎提交 [issues](https://github.com/FlyGues2889/random-number/issues) 和 [PRs](https://github.com/FlyGues2889/random-number/pulls) 。
 
-### Authors
+### 作者
 
 - [FlyGues2889](https://github.com/FlyGues2889)
 - [Echoes678](https://github.com/Echoes678)
 
-## License
+## 许可证
 
-This project is licensed under the [AGPL-3.0](https://gitee.com/flygues2889/random-number/blob/main/LICENSE) License.
+本项目使用 [MIT](https://gitee.com/flygues2889/random-number/blob/main/LICENSE) 许可证。
 
-Copyright © 2025 FlyGues2889
+版权所有 © 2025 FlyGues2889

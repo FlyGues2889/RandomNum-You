@@ -3,7 +3,7 @@ var c = 0,
   add = [],
   sec,
   f = 0,
-  m = 0
+  m = 0;
 
 function $(id) {
   return document.getElementById(id);
@@ -33,8 +33,6 @@ function timedCount(numarr) {
 
     add.push(numarr[rn]);
     document.querySelector("#notes span").innerHTML = add.join(", ");
-    document.querySelector("#notes b").innerHTML = add.length;
-
   } else {
     t = setTimeout(function () {
       timedCount(numarr);
@@ -64,6 +62,7 @@ function motionEventHandler(e) {
   lastY = y;
   lastZ = z;
 }
+
 function stopCount() {
   clearTimeout(t);
 }
@@ -145,7 +144,6 @@ function settime(vs, vx) {
   setTimeout(function () {
     vx += 50;
     if (vx > vs) vx = vs;
-    $("time").innerHTML = (vx * 0.001).toFixed(2);
     if (vx < vs) settime(vs, vx);
   }, 50);
 }
@@ -158,19 +156,6 @@ function storage(n) {
         $("settime").value = settings.settime;
         settime(settings.settime, 0);
       }
-      if ("bc" in settings) {
-        $("bc").value = settings.bc;
-        $("out").style.backgroundColor = settings.bc;
-      }
-      if ("tc" in settings) {
-        $("tc").value = settings.tc;
-        $("out").style.color = settings.tc;
-      }
-      if ("tsc" in settings) $("tsc").value = settings.tsc;
-      if ("ttc" in settings) {
-        $("ttc").value = settings.ttc;
-        $("t").style.color = settings.ttc;
-      }
       if ("repeat" in settings)
         $("repeat").checked = settings.repeat == 1 ? true : false;
       if ("manual" in settings) {
@@ -181,22 +166,14 @@ function storage(n) {
   }
   var setting = new Object();
   setting.settime = $("settime").value;
-  setting.bc = $("bc").value;
-  setting.tc = $("tc").value;
-  setting.tsc = $("tsc").value;
-  setting.ttc = $("ttc").value;
   setting.repeat = $("repeat").checked ? 1 : 0;
-  setting.note = $("note").checked ? 1 : 0;
   setting.manual = $("manual").checked ? 1 : 0;
-  setting.position = $("position").value;
-  setting.fs = $("fontsize").value;
   localStorage.setItem("suijishu", JSON.stringify(setting));
 }
 
 function manuald() {
   var check = $("manual").checked;
-  $("timeout").style.display = check ? "none" : "inline-block";
-  $("manualtips").style.display = check ? "inline-block" : "none";
+  $("timeout").style.display = "inline-block";
   if (!check) {
     m = 0;
     sec = new Date().getTime();
@@ -270,12 +247,12 @@ window.onload = function () {
   storage(1);
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const bottomBar = document.querySelector('.dragBar');
+document.addEventListener("DOMContentLoaded", () => {
+  const bottomBar = document.querySelector(".dragBar");
   let isDragging = false;
   let offset = { x: 0, y: 0 };
 
-  bottomBar.addEventListener('mousedown', (e) => {
+  bottomBar.addEventListener("mousedown", (e) => {
     isDragging = true;
     offset = {
       x: bottomBar.offsetLeft - e.clientX,
@@ -283,14 +260,56 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   });
 
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
     e.preventDefault();
-    bottomBar.style.left = (e.clientX + offset.x) + 'px';
-    bottomBar.style.top = (e.clientY + offset.y) + 'px';
+    bottomBar.style.left = e.clientX + offset.x + "px";
+    bottomBar.style.top = e.clientY + offset.y + "px";
   });
 
-  document.addEventListener('mouseup', () => {
+  document.addEventListener("mouseup", () => {
     isDragging = false;
   });
 });
+
+function openErrorDialog() {
+  notice("抽取范围格式错误！请检查并重新输入");
+}
+
+function openBlockDialog() {
+  const blockDialog = document.querySelector(".block-dialog");
+  const closeButton2 = blockDialog.querySelector(".close-block-dialog");
+
+  blockDialog.open = true;
+  closeButton2.addEventListener("click", () => (blockDialog.open = false));
+}
+
+function copyToClipboard1() {
+  const outContent = document.getElementById("out").innerText; // 获取 div#out 的内容
+
+  navigator.clipboard
+    .writeText(outContent)
+    .then(() => {
+      notice("复制成功");
+    })
+    .catch((err) => {
+      notice("复制失败！请手动复制内容");
+    });
+}
+
+function copyToClipboard2() {
+  const notesContent = document.getElementById("notes").innerText;
+
+  navigator.clipboard
+    .writeText(notesContent)
+    .then(() => {
+      notice("复制成功");
+    })
+    .catch((err) => {
+      notice("复制失败！请手动复制内容");
+    });
+}
+
+function showSettingsSavedSnackbar() {
+  notice("设置已保存");
+}

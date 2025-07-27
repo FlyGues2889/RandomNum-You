@@ -1,13 +1,13 @@
 {
   "name": "random-num-you",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A random number generator",
   "main": "main.js",
   "icon": "app/assets/appIcon.ico",
   "scripts": {
   },
   "author": "FlyGues",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "devDependencies": {
   },
   "dependencies": {

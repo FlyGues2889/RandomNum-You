@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "Material Icons Round";
+  font-family: "Material Icons Two Tone";
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("./material-icons-round.woff2") format("woff2");
+  src: url("./material-icons-two-tone.woff2") format("woff2"), url("./material-icons-two-tone.woff") format("woff");
 }
-.material-icons-round {
-  font-family: "Material Icons Round";
+.material-icons-two-tone {
+  font-family: "Material Icons Two Tone";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;

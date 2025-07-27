@@ -21,13 +21,20 @@ mdui-select {
   /*FlyGues2889:修一下mdui的bug，select的选择菜单行高会遮挡文字*/
 }
 
+mdui-tab-panel {
+  width: 50vw;
+  max-width: 32rem;
+  margin-top: 0.8rem;
+  font-family: 'HarmonyOS Sans SC';
+}
+
 html,
 body {
   width: 100vw;
   height: 100vh;
 
   user-select: none;
-  background-color: rgb(var(--mdui-color-surface-container)) !important;
+  background-color: rgb(var(--mdui-color-surface-container));
 }
 
 body {

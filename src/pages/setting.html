@@ -1,12 +1,9 @@
-<link rel="stylesheet" href="@material-design-icons/font/index.css">
-
-
 <div class="page-container">
     <h1>设置</h1>
     <mdui-list-subheader>通用</mdui-list-subheader>
     <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
         <mdui-list-item nonclickable>
-            <span slot="icon" class="material-icons-round">numbers</span>
+            <span slot="icon" class="material-icons-outlined">numbers</span>
             抽取数字范围
             <span slot="description">设置抽取极值</span>
             <mdui-tooltip content="格式为 最小值-最大值 ，范围 （0 - 999999）" slot="end-icon" placement="bottom"
@@ -18,26 +15,23 @@
             </mdui-tooltip>
         </mdui-list-item>
         <mdui-list-item nonclickable>
-            <span slot="icon" class="material-icons-round">block</span>
+            <span slot="icon" class="material-icons-outlined">block</span>
             排除数字范围
             <span slot="description">抽取过程中要排除的数字</span>
 
             <mdui-button onclick="openBlockDialog()" slot="end-icon" class="open-block-dialog" variant="tonal">
-                <span class="material-icons-round">open_in_new</span>
+                <span class="material-icons-outlined">open_in_new</span>
             </mdui-button>
         </mdui-list-item>
     </mdui-card>
     <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
         <mdui-list-item nonclickable style="text-align: left;">
-            <span slot="icon" class="material-icons-round">access_time</span>
+            <span slot="icon" class="material-icons-outlined">access_time</span>
             时间延迟
             <mdui-select slot="end-icon" variant="outlined" class="GETTIME" id="settime"
                 x-data="{ value: localStorage.getItem('delay') || '500' }" x-init="$el.value = value" x-model="value"
                 @change="localStorage.setItem('delay', document.getElementById('settime').value);tm=false; settime(document.getElementById('settime').value,0); showSettingsSavedSnackbar();">
-                <svg slot="end-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="m7 10l5 5l5-5z" />
-                </svg>
-                <!-- <mdui-menu-item value="250">0.25s</mdui-menu-item> -->
+                <span slot="end-icon" class="material-icons">keyboard_arrow_down</span>
                 <mdui-menu-item value="500">0.50s</mdui-menu-item>
                 <mdui-menu-item value="750">0.75s</mdui-menu-item>
                 <mdui-menu-item value="1000">1s</mdui-menu-item>
@@ -61,7 +55,7 @@
         </mdui-list-item>
 
         <mdui-list-item nonclickable style="text-align: left;">
-            <span slot="icon" class="material-icons-round">repeat</span>
+            <span slot="icon" class="material-icons-outlined">repeat</span>
             周期内不重复
             <label for="repeat"></label>
             <mdui-switch class="toggle" id="repeat" type="checkbox" value="1"
@@ -84,27 +78,27 @@
                 x-data="{ theme: localStorage.getItem('theme') || 'light' }" x-model="theme"
                 x-init="$watch('theme', value => { theme.setTheme(value); })" :value="theme" id="theme-toggle">
                 <mdui-segmented-button value="auto" onclick="theme.setTheme('auto');">
-                    <span class="material-icons-round">brightness_auto</span>
+                    <span class="material-icons-outlined" style="transform: scale(0.7);">brightness_auto</span>
                 </mdui-segmented-button>
                 <mdui-segmented-button value="light" onclick="theme.setTheme('light');">
-                    <span class="material-icons-round">brightness_7</span>
+                    <span class="material-icons-outlined" style="transform: scale(0.7);">wb_sunny</span>
                 </mdui-segmented-button>
                 <mdui-segmented-button value="dark" onclick="theme.setTheme('dark');">
-                    <span class="material-icons-round">nightlight</span>
+                    <span class="material-icons-outlined" style="transform: scale(0.7);">brightness_2</span>
                 </mdui-segmented-button>
             </mdui-segmented-button-group>
         </mdui-list-item>
         <div style="margin-left: 2.5rem;">
             <mdui-list-item nonclickable>
-                <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;color: white;"
-                onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
-                <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;color: white;"
-                onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
-                <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;color: white;"
-                onclick="theme.setLight('greenTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;"
+                    onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;"
+                    onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
+                <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;"
+                    onclick="theme.setLight('greenTheme');"></mdui-button-icon>
 
-                <mdui-button class="theme-button" id="defaultTheme" style="position: absolute;right: 5rem;" variant="text"
-                    onclick="theme.setLight('defaultTheme');">
+                <mdui-button class="theme-button" id="defaultTheme" style="position: absolute;right: 5rem;"
+                    variant="text" onclick="theme.setLight('defaultTheme');">
                     <span class="material-icons-outlined" slot="icon">settings_backup_restore</span>
                     默认配色
                 </mdui-button>
@@ -141,9 +135,9 @@
             </mdui-switch>
         </mdui-list-item>
         <mdui-list-item nonclickable>
-            <span slot="icon" class="material-icons-round">opacity</span>
-            页面背景透明
-            <span slot="description">设置页面背景透明度(默认值:80%)</span>
+            <span slot="icon" class="material-icons-outlined">opacity</span>
+            页面背景不透明度
+            <span slot="description">默认值：80%</span>
 
             <mdui-slider class="slider" style="width: 12rem;" id="opacity" min="0" max="100" step="5" slot="end-icon"
                 name="" hover="" x-data="{ opacity: localStorage.getItem('opacity') ?? 80 }"
@@ -153,7 +147,7 @@
 
         </mdui-list-item>
         <mdui-list-item nonclickable>
-            <span slot="icon" class="material-icons-round">blur_on</span>
+            <span slot="icon" class="material-icons-outlined">blur_on</span>
             背景磨砂
             <span slot="description">设置背景磨砂颗粒数</span>
 
@@ -170,15 +164,15 @@
                 <mdui-list-item slot="header" rounded>
                     <span slot="icon" class="material-icons-outlined">info</span>
                     关于 RandomNum You
-                    <span slot="description"> 1.0.0</span>
+                    <span slot="description"> 1.0.1</span>
                 </mdui-list-item>
 
                 <div>
                     <div style="margin-left: 1.5rem;" class="mdui-prose">
                         <mdui-list-item nonclickable>
                             <mdui-list-item rounded>
-                                使用框架
-                                <span slot="description">Tauri + MDUI</span>
+                                使用开源项目
+                                <span slot="description">Tauri - MDUI - Material Symbols</span>
                             </mdui-list-item>
                             <mdui-list-item rounded>
                                 项目存储库
@@ -186,7 +180,7 @@
                             </mdui-list-item>
                             <mdui-list-item rounded>
                                 许可证
-                                <span slot="description">AGPL 3.0</span>
+                                <span slot="description">MIT</span>
                             </mdui-list-item>
                         </mdui-list-item>
                     </div>
@@ -219,6 +213,7 @@
                             </g>
                         </g>
                     </svg>
+                    <span slot="description">By FlyGues Studio</span>
                 </mdui-list-item>
 
                 <div>
