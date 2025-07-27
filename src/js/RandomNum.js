@@ -252,24 +252,48 @@ document.addEventListener("DOMContentLoaded", () => {
   let isDragging = false;
   let offset = { x: 0, y: 0 };
 
-  bottomBar.addEventListener("mousedown", (e) => {
+  // 处理鼠标按下和触摸开始事件
+  function handleStart(e) {
+    e.preventDefault();
     isDragging = true;
-    offset = {
-      x: bottomBar.offsetLeft - e.clientX,
-      y: bottomBar.offsetTop - e.clientY,
-    };
-  });
 
-  document.addEventListener("mousemove", (e) => {
+    // 获取鼠标/触摸位置
+    const clientX = e.clientX || e.touches[0].clientX;
+    const clientY = e.clientY || e.touches[0].clientY;
+
+    offset = {
+      x: bottomBar.offsetLeft - clientX,
+      y: bottomBar.offsetTop - clientY,
+    };
+  }
+
+  // 处理鼠标移动和触摸移动事件
+  function handleMove(e) {
     if (!isDragging) return;
     e.preventDefault();
-    bottomBar.style.left = e.clientX + offset.x + "px";
-    bottomBar.style.top = e.clientY + offset.y + "px";
-  });
 
-  document.addEventListener("mouseup", () => {
+    // 获取鼠标/触摸位置
+    const clientX = e.clientX || e.touches[0].clientX;
+    const clientY = e.clientY || e.touches[0].clientY;
+
+    bottomBar.style.left = clientX + offset.x + "px";
+    bottomBar.style.top = clientY + offset.y + "px";
+  }
+
+  // 处理鼠标释放和触摸结束事件
+  function handleEnd() {
     isDragging = false;
-  });
+  }
+
+  // 绑定鼠标事件
+  bottomBar.addEventListener("mousedown", handleStart);
+  document.addEventListener("mousemove", handleMove);
+  document.addEventListener("mouseup", handleEnd);
+
+  // 绑定触摸事件
+  bottomBar.addEventListener("touchstart", handleStart);
+  document.addEventListener("touchmove", handleMove, { passive: false });
+  document.addEventListener("touchend", handleEnd);
 });
 
 function openErrorDialog() {

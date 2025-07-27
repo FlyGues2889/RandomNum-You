@@ -25,7 +25,6 @@ mdui-tab-panel {
   width: 50vw;
   max-width: 32rem;
   margin-top: 0.8rem;
-  font-family: 'HarmonyOS Sans SC';
 }
 
 html,
@@ -252,13 +251,12 @@ div.dragBar {
   bottom: 2rem;
 
   border-radius: 1.5rem;
-  color: rgb(var(--mdui-color-outline), 0.7);
-  background-color: rgb(var(--mdui-color-surface-container));
-
+  background-color: rgb(var(--mdui-color-primary),0.1);
+  
   .dragArea {
     margin: 0;
     width: 100%;
-
+    
     position: absolute;
     top: 0;
     left: 0;
@@ -266,8 +264,9 @@ div.dragBar {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-    background-color: rgb(var(--mdui-color-surface), 0.8);
+    
+    color: rgb(var(--mdui-color-on-surface),0.6);
+  background-color: rgb(var(--mdui-color-on-surface),0.1);
     border-radius: 1.5rem 1.5rem 0 0;
 
     cursor: move;
