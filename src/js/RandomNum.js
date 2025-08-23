@@ -84,8 +84,7 @@ function getNum() {
     add = [];
   }
 
-  const errorSnackbar = document.querySelector(".errorSnackbar");
-  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (errorSnackbar.open = true);
+  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (openErrorDialog());
 
   arr = nr.split("-").map(Number);
   let in0 = Math.min(arr[0], arr[1]);
@@ -297,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function openErrorDialog() {
-  notice("抽取范围格式错误！请检查并重新输入");
+  notice("错误：抽取范围格式不正确。");
 }
 
 function openBlockDialog() {
@@ -314,10 +313,10 @@ function copyToClipboard1() {
   navigator.clipboard
     .writeText(outContent)
     .then(() => {
-      notice("复制成功");
+      notice("复制内容成功。");
     })
     .catch((err) => {
-      notice("复制失败！请手动复制内容");
+      notice("错误：无法复制内容。");
     });
 }
 
@@ -327,13 +326,13 @@ function copyToClipboard2() {
   navigator.clipboard
     .writeText(notesContent)
     .then(() => {
-      notice("复制成功");
+      notice("复制内容成功。");
     })
     .catch((err) => {
-      notice("复制失败！请手动复制内容");
+      notice("错误：无法复制内容。");
     });
 }
 
 function showSettingsSavedSnackbar() {
-  notice("设置已保存");
+  notice("设置已保存。");
 }

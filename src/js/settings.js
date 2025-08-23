@@ -1,8 +1,8 @@
-function alert(message) {
+function alert(title, message) {
   mdui.alert({
-    headline: "提示",
+    headline: title,
     description: message,
-    confirmText: "OK",
+    confirmText: "确定",
     onConfirm: () => console.log("confirmed"),
   });
 }
@@ -90,7 +90,7 @@ class ThemeManager {
         //localStorage.setItem('backgroundImageSwitch', "true"); // 设置开关
       } catch (error) {
         console.error("保存图片到 IndexedDB 失败:", error);
-        alert("图片保存失败，请稍后重试。");
+        notice("图片保存失败，请稍后重试。");
         return; // 如果保存失败，则停止后续操作
       }
 
@@ -112,14 +112,14 @@ class ThemeManager {
                 this.setCustomLight(color, false);
               })
               .catch((err) => {
-                alert("无法提取图片主色：" + err);
+                notice("无法提取图片主色：" + err);
               });
           } else {
-            console.warn("mdui 或 getColorFromImage 函数未定义。");
+            notice("错误：mdui 或 getColorFromImage 函数未定义。");
           }
         };
         img.onerror = () => {
-          alert("图片加载失败");
+          notice("图片加载失败。");
         };
       };
       reader.readAsDataURL(file);
@@ -135,11 +135,10 @@ class ThemeManager {
         mdui.setColorScheme(localStorage.getItem("customLight"));
         localStorage.setItem("usingCustomLight", "true");
       } catch (error) {
-        notice("加载背景图片失败:", error);
+        notice("错误：背景图片不存在或无法加载");
         backgroundImageSwitch.checked = false;
       }
     } else {
-      // 获取 body 标签，替换原本的 document.documentElement
       const mainPage = document.body;
       mainPage.style.backgroundImage = "none";
       mainPage.style.backgroundColor = "rgb(var(--mdui-color-surface)";

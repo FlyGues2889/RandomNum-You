@@ -97,17 +97,17 @@
                 <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;"
                     onclick="theme.setLight('greenTheme');"></mdui-button-icon>
 
-                <mdui-button class="theme-button" id="defaultTheme" style="position: absolute;right: 5rem;"
+                <mdui-button class="theme-button" id="defaultTheme" style="position: absolute;right: 7rem;"
                     variant="text" onclick="theme.setLight('defaultTheme');">
                     <span class="material-icons-outlined" slot="icon">settings_backup_restore</span>
                     默认配色
                 </mdui-button>
                 <mdui-tooltip variant="rich" placement="bottom"
                     x-data="{ customLight: localStorage.getItem('customLight') }">
-                    <mdui-button-icon variant="outlined" style="position: absolute;right: 2rem;"
+                    <mdui-button variant="tonal" style="position: absolute;right: 2rem;"
                         onclick="document.querySelector('#customLight').click();">
                         <span class="material-icons-outlined">draw</span>
-                    </mdui-button-icon>
+                    </mdui-button>
                     <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
                         style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;position: absolute;right: 2rem;top: 3rem;"
                         onchange="theme.setCustomLight(this.value);">
@@ -149,7 +149,7 @@
         <mdui-list-item nonclickable>
             <span slot="icon" class="material-icons-outlined">blur_on</span>
             背景磨砂
-            <span slot="description">设置背景磨砂颗粒数</span>
+            <span slot="description">设置背景磨砂颗粒效果强度</span>
 
             <mdui-slider class="slider" style="width: 12rem;" id="blur" min="0" max="15" step="0.5" slot="end-icon"
                 name="" hover="" x-data="{ blur: localStorage.getItem('blur') ?? 0 }" x-init="$el.value = blur"
@@ -164,7 +164,7 @@
                 <mdui-list-item slot="header" rounded>
                     <span slot="icon" class="material-icons-outlined">info</span>
                     关于 RandomNum You
-                    <span slot="description"> 1.0.1</span>
+                    <span slot="description">1.0.1</span>
                 </mdui-list-item>
 
                 <div>

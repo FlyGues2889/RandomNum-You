@@ -95,11 +95,16 @@
                     style="margin-top: 0.8rem;" variant="outlined" icon="format_list_numbered">
                     <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
                 </mdui-text-field>
+                <div style="display: flex;justify-content: end;margin-top: 1rem;">
+                    <mdui-button id="create-exclude-label" variant="outlined"
+                        onclick="saveExcludeLabel();showSettingsSavedSnackbar()">
+                        <span slot="icon" class="material-icons-outlined">new_label</span>
+                        将新建内容保存为新标签
+                    </mdui-button>
+                </div>
             </mdui-tab-panel>
         </mdui-tabs>
 
-        <mdui-button id="create-exclude-label" slot="action" variant="text"
-            onclick="saveExcludeLabel();showSettingsSavedSnackbar()">将新建内容保存为新标签</mdui-button>
         <mdui-button class="close-block-dialog" slot="action" variant="tonal">确定</mdui-button>
     </mdui-dialog>
 </body>
