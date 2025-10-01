@@ -1,4 +1,34 @@
 /*==========全局控件样式==========*/
+mdui-segmented-button-group {
+  mdui-segmented-button {
+    width: 0.4rem;
+    margin: 0 0.05rem;
+
+    border-radius: var(--mdui-shape-corner-small);
+    color: rgb(var(--mdui-color-primary));
+    background-color: rgb(var(--mdui-color-secondary-container));
+    border: none;
+
+    transition: all 0.2s;
+  }
+
+  mdui-segmented-button.leftBtn {
+    border-radius: var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small) var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large);
+  }
+
+  mdui-segmented-button.rightBtn {
+    border-radius: var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small);
+  }
+
+  mdui-segmented-button[selected] {
+    width: 1.6rem;
+    border-radius: var(--mdui-shape-corner-extra-large);
+    color: rgb(var(--mdui-color-surface));
+    background-color: rgb(var(--mdui-color-primary));
+  }
+}
+
+
 mdui-list-subheader {
   margin-left: 1rem;
 
@@ -33,6 +63,8 @@ body {
   height: 100vh;
 
   user-select: none;
+  overscroll-behavior: none;
+
   background-color: rgb(var(--mdui-color-surface-container)) !important;
 }
 
@@ -310,6 +342,12 @@ mdui-card.container {
   padding: 0.2rem;
 }
 
+#defaultTheme {
+  width: 1rem;
+
+  position: absolute;
+  right: 7rem;
+}
 
 
 /*==========窗口元素设置==========*/

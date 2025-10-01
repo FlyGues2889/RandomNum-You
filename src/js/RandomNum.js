@@ -1,32 +1,38 @@
+// 全局变量定义
 var c = 0,
   t,
   add = [],
   sec,
   f = 0,
   m = 0;
+var tm = false;
 
+// DOM 元素获取工具函数
 function $(id) {
   return document.getElementById(id);
 }
 
+// 定时抽取数字函数
 function timedCount(numarr) {
   var node = $("out"),
     rn = Math.floor(Math.random() * numarr.length);
-  node.style.color = "rgb(var(--mdui-color-primary))"; // 修改为变量值
-  node.style.opacity = "0.5"; // 设置透明度为0.5
+    
+  node.style.color = "rgb(var(--mdui-color-primary))";
+  node.style.opacity = "0.5";
   node.innerHTML = numarr[rn];
-  c = c + 1;
+  c++;
+  
+  // 检查是否达到停止条件
   if (new Date().getTime() - sec > $("settime").value || m) {
     stopCount();
     c = 0;
     m = 0;
-    node.style.color = "rgb(var(--mdui-color-primary))"; // 修改为变量值
-    node.style.opacity = "1"; // 设置透明度为1
+    node.style.color = "rgb(var(--mdui-color-primary))";
+    node.style.opacity = "1";
 
-    // 为每个已抽到的数字创建一个mdui-chip元素
+    // 添加到历史记录
     const historyList = document.getElementById("history-list");
     const newChip = document.createElement("mdui-chip");
-
     newChip.textContent = numarr[rn];
     newChip.style.margin = "4px";
     historyList.appendChild(newChip);
@@ -34,17 +40,17 @@ function timedCount(numarr) {
     add.push(numarr[rn]);
     document.querySelector("#notes span").innerHTML = add.join(", ");
   } else {
-    t = setTimeout(function () {
-      timedCount(numarr);
-    }, 50); // 使用函数而不是字符串
+    t = setTimeout(() => timedCount(numarr), 50);
   }
 }
 
+// 设备运动事件处理（注：需补充 x/y/z/lastX/lastY/lastZ/speed/sy/zd/last_update 的声明）
 function motionEventHandler(e) {
   var acceleration = e.accelerationIncludingGravity;
   x = acceleration.x;
   y = acceleration.y;
   z = acceleration.z;
+  
   if (
     Math.abs(x - lastX) > speed ||
     Math.abs(y - lastY) > speed ||
@@ -63,10 +69,12 @@ function motionEventHandler(e) {
   lastZ = z;
 }
 
+// 停止计数函数
 function stopCount() {
   clearTimeout(t);
 }
 
+// 获取随机数主函数
 function getNum() {
   var manual = $("manual").checked;
   if (c) {
@@ -74,28 +82,29 @@ function getNum() {
     return;
   }
   m = 0;
+  
   var nr = $("num").value,
-    excludeStr = getExcludedNumbersFromStorage($("set-exclude-label").value), // 获取排除的数字
+    excludeStr = getExcludedNumbersFromStorage($("set-exclude-label").value),
     out = $("out");
 
-  // 清空历史记录
+  // 范围变化时清空历史记录
   if (sessionStorage.getItem("randomIn") != nr) {
     sessionStorage.setItem("randomIn", nr);
     add = [];
   }
 
-  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return (openErrorDialog());
+  // 验证输入格式
+  if (!/^\d{1,6}-\d{1,6}$/.test(nr)) return openErrorDialog();
 
+  // 解析数字范围
   arr = nr.split("-").map(Number);
   let in0 = Math.min(arr[0], arr[1]);
   let in1 = Math.max(arr[0], arr[1]);
   out.innerHTML = in0 === in1 ? in0 : "";
 
-  // 清空当前的排除数字列表
+  // 显示排除数字
   const excludeList = document.getElementById("exclude-list");
   excludeList.innerHTML = "";
-
-  // 将排除的数字添加到 mdui-chip 中
   excludeStr.forEach((num) => {
     const newChip = document.createElement("mdui-chip");
     newChip.textContent = num;
@@ -103,17 +112,17 @@ function getNum() {
     excludeList.appendChild(newChip);
   });
 
+  // 生成可用数字数组
   numarr = [];
   for (let i = in0; i <= in1; i++) {
-    // 如果未勾选不重复，则直接添加到 numarr
     if (!$("repeat").checked || !add.includes(i)) {
-      // 如果该数字不在排除列表中，则添加
       if (!excludeStr.includes(i)) {
         numarr.push(i);
       }
     }
   }
 
+  // 检查是否有可用数字
   if (numarr.length == 0) {
     add = [];
     window.removeEventListener("devicemotion", motionEventHandler, false);
@@ -122,11 +131,13 @@ function getNum() {
     return;
   }
 
+  // 开始抽取
   sec = new Date().getTime();
   if (manual) sec += 1000 * 60 * 60 * 24 * 7;
   timedCount(numarr);
 }
 
+// 键盘事件处理
 document.onkeydown = function (e) {
   var keyCode = window.event ? e.keyCode : e.which;
   if ((13 == keyCode || 32 == keyCode) && f == 0) {
@@ -136,8 +147,7 @@ document.onkeydown = function (e) {
   }
 };
 
-var tm = false;
-
+// 时间设置函数
 function settime(vs, vx) {
   if (tm) return;
   setTimeout(function () {
@@ -147,6 +157,7 @@ function settime(vs, vx) {
   }, 50);
 }
 
+// 本地存储处理
 function storage(n) {
   if (n) {
     if (localStorage.getItem("suijishu")) {
@@ -170,6 +181,7 @@ function storage(n) {
   localStorage.setItem("suijishu", JSON.stringify(setting));
 }
 
+// 手动模式处理
 function manuald() {
   var check = $("manual").checked;
   $("timeout").style.display = "inline-block";
@@ -179,6 +191,7 @@ function manuald() {
   }
 }
 
+// 设置下拉框选中项
 function setSelectChecked(id, val) {
   var node = $(id),
     i = 0;
@@ -190,7 +203,7 @@ function setSelectChecked(id, val) {
   }
 }
 
-// 从 localStorage 获取排除数字数组
+// 从本地存储获取排除数字
 function getExcludedNumbersFromStorage(labelValue) {
   if (!localStorage.getItem("excludeLabels")) return [];
   var labels = JSON.parse(localStorage.getItem("excludeLabels"));
@@ -224,9 +237,9 @@ function saveExcludeLabel() {
   showSettingsSavedSnackbar();
 }
 
+// 页面加载完成处理
 window.onload = function () {
   const loading = document.querySelector(".loading");
-  // 页面加载完成后隐藏进度指示条
   loading.style.display = "none";
 
   // 加载保存的排除标签
@@ -246,55 +259,79 @@ window.onload = function () {
   storage(1);
 };
 
+// -------------------------- 核心修复：底部栏拖拽功能 --------------------------
 document.addEventListener("DOMContentLoaded", () => {
   const bottomBar = document.querySelector(".dragBar");
   let isDragging = false;
   let offset = { x: 0, y: 0 };
 
-  // 处理鼠标按下和触摸开始事件
+  // 关键：判断触摸目标是否为 mdui-fab（或其内部元素）
+  function isFabTarget(target) {
+    // 检查目标元素本身或其祖先是否包含 mdui-fab 类
+    return target.closest(".mdui-fab") !== null;
+  }
+
+  // 处理开始事件（触摸/鼠标按下）
   function handleStart(e) {
-    e.preventDefault();
+    // 1. 触摸事件：优先判断是否点击 mdui-fab
+    if (e.type === "touchstart") {
+      const touchTarget = e.touches[0].target; // 获取触摸的实际元素
+      if (isFabTarget(touchTarget)) {
+        return; // 是 fab 元素，不执行拖动逻辑，保留点击事件
+      }
+    }
+
+    // 2. 鼠标事件：判断是否点击 mdui-fab（可选，防止鼠标点击也被拦截）
+    if (e.type === "mousedown" && isFabTarget(e.target)) {
+      return; // 是 fab 元素，不执行拖动逻辑
+    }
+
+    // 3. 非 fab 元素，执行拖动初始化
+    e.preventDefault(); // 仅在非 fab 时阻止默认行为
     isDragging = true;
 
-    // 获取鼠标/触摸位置
+    // 获取鼠标/触摸位置（兼容两种事件）
     const clientX = e.clientX || e.touches[0].clientX;
     const clientY = e.clientY || e.touches[0].clientY;
 
+    // 计算偏移量（元素左上角到触摸点的距离，确保拖动不跳动）
     offset = {
       x: bottomBar.offsetLeft - clientX,
       y: bottomBar.offsetTop - clientY,
     };
   }
 
-  // 处理鼠标移动和触摸移动事件
+  // 处理移动事件（触摸/鼠标移动）
   function handleMove(e) {
-    if (!isDragging) return;
-    e.preventDefault();
+    if (!isDragging) return; // 未处于拖动状态，直接返回
+    e.preventDefault(); // 阻止页面滚动，确保拖动流畅
 
-    // 获取鼠标/触摸位置
+    // 获取当前触摸/鼠标位置
     const clientX = e.clientX || e.touches[0].clientX;
     const clientY = e.clientY || e.touches[0].clientY;
 
-    bottomBar.style.left = clientX + offset.x + "px";
-    bottomBar.style.top = clientY + offset.y + "px";
+    // 更新 bottomBar 位置（偏移量 + 当前位置 = 元素新位置）
+    bottomBar.style.left = `${clientX + offset.x}px`;
+    bottomBar.style.top = `${clientY + offset.y}px`;
   }
 
-  // 处理鼠标释放和触摸结束事件
+  // 处理结束事件（触摸/鼠标释放）
   function handleEnd() {
-    isDragging = false;
+    isDragging = false; // 重置拖动状态
   }
 
-  // 绑定鼠标事件
+  // 绑定鼠标事件（兼容桌面端）
   bottomBar.addEventListener("mousedown", handleStart);
   document.addEventListener("mousemove", handleMove);
   document.addEventListener("mouseup", handleEnd);
 
-  // 绑定触摸事件
-  bottomBar.addEventListener("touchstart", handleStart);
-  document.addEventListener("touchmove", handleMove, { passive: false });
+  // 绑定触摸事件（兼容移动端，关键修复）
+  bottomBar.addEventListener("touchstart", handleStart); // 触摸开始时判断目标
+  document.addEventListener("touchmove", handleMove, { passive: false }); // passive: false 允许 preventDefault
   document.addEventListener("touchend", handleEnd);
 });
 
+// 对话框和通知功能
 function openErrorDialog() {
   notice("错误：抽取范围格式不正确。");
 }
@@ -308,16 +345,12 @@ function openBlockDialog() {
 }
 
 function copyToClipboard1() {
-  const outContent = document.getElementById("out").innerText; // 获取 div#out 的内容
+  const outContent = document.getElementById("out").innerText;
 
   navigator.clipboard
     .writeText(outContent)
-    .then(() => {
-      notice("复制内容成功。");
-    })
-    .catch((err) => {
-      notice("错误：无法复制内容。");
-    });
+    .then(() => notice("复制内容成功。"))
+    .catch((err) => notice("错误：无法复制内容。"));
 }
 
 function copyToClipboard2() {
@@ -325,12 +358,8 @@ function copyToClipboard2() {
 
   navigator.clipboard
     .writeText(notesContent)
-    .then(() => {
-      notice("复制内容成功。");
-    })
-    .catch((err) => {
-      notice("错误：无法复制内容。");
-    });
+    .then(() => notice("复制内容成功。"))
+    .catch((err) => notice("错误：无法复制内容。"));
 }
 
 function showSettingsSavedSnackbar() {

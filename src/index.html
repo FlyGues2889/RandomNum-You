@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/mdui.css">
     <link rel="stylesheet" href="./css/theme.css">
-    <link rel="stylesheet" href="./css/icon.css">
-    <link rel="stylesheet" href="./materialIcons/iconfont/material-icons.css">
+    <link rel="stylesheet" href="./css/material-symbols/index.css">
 </head>
 
 <body id="body" class="mdui-theme-auto" style="margin: 0;" x-data x-init="$store.lang = 'en'">
@@ -35,21 +34,22 @@
             <div style="flex-grow: 1"></div>
 
             <mdui-button-icon id="titlebar-minimize">
-                <span class="material-icons-outlined">minimize</span>
+                <span class="material-symbols-rounded">minimize</span>
             </mdui-button-icon>
             <mdui-button-icon id="titlebar-maximize">
-                <span class="material-icons-outlined" style="font-size: 1.4rem;">crop_square</span>
+                <span class="material-symbols-rounded" style="font-size: 1.4rem;">crop_square</span>
             </mdui-button-icon>
             <mdui-button-icon id="titlebar-close" style="margin-right: 8px;">
-                <span class="material-icons-outlined">close</span>
+                <span class="material-symbols-rounded">close</span>
             </mdui-button-icon>
         </mdui-top-app-bar>
 
         <mdui-navigation-rail value="main">
             <template x-for="page in pages" :key="page.name">
                 <template x-if="page.type !== 'settings'">
-                    <mdui-navigation-rail-item :value="page.name" :icon="page.icon" @click="navigate(page.name+'Page')"
+                    <mdui-navigation-rail-item :value="page.name" @click="navigate(page.name+'Page')"
                         x-text="page.text">
+                        <span slot="icon" x-text="'page.icon'"></span>
                     </mdui-navigation-rail-item>
                 </template>
             </template>
@@ -60,7 +60,7 @@
                 </mdui-button-icon>
 
                 <mdui-button-icon selectable onclick="navigate('settingsPage');" id="toSettings">
-                    <span class="material-icons-outlined">settings</span>
+                    <span class="material-symbols-rounded">settings</span>
                 </mdui-button-icon>
             </div>
 
@@ -70,18 +70,23 @@
     </mdui-layout>
 
 
-    <mdui-dialog close-on-overlay-click headline="排除项标签设置" class="block-dialog" icon="block">
+    <mdui-dialog close-on-overlay-click headline="排除项标签设置" class="block-dialog">
+        <span slot="icon" class="material-symbols-rounded">block</span>
         <mdui-tabs value="tab-1" placement="top">
-            <mdui-tab value="tab-1" icon="save"></mdui-tab>
-            <mdui-tab value="tab-2" icon="new_label"></mdui-tab>
+            <mdui-tab value="tab-1">
+                <span slot="icon" class="material-symbols-rounded">save</span>
+            </mdui-tab>
+            <mdui-tab value="tab-2">
+                <span slot="icon" class="material-symbols-rounded">new_label</span>
+            </mdui-tab>
 
             <mdui-tab-panel slot="panel" value="tab-1">
                 <small style="display: block;margin-bottom: 0.5rem;">选择一个已保存的排除项标签以生效：</small>
                 <mdui-select value="null" variant="outlined" class="GETTIME" style="width: 50vw;max-width: 32rem;"
                     onchange="tm=false;settime(this.value,0);storage(0);showSettingsSavedSnackbar()"
                     id="set-exclude-label">
-                    <span slot="icon" class="material-icons-outlined">label</span>
-                    <span slot="end-icon" class="material-icons">keyboard_arrow_down</span>
+                    <span slot="icon" class="material-symbols-rounded">label</span>
+                    <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
                     <mdui-menu-item value="null">无</mdui-menu-item>
                 </mdui-select>
             </mdui-tab-panel>
@@ -89,16 +94,17 @@
             <mdui-tab-panel slot="panel" value="tab-2">
                 <small style="display: block;margin-bottom: 0.5rem;">新建一个新排除项标签：</small>
                 <mdui-text-field label="标签名称" variant="outlined" id="exclude-label-name">
-                    <span slot="icon" class="material-icons-outlined">label</span>
+                    <span slot="icon" class="material-symbols-rounded">label</span>
                 </mdui-text-field>
                 <mdui-text-field clearable autosize label="排除项（数字间用英文逗号分隔）" type="input" id="excludeNums" value=""
-                    style="margin-top: 0.8rem;" variant="outlined" icon="format_list_numbered">
+                style="margin-top: 0.8rem;" variant="outlined">
+                <span slot="icon" class="material-symbols-rounded">numbers</span>
                     <span slot="helper">你需要先将这里的内容保存为标签再选择该标签，设置才能生效。</span>
                 </mdui-text-field>
                 <div style="display: flex;justify-content: end;margin-top: 1rem;">
                     <mdui-button id="create-exclude-label" variant="outlined"
                         onclick="saveExcludeLabel();showSettingsSavedSnackbar()">
-                        <span slot="icon" class="material-icons-outlined">new_label</span>
+                        <span slot="icon" class="material-symbols-rounded">new_label</span>
                         将新建内容保存为新标签
                     </mdui-button>
                 </div>

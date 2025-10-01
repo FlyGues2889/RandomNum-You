@@ -67,8 +67,9 @@ function getHtmlSync(url) {
 
 function createIconElement(icon) {
   const iconElement = document.createElement("span");
-  iconElement.classList.add("material-icons-outlined");
+  iconElement.slot = "icon";
   iconElement.textContent = icon;
+  iconElement.classList.add("material-symbols-rounded");
   return iconElement;
 }
 
@@ -79,20 +80,54 @@ pageData.forEach((page) => {
 
 function pageLoad() {
   const layout = document.getElementById("layout");
+
   pageData.forEach((page) => {
     const pageDiv = document.createElement("div");
     pageDiv.classList.add("page");
     pageDiv.id = `${page.name}Page`;
     pageDiv.setAttribute("x-data", `{ content: ${page.name}Html }`);
     pageDiv.setAttribute("x-effect", "$el.innerHTML = content");
-
-    const navRailItem = document.querySelector(
-      `mdui-navigation-rail-item[value="${page.name}"]`
-    );
-    if (navRailItem) {
-      navRailItem.insertBefore(page.iconElement, navRailItem.firstChild);
-    }
-
     layout.insertAdjacentElement("beforeend", pageDiv);
   });
+
+  setTimeout(() => {
+    pageData.forEach((page) => {
+      const iconElement = document.createElement("span");
+      iconElement.classList.add("material-symbols-rounded");
+      iconElement.textContent = page.icon;
+
+      if (page.type === "settings") {
+        const settingsButton = document.getElementById("toSettings");
+        if (settingsButton) {
+          const existingIcon = settingsButton.querySelector(
+            ".material-symbols-rounded"
+          );
+          if (existingIcon) {
+            settingsButton.removeChild(existingIcon);
+          }
+
+          settingsButton.appendChild(iconElement);
+        }
+      } else {
+        const navRailItem = document.querySelector(
+          `mdui-navigation-rail-item[value="${page.name}"]`
+        );
+        if (navRailItem) {
+          const existingIcon = navRailItem.querySelector(
+            ".material-symbols-rounded"
+          );
+          if (existingIcon) existingIcon.remove();
+
+          iconElement.setAttribute("slot", "icon");
+
+          navRailItem.appendChild(iconElement);
+        }
+      }
+    });
+  }, 50);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  pageLoad();
+  navigate("mainPage");
+});

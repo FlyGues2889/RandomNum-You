@@ -13,7 +13,8 @@
 
     <div style="min-width: 500px;margin-top: 2rem;">
         <mdui-card class="container" variant="filled" style="border-radius: 2rem 2rem 0 0;">
-            <mdui-list-item nonclickable icon="block">
+            <mdui-list-item nonclickable>
+                <span slot="icon" class="material-symbols-rounded">block</span>
                 已排除数字
             </mdui-list-item>
             <div style="margin-left: 2.5rem;">
@@ -23,7 +24,8 @@
             </div>
         </mdui-card>
         <mdui-card class="container" variant="filled" style="border-radius: 0 0 2rem 2rem;">
-            <mdui-list-item nonclickable icon="numbers">
+            <mdui-list-item nonclickable>
+                <span slot="icon" class="material-symbols-rounded">history</span>
                 已抽取全部记录
             </mdui-list-item>
             <div style="margin-left: 2.5rem;">
@@ -31,7 +33,7 @@
                     <div id="history-list"></div>
                 </mdui-list-item>
                 <mdui-button id="copy2" onclick="copyToClipboard2()" variant="tonal">
-                    <span slot="icon" class="material-icons-outlined" style="font-size: medium;">copy</span>
+                    <span slot="icon" class="material-symbols-rounded" style="font-size: medium;">content_copy</span>
                     复制本轮已抽取数字
                 </mdui-button>
             </div>
