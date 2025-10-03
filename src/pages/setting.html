@@ -43,9 +43,9 @@
         </mdui-list-item>
 
         <mdui-list-item nonclickable style="text-align: left;padding: 0;">
-            <span slot="icon" class="material-symbols-rounded">touch_app</span>
-            是否手动
-            <span slot="description">按钮/回车/空格键以启停</span>
+            <span slot="icon" class="material-symbols-rounded">back_hand</span>
+            启用手动抽取
+            <span slot="description">手动点击抽取按钮/回车/空格键以启停</span>
             <mdui-switch class="manual" id="manual" slot="end-icon"
                 x-data="{ ifChecked: localStorage.getItem('manualSwitch') }"
                 :checked="ifChecked == 'true' ? true : false;"
