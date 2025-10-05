@@ -69,7 +69,7 @@ jobs:
         run: |
           $version = "${{ github.ref_name }}".Replace('v', '')
           $greenDir = "./src-tauri/target/x86_64-pc-windows-msvc/release"
-          $zipName = "your-app-name-green-$version-windows-x64.zip"
+          $zipName = "RandomNum-You-green-$version-windows-x64.zip"
           
           # 创建ZIP包（包含所有可执行文件和依赖）
           Compress-Archive -Path "$greenDir/*" -DestinationPath "$zipName"
