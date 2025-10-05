@@ -44,7 +44,8 @@ jobs:
       - name: Install Tauri CLI
         run: cargo install tauri-cli
 
-      - name: Build Tauri app
+      # 构建并发布常规安装包
+      - name: Build Tauri installer
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,5 +55,32 @@ jobs:
           releaseBody: ""
           releaseDraft: false
           prerelease: false
-          args: --target x86_64-pc-windows-msvc  # 明确指定Windows 64位目标
-    
+          args: --target x86_64-pc-windows-msvc
+
+      # 构建绿色版本（便携版）
+      - name: Build green version (portable)
+        run: |
+          pnpm run tauri build --target x86_64-pc-windows-msvc
+          # 查看构建输出目录结构
+          ls -R ./src-tauri/target/x86_64-pc-windows-msvc/release/bundle/
+
+      # 打包绿色版本为ZIP
+      - name: Package green version
+        run: |
+          $version = "${{ github.ref_name }}".Replace('v', '')
+          $greenDir = "./src-tauri/target/x86_64-pc-windows-msvc/release"
+          $zipName = "your-app-name-green-$version-windows-x64.zip"
+          
+          # 创建ZIP包（包含所有可执行文件和依赖）
+          Compress-Archive -Path "$greenDir/*" -DestinationPath "$zipName"
+          echo "GREEN_ZIP=$zipName" >> $env:GITHUB_ENV
+
+      # 上传绿色版本到GitHub Releases
+      - name: Upload green version to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: ${{ env.GREEN_ZIP }}
+          name: "Release ${{ github.ref_name }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
