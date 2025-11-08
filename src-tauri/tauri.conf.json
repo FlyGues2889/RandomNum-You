@@ -1,19 +1,20 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "RandomNum-You",
-  "version": "1.0.4",
-  "identifier": "com.flygues.randomnum-you.app",
+  "version": "2.0.0",
+  "identifier": "com.flygues.randomnum-you",
   "build": {
-    "frontendDist": "../src"
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
   },
   "app": {
-    "withGlobalTauri": true,
     "windows": [
       {
         "title": "RandomNum You",
         "minWidth": 800,
         "minHeight": 600,
-        "decorations": false,
         "transparent": true,
         "visible": true
       }
