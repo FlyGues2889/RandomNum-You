@@ -1,16 +1,32 @@
+<script setup>
+import 'material-symbols';
+import { ref } from 'vue';
+
+import 'mdui/mdui.css';
+</script>
+
 <template>
-  <div class="user-page">
-    <h1>Settings</h1>
-    <p>这是设置页面</p>
+  <div class="page-container">
+    <div class="content-container">
+      <h1>设置</h1>
+    </div>
   </div>
 </template>
 
-<script setup>
-// 页面逻辑（如请求用户数据等）
-</script>
-
 <style scoped>
-.user-page {
-  padding: 20px;
+.page-container {
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content-container {
+    width: calc(100% - 4.5rem);
+    max-width: 72rem;
+    min-height: calc(100% - 2rem);
+
+    margin: 1rem 2.25rem;
+  }
 }
 </style>

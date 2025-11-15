@@ -7,7 +7,8 @@ import 'mdui';
 
 import { getCurrentWindow } from '@tauri-apps/api/window';
 
-import './css/index.css';
+import './assets/css/index.css';
+import './assets/css/font.css';
 
 //============================================================
 
@@ -17,56 +18,33 @@ const init = async () => {
 };
 init();
 
-const handleMinimize = async () => {
-  await win.minimize();
-};
 
-const handleMaximize = async () => {
-  const isMax = await win.isMaximized();
-  if (isMax) {
-    await win.unmaximize();
-  } else {
-    await win.maximize();
-  }
-};
+function handleMinimize() { win.minimize() };
+function handleMaximize() { win.toggleMaximize() };
+function handleClose() { win.close() };
 
-const handleClose = async () => {
-  try {
-    await win.close();
-  } catch (err) {
-  }
-};
+function changeSideValue() {
+  document.getElementById("navigation-rail").value = this.value ;
+}
 </script>
 
 
 <template>
-  <mdui-navigation-rail value="main">
+  <mdui-navigation-rail value="main" id="navigation-rail">
     <mdui-button-icon slot="top">
       <span class="material-symbols-rounded">menu</span>
     </mdui-button-icon>
 
-    <mdui-navigation-rail-item value="main">
-      <router-link slot="icon" to="/">
-        <span class="material-symbols-rounded">numbers</span>
-      </router-link>
-    </mdui-navigation-rail-item value="history">
-    <mdui-navigation-rail-item>
-      <router-link slot="icon" to="/history">
-        <span class="material-symbols-rounded">history</span>
-      </router-link>
+    <mdui-navigation-rail-item value="main" href="/">
+      <span slot="icon" class="material-symbols-rounded">numbers</span>
+    </mdui-navigation-rail-item>
+    <mdui-navigation-rail-item value="history" href="/history">
+      <span slot="icon" class="material-symbols-rounded">history</span>
     </mdui-navigation-rail-item value="settings">
 
-    <div slot="bottom">
-      <mdui-button-icon class="loading" disabled>
-        <mdui-circular-progress style="width: 50%;"></mdui-circular-progress>
-      </mdui-button-icon>
-
-      <mdui-button-icon>
-        <router-link to="/settings">
-          <span class="material-symbols-rounded">settings</span>
-        </router-link>
-      </mdui-button-icon>
-    </div>
+    <mdui-button-icon slot="bottom" href="/settings">
+      <span class="material-symbols-rounded">settings</span>
+    </mdui-button-icon>
 
   </mdui-navigation-rail>
 
@@ -75,13 +53,13 @@ const handleClose = async () => {
 
     <div style="flex-grow: 1"></div>
 
-    <mdui-button-icon @click="handleMinimize">
+    <mdui-button-icon @click="handleMinimize" id="appBar-minimize">
       <span class="material-symbols-rounded">minimize</span>
     </mdui-button-icon>
-    <mdui-button-icon @click="handleMaximize">
-      <span class="material-symbols-rounded" style="font-size: 1.2rem;">crop_square</span>
+    <mdui-button-icon @click="handleMaximize" id="appBar-maximize">
+      <span class="material-symbols-rounded" style="transform: scale(0.9);">ad_group</span>
     </mdui-button-icon>
-    <mdui-button-icon @click="handleClose" style="margin-right: 8px;">
+    <mdui-button-icon @click="handleClose" id="appBar-close" style="margin-right: 8px;">
       <span class="material-symbols-rounded">close</span>
     </mdui-button-icon>
   </mdui-top-app-bar>
@@ -97,8 +75,8 @@ main {
   height: calc(100vh - 4rem);
 
   .view-container {
-    height: calc(100vh - 7rem);
-    width: calc(100vw - 8rem);
+    height: calc(100vh - 6.5rem);
+    width: calc(100vw - 7.5rem);
     background-color: rgb(var(--mdui-color-surface));
     border-radius: var(--mdui-shape-corner-small);
   }
@@ -126,11 +104,11 @@ mdui-top-app-bar {
 
   mdui-top-app-bar-title {
     /* opacity: 0.8; */
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
     display: flex;
     align-items: center;
 
-    font-family: 'Manrope';
+    font-family: 'Nunito';
     font-size: 1.25rem;
     color: rgb(var(--mdui-color-primary));
 
@@ -148,5 +126,10 @@ mdui-top-app-bar {
 
 router-link {
   margin: 0;
+  padding: 0;
+}
+
+router-link:hover {
+  color: #000;
 }
 </style>

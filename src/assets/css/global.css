@@ -161,7 +161,7 @@ mdui-snackbar {
 mdui-badge.beta-badge {
   background-color: rgb(var(--mdui-color-primary));
   color: rgb(var(--mdui-color-surface));
-  font-family: 'Manrope';
+  font-family: 'Nunito';
 }
 
 mdui-segmented-button {
@@ -252,7 +252,7 @@ div#out {
   justify-content: center;
   flex-direction: column;
 
-  font-family: 'Manrope';
+  font-family: 'Nunito';
 
   /* text-shadow: 0 0 24px rgb(var(--mdui-color-surface-container), 0.6); */
 
@@ -364,7 +364,7 @@ mdui-top-app-bar {
     display: flex;
     align-items: center;
 
-    font-family: 'Manrope';
+    font-family: 'Nunito';
     font-size: 1.25rem;
     color: rgb(var(--mdui-color-primary));
 
