@@ -1,6 +1,6 @@
 <script setup>
 import 'material-symbols';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 import 'mdui/mdui.css';
 
@@ -12,7 +12,7 @@ function generateNum() {
 </script>
 
 <template>
-  <div class="page-container">
+  <page-container>
     <div class="content-container">
       <mdui-fab id="btn" class="mdui-fab"size="large" @click="generateNum">
         <span slot="icon" class="material-symbols-rounded">touch_app</span>
@@ -29,32 +29,17 @@ function generateNum() {
       </mdui-dropdown>
 
     </div>
-  </div>
+  </page-container>
 </template>
 
 <style scoped>
-.page-container {
-  padding: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .content-container {
-    width: calc(100% - 4.5rem);
-    max-width: 72rem;
-    min-height: calc(100% - 2rem);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    margin: 1rem 2.25rem;
-  }
-}
 
 #out {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-45%, -50%);
+
   font-size: 24vh;
   font-family: 'Nunito';
   color: rgb(var(--mdui-color-secondary));
