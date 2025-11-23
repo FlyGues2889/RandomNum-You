@@ -1,8 +1,8 @@
 <script setup>
-import { ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router"; // 导入路由相关实例
+import { ref, watch, onMounted, onUnmounted } from "vue"; // 引入生命周期钩子
+import { useRoute, useRouter } from "vue-router";
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { invoke } from "@tauri-apps/api/core";
+// import { invoke } from "@tauri-apps/api/core"; // 如果没用到可以注释掉
 
 import 'mdui/mdui.css';
 import 'mdui';
@@ -15,16 +15,34 @@ import History from "./components/pages/history.vue";
 //============================================================
 
 let win;
-const init = async () => {
+const isMaximized = ref(false); // 1. 新增：用于存储是否最大化的状态
+let unlistenResize; // 用于存储取消监听的函数
+
+// 2. 修改：将初始化逻辑放入 onMounted，并添加监听器
+onMounted(async () => {
   win = await getCurrentWindow();
-};
-init();
+  
+  // 初始化时检查当前状态
+  isMaximized.value = await win.isMaximized();
+
+  // 监听窗口调整大小事件 (包括最大化/还原)
+  // Tauri v2 推荐使用 win.onResized 或类似的事件监听
+  unlistenResize = await win.onResized(async () => {
+    isMaximized.value = await win.isMaximized();
+  });
+});
+
+// 组件卸载时清理监听器
+onUnmounted(() => {
+  if (unlistenResize) {
+    unlistenResize();
+  }
+});
 
 const route = useRoute();
-const router = useRouter(); // 初始化路由跳转实例（核心修改）
+const router = useRouter();
 const value = ref('main');
 
-// 监听路由变化，同步导航选中状态（原有逻辑不变）
 watch(
   () => route.path,
   (newPath) => {
@@ -44,7 +62,12 @@ watch(
 );
 
 function handleMinimize() { win.minimize() };
-function handleMaximize() { win.toggleMaximize() };
+
+// 3. 修改：handleMaximize 只负责切换，状态由监听器自动更新
+function handleMaximize() { 
+  win.toggleMaximize();
+};
+
 function handleClose() { win.close() };
 </script>
 
@@ -56,9 +79,13 @@ function handleClose() { win.close() };
     <mdui-button-icon @click="handleMinimize" id="appBar-minimize">
       <span class="material-symbols-rounded">minimize</span>
     </mdui-button-icon>
+    
     <mdui-button-icon @click="handleMaximize" id="appBar-maximize">
-      <span class="material-symbols-rounded" style="transform: scale(0.9);">ad_group</span>
+      <span class="material-symbols-rounded" style="transform: scale(0.9);">
+        {{ isMaximized ? 'filter_none' : 'crop_square' }}
+      </span>
     </mdui-button-icon>
+
     <mdui-button-icon @click="handleClose" id="appBar-close" style="margin-right: 8px;">
       <span class="material-symbols-rounded">close</span>
     </mdui-button-icon>
@@ -88,11 +115,10 @@ function handleClose() { win.close() };
 </template>
 
 <style scoped>
+/* 样式保持不变 */
 main {
   height: calc(100vh - 4rem);
-
   overflow: auto;
-
   .view-container {
     height: calc(100vh - 6.5rem);
     width: calc(100vw - 7.5rem);
@@ -103,10 +129,8 @@ main {
 
 mdui-navigation-rail {
   margin-top: 4rem;
-
   z-index: 990;
   background-color: unset;
-
   div[slot="bottom"] {
     display: flex;
     flex-direction: column;
@@ -118,17 +142,14 @@ mdui-navigation-rail {
 mdui-top-app-bar {
   background-color: unset;
   color: rgb(var(--mdui-color-primary));
-
   mdui-top-app-bar-title {
     margin-left: 1.2rem;
-
     font-family: 'Nunito';
     font-size: 1.25rem;
     color: rgb(var(--mdui-color-primary));
     -webkit-app-region: drag;
     user-select: none;
   }
-
   mdui-button-icon {
     margin: 0;
     transform: scale(0.9);
