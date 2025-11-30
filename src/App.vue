@@ -20,7 +20,7 @@ let unlistenResize;
 
 onMounted(async () => {
   win = await getCurrentWindow();
-  
+
   isMaximized.value = await win.isMaximized();
 
   unlistenResize = await win.onResized(async () => {
@@ -58,7 +58,7 @@ watch(
 
 function handleMinimize() { win.minimize() };
 
-function handleMaximize() { 
+function handleMaximize() {
   win.toggleMaximize();
 };
 
@@ -66,14 +66,14 @@ function handleClose() { win.close() };
 </script>
 
 <template>
-  
+
   <mdui-top-app-bar data-tauri-drag-region>
     <mdui-top-app-bar-title>RandomNum You</mdui-top-app-bar-title>
     <div style="flex-grow: 1"></div>
     <mdui-button-icon @click="handleMinimize" id="appBar-minimize">
       <span class="material-symbols-rounded">minimize</span>
     </mdui-button-icon>
-    
+
     <mdui-button-icon @click="handleMaximize" id="appBar-maximize">
       <span class="material-symbols-rounded" style="transform: scale(0.9);">
         {{ isMaximized ? 'ad_group' : 'crop_square' }}
@@ -84,7 +84,7 @@ function handleClose() { win.close() };
       <span class="material-symbols-rounded">close</span>
     </mdui-button-icon>
   </mdui-top-app-bar>
-  
+
   <mdui-navigation-rail :value="value" id="navigation-rail">
     <mdui-navigation-rail-item value="main" @click="route.path !== '/' && router.push('/')"
       :class="{ 'active-nav-item': value === 'main' }">
@@ -114,12 +114,13 @@ function handleClose() { win.close() };
 
 <style scoped>
 main {
-  position: relative; /* Establish positioning context */
+  position: relative;
   height: calc(100vh - 4rem);
-  overflow: hidden; /* Hide scrollbars during animation */
+  overflow: hidden;
+
   .view-container {
-    height: calc(100vh - 6.75rem);
-    width: calc(100vw - 7.75rem);
+    height: calc(100vh - 7rem);
+    width: calc(100vw - 8rem);
     background-color: rgb(var(--mdui-color-surface));
     border-radius: var(--mdui-shape-corner-medium);
     padding: 1.25rem;
@@ -129,7 +130,9 @@ main {
 mdui-navigation-rail {
   margin-top: 4rem;
   z-index: 990;
+
   background-color: unset;
+
   div[slot="bottom"] {
     display: flex;
     flex-direction: column;
@@ -141,14 +144,18 @@ mdui-navigation-rail {
 mdui-top-app-bar {
   background-color: unset;
   color: rgb(var(--mdui-color-primary));
+
   mdui-top-app-bar-title {
     margin-left: 1.2rem;
+    
     font-family: 'Nunito';
     font-size: 1.25rem;
     color: rgb(var(--mdui-color-primary));
+
     -webkit-app-region: drag;
     user-select: none;
   }
+
   mdui-button-icon {
     margin: 0;
     transform: scale(0.9);

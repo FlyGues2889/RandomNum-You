@@ -11,6 +11,7 @@ export default {
 <style scoped>
 .page-container {
     height: 100vh;
+    width: 100%;
     padding: 1rem;
 
     display: flex;
@@ -20,6 +21,6 @@ export default {
     overflow-y: auto;
 
     scrollbar-width: thin;
-    scrollbar-color: rgba(var(--mdui-color-primary),0.15) #00000000;
+    scrollbar-color: rgba(var(--mdui-color-primary), 0.15) #00000000;
 }
 </style>
