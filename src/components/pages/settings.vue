@@ -49,7 +49,6 @@ import 'mdui/mdui.css';
           启用手动抽取
           <span slot="description">手动点击抽取按钮/回车/空格键以启停</span>
           <mdui-switch slot="end-icon">
-            <mdui-icon slot="checked-icon" name=""></mdui-icon>
           </mdui-switch>
         </mdui-list-item>
 
@@ -58,7 +57,6 @@ import 'mdui/mdui.css';
           周期内不重复
           <label for="repeat"></label>
           <mdui-switch slot="end-icon">
-            <mdui-icon slot="checked-icon" name=""></mdui-icon>
           </mdui-switch>
         </mdui-list-item>
 

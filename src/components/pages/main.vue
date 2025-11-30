@@ -14,6 +14,11 @@ function generateNum() {
 <template>
   <page-container class="page-container">
     <content-container>
+      <mdui-button id="openNumSettings" variant="outlined">
+        <span class="material-symbols-rounded" slot="icon">instant_mix</span>
+        抽取设置
+      </mdui-button>
+
       <mdui-fab id="btn" class="mdui-fab" size="large" @click="generateNum">
         <span slot="icon" class="material-symbols-rounded">touch_app</span>
       </mdui-fab>
@@ -70,5 +75,13 @@ function generateNum() {
   span {
     font-size: 2.25rem;
   }
+}
+
+#openNumSettings {
+  position: absolute;
+  bottom: 3.2rem;
+  left: 3.2rem;
+
+  transition: all 0.2s ease-in-out;
 }
 </style>

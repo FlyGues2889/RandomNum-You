@@ -121,9 +121,11 @@ main {
   .view-container {
     height: calc(100vh - 7rem);
     width: calc(100vw - 8rem);
-    background-color: rgb(var(--mdui-color-surface));
-    border-radius: var(--mdui-shape-corner-medium);
     padding: 1.25rem;
+
+    background-color: rgb(var(--mdui-color-surface));
+    border: 0.1rem solid rgba(var(--mdui-color-on-surface),0.02);
+    border-radius: var(--mdui-shape-corner-medium);
   }
 }
 
@@ -147,7 +149,7 @@ mdui-top-app-bar {
 
   mdui-top-app-bar-title {
     margin-left: 1.2rem;
-    
+
     font-family: 'Nunito';
     font-size: 1.25rem;
     color: rgb(var(--mdui-color-primary));

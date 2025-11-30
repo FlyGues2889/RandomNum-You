@@ -15,7 +15,9 @@ import 'mdui/mdui.css';
         <template v-slot:title>
           <mdui-list-item nonclickable>
             <span class="out">215988</span>
-            <mdui-button variant="outlined"  slot="icon">当前输出</mdui-button>
+            <mdui-button-icon slot="icon" disabled>
+              <span class="material-symbols-rounded">arrow_forward</span>
+            </mdui-button-icon>
           </mdui-list-item>
         </template>
         <mdui-list-item nonclickable>
@@ -34,6 +36,7 @@ import 'mdui/mdui.css';
 span.out {
   font-size: 1.8rem;
   font-weight: bold;
+  line-height: 2rem;
   color: rgba(var(--mdui-color-primary));
   font-family: 'Nunito';
 }

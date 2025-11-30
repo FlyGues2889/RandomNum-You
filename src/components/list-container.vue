@@ -18,7 +18,8 @@ div.container {
     padding: 1rem;
     
     border-radius: var(--mdui-shape-corner-medium);
-    background-color: rgb(var(--mdui-color-surface-container), 0.8);
-    box-shadow: var(--mdui-elevation-level2);
+    background-color: rgb(var(--mdui-color-surface-container), 0.7);
+    border: 0.1rem solid rgba(var(--mdui-color-secondary),0.1);
+    /* box-shadow: var(--mdui-elevation-level2); */
 }
 </style>
