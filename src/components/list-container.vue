@@ -13,15 +13,12 @@ export default {
 </script>
 <style scoped>
 div.container {
-    width: 100%;
+    width: calc(100% - 2rem);
     margin: 1rem 0;
+    padding: 1rem;
     
     border-radius: var(--mdui-shape-corner-medium);
     background-color: rgb(var(--mdui-color-surface-container), 0.8);
     box-shadow: var(--mdui-elevation-level2);
-}
-
-div.content-container {
-    margin: 1rem;
 }
 </style>

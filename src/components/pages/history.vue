@@ -9,13 +9,13 @@ import 'mdui/mdui.css';
 
 <template>
   <page-container>
-    <div class="content-container">
-      <h1>历史记录</h1>
+    <content-container>
+      <Title title="历史记录" />
       <list-container>
         <template v-slot:title>
           <mdui-list-item nonclickable>
-            <span class="out" slot="icon">215988</span>
-            <span slot="description">当前结果</span>
+            <span class="out">215988</span>
+            <mdui-button variant="outlined"  slot="icon">当前输出</mdui-button>
           </mdui-list-item>
         </template>
         <mdui-list-item nonclickable>
@@ -26,14 +26,14 @@ import 'mdui/mdui.css';
           <history-chip>123</history-chip>
         </div>
       </list-container>
-    </div>
+    </content-container>
   </page-container>
 </template>
 
 <style scoped>
 span.out {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: bold;
   color: rgba(var(--mdui-color-primary));
   font-family: 'Nunito';
 }

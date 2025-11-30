@@ -10,18 +10,16 @@ export default {
 </script>
 <style scoped>
 .page-container {
+    height: 100vh;
     padding: 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    .content-container {
-        width: calc(100% - 4.5rem);
-        max-width: 72rem;
-        min-height: calc(100% - 2rem);
+    overflow-y: auto;
 
-        margin: 1rem 2.25rem;
-    }
+    scrollbar-width: thin;
+    scrollbar-color: rgba(var(--mdui-color-primary),0.15) #00000000;
 }
 </style>

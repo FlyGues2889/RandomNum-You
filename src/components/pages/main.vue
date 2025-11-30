@@ -13,8 +13,8 @@ function generateNum() {
 
 <template>
   <page-container>
-    <div class="content-container">
-      <mdui-fab id="btn" class="mdui-fab"size="large" @click="generateNum">
+    <content-container>
+      <mdui-fab id="btn" class="mdui-fab" size="large" @click="generateNum">
         <span slot="icon" class="material-symbols-rounded">touch_app</span>
       </mdui-fab>
 
@@ -28,18 +28,27 @@ function generateNum() {
         </mdui-menu>
       </mdui-dropdown>
 
-    </div>
+    </content-container>
   </page-container>
 </template>
 
 <style scoped>
+.content-container {
+  width: calc(100% - 4.5rem);
+  max-width: 72rem;
+
+  margin: 0;
+
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 #out {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-45%, -50%);
-
+  text-align: center;
   font-size: 24vh;
   font-family: 'Nunito';
   color: rgb(var(--mdui-color-secondary));
@@ -51,6 +60,8 @@ function generateNum() {
   right: 2rem;
 
   background-color: rgb(var(--mdui-color-secondary-container));
+
+  transition: all 0.3s ease-in-out;
 
   span {
     font-size: 2.25rem;

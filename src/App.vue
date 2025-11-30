@@ -1,8 +1,7 @@
 <script setup>
-import { ref, watch, onMounted, onUnmounted } from "vue"; // 引入生命周期钩子
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getCurrentWindow } from '@tauri-apps/api/window';
-// import { invoke } from "@tauri-apps/api/core"; // 如果没用到可以注释掉
 
 import 'mdui/mdui.css';
 import 'mdui';
@@ -15,24 +14,19 @@ import History from "./components/pages/history.vue";
 //============================================================
 
 let win;
-const isMaximized = ref(false); // 1. 新增：用于存储是否最大化的状态
-let unlistenResize; // 用于存储取消监听的函数
+const isMaximized = ref(false);
+let unlistenResize;
 
-// 2. 修改：将初始化逻辑放入 onMounted，并添加监听器
 onMounted(async () => {
   win = await getCurrentWindow();
   
-  // 初始化时检查当前状态
   isMaximized.value = await win.isMaximized();
 
-  // 监听窗口调整大小事件 (包括最大化/还原)
-  // Tauri v2 推荐使用 win.onResized 或类似的事件监听
   unlistenResize = await win.onResized(async () => {
     isMaximized.value = await win.isMaximized();
   });
 });
 
-// 组件卸载时清理监听器
 onUnmounted(() => {
   if (unlistenResize) {
     unlistenResize();
@@ -63,7 +57,6 @@ watch(
 
 function handleMinimize() { win.minimize() };
 
-// 3. 修改：handleMaximize 只负责切换，状态由监听器自动更新
 function handleMaximize() { 
   win.toggleMaximize();
 };
@@ -82,7 +75,7 @@ function handleClose() { win.close() };
     
     <mdui-button-icon @click="handleMaximize" id="appBar-maximize">
       <span class="material-symbols-rounded" style="transform: scale(0.9);">
-        {{ isMaximized ? 'filter_none' : 'crop_square' }}
+        {{ isMaximized ? 'ad_group' : 'crop_square' }}
       </span>
     </mdui-button-icon>
 
@@ -115,13 +108,12 @@ function handleClose() { win.close() };
 </template>
 
 <style scoped>
-/* 样式保持不变 */
 main {
   height: calc(100vh - 4rem);
   overflow: auto;
   .view-container {
-    height: calc(100vh - 6.5rem);
-    width: calc(100vw - 7.5rem);
+    height: calc(100vh - 6.75rem);
+    width: calc(100vw - 7.75rem);
     background-color: rgb(var(--mdui-color-surface));
     border-radius: var(--mdui-shape-corner-medium);
   }

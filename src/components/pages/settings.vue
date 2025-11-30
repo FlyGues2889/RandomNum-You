@@ -7,8 +7,8 @@ import 'mdui/mdui.css';
 
 <template>
   <page-container>
-    <div class="content-container">
-      <h1>设置</h1>
+    <content-container>
+      <Title title="设置" />
       <list-container>
         <template v-slot:title>
           <mdui-list-subheader>抽取设置</mdui-list-subheader>
@@ -63,25 +63,13 @@ import 'mdui/mdui.css';
         </mdui-list-item>
 
       </list-container>
-    </div>
+    </content-container>
   </page-container>
 </template>
 
 <style scoped>
-.page-container {
-  padding: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .content-container {
-    width: calc(100% - 4.5rem);
-    max-width: 72rem;
-    min-height: calc(100% - 2rem);
-
-    margin: 1rem 2.25rem;
-  }
+list-container {
+  padding-bottom: 5rem;
 }
 
 mdui-list-subheader {
