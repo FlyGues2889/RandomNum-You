@@ -8,6 +8,7 @@ import 'mdui';
 
 import './assets/css/index.css';
 import './assets/css/font.css';
+import './assets/css/transitions.css';
 
 import History from "./components/pages/history.vue";
 
@@ -103,19 +104,25 @@ function handleClose() { win.close() };
 
   </mdui-navigation-rail>
   <main>
-    <router-view class="view-container" />
+    <router-view v-slot="{ Component, route }">
+      <transition name="slide-fade" mode="out-in">
+        <component :is="Component" :key="route.path" class="view-container" />
+      </transition>
+    </router-view>
   </main>
 </template>
 
 <style scoped>
 main {
+  position: relative; /* Establish positioning context */
   height: calc(100vh - 4rem);
-  overflow: auto;
+  overflow: hidden; /* Hide scrollbars during animation */
   .view-container {
     height: calc(100vh - 6.75rem);
     width: calc(100vw - 7.75rem);
     background-color: rgb(var(--mdui-color-surface));
     border-radius: var(--mdui-shape-corner-medium);
+    padding: 1.25rem;
   }
 }
 
