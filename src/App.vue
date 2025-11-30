@@ -113,6 +113,10 @@ function handleClose() { win.close() };
 </template>
 
 <style scoped>
+:host {
+  user-select: none;
+}
+
 main {
   position: relative;
   height: calc(100vh - 4rem);

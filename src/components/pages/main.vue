@@ -4,7 +4,7 @@ import { ref, watch } from 'vue';
 
 import 'mdui/mdui.css';
 
-const outNum = ref(714213);
+const outNum = ref(215988);
 
 function generateNum() {
   outNum.value = Math.floor(Math.random() * 900000) + 100000;

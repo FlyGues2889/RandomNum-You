@@ -59,6 +59,59 @@ import 'mdui/mdui.css';
           <mdui-switch slot="end-icon">
           </mdui-switch>
         </mdui-list-item>
+      </list-container>
+      <list-container>
+        <template v-slot:title>
+          <mdui-list-subheader>个性化</mdui-list-subheader>
+        </template>
+        <mdui-list-item nonclickable>
+          <span slot="icon" class="material-symbols-rounded">palette</span>
+          主题
+          <span slot="description">切换应用程序光照模式和主题色</span>
+          <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" value="auto"
+            x-data="{ theme: localStorage.getItem('theme') || 'light' }" x-model="theme"
+            x-init="$watch('theme', value => { theme.setTheme(value); })" :value="theme" id="theme-toggle">
+            <mdui-segmented-button class="leftBtn" value="auto" onclick="theme.setTheme('auto');">
+              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">brightness_auto</span>
+            </mdui-segmented-button>
+            <mdui-segmented-button value="auto" onclick="theme.setTheme('light');">
+              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">wb_sunny</span>
+            </mdui-segmented-button>
+            <mdui-segmented-button class="rightBtn" value="auto" onclick="theme.setTheme('dark');">
+              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">brightness_2</span>
+            </mdui-segmented-button>
+          </mdui-segmented-button-group>
+
+        </mdui-list-item>
+        <div style="margin-left: 2.5rem;">
+          <mdui-list-item nonclickable>
+            <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;"
+              onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
+            <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;"
+              onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
+            <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;"
+              onclick="theme.setLight('greenTheme');"></mdui-button-icon>
+
+            <mdui-button class="theme-button" id="defaultTheme" variant="outlined"
+              onclick="theme.setLight('defaultTheme');">
+              <span class="material-symbols-rounded">settings_backup_restore</span>
+            </mdui-button>
+            <mdui-tooltip variant="rich" placement="bottom"
+              x-data="{ customLight: localStorage.getItem('customLight') }">
+              <mdui-button variant="tonal" style="position: absolute;right: 2rem;"
+                onclick="document.querySelector('#customLight').click();">
+                <span class="material-symbols-rounded">colorize</span>
+              </mdui-button>
+              <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
+                style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;position: absolute;right: 2rem;top: 3rem;"
+                onchange="theme.setCustomLight(this.value);">
+              <div slot="headline">自定义主题色</div>
+              <div slot="content" id="customLightTip" x-text="customLight || '暂无'"
+                style="color: rgb(var(--mdui-color-primary));">
+              </div>
+            </mdui-tooltip>
+          </mdui-list-item>
+        </div>
 
       </list-container>
     </content-container>
@@ -66,6 +119,35 @@ import 'mdui/mdui.css';
 </template>
 
 <style scoped>
+mdui-segmented-button-group {
+  mdui-segmented-button {
+    width: 0.4rem;
+    margin: 0 0.05rem;
+
+    border-radius: var(--mdui-shape-corner-small);
+    color: rgb(var(--mdui-color-primary));
+    background-color: rgb(var(--mdui-color-secondary-container));
+    border: none;
+
+    transition: all 0.2s;
+  }
+
+  mdui-segmented-button.leftBtn {
+    border-radius: var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small) var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large);
+  }
+
+  mdui-segmented-button.rightBtn {
+    border-radius: var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small);
+  }
+
+  mdui-segmented-button[selected] {
+    width: 1.6rem;
+    border-radius: var(--mdui-shape-corner-extra-large);
+    color: rgb(var(--mdui-color-surface));
+    background-color: rgb(var(--mdui-color-primary));
+  }
+}
+
 list-container {
   padding-bottom: 5rem;
 }

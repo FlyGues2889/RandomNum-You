@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
-
 .material-symbols-rounded-fill {
   font-family: "Material Symbols Rounded";
   font-weight: normal;
@@ -22,6 +19,10 @@
 }
 
 @font-face {
-    font-family: "Nunito";
-    src: url('../fonts/Nunito-Regular.ttf');
+  font-family: "Nunito";
+  src: url('../fonts/Nunito-Regular.ttf');
+}
+
+:host {
+  font-family: 'Nunoto', sans-serif;
 }
