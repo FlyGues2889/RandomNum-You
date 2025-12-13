@@ -1,13 +1,77 @@
 <script setup>
 import 'material-symbols';
-import { ref, watch } from 'vue';
+import { ref, onMounted } from 'vue';
+import Picker from '../../js/Picker.js';
+import HistoryService from '../../js/HistoryService.js';
 
 import 'mdui/mdui.css';
 
-const outNum = ref(215988);
+// Load the last displayed number from localStorage, fallback to default
+const lastNumber = localStorage.getItem('lastRandomNumber');
+const outNum = ref(lastNumber ? parseInt(lastNumber) : 215988);
+const isPicking = ref(false);
+const picker = new Picker();
+
+// Set default parameters for the picker - allowing repeats to enable multiple picks
+picker.setParams({
+  minNum: 100000,    // Minimum 6-digit number
+  maxNum: 999999,    // Maximum 6-digit number
+  pickTime: 2000,    // 2 seconds of animation
+  isManned: false,   // Auto-stop after pickTime
+  isRepeat: true     // Allow repeating numbers so we can pick multiple times
+});
+
+// Ensure the outNum is within the valid range if it was loaded from storage
+if (outNum.value < 100000 || outNum.value > 999999) {
+  outNum.value = 215988; // Reset to default if out of range
+  localStorage.setItem('lastRandomNumber', '215988');
+}
 
 function generateNum() {
-  outNum.value = Math.floor(Math.random() * 900000) + 100000;
+  if (isPicking.value) {
+    // Stop picking and get final result
+    stopPicking();
+  } else {
+    // Start picking with animation
+    startPicking();
+  }
+}
+
+function startPicking() {
+  isPicking.value = true;
+  picker.startPick((currentValue) => {
+    if (currentValue !== null) {
+      outNum.value = currentValue;
+      // Save the current animated number to localStorage so it persists if user switches pages
+      localStorage.setItem('lastRandomNumber', currentValue.toString());
+    }
+  });
+
+  // Since the picker automatically stops after pickTime in auto mode,
+  // we need to set a timeout to update our UI state accordingly
+  setTimeout(() => {
+    // At this point the picker should have stopped automatically
+    // but if the user didn't manually stop it, we need to update the UI
+    if (isPicking.value) {
+      isPicking.value = false;
+    }
+  }, picker.pickTime + 50); // Small buffer to ensure picker has stopped
+}
+
+function stopPicking() {
+  picker.stopPick((result) => {
+    if (result !== null) {
+      outNum.value = result;
+      // Save the number to localStorage
+      localStorage.setItem('lastRandomNumber', result.toString());
+      // Add the result to history
+      HistoryService.addToHistory({
+        number: result,
+        timestamp: new Date().toLocaleString()
+      });
+    }
+    isPicking.value = false;
+  });
 }
 </script>
 
@@ -20,7 +84,7 @@ function generateNum() {
       </mdui-button>
 
       <mdui-fab id="btn" class="mdui-fab" size="large" @click="generateNum">
-        <span slot="icon" class="material-symbols-rounded">touch_app</span>
+        <span slot="icon" class="material-symbols-rounded">{{ isPicking ? 'stop' : 'touch_app' }}</span>
       </mdui-fab>
 
       <mdui-dropdown trigger="contextmenu" open-on-pointer>
