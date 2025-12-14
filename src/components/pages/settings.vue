@@ -11,57 +11,6 @@ import 'mdui/mdui.css';
       <Title title="设置" />
       <list-container>
         <template v-slot:title>
-          <mdui-list-subheader>抽取设置</mdui-list-subheader>
-        </template>
-        <mdui-list-item nonclickable>
-          <div class="number-range">
-            <mdui-text-field class="number-range" label="最小值" v-model="min"></mdui-text-field>
-            <b>&nbsp;&nbsp;-&nbsp;&nbsp;</b>
-            <mdui-text-field class="number-range" label="最大值" v-model="max"></mdui-text-field>
-          </div>
-        </mdui-list-item>
-        <mdui-list-item nonclickable>
-          <span slot="icon" class="material-symbols-rounded">block</span>
-          排除数字范围
-          <span slot="description">抽取过程中要排除的数字</span>
-
-          <mdui-button slot="end-icon" variant="tonal">
-            <span class="material-symbols-rounded">open_in_new</span>
-          </mdui-button>
-        </mdui-list-item>
-        <mdui-list-item nonclickable style="text-align: left;">
-          <span slot="icon" class="material-symbols-rounded">access_time</span>
-          时间延迟
-          <mdui-select slot="end-icon" variant="outlined" id="settime">
-            <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
-            <mdui-menu-item value="500">0.50s</mdui-menu-item>
-            <mdui-menu-item value="750">0.75s</mdui-menu-item>
-            <mdui-menu-item value="1000">1s</mdui-menu-item>
-            <mdui-menu-item value="1500">1.50s</mdui-menu-item>
-            <mdui-menu-item value="2000">2s</mdui-menu-item>
-            <mdui-menu-item value="5000">5s</mdui-menu-item>
-          </mdui-select>
-
-        </mdui-list-item>
-
-        <mdui-list-item nonclickable style="text-align: left;padding: 0;">
-          <span slot="icon" class="material-symbols-rounded">back_hand</span>
-          启用手动抽取
-          <span slot="description">手动点击抽取按钮/回车/空格键以启停</span>
-          <mdui-switch slot="end-icon">
-          </mdui-switch>
-        </mdui-list-item>
-
-        <mdui-list-item nonclickable style="text-align: left;">
-          <span slot="icon" class="material-symbols-rounded">repeat</span>
-          周期内不重复
-          <label for="repeat"></label>
-          <mdui-switch slot="end-icon">
-          </mdui-switch>
-        </mdui-list-item>
-      </list-container>
-      <list-container>
-        <template v-slot:title>
           <mdui-list-subheader>个性化</mdui-list-subheader>
         </template>
         <mdui-list-item nonclickable>
@@ -112,6 +61,72 @@ import 'mdui/mdui.css';
             </mdui-tooltip>
           </mdui-list-item>
         </div>
+      </list-container>
+      <list-container>
+        <template v-slot:title>
+          <mdui-list-subheader>关于</mdui-list-subheader>
+        </template>
+        <mdui-list-item rounded nonclickable>
+          <span slot="icon" class="material-symbols-rounded">info</span>
+          关于 RandomNum You
+          <span slot="description">Version 2.0.0</span>
+        </mdui-list-item>
+        <div style="margin-left: 2.5rem;" class="mdui-prose">
+          <mdui-list-item nonclickable>
+            <mdui-list-item rounded>
+              使用开源项目
+              <span slot="description">Tauri - MDUI - Material Symbols</span>
+            </mdui-list-item>
+            <mdui-list-item rounded>
+              项目存储库
+              <span slot="description">https://github.com/FlyGues2889/random-number</span>
+            </mdui-list-item>
+            <mdui-list-item rounded>
+              许可证
+              <span slot="description">MIT</span>
+            </mdui-list-item>
+          </mdui-list-item>
+        </div>
+        <mdui-list-item rounded nonclickable>
+          项目作者
+          <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 400 400"
+            style="margin-left: -0.1rem;">
+            <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
+              <g id="组_16" data-name="组 16" transform="translate(2844 195)">
+                <rect id="矩形_7" data-name="矩形 7" width="400" height="400" fill="none" />
+                <g id="组_12" data-name="组 12" transform="translate(-199.587 123.82) rotate(-45)">
+                  <path id="矩形_14" data-name="矩形 14"
+                    d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
+                    transform="translate(306 359) rotate(90)" fill="currentColor" />
+                  <path id="矩形_15" data-name="矩形 15"
+                    d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
+                    transform="translate(106 359)" fill="currentColor" />
+                  <path id="矩形_6" data-name="矩形 6" d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
+                    transform="translate(351.366 213.836) rotate(90)" fill="currentColor" />
+                  <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
+                    d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
+                    transform="translate(1005.007 123.433)" fill="currentColor" />
+                </g>
+              </g>
+            </g>
+          </svg>
+          <span slot="description">By FlyGues Studio</span>
+        </mdui-list-item>
+
+        <div style="margin-left: 2.5rem;" class="mdui-prose">
+          <mdui-list-item rounded href="https://github.com/FlyGues2889" target="_blank">
+            FlyGues2889
+            <mdui-avatar src="http://q1.qlogo.cn/g?b=qq&nk=2037432889&s=100" slot="icon"></mdui-avatar>
+
+            <span slot="description">https://github.com/FlyGues2889</span>
+
+          </mdui-list-item>
+          <mdui-list-item rounded href="https://github.com/Echoes678" target="_blank">
+            Echoes678
+            <mdui-avatar src="http://q1.qlogo.cn/g?b=qq&nk=2040244628&s=100" slot="icon"></mdui-avatar>
+            <span slot="description">https://github.com/Echoes678</span>
+          </mdui-list-item>
+        </div>
 
       </list-container>
     </content-container>
@@ -119,39 +134,6 @@ import 'mdui/mdui.css';
 </template>
 
 <style scoped>
-mdui-segmented-button-group {
-  mdui-segmented-button {
-    width: 0.4rem;
-    margin: 0 0.05rem;
-
-    border-radius: var(--mdui-shape-corner-small);
-    color: rgb(var(--mdui-color-primary));
-    background-color: rgb(var(--mdui-color-secondary-container));
-    border: none;
-
-    transition: all 0.2s;
-  }
-
-  mdui-segmented-button.leftBtn {
-    border-radius: var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small) var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large);
-  }
-
-  mdui-segmented-button.rightBtn {
-    border-radius: var(--mdui-shape-corner-small) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-extra-large) var(--mdui-shape-corner-small);
-  }
-
-  mdui-segmented-button[selected] {
-    width: 1.6rem;
-    border-radius: var(--mdui-shape-corner-extra-large);
-    color: rgb(var(--mdui-color-surface));
-    background-color: rgb(var(--mdui-color-primary));
-  }
-}
-
-list-container {
-  padding-bottom: 5rem;
-}
-
 mdui-list-subheader {
   margin-left: 0.1rem;
   height: 1.25rem;
@@ -159,44 +141,5 @@ mdui-list-subheader {
   font-size: 1rem;
   color: rgb(var(--mdui-color-secondary));
   line-height: unset;
-}
-
-mdui-select,
-mdui-text-field {
-  line-height: 1.375rem;
-  max-width: 16em;
-}
-
-mdui-text-field.shaped::part(container) {
-  border-radius: var(--mdui-shape-corner-large);
-}
-
-mdui-text-field.number-range {
-  width: 10rem;
-  height: 4.8rem;
-}
-
-mdui-text-field.number-range::part(input) {
-  display: flex;
-  justify-content: center;
-
-  font-size: 2rem;
-  font-family: 'Nunito';
-  font-weight: bold;
-  color: rgb(var(--mdui-color-secondary));
-}
-
-div.number-range {
-  margin: 0.5rem 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-b {
-  font-size: 2rem;
-  font-weight: bold;
-  color: rgb(var(--mdui-color-secondary));
 }
 </style>

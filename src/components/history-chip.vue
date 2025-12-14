@@ -12,5 +12,9 @@ export default {
 mdui-chip {
     box-shadow: none;
     background-color: unset;
+
+    font-family: 'Nunito';
+    font-weight: 500;
+    font-size: medium;
 }
 </style>
