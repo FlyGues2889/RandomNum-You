@@ -9,7 +9,6 @@ export default class Picker {
     this.maxNum = 100;            // 最大值
     this.animationInterval = 100; // 动画间隔时间(ms)
     this.pickTime = 2000;         // 抽取总时间(ms)
-    this.isManned = false;        // 是否手动控制
     this.isRepeat = false;        // 是否重复抽取
     this.exNumArr = [];           // 排除数字数组
 
@@ -48,13 +47,12 @@ export default class Picker {
    * @param {Object} params 参数对象
    */
   setParams(params) {
-    const { minNum, maxNum, pickTime, isManned, isRepeat, exNumArr } = params;
+    const { minNum, maxNum, pickTime, isRepeat, exNumArr } = params;
 
     // 更新参数
     if (minNum !== undefined) this.minNum = minNum;
     if (maxNum !== undefined) this.maxNum = maxNum;
     if (pickTime !== undefined) this.pickTime = pickTime;
-    if (isManned !== undefined) this.isManned = isManned;
     if (isRepeat !== undefined) this.isRepeat = isRepeat;
     if (exNumArr !== undefined) this.exNumArr = exNumArr;
 
@@ -79,18 +77,8 @@ export default class Picker {
     this.animationTimer = null;
     this.finalTimer = null;
 
-    console.log('Starting pick process, mode:', this.isManned ? 'manual' : 'auto');
-
     // 开始动画效果（数字持续变化）
     this.startAnimation(callback);
-
-    // 如果是自动模式，设置定时器在指定时间后停止并输出最终结果
-    if (!this.isManned) {
-      console.log(`Auto mode: Will stop after ${this.pickTime}ms`);
-      this.finalTimer = setTimeout(() => {
-        this.stopPick(callback);
-      }, this.pickTime);
-    }
   }
 
   /**

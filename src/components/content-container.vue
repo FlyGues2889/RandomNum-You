@@ -13,6 +13,5 @@ export default {
     width: calc(100% - 4.5rem);
     max-width: 72rem;
     margin: 1rem auto;
-    padding-bottom: 2rem;
 }
 </style>

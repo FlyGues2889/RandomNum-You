@@ -1,7 +1,20 @@
 <script setup>
 import 'material-symbols';
 import { ref } from 'vue';
+import { setColorScheme } from 'mdui/functions/setColorScheme.js';
+import { setTheme } from 'mdui/functions/setTheme.js';
 
+const themeColor = ref("#6750a4")
+function setColorTheme(color) {
+  themeColor.value = color;
+  setColorScheme(color);
+
+  document.body.style.backgroundColor = 'rgba(var(--mdui-color-surface-container))';
+}
+function resetTheme() {
+  setTheme('auto');
+  setColorScheme('#6750a4');
+}
 import 'mdui/mdui.css';
 </script>
 
@@ -17,48 +30,38 @@ import 'mdui/mdui.css';
           <span slot="icon" class="material-symbols-rounded">palette</span>
           主题
           <span slot="description">切换应用程序光照模式和主题色</span>
-          <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" value="auto"
-            x-data="{ theme: localStorage.getItem('theme') || 'light' }" x-model="theme"
-            x-init="$watch('theme', value => { theme.setTheme(value); })" :value="theme" id="theme-toggle">
-            <mdui-segmented-button class="leftBtn" value="auto" onclick="theme.setTheme('auto');">
-              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">brightness_auto</span>
-            </mdui-segmented-button>
-            <mdui-segmented-button value="auto" onclick="theme.setTheme('light');">
-              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">wb_sunny</span>
-            </mdui-segmented-button>
-            <mdui-segmented-button class="rightBtn" value="auto" onclick="theme.setTheme('dark');">
-              <span class="material-symbols-rounded-fill" style="transform: scale(0.7);">brightness_2</span>
-            </mdui-segmented-button>
-          </mdui-segmented-button-group>
 
+          <mdui-button slot="end-icon" v-show="themeColor !== '#006750a4'" class="theme-button" id="defaultTheme"
+            variant="outlined" @click="resetTheme()">
+            <span class="material-symbols-rounded">reset_settings</span>
+          </mdui-button>
         </mdui-list-item>
         <div style="margin-left: 2.5rem;">
           <mdui-list-item nonclickable>
             <mdui-button-icon class="theme-button" id="cyanTheme" style="background-color: #006874;"
-              onclick="theme.setLight('cyanTheme');"></mdui-button-icon>
-            <mdui-button-icon class="theme-button" id="purpleTheme" style="background-color: #6750a4;"
-              onclick="theme.setLight('purpleTheme');"></mdui-button-icon>
+              @click="setColorTheme('#006874');"></mdui-button-icon>
             <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;"
-              onclick="theme.setLight('greenTheme');"></mdui-button-icon>
+              @click="setColorTheme('#006e1c');"></mdui-button-icon>
 
-            <mdui-button class="theme-button" id="defaultTheme" variant="outlined"
-              onclick="theme.setLight('defaultTheme');">
-              <span class="material-symbols-rounded">settings_backup_restore</span>
+            <mdui-button variant="tonal" style="" onclick="document.querySelector('#customLight').click();">
+              <span class="material-symbols-rounded">colorize</span>
             </mdui-button>
-            <mdui-tooltip variant="rich" placement="bottom"
-              x-data="{ customLight: localStorage.getItem('customLight') }">
-              <mdui-button variant="tonal" style="position: absolute;right: 2rem;"
-                onclick="document.querySelector('#customLight').click();">
-                <span class="material-symbols-rounded">colorize</span>
-              </mdui-button>
-              <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
-                style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;position: absolute;right: 2rem;top: 3rem;"
-                onchange="theme.setCustomLight(this.value);">
-              <div slot="headline">自定义主题色</div>
-              <div slot="content" id="customLightTip" x-text="customLight || '暂无'"
-                style="color: rgb(var(--mdui-color-primary));">
-              </div>
-            </mdui-tooltip>
+            <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
+              style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;"
+              onchange="theme.setCustomLight(this.value);">
+
+            <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" value="auto"
+              id="theme-toggle">
+              <mdui-segmented-button class="leftBtn" value="auto" @click="setTheme('auto');">
+                <span class="material-symbols-rounded" style="transform: scale(0.7);">brightness_auto</span>
+              </mdui-segmented-button>
+              <mdui-segmented-button value="auto" @click="setTheme('light');">
+                <span class="material-symbols-rounded" style="transform: scale(0.7);">wb_sunny</span>
+              </mdui-segmented-button>
+              <mdui-segmented-button class="rightBtn" value="auto" @click="setTheme('dark');">
+                <span class="material-symbols-rounded" style="transform: scale(0.7);">brightness_2</span>
+              </mdui-segmented-button>
+            </mdui-segmented-button-group>
           </mdui-list-item>
         </div>
       </list-container>
@@ -132,7 +135,6 @@ import 'mdui/mdui.css';
     </content-container>
   </page-container>
 </template>
-
 <style scoped>
 mdui-list-subheader {
   margin-left: 0.1rem;
@@ -141,5 +143,9 @@ mdui-list-subheader {
   font-size: 1rem;
   color: rgb(var(--mdui-color-secondary));
   line-height: unset;
+}
+
+.theme-button {
+  margin-right: 0.2rem;
 }
 </style>

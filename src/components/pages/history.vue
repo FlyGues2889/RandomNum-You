@@ -31,18 +31,24 @@ function clearHistory() {
       <ListContainer>
         <template v-slot:title>
           <mdui-list-item nonclickable>
-            <span class="out">{{ history.length > 0 ? history[0].number : 'None' }}</span>
             <mdui-button-icon slot="icon" disabled>
               <span class="material-symbols-rounded">arrow_forward</span>
             </mdui-button-icon>
+            <span class="out">{{ history.length > 0 ? history[0].number : 'None' }}</span>
           </mdui-list-item>
         </template>
-        <mdui-list-item nonclickable>
+        <mdui-list-item nonclickable style="position: sticky;">
           <span slot="icon" class="material-symbols-rounded">history</span>
           抽取记录
+          <span slot="description">共 {{ history.length }} 条</span>
+
+          <mdui-button variant="outlined" slot="end-icon" id="delHistoryBtn" class="mdui-fab" v-if="history.length > 0" @click="clearHistory">
+            <span slot="icon" class="material-symbols-rounded">delete</span>
+            清空抽取记录
+          </mdui-button>
         </mdui-list-item>
         <mdui-list-item nonclickable class="pickStatue" v-if="history.length > 0">
-          <mdui-list-item nonclickable v-for="(item, index) in history" :key="index" style="margin-bottom: 0.5rem;">
+          <mdui-list-item nonclickable v-for="(item, index) in history" :key="index" value="{{ index }}">
             <history-chip slot="icon">{{ item.number }}</history-chip>
             <span slot="end-icon" class="timestamp">{{ item.timestamp }}</span>
           </mdui-list-item>
@@ -53,11 +59,7 @@ function clearHistory() {
 
       </ListContainer>
     </content-container>
-
-    <mdui-fab extended id="delHistoryBtn" class="mdui-fab" v-if="history.length > 0" @click="clearHistory">
-      <span slot="icon" class="material-symbols-rounded">delete</span>
-      清空历史记录
-    </mdui-fab>
+    
   </page-container>
 </template>
 
@@ -88,13 +90,4 @@ span.out {
   color: rgba(var(--mdui-color-secondary), 0.7);
 }
 
-#delHistoryBtn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-
-  background-color: rgb(var(--mdui-color-secondary-container));
-
-  transition: all 0.2s ease-in-out;
-}
 </style>

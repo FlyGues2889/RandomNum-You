@@ -34,6 +34,11 @@ onUnmounted(() => {
   }
 });
 
+onMounted(() => {
+  document.body.style.margin = '0';
+  document.body.style.backgroundColor = 'rgba(var(--mdui-color-surface-container))';
+});
+
 const route = useRoute();
 const router = useRouter();
 const value = ref('main');
@@ -113,8 +118,11 @@ function handleClose() { win.close() };
 </template>
 
 <style scoped>
-:host {
+div#app {
   user-select: none;
+
+  background-color: rgba(var(--mdui-color-primary-container), 0.4);
+
 }
 
 main {
@@ -127,8 +135,7 @@ main {
     width: calc(100vw - 8rem);
     padding: 1.25rem;
 
-    background-color: rgb(var(--mdui-color-surface));
-    border: 0.1rem solid rgba(var(--mdui-color-on-surface),0.02);
+    background-color: rgb(var(--mdui-color-surface), 0.7);
     border-radius: var(--mdui-shape-corner-medium);
   }
 }

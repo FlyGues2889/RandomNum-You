@@ -7,22 +7,18 @@ import { snackbar } from 'mdui/functions/snackbar.js';
 
 import 'mdui/mdui.css';
 
-// Load the last displayed number from localStorage, fallback to default
 const lastNumber = localStorage.getItem('lastRandomNumber');
 const outNum = ref(lastNumber ? parseInt(lastNumber) : "-");
 const isPicking = ref(false);
 const picker = new Picker();
 
-// Set default parameters for the picker - allowing repeats to enable multiple picks
 picker.setParams({
-  minNum: 1,    // Minimum 6-digit number
-  maxNum: 999999,    // Maximum 6-digit number
-  pickTime: 2000,    // 2 seconds of animation
-  isManned: false,   // Auto-stop after pickTime
-  isRepeat: false     // Allow repeating numbers so we can pick multiple times
+  minNum: 1,
+  maxNum: 999999,
+  pickTime: 2000,
+  isRepeat: false
 });
 
-// Ensure the outNum is within the valid range if it was loaded from storage
 if (outNum.value < 1 || outNum.value > 999999) {
   outNum.value = "Error";
   snackbar({
@@ -34,10 +30,8 @@ if (outNum.value < 1 || outNum.value > 999999) {
 
 function generateNum() {
   if (isPicking.value) {
-    // Stop picking and get final result
     stopPicking();
   } else {
-    // Start picking with animation
     startPicking();
   }
 }
@@ -47,29 +41,19 @@ function startPicking() {
   picker.startPick((currentValue) => {
     if (currentValue !== null) {
       outNum.value = currentValue;
-      // Save the current animated number to localStorage so it persists if user switches pages
+
       localStorage.setItem('lastRandomNumber', currentValue.toString());
     }
   });
 
-  // Since the picker automatically stops after pickTime in auto mode,
-  // we need to set a timeout to update our UI state accordingly
-  setTimeout(() => {
-    // At this point the picker should have stopped automatically
-    // but if the user didn't manually stop it, we need to update the UI
-    if (isPicking.value) {
-      isPicking.value = false;
-    }
-  }, picker.pickTime + 50); // Small buffer to ensure picker has stopped
 }
 
 function stopPicking() {
   picker.stopPick((result) => {
     if (result !== null) {
       outNum.value = result;
-      // Save the number to localStorage
+      
       localStorage.setItem('lastRandomNumber', result.toString());
-      // Add the result to history
       HistoryService.addToHistory({
         number: result,
         timestamp: new Date().toLocaleString()
@@ -126,9 +110,9 @@ function showNumSettingsDialog() {
 
         <mdui-tab-panel slot="panel" value="tab-1">
           <div class="number-range">
-            <mdui-text-field class="number-range" label="最小值" v-model="minNum"></mdui-text-field>
+            <mdui-text-field variant="outlined" required class="number-range" label="最小值" v-model="minNum"></mdui-text-field>
             <b>&nbsp;&nbsp;-&nbsp;&nbsp;</b>
-            <mdui-text-field class="number-range" label="最大值" v-model="maxNum"></mdui-text-field>
+            <mdui-text-field variant="outlined" required class="number-range" label="最大值" v-model="maxNum"></mdui-text-field>
           </div>
 
           <mdui-list-item nonclickable>
@@ -144,14 +128,6 @@ function showNumSettingsDialog() {
               <mdui-menu-item value="5000">5s</mdui-menu-item>
             </mdui-select>
 
-          </mdui-list-item>
-
-          <mdui-list-item nonclickable>
-            <span slot="icon" class="material-symbols-rounded">back_hand</span>
-            启用手动抽取
-            <span slot="description">手动点击抽取按钮/回车/空格键以启停</span>
-            <mdui-switch slot="end-icon" value="{{ isManned }}">
-            </mdui-switch>
           </mdui-list-item>
 
           <mdui-list-item nonclickable>
@@ -266,6 +242,7 @@ mdui-tab-panel {
     width: 100%;
 
     margin-bottom: 2rem;
+    margin-top: 0.5rem;
 
     display: flex;
     justify-content: center;
