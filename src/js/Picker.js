@@ -16,7 +16,8 @@ export default class Picker {
     this.pickArr = [];            // 可抽取数组
     this.result = null;           // 当前抽取结果
     this.isPicking = false;       // 是否正在抽取
-    this.pickInterval = null;     // 抽取定时器
+    this.animationTimer = null;   // 动画定时器
+    this.autoStopTimer = null;    // 自动停止定时器
     this.totalHistory = [];       // 总历史记录
 
     // 初始化数据数组
@@ -27,6 +28,12 @@ export default class Picker {
    * 初始化数据数组
    */
   initData() {
+    // 边界值检查
+    if (this.minNum > this.maxNum) {
+      console.warn('最小值不能大于最大值，已自动交换');
+      [this.minNum, this.maxNum] = [this.maxNum, this.minNum];
+    }
+
     this.dataArr = [];
     for (let i = this.minNum; i <= this.maxNum; i++) {
       this.dataArr.push(i);
@@ -47,21 +54,26 @@ export default class Picker {
    * @param {Object} params 参数对象
    */
   setParams(params) {
-    const { minNum, maxNum, pickTime, isRepeat, exNumArr } = params;
+    if (typeof params !== 'object' || params === null) return;
 
-    // 更新参数
-    if (minNum !== undefined) this.minNum = minNum;
-    if (maxNum !== undefined) this.maxNum = maxNum;
-    if (pickTime !== undefined) this.pickTime = pickTime;
-    if (isRepeat !== undefined) this.isRepeat = isRepeat;
-    if (exNumArr !== undefined) this.exNumArr = exNumArr;
+    const { minNum, maxNum, animationInterval, pickTime, isRepeat, exNumArr } = params;
+
+    // 更新参数（添加类型检查）
+    if (typeof minNum === 'number') this.minNum = minNum;
+    if (typeof maxNum === 'number') this.maxNum = maxNum;
+    if (typeof animationInterval === 'number' && animationInterval > 0) {
+      this.animationInterval = animationInterval;
+    }
+    if (typeof pickTime === 'number' && pickTime > 0) this.pickTime = pickTime;
+    if (typeof isRepeat === 'boolean') this.isRepeat = isRepeat;
+    if (Array.isArray(exNumArr)) this.exNumArr = exNumArr.filter(num => typeof num === 'number');
 
     // 重新初始化数据
     this.initData();
   }
 
   /**
-   * 开始抽取
+   * 开始抽取（带动画效果，自动停止）
    * @param {Function} callback 回调函数，接收当前抽取的数字
    */
   startPick(callback) {
@@ -74,11 +86,15 @@ export default class Picker {
     }
 
     this.isPicking = true;
-    this.animationTimer = null;
-    this.finalTimer = null;
+    this.result = null;
 
     // 开始动画效果（数字持续变化）
     this.startAnimation(callback);
+
+    // 设置自动停止定时器
+    this.autoStopTimer = setTimeout(() => {
+      this.stopPick(callback);
+    }, this.pickTime);
   }
 
   /**
@@ -86,17 +102,23 @@ export default class Picker {
    * @param {Function} callback 回调函数
    */
   startAnimation(callback) {
-    // 设置动画定时器，以固定间隔（100ms）更新显示的数字
+    // 先清除已有定时器
+    this.stopAnimation();
+
+    // 设置动画定时器，以固定间隔更新显示的数字
     this.animationTimer = setInterval(() => {
       try {
+        if (this.pickArr.length === 0) {
+          this.stopAnimation();
+          callback && callback(null);
+          return;
+        }
         // 随机抽取一个数字作为动画效果
         const randomIndex = Math.floor(Math.random() * this.pickArr.length);
         const animationResult = this.pickArr[randomIndex];
 
         // 回调当前动画数字
-        if (callback) {
-          callback(animationResult);
-        }
+        callback && callback(animationResult);
       } catch (error) {
         console.error('Error in animation:', error);
         this.stopAnimation();
@@ -113,9 +135,9 @@ export default class Picker {
       this.animationTimer = null;
     }
 
-    if (this.finalTimer) {
-      clearTimeout(this.finalTimer);
-      this.finalTimer = null;
+    if (this.autoStopTimer) {
+      clearTimeout(this.autoStopTimer);
+      this.autoStopTimer = null;
     }
   }
 
@@ -131,12 +153,6 @@ export default class Picker {
 
     // 停止动画
     this.stopAnimation();
-
-    // 清除定时器
-    if (this.pickInterval) {
-      clearInterval(this.pickInterval);
-      this.pickInterval = null;
-    }
 
     // 生成最终结果
     if (this.pickArr.length > 0) {
@@ -160,25 +176,20 @@ export default class Picker {
     }
 
     // 回调最终结果
-    if (callback) {
-      callback(this.result);
-    }
+    callback && callback(this.result);
   }
 
   /**
-   * 单次抽取
+   * 单次抽取（无动画，直接返回结果）
    * @param {Function} callback 回调函数
    */
   pickOnce(callback) {
     console.log('pickOnce called, available numbers:', this.pickArr.length);
 
     // 检查是否有可抽取的数字
-    if (!this.pickArr || this.pickArr.length === 0) {
+    if (this.pickArr.length === 0) {
       console.warn('No numbers to pick from');
-      if (callback) {
-        callback(null);
-      }
-      this.stopPick(callback);
+      callback && callback(null);
       return;
     }
 
@@ -188,15 +199,22 @@ export default class Picker {
       this.result = this.pickArr[randomIndex];
       console.log('Picked number:', this.result, 'from index:', randomIndex);
 
-      // 回调当前结果
-      if (callback) {
-        callback(this.result);
+      // 保存到历史记录
+      this.saveToHistory();
+
+      // 从可抽取数组中移除当前结果（如果不允许重复）
+      if (!this.isRepeat) {
+        const index = this.pickArr.indexOf(this.result);
+        if (index > -1) {
+          this.pickArr.splice(index, 1);
+        }
       }
+
+      // 回调结果
+      callback && callback(this.result);
     } catch (error) {
       console.error('Error in pickOnce:', error);
-      if (callback) {
-        callback(null);
-      }
+      callback && callback(null);
     }
   }
 
@@ -207,7 +225,8 @@ export default class Picker {
     if (this.result !== null) {
       const record = {
         number: this.result,
-        timestamp: new Date().toLocaleString()
+        timestamp: new Date().toLocaleString(),
+        timestampMs: Date.now() // 添加时间戳（毫秒）便于排序
       };
       this.totalHistory.push(record);
     }
@@ -215,10 +234,14 @@ export default class Picker {
 
   /**
    * 获取历史记录
+   * @param {Boolean} sorted 是否按时间排序（默认true）
    * @returns {Array} 历史记录数组
    */
-  getHistory() {
-    return this.totalHistory;
+  getHistory(sorted = true) {
+    if (sorted) {
+      return [...this.totalHistory].sort((a, b) => a.timestampMs - b.timestampMs);
+    }
+    return [...this.totalHistory]; // 返回副本，防止外部修改
   }
 
   /**
@@ -230,25 +253,40 @@ export default class Picker {
 
   /**
    * 添加排除数字
-   * @param {Number} num 要排除的数字
+   * @param {Number|Array} num 要排除的数字或数字数组
    */
   addExcludeNum(num) {
-    if (!this.exNumArr.includes(num)) {
+    if (Array.isArray(num)) {
+      num.forEach(n => {
+        if (typeof n === 'number' && !this.exNumArr.includes(n)) {
+          this.exNumArr.push(n);
+        }
+      });
+    } else if (typeof num === 'number' && !this.exNumArr.includes(num)) {
       this.exNumArr.push(num);
-      this.updatePickArr();
     }
+    this.updatePickArr();
   }
 
   /**
    * 移除排除数字
-   * @param {Number} num 要移除的排除数字
+   * @param {Number|Array} num 要移除的排除数字或数字数组
    */
   removeExcludeNum(num) {
-    const index = this.exNumArr.indexOf(num);
-    if (index > -1) {
-      this.exNumArr.splice(index, 1);
-      this.updatePickArr();
+    if (Array.isArray(num)) {
+      num.forEach(n => {
+        const index = this.exNumArr.indexOf(n);
+        if (index > -1) {
+          this.exNumArr.splice(index, 1);
+        }
+      });
+    } else if (typeof num === 'number') {
+      const index = this.exNumArr.indexOf(num);
+      if (index > -1) {
+        this.exNumArr.splice(index, 1);
+      }
     }
+    this.updatePickArr();
   }
 
   /**
@@ -257,5 +295,23 @@ export default class Picker {
   clearExcludeNums() {
     this.exNumArr = [];
     this.updatePickArr();
+  }
+
+  /**
+   * 重置抽取器
+   */
+  reset() {
+    this.stopAnimation();
+    this.isPicking = false;
+    this.result = null;
+    this.initData();
+  }
+
+  /**
+   * 获取可抽取数字数量
+   * @returns {Number} 数量
+   */
+  getAvailableCount() {
+    return this.pickArr.length;
   }
 }

@@ -14,6 +14,8 @@ function setColorTheme(color) {
 function resetTheme() {
   setTheme('auto');
   setColorScheme('#6750a4');
+
+  themeColor.value = '#6750a4';
 }
 import 'mdui/mdui.css';
 </script>
@@ -31,7 +33,7 @@ import 'mdui/mdui.css';
           主题
           <span slot="description">切换应用程序光照模式和主题色</span>
 
-          <mdui-button slot="end-icon" v-show="themeColor !== '#006750a4'" class="theme-button" id="defaultTheme"
+          <mdui-button slot="end-icon" v-show="themeColor !== '#6750a4'" class="theme-button" id="defaultTheme"
             variant="outlined" @click="resetTheme()">
             <span class="material-symbols-rounded">reset_settings</span>
           </mdui-button>
@@ -65,6 +67,7 @@ import 'mdui/mdui.css';
           </mdui-list-item>
         </div>
       </list-container>
+
       <list-container>
         <template v-slot:title>
           <mdui-list-subheader>关于</mdui-list-subheader>
@@ -94,20 +97,17 @@ import 'mdui/mdui.css';
           项目作者
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 400 400"
             style="margin-left: -0.1rem;">
-            <g id="组_18" data-name="组 18" transform="translate(-2844 -168)">
-              <g id="组_16" data-name="组 16" transform="translate(2844 195)">
-                <rect id="矩形_7" data-name="矩形 7" width="400" height="400" fill="none" />
-                <g id="组_12" data-name="组 12" transform="translate(-199.587 123.82) rotate(-45)">
-                  <path id="矩形_14" data-name="矩形 14"
-                    d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
+            <g transform="translate(-2844 -168)">
+              <g transform="translate(2844 195)">
+                <rect width="400" height="400" fill="none" />
+                <g transform="translate(-199.587 123.82) rotate(-45)">
+                  <path d="M20,0H80a20,20,0,0,1,20,20V30A20,20,0,0,1,80,50H0a0,0,0,0,1,0,0V20A20,20,0,0,1,20,0Z"
                     transform="translate(306 359) rotate(90)" fill="currentColor" />
-                  <path id="矩形_15" data-name="矩形 15"
-                    d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
+                  <path d="M20,0h80a0,0,0,0,1,0,0V80a20,20,0,0,1-20,20H72A72,72,0,0,1,0,28V20A20,20,0,0,1,20,0Z"
                     transform="translate(106 359)" fill="currentColor" />
-                  <path id="矩形_6" data-name="矩形 6" d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
+                  <path d="M35.049,0A35,35,0,1,1,0,35.049,34.881,34.881,0,0,1,35.049,0Z"
                     transform="translate(351.366 213.836) rotate(90)" fill="currentColor" />
-                  <path id="联合_1_-_轮廓" data-name="联合 1 - 轮廓"
-                    d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
+                  <path d="M-749.007,235.567h-50v-50h-80a20,20,0,0,1-20-20v-10a20,20,0,0,1,20-20h110a20,20,0,0,1,20,20Z"
                     transform="translate(1005.007 123.433)" fill="currentColor" />
                 </g>
               </g>
