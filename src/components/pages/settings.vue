@@ -1,23 +1,63 @@
 <script setup>
 import 'material-symbols';
-import { ref } from 'vue';
-import { setColorScheme } from 'mdui/functions/setColorScheme.js';
-import { setTheme } from 'mdui/functions/setTheme.js';
+import { ref, onMounted } from 'vue';
+import theme from '../../js/theme.js';
+import 'mdui/mdui.css';
 
-const themeColor = ref("#6750a4")
+const themeColor = ref('#6750a4');
+const customLight = ref(null);
+// appliedMode: the theme mode already applied to the app
+const appliedMode = ref('auto');
+// uiSelectedMode: the value bound to the segmented button group's value (controls check animation)
+const uiSelectedMode = ref('auto');
+// track last clicked value to enable "second click shows check" behavior
+const lastClicked = ref(null);
+
 function setColorTheme(color) {
   themeColor.value = color;
-  setColorScheme(color);
-
+  theme.setColor(color);
   document.body.style.backgroundColor = 'rgba(var(--mdui-color-surface-container))';
 }
+
 function resetTheme() {
-  setTheme('auto');
-  setColorScheme('#6750a4');
+  theme.setMode('auto');
+  theme.setColor('#6750a4');
 
   themeColor.value = '#6750a4';
+  themeMode.value = 'auto';
+  customLight.value = null;
 }
-import 'mdui/mdui.css';
+
+function onCustomLightChange(e) {
+  const val = e.target.value;
+  customLight.value = val;
+  theme.setCustomLight(val);
+  theme.setColor(val);
+  themeColor.value = val;
+}
+
+function setThemeMode(mode) {
+  // apply immediately
+  theme.setMode(mode);
+  appliedMode.value = mode;
+
+  // if user clicked same button twice in a row and ui has not shown selection yet,
+  // then update uiSelectedMode to show the check animation on second click
+  if (lastClicked.value === mode && uiSelectedMode.value !== mode) {
+    uiSelectedMode.value = mode;
+  }
+
+  // update lastClicked every time
+  lastClicked.value = mode;
+}
+
+onMounted(() => {
+  const s = theme.init();
+  themeColor.value = s.color || '#6750a4';
+  customLight.value = s.custom || null;
+  appliedMode.value = s.mode || 'auto';
+  uiSelectedMode.value = s.mode || 'auto';
+});
 </script>
 
 <template>
@@ -45,22 +85,22 @@ import 'mdui/mdui.css';
             <mdui-button-icon class="theme-button" id="greenTheme" style="background-color: #006e1c;"
               @click="setColorTheme('#006e1c');"></mdui-button-icon>
 
-            <mdui-button variant="tonal" style="" onclick="document.querySelector('#customLight').click();">
+            <mdui-button variant="tonal" style="" @click="document.querySelector('#customLight').click();">
               <span class="material-symbols-rounded">colorize</span>
             </mdui-button>
-            <input type="color" id="customLight" x-bind:value="customLight || '#000000'"
+            <input type="color" id="customLight" :value="customLight || '#000000'"
               style="width:0;height:0;opacity:0;pointer-events:none;border:none;padding:0;margin:0;"
-              onchange="theme.setCustomLight(this.value);">
+              @change="onCustomLightChange">
 
-            <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" value="auto"
+            <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" :value="uiSelectedMode"
               id="theme-toggle">
-              <mdui-segmented-button class="leftBtn" value="auto" @click="setTheme('auto');">
+              <mdui-segmented-button class="leftBtn" value="auto" @click="setThemeMode('auto');">
                 <span class="material-symbols-rounded" style="transform: scale(0.7);">brightness_auto</span>
               </mdui-segmented-button>
-              <mdui-segmented-button value="auto" @click="setTheme('light');">
+              <mdui-segmented-button value="light" @click="setThemeMode('light');">
                 <span class="material-symbols-rounded" style="transform: scale(0.7);">wb_sunny</span>
               </mdui-segmented-button>
-              <mdui-segmented-button class="rightBtn" value="auto" @click="setTheme('dark');">
+              <mdui-segmented-button class="rightBtn" value="dark" @click="setThemeMode('dark');">
                 <span class="material-symbols-rounded" style="transform: scale(0.7);">brightness_2</span>
               </mdui-segmented-button>
             </mdui-segmented-button-group>
