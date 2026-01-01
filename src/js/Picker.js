@@ -1,6 +1,6 @@
 /**
  * 随机数抽取器类
- * 实现随机数抽取的核心逻辑
+ * 实现随机数抽取的核心逻辑（纯手动控制）
  */
 export default class Picker {
   constructor() {
@@ -8,7 +8,6 @@ export default class Picker {
     this.minNum = 1;              // 最小值
     this.maxNum = 100;            // 最大值
     this.animationInterval = 100; // 动画间隔时间(ms)
-    this.pickTime = 2000;         // 抽取总时间(ms)
     this.isRepeat = false;        // 是否重复抽取
     this.exNumArr = [];           // 排除数字数组
 
@@ -17,7 +16,6 @@ export default class Picker {
     this.result = null;           // 当前抽取结果
     this.isPicking = false;       // 是否正在抽取
     this.animationTimer = null;   // 动画定时器
-    this.autoStopTimer = null;    // 自动停止定时器
     this.totalHistory = [];       // 总历史记录
 
     // 初始化数据数组
@@ -56,7 +54,7 @@ export default class Picker {
   setParams(params) {
     if (typeof params !== 'object' || params === null) return;
 
-    const { minNum, maxNum, animationInterval, pickTime, isRepeat, exNumArr } = params;
+    const { minNum, maxNum, animationInterval, isRepeat, exNumArr } = params;
 
     // 更新参数（添加类型检查）
     if (typeof minNum === 'number') this.minNum = minNum;
@@ -64,7 +62,6 @@ export default class Picker {
     if (typeof animationInterval === 'number' && animationInterval > 0) {
       this.animationInterval = animationInterval;
     }
-    if (typeof pickTime === 'number' && pickTime > 0) this.pickTime = pickTime;
     if (typeof isRepeat === 'boolean') this.isRepeat = isRepeat;
     if (Array.isArray(exNumArr)) this.exNumArr = exNumArr.filter(num => typeof num === 'number');
 
@@ -73,7 +70,7 @@ export default class Picker {
   }
 
   /**
-   * 开始抽取（带动画效果，自动停止）
+   * 开始抽取（仅动画，无自动停止）
    * @param {Function} callback 回调函数，接收当前抽取的数字
    */
   startPick(callback) {
@@ -88,13 +85,8 @@ export default class Picker {
     this.isPicking = true;
     this.result = null;
 
-    // 开始动画效果（数字持续变化）
+    // 仅启动动画，移除自动停止定时器
     this.startAnimation(callback);
-
-    // 设置自动停止定时器
-    this.autoStopTimer = setTimeout(() => {
-      this.stopPick(callback);
-    }, this.pickTime);
   }
 
   /**
@@ -127,22 +119,17 @@ export default class Picker {
   }
 
   /**
-   * 停止动画效果
+   * 停止动画效果（仅清除定时器，无其他逻辑）
    */
   stopAnimation() {
     if (this.animationTimer) {
       clearInterval(this.animationTimer);
       this.animationTimer = null;
     }
-
-    if (this.autoStopTimer) {
-      clearTimeout(this.autoStopTimer);
-      this.autoStopTimer = null;
-    }
   }
 
   /**
-   * 停止抽取
+   * 停止抽取（手动调用才会终止）
    * @param {Function} callback 回调函数，接收最终抽取结果
    */
   stopPick(callback) {

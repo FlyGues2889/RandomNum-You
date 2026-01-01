@@ -5,31 +5,46 @@ import Picker from '../../js/Picker.js';
 import HistoryService from '../../js/HistoryService.js';
 import { snackbar } from 'mdui/functions/snackbar.js';
 import ClipboardJS from 'clipboard';
-
 import 'mdui/mdui.css';
 
-onMounted(() => {
-  new ClipboardJS('#copyOut', {
-    text: function (trigger) {
-      const outText = document.getElementById('out').innerText;
-      snackbar({ message: "结果已复制" });
-      return outText;
-    }
-  });
-});
+// 默认配置
+const defaultConfig = {
+  minNum: 1,
+  maxNum: 55,
+  isRepeat: false,
+  excludeNumbers: '',
+  excludeLabels: [],
+  lastRandomNumber: '-'
+};
 
-const lastNumber = localStorage.getItem('lastRandomNumber');
-const outNum = ref(lastNumber ? parseInt(lastNumber) : "-");
+// 读取本地存储配置
+const storedConfig = JSON.parse(localStorage.getItem('pickerConfig') || JSON.stringify(defaultConfig));
+
+// 响应式变量初始化（基础默认值）
+const outNum = ref('-');
 const isPicking = ref(false);
 const picker = new Picker();
-
-const minNum = ref(1);
-const maxNum = ref(55);
-const isRepeat = ref(false);
-const excludeNumbers = ref('');
-const excludeLabels = ref([]);
+const minNum = ref(storedConfig.minNum || defaultConfig.minNum);
+const maxNum = ref(storedConfig.maxNum || defaultConfig.maxNum);
+const isRepeat = ref(storedConfig.isRepeat || defaultConfig.isRepeat);
+const excludeNumbers = ref(storedConfig.excludeNumbers || defaultConfig.excludeNumbers);
+const excludeLabels = ref(storedConfig.excludeLabels || defaultConfig.excludeLabels);
 const selectedLabel = ref('null');
 
+// 保存配置到本地存储
+function saveConfigToLocal() {
+  const config = {
+    minNum: minNum.value,
+    maxNum: maxNum.value,
+    isRepeat: isRepeat.value,
+    excludeNumbers: excludeNumbers.value,
+    excludeLabels: excludeLabels.value,
+    lastRandomNumber: outNum.value
+  };
+  localStorage.setItem('pickerConfig', JSON.stringify(config));
+}
+
+// 更新Picker参数
 function updatePickerParams() {
   const exNumArr = excludeNumbers.value
     .split(',')
@@ -49,23 +64,15 @@ function updatePickerParams() {
   }
 }
 
-updatePickerParams();
-
+// 监听设置变更，实时保存
 watch([minNum, maxNum, isRepeat, excludeNumbers], () => {
   if (!isPicking.value) {
     updatePickerParams();
+    saveConfigToLocal();
   }
 });
 
-if (lastNumber && (isNaN(lastNumber) || lastNumber < 1 || lastNumber > 999999)) {
-  outNum.value = "Error";
-  snackbar({
-    message: "Error: last displayed number is out of range",
-    onActionClick: () => console.log("click action button")
-  });
-  localStorage.setItem('lastRandomNumber', '-');
-}
-
+// 生成随机数（开始/停止）
 function generateNum() {
   if (isPicking.value) {
     stopPicking();
@@ -74,6 +81,7 @@ function generateNum() {
   }
 }
 
+// 开始抽取
 function startPicking() {
   updatePickerParams();
   
@@ -81,42 +89,43 @@ function startPicking() {
   picker.startPick((currentValue) => {
     if (currentValue !== null) {
       outNum.value = currentValue;
-      localStorage.setItem('lastRandomNumber', currentValue.toString());
+      saveConfigToLocal();
     }
   });
 }
 
+// 停止抽取
 function stopPicking() {
   picker.stopPick((result) => {
     if (result !== null) {
       outNum.value = result;
-      localStorage.setItem('lastRandomNumber', result.toString());
       HistoryService.addToHistory({
         number: result,
         timestamp: new Date().toLocaleString()
       });
+      saveConfigToLocal();
     }
     isPicking.value = false;
   });
 }
 
+// 打开设置弹窗
 function showNumSettingsDialog() {
   const dialog = document.querySelector('#numsettings-dialog');
   dialog.open = true;
-  
-  const savedLabels = JSON.parse(localStorage.getItem('excludeLabels') || '[]');
-  excludeLabels.value = savedLabels;
+  excludeLabels.value = storedConfig.excludeLabels || [];
 }
 
+// 关闭设置弹窗
 function closeSettingsDialog() {
   const dialog = document.querySelector('#numsettings-dialog');
   dialog.open = false;
   
   updatePickerParams();
-  
-  // snackbar({ message: "设置已保存" });
+  saveConfigToLocal();
 }
 
+// 保存排除标签
 function saveExcludeLabel() {
   const labelName = document.getElementById('exLabel-name').value?.trim();
   const labelContent = document.getElementById('exLabel-content').value?.trim();
@@ -133,8 +142,7 @@ function saveExcludeLabel() {
   };
   
   excludeLabels.value.push(newLabel);
-  
-  localStorage.setItem('excludeLabels', JSON.stringify(excludeLabels.value));
+  saveConfigToLocal();
   
   document.getElementById('exLabel-name').value = '';
   document.getElementById('exLabel-content').value = '';
@@ -142,6 +150,7 @@ function saveExcludeLabel() {
   snackbar({ message: "排除标签已保存" });
 }
 
+// 切换排除标签
 function onLabelChange() {
   if (selectedLabel.value !== 'null') {
     const label = excludeLabels.value.find(l => l.id === selectedLabel.value);
@@ -151,7 +160,40 @@ function onLabelChange() {
   } else {
     excludeNumbers.value = '';
   }
+  saveConfigToLocal();
 }
+
+// 挂载初始化
+onMounted(() => {
+  // 初始化剪贴板
+  new ClipboardJS('#copyOut', {
+    text: function (trigger) {
+      const outText = document.getElementById('out').innerText;
+      snackbar({ message: "结果已复制" });
+      return outText;
+    }
+  });
+
+  // 初始化最后抽取数字（修复语法错误核心）
+  const storedLastNum = storedConfig.lastRandomNumber;
+  if (storedLastNum !== '-') {
+    const num = Number(storedLastNum);
+    outNum.value = isNaN(num) ? '-' : num;
+  }
+
+  // 数值范围校验（仅非默认值时校验）
+  if (outNum.value !== '-' && (outNum.value < 1 || outNum.value > 999999)) {
+    outNum.value = "Error";
+    snackbar({
+      message: "Error: last displayed number is out of range",
+      onActionClick: () => console.log("click action button")
+    });
+    saveConfigToLocal();
+  }
+
+  // 初始化Picker参数
+  updatePickerParams();
+});
 </script>
 
 <template>

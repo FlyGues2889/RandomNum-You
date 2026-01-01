@@ -32,3 +32,6 @@ mdui-segmented-button-group {
   }
 }
 
+mdui-snackbar{
+  border-radius: var(--mdui-shape-corner-large) !important;
+}
