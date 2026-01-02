@@ -3,6 +3,7 @@
     "title": "RandomNum You",
     "settings": "Settings",
     "personalization": "Personalization",
+    "general": "General",
     "language": "Language",
     "theme": "Theme",
     "themeDescription": "Switch application light/dark mode and theme color",
@@ -17,7 +18,7 @@
     "author": "Project author"
   },
   "main": {
-    "pickSettings": "Pick Settings",
+    "pickSettings": "Settings",
     "copyResult": "Copy result",
     "startStopPick": "Start / Stop picking",
     "labelNameContentRequired": "Label name and content cannot be empty",
@@ -31,10 +32,19 @@
     "allowRepeat": "Allow repeat picking",
     "selectSavedLabel": "Select saved label",
     "none": "None",
-    "excludeNumbers": "Exclude numbers (comma separated)",
+    "excludeNumbers": "Exclude numbers",
+    "excludeNumbersDesc": "Comma separated",
     "newExcludeLabel": "New exclude label",
     "labelName": "Label name",
     "excludeContent": "Exclude content",
     "saveAsNewLabel": "Save as new label"
+  },
+  "history": {
+    "title": "History",
+    "history": "History",
+    "desc": "Total draws: ",
+    "clearHistory": "Clear history",
+    "empty": "No history available",
+    "historyCleared": "History cleared"
   }
 }

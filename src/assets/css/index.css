@@ -32,6 +32,21 @@ mdui-segmented-button-group {
   }
 }
 
-mdui-snackbar{
+
+mdui-select,
+mdui-text-field {
+  line-height: 1.375rem;
+  max-width: 14em;
+}
+
+mdui-snackbar {
   border-radius: var(--mdui-shape-corner-large) !important;
+
+  margin-left: 2.4rem;
+  margin-bottom: 0.7rem;
+}
+
+span[slot="description"] {
+  color: rgb(var(--mdui-color-secondary));
+  opacity: 0.8;
 }

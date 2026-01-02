@@ -5,8 +5,12 @@ import HistoryService from '../../js/HistoryService.js';
 import historyChip from '../history-chip.vue';
 import Title from '../title.vue';
 import ListContainer from '../list-container.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 import 'mdui/mdui.css';
+import { snackbar } from 'mdui';
 
 const history = ref([]);
 
@@ -21,13 +25,19 @@ function loadHistory() {
 function clearHistory() {
   HistoryService.clearHistory();
   history.value = [];
+
+  snackbar({
+    message: t('history.historyCleared'),
+    position: 'bottom-start',
+    timeout: 2000
+  });
 }
 </script>
 
 <template>
   <page-container>
     <content-container>
-      <Title title="历史记录" />
+      <Title v-html="t('history.title')" />
       <ListContainer>
         <template v-slot:title>
           <mdui-list-item nonclickable>
@@ -39,12 +49,12 @@ function clearHistory() {
         </template>
         <mdui-list-item nonclickable style="position: sticky;">
           <span slot="icon" class="material-symbols-rounded">history</span>
-          抽取记录
-          <span slot="description">共 {{ history.length }} 条</span>
+          {{ t('history.history') }}
+          <span slot="description">{{ t('history.desc') + history.length }}</span>
 
           <mdui-button variant="outlined" slot="end-icon" id="delHistoryBtn" class="mdui-fab" v-if="history.length > 0" @click="clearHistory">
             <span slot="icon" class="material-symbols-rounded">delete</span>
-            清空抽取记录
+            {{ t('history.clearHistory') }}
           </mdui-button>
         </mdui-list-item>
         <mdui-list-item nonclickable class="pickStatue" v-if="history.length > 0">
@@ -54,7 +64,7 @@ function clearHistory() {
           </mdui-list-item>
         </mdui-list-item>
         <mdui-list-item nonclickable class="pickStatue" v-else>
-          <p style="text-align: center;color: rgba(var(--mdui-color-secondary),0.7);">暂无抽取记录</p>
+          <p style="text-align: center;color: rgba(var(--mdui-color-secondary),0.7);">{{ t('history.empty') }}</p>
         </mdui-list-item>
 
       </ListContainer>

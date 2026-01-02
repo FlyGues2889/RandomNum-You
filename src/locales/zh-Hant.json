@@ -3,6 +3,7 @@
     "title": "RandomNum You",
     "settings": "設定",
     "personalization": "個性化",
+    "general": "通用",
     "language": "語言",
     "theme": "主題",
     "themeDescription": "切換應用程式光照模式和主題色",
@@ -31,10 +32,19 @@
     "allowRepeat": "允許重複抽取",
     "selectSavedLabel": "選擇已保存的標籤",
     "none": "無",
-    "excludeNumbers": "排除數字(逗號分隔)",
+    "excludeNumbers": "排除數字",
+    "excludeNumbersDesc": "逗號分隔",
     "newExcludeLabel": "新建排除項標籤",
     "labelName": "標籤名稱",
     "excludeContent": "排除項內容",
     "saveAsNewLabel": "將新建內容保存為新標籤"
+  },
+  "history": {
+    "title": "歷史記錄",
+    "history": "歷史記錄",
+    "desc": "已抽取數量 ",
+    "clearHistory": "清除歷史記錄",
+    "empty": "目前沒有歷史記錄",
+    "historyCleared": "歷史記錄已清除"
   }
 }

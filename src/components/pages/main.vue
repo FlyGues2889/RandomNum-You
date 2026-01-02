@@ -87,7 +87,7 @@ function generateNum() {
 // 开始抽取
 function startPicking() {
   updatePickerParams();
-  
+
   isPicking.value = true;
   picker.startPick((currentValue) => {
     if (currentValue !== null) {
@@ -123,7 +123,7 @@ function showNumSettingsDialog() {
 function closeSettingsDialog() {
   const dialog = document.querySelector('#numsettings-dialog');
   dialog.open = false;
-  
+
   updatePickerParams();
   saveConfigToLocal();
 }
@@ -132,25 +132,31 @@ function closeSettingsDialog() {
 function saveExcludeLabel() {
   const labelName = document.getElementById('exLabel-name').value?.trim();
   const labelContent = document.getElementById('exLabel-content').value?.trim();
-  
+
   if (!labelName || !labelContent) {
-    snackbar({ message: t('main.labelNameContentRequired') });
+    snackbar({
+      message: t('main.labelNameContentRequired'),
+
+    });
     return;
   }
-  
+
   const newLabel = {
     name: labelName,
     content: labelContent,
     id: Date.now().toString()
   };
-  
+
   excludeLabels.value.push(newLabel);
   saveConfigToLocal();
-  
+
   document.getElementById('exLabel-name').value = '';
   document.getElementById('exLabel-content').value = '';
-  
-  snackbar({ message: t('main.excludeLabelSaved') });
+
+  snackbar({
+    message: t('main.excludeLabelSaved'),
+
+  });
 }
 
 // 切换排除标签
@@ -172,7 +178,10 @@ onMounted(() => {
   new ClipboardJS('#copyOut', {
     text: function (trigger) {
       const outText = document.getElementById('out').innerText;
-      snackbar({ message: t('main.resultCopied') });
+      snackbar({
+        message: t('main.resultCopied'),
+
+      });
       return outText;
     }
   });
@@ -189,7 +198,7 @@ onMounted(() => {
     outNum.value = "Error";
     snackbar({
       message: t('main.numberOutOfRange'),
-      onActionClick: () => console.log("click action button")
+
     });
     saveConfigToLocal();
   }
@@ -222,12 +231,8 @@ onMounted(() => {
       <div id="out" slot="trigger" v-text="outNum"></div>
     </content-container>
 
-    <mdui-dialog 
-      close-on-overlay-click 
-      :headline="t('main.pickSettings')" 
-      id="numsettings-dialog"
-      @close="closeSettingsDialog"
-    >
+    <mdui-dialog close-on-overlay-click :headline="t('main.pickSettings')" id="numsettings-dialog"
+      @close="closeSettingsDialog">
       <span slot="icon" class="material-symbols-rounded">instant_mix</span>
       <mdui-tabs value="tab-1" placement="left-start">
         <mdui-tab value="tab-1">
@@ -241,36 +246,17 @@ onMounted(() => {
 
         <mdui-tab-panel slot="panel" value="tab-1">
           <div class="number-range">
-            <mdui-text-field 
-              variant="outlined" 
-              required 
-              class="number-range" 
-              :label="t('main.minValue')"
-              v-model.lazy="minNum"
-              type="number"
-              min="1"
-              max="999999"
-            ></mdui-text-field>
+            <mdui-text-field variant="outlined" required class="number-range" :label="t('main.minValue')"
+              v-model.lazy="minNum" type="number" min="1" max="999999"></mdui-text-field>
             <b>&nbsp;&nbsp;-&nbsp;&nbsp;</b>
-            <mdui-text-field 
-              variant="outlined" 
-              required 
-              class="number-range" 
-              :label="t('main.maxValue')"
-              v-model.lazy="maxNum"
-              type="number"
-              min="1"
-              max="999999"
-            ></mdui-text-field>
+            <mdui-text-field variant="outlined" required class="number-range" :label="t('main.maxValue')"
+              v-model.lazy="maxNum" type="number" min="1" max="999999"></mdui-text-field>
           </div>
 
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">repeat</span>
             {{ t('main.allowRepeat') }}
-            <mdui-switch 
-              slot="end-icon" 
-              v-model="isRepeat"
-            ></mdui-switch>
+            <mdui-switch slot="end-icon" v-model="isRepeat"></mdui-switch>
           </mdui-list-item>
         </mdui-tab-panel>
 
@@ -278,19 +264,10 @@ onMounted(() => {
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">label</span>
             {{ t('main.selectSavedLabel') }}
-            <mdui-select 
-              slot="end-icon" 
-              v-model="selectedLabel" 
-              variant="outlined"
-              @change="onLabelChange"
-            >
+            <mdui-select slot="end-icon" v-model="selectedLabel" variant="outlined" @change="onLabelChange">
               <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
               <mdui-menu-item value="null">{{ t('main.none') }}</mdui-menu-item>
-              <mdui-menu-item 
-                v-for="label in excludeLabels" 
-                :key="label.id" 
-                :value="label.id"
-              >
+              <mdui-menu-item v-for="label in excludeLabels" :key="label.id" :value="label.id">
                 {{ label.name }}
               </mdui-menu-item>
             </mdui-select>
@@ -299,55 +276,34 @@ onMounted(() => {
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">block</span>
             {{ t('main.excludeNumbers') }}
-            <mdui-text-field
-              slot="end-icon" 
-              variant="outlined" 
-              v-model="excludeNumbers"
-              placeholder="例如：1,5,8,10"
-            ></mdui-text-field>
+            <span slot="description">{{ t('main.excludeNumbersDesc') }}</span>
+            <mdui-text-field slot="end-icon" variant="outlined" v-model="excludeNumbers"></mdui-text-field>
           </mdui-list-item>
 
-          <mdui-collapse accordion>
-            <mdui-collapse-item>
-              <mdui-list-item slot="header" rounded>
-                {{ t('main.newExcludeLabel') }}
-                <span slot="icon" class="material-symbols-rounded">new_label</span>
-                <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
-              </mdui-list-item>
-              
-              <mdui-list-item nonclickable>
-                {{ t('main.labelName') }}
-                <mdui-text-field 
-                  slot="end-icon" 
-                  variant="outlined" 
-                  id="exLabel-name"
-                  placeholder="例如：已中奖号码"
-                ></mdui-text-field>
-              </mdui-list-item>
-              
-              <mdui-list-item nonclickable>
-                {{ t('main.excludeContent') }}
-                <mdui-text-field 
-                  slot="end-icon" 
-                  variant="outlined" 
-                  id="exLabel-content"
-                  placeholder="例如：1,5,8,10"
-                ></mdui-text-field>
-              </mdui-list-item>
-              
-              <div style="display: flex;justify-content: end;margin-top: 1rem;">
-                <mdui-button 
-                  id="create-exclude-label" 
-                  variant="outlined" 
-                  style="margin-right: 1.5rem;"
-                  @click="saveExcludeLabel"
-                >
-                  <span slot="icon" class="material-symbols-rounded">new_label</span>
-                  {{ t('main.saveAsNewLabel') }}
-                </mdui-button>
-              </div>
-            </mdui-collapse-item>
-          </mdui-collapse>
+          <mdui-divider style="margin: 1rem 0;"></mdui-divider>
+
+          <mdui-list-item nonclickable>
+            {{ t('main.newExcludeLabel') }}
+            <span slot="icon" class="material-symbols-rounded">new_label</span>
+          </mdui-list-item>
+
+          <mdui-list-item nonclickable>
+            {{ t('main.labelName') }}
+            <mdui-text-field slot="end-icon" variant="outlined" id="exLabel-name"></mdui-text-field>
+          </mdui-list-item>
+
+          <mdui-list-item nonclickable>
+            {{ t('main.excludeContent') }}
+            <mdui-text-field slot="end-icon" variant="outlined" id="exLabel-content"></mdui-text-field>
+          </mdui-list-item>
+
+          <div style="display: flex;justify-content: end;margin-top: 1rem;">
+            <mdui-button id="create-exclude-label" variant="outlined" style="margin-right: 1.5rem;"
+              @click="saveExcludeLabel">
+              <span slot="icon" class="material-symbols-rounded">new_label</span>
+              {{ t('main.saveAsNewLabel') }}
+            </mdui-button>
+          </div>
         </mdui-tab-panel>
       </mdui-tabs>
 
@@ -410,8 +366,7 @@ onMounted(() => {
 
 mdui-tab-panel {
   width: calc(54vw - 1rem);
-  min-height: calc(12rem);
-  max-height: calc(50vh - 1rem);
+  height: calc(50vh - 1rem);
   margin: 0 0.5rem;
 
   div.number-range {
@@ -445,12 +400,6 @@ mdui-tab-panel {
 
   mdui-list-container {
     margin: 2rem 0;
-  }
-
-  mdui-select,
-  mdui-text-field {
-    line-height: 1.375rem;
-    max-width: 16em;
   }
 }
 

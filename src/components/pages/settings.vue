@@ -58,7 +58,7 @@ function resetTheme() {
 
   snackbar({
     message: t('app.resetTheme'),
-    position: 'bottom',
+    
     timeout: 2000
   });
 }
@@ -70,7 +70,7 @@ function onCustomLightChange(e) {
 
   snackbar({
     message: t('app.appliedCustomColor'),
-    position: 'bottom',
+    
     timeout: 2000
   });
 }
@@ -109,19 +109,27 @@ onMounted(() => {
   <page-container>
     <content-container>
       <Title :title="t('app.settings')" />
+
       <list-container>
         <template v-slot:title>
-          <mdui-list-subheader>{{ t('app.personalization') }}</mdui-list-subheader>
+          <mdui-list-subheader>{{ t('app.general') }}</mdui-list-subheader>
         </template>
         <mdui-list-item nonclickable>
           <span slot="icon" class="material-symbols-rounded">language</span>
           {{ t('app.language') }}
-          <mdui-select slot="end-icon" :value="currentLocale" @change="setLocale($event.target.value)">
+          <mdui-select variant="outlined" slot="end-icon" :value="currentLocale" @change="setLocale($event.target.value)">
+            <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
             <mdui-menu-item value="zh">简体中文</mdui-menu-item>
             <mdui-menu-item value="zh-Hant">繁體中文</mdui-menu-item>
             <mdui-menu-item value="en">English</mdui-menu-item>
           </mdui-select>
         </mdui-list-item>
+      </list-container>
+
+      <list-container>
+        <template v-slot:title>
+          <mdui-list-subheader>{{ t('app.personalization') }}</mdui-list-subheader>
+        </template>
         <mdui-list-item nonclickable>
           <span slot="icon" class="material-symbols-rounded">palette</span>
           {{ t('app.theme') }}
