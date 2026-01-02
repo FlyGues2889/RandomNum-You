@@ -2,6 +2,7 @@
 import { ref, watch, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { useI18n } from 'vue-i18n';
 
 import 'mdui/mdui.css';
 import 'mdui';
@@ -13,6 +14,8 @@ import './assets/css/transitions.css';
 import History from "./components/pages/history.vue";
 
 //============================================================
+
+const { t } = useI18n();
 
 let win;
 const isMaximized = ref(false);
@@ -73,7 +76,7 @@ function handleClose() { win.close() };
 <template>
 
   <mdui-top-app-bar data-tauri-drag-region>
-    <mdui-top-app-bar-title>RandomNum You</mdui-top-app-bar-title>
+    <mdui-top-app-bar-title>{{ t('app.title') }}</mdui-top-app-bar-title>
     <div style="flex-grow: 1"></div>
     <mdui-button-icon @click="handleMinimize" id="appBar-minimize">
       <span class="material-symbols-rounded">minimize</span>

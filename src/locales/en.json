@@ -1,0 +1,40 @@
+{
+  "app": {
+    "title": "RandomNum You",
+    "settings": "Settings",
+    "personalization": "Personalization",
+    "language": "Language",
+    "theme": "Theme",
+    "themeDescription": "Switch application light/dark mode and theme color",
+    "resetTheme": "Theme color has been reset",
+    "appliedCustomColor": "Custom theme color has been applied",
+    "about": "About",
+    "aboutDescription": "Version {version}",
+    "openSource": "Open source projects",
+    "openSourceDescription": "Tauri - MDUI - Material Symbols",
+    "repository": "Project repository",
+    "license": "License",
+    "author": "Project author"
+  },
+  "main": {
+    "pickSettings": "Pick Settings",
+    "copyResult": "Copy result",
+    "startStopPick": "Start / Stop picking",
+    "labelNameContentRequired": "Label name and content cannot be empty",
+    "excludeLabelSaved": "Exclude label saved",
+    "resultCopied": "Result copied",
+    "numberOutOfRange": "Error: last displayed number is out of range",
+    "basic": "Basic",
+    "exclusions": "Exclusions",
+    "minValue": "Min value",
+    "maxValue": "Max value",
+    "allowRepeat": "Allow repeat picking",
+    "selectSavedLabel": "Select saved label",
+    "none": "None",
+    "excludeNumbers": "Exclude numbers (comma separated)",
+    "newExcludeLabel": "New exclude label",
+    "labelName": "Label name",
+    "excludeContent": "Exclude content",
+    "saveAsNewLabel": "Save as new label"
+  }
+}

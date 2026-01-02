@@ -1,11 +1,14 @@
 <script setup>
 import 'material-symbols';
 import { ref, watch, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Picker from '../../js/Picker.js';
 import HistoryService from '../../js/HistoryService.js';
 import { snackbar } from 'mdui/functions/snackbar.js';
 import ClipboardJS from 'clipboard';
 import 'mdui/mdui.css';
+
+const { t } = useI18n();
 
 // 默认配置
 const defaultConfig = {
@@ -131,7 +134,7 @@ function saveExcludeLabel() {
   const labelContent = document.getElementById('exLabel-content').value?.trim();
   
   if (!labelName || !labelContent) {
-    snackbar({ message: "标签名称和内容不能为空" });
+    snackbar({ message: t('main.labelNameContentRequired') });
     return;
   }
   
@@ -147,7 +150,7 @@ function saveExcludeLabel() {
   document.getElementById('exLabel-name').value = '';
   document.getElementById('exLabel-content').value = '';
   
-  snackbar({ message: "排除标签已保存" });
+  snackbar({ message: t('main.excludeLabelSaved') });
 }
 
 // 切换排除标签
@@ -169,7 +172,7 @@ onMounted(() => {
   new ClipboardJS('#copyOut', {
     text: function (trigger) {
       const outText = document.getElementById('out').innerText;
-      snackbar({ message: "结果已复制" });
+      snackbar({ message: t('main.resultCopied') });
       return outText;
     }
   });
@@ -185,7 +188,7 @@ onMounted(() => {
   if (outNum.value !== '-' && (outNum.value < 1 || outNum.value > 999999)) {
     outNum.value = "Error";
     snackbar({
-      message: "Error: last displayed number is out of range",
+      message: t('main.numberOutOfRange'),
       onActionClick: () => console.log("click action button")
     });
     saveConfigToLocal();
@@ -201,16 +204,16 @@ onMounted(() => {
     <content-container>
       <mdui-button id="openNumSettings" variant="outlined" @click="showNumSettingsDialog()">
         <span class="material-symbols-rounded" slot="icon">instant_mix</span>
-        抽取设置
+        {{ t('main.pickSettings') }}
       </mdui-button>
 
-      <mdui-tooltip content="复制抽取结果">
+      <mdui-tooltip :content="t('main.copyResult')">
         <mdui-button-icon id="copyOut">
           <span class="material-symbols-rounded">content_copy</span>
         </mdui-button-icon>
       </mdui-tooltip>
 
-      <mdui-tooltip content="开始 / 结束 抽取">
+      <mdui-tooltip :content="t('main.startStopPick')">
         <mdui-fab id="pickBtn" class="mdui-fab" size="large" @click="generateNum">
           <span slot="icon" class="material-symbols-rounded">{{ isPicking ? 'stop' : 'touch_app' }}</span>
         </mdui-fab>
@@ -221,7 +224,7 @@ onMounted(() => {
 
     <mdui-dialog 
       close-on-overlay-click 
-      headline="抽取设置" 
+      :headline="t('main.pickSettings')" 
       id="numsettings-dialog"
       @close="closeSettingsDialog"
     >
@@ -229,11 +232,11 @@ onMounted(() => {
       <mdui-tabs value="tab-1" placement="left-start">
         <mdui-tab value="tab-1">
           <span slot="icon" class="material-symbols-rounded">numbers</span>
-          基本
+          {{ t('main.basic') }}
         </mdui-tab>
         <mdui-tab value="tab-2">
           <span slot="icon" class="material-symbols-rounded">block</span>
-          排除项
+          {{ t('main.exclusions') }}
         </mdui-tab>
 
         <mdui-tab-panel slot="panel" value="tab-1">
@@ -242,7 +245,7 @@ onMounted(() => {
               variant="outlined" 
               required 
               class="number-range" 
-              label="最小值"
+              :label="t('main.minValue')"
               v-model.lazy="minNum"
               type="number"
               min="1"
@@ -253,7 +256,7 @@ onMounted(() => {
               variant="outlined" 
               required 
               class="number-range" 
-              label="最大值"
+              :label="t('main.maxValue')"
               v-model.lazy="maxNum"
               type="number"
               min="1"
@@ -263,7 +266,7 @@ onMounted(() => {
 
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">repeat</span>
-            允许重复抽取
+            {{ t('main.allowRepeat') }}
             <mdui-switch 
               slot="end-icon" 
               v-model="isRepeat"
@@ -274,7 +277,7 @@ onMounted(() => {
         <mdui-tab-panel slot="panel" value="tab-2">
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">label</span>
-            选择已保存的标签
+            {{ t('main.selectSavedLabel') }}
             <mdui-select 
               slot="end-icon" 
               v-model="selectedLabel" 
@@ -282,7 +285,7 @@ onMounted(() => {
               @change="onLabelChange"
             >
               <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
-              <mdui-menu-item value="null">无</mdui-menu-item>
+              <mdui-menu-item value="null">{{ t('main.none') }}</mdui-menu-item>
               <mdui-menu-item 
                 v-for="label in excludeLabels" 
                 :key="label.id" 
@@ -295,8 +298,8 @@ onMounted(() => {
 
           <mdui-list-item nonclickable>
             <span slot="icon" class="material-symbols-rounded">block</span>
-            排除数字(逗号分隔)
-            <mdui-text-field 
+            {{ t('main.excludeNumbers') }}
+            <mdui-text-field
               slot="end-icon" 
               variant="outlined" 
               v-model="excludeNumbers"
@@ -307,13 +310,13 @@ onMounted(() => {
           <mdui-collapse accordion>
             <mdui-collapse-item>
               <mdui-list-item slot="header" rounded>
-                新建排除项标签
+                {{ t('main.newExcludeLabel') }}
                 <span slot="icon" class="material-symbols-rounded">new_label</span>
                 <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
               </mdui-list-item>
               
               <mdui-list-item nonclickable>
-                标签名称
+                {{ t('main.labelName') }}
                 <mdui-text-field 
                   slot="end-icon" 
                   variant="outlined" 
@@ -323,7 +326,7 @@ onMounted(() => {
               </mdui-list-item>
               
               <mdui-list-item nonclickable>
-                排除项内容
+                {{ t('main.excludeContent') }}
                 <mdui-text-field 
                   slot="end-icon" 
                   variant="outlined" 
@@ -340,7 +343,7 @@ onMounted(() => {
                   @click="saveExcludeLabel"
                 >
                   <span slot="icon" class="material-symbols-rounded">new_label</span>
-                  将新建内容保存为新标签
+                  {{ t('main.saveAsNewLabel') }}
                 </mdui-button>
               </div>
             </mdui-collapse-item>

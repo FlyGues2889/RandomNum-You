@@ -1,9 +1,12 @@
 <script setup>
 import 'material-symbols';
 import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import theme from '../../js/theme.js';
 import 'mdui/mdui.css';
 import { snackbar } from 'mdui';
+
+const { t } = useI18n();
 
 const defaultThemeColor = '#3a699c';
 const storedTheme = JSON.parse(localStorage.getItem('appTheme')) || {
@@ -18,6 +21,13 @@ const appliedMode = ref(storedTheme.mode);
 const uiSelectedMode = ref(storedTheme.mode);
 const lastClicked = ref(null);
 const customColorInput = ref(null);
+const currentLocale = ref(localStorage.getItem('rny.locale') || 'zh');
+
+function setLocale(locale) {
+  currentLocale.value = locale;
+  localStorage.setItem('rny.locale', locale);
+  window.location.reload(); // 重新加载应用以应用语言更改
+}
 
 function saveThemeToLocal() {
   const themeConfig = {
@@ -47,7 +57,7 @@ function resetTheme() {
   saveThemeToLocal();
 
   snackbar({
-    message: '已重置主题颜色',
+    message: t('app.resetTheme'),
     position: 'bottom',
     timeout: 2000
   });
@@ -59,7 +69,7 @@ function onCustomLightChange(e) {
   setColorTheme(val);
 
   snackbar({
-    message: '已应用自定义主题色',
+    message: t('app.appliedCustomColor'),
     position: 'bottom',
     timeout: 2000
   });
@@ -98,15 +108,24 @@ onMounted(() => {
 <template>
   <page-container>
     <content-container>
-      <Title title="设置" />
+      <Title :title="t('app.settings')" />
       <list-container>
         <template v-slot:title>
-          <mdui-list-subheader>个性化</mdui-list-subheader>
+          <mdui-list-subheader>{{ t('app.personalization') }}</mdui-list-subheader>
         </template>
         <mdui-list-item nonclickable>
+          <span slot="icon" class="material-symbols-rounded">language</span>
+          {{ t('app.language') }}
+          <mdui-select slot="end-icon" :value="currentLocale" @change="setLocale($event.target.value)">
+            <mdui-menu-item value="zh">简体中文</mdui-menu-item>
+            <mdui-menu-item value="zh-Hant">繁體中文</mdui-menu-item>
+            <mdui-menu-item value="en">English</mdui-menu-item>
+          </mdui-select>
+        </mdui-list-item>
+        <mdui-list-item nonclickable>
           <span slot="icon" class="material-symbols-rounded">palette</span>
-          主题
-          <span slot="description">切换应用程序光照模式和主题色</span>
+          {{ t('app.theme') }}
+          <span slot="description">{{ t('app.themeDescription') }}</span>
           <mdui-button slot="end-icon" v-show="themeColor !== '#3a699c'" class="theme-button" id="defaultTheme"
             variant="outlined" @click="resetTheme()">
             <span class="material-symbols-rounded">reset_settings</span>
@@ -157,31 +176,31 @@ onMounted(() => {
 
       <list-container>
         <template v-slot:title>
-          <mdui-list-subheader>关于</mdui-list-subheader>
+          <mdui-list-subheader>{{ t('app.about') }}</mdui-list-subheader>
         </template>
         <mdui-list-item rounded nonclickable>
           <span slot="icon" class="material-symbols-rounded">info</span>
-          关于 RandomNum You
-          <span slot="description">Version 2.0.0</span>
+          {{ t('app.about') }} RandomNum You
+          <span slot="description">{{ t('app.aboutDescription', { version: '2.0.0' }) }}</span>
         </mdui-list-item>
         <div style="margin-left: 2.5rem;" class="mdui-prose">
           <mdui-list-item nonclickable>
             <mdui-list-item rounded>
-              使用开源项目
-              <span slot="description">Tauri - MDUI - Material Symbols</span>
+              {{ t('app.openSource') }}
+              <span slot="description">{{ t('app.openSourceDescription') }}</span>
             </mdui-list-item>
             <mdui-list-item rounded>
-              项目存储库
+              {{ t('app.repository') }}
               <span slot="description">https://github.com/FlyGues2889/random-number</span>
             </mdui-list-item>
             <mdui-list-item rounded>
-              许可证
+              {{ t('app.license') }}
               <span slot="description">MIT</span>
             </mdui-list-item>
           </mdui-list-item>
         </div>
         <mdui-list-item rounded nonclickable>
-          项目作者
+          {{ t('app.author') }}
           <svg slot="icon" xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 0 400 400"
             style="margin-left: -0.1rem;">
             <g transform="translate(-2844 -168)">

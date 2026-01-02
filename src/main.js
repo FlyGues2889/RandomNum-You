@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
+import i18n from "./locales";
 
 import "mdui/mdui.css";
 import "mdui";
@@ -19,6 +20,7 @@ app.component("content-container", contentContainer);
 app.component("Title", Title);
 
 app.use(router);
+app.use(i18n);
 // apply saved theme before mounting
 theme.init();
 

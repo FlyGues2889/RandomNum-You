@@ -1,0 +1,40 @@
+{
+  "app": {
+    "title": "RandomNum You",
+    "settings": "設定",
+    "personalization": "個性化",
+    "language": "語言",
+    "theme": "主題",
+    "themeDescription": "切換應用程式光照模式和主題色",
+    "resetTheme": "已重設主題顏色",
+    "appliedCustomColor": "已應用自訂主題色",
+    "about": "關於",
+    "aboutDescription": "版本 {version}",
+    "openSource": "使用開源專案",
+    "openSourceDescription": "Tauri - MDUI - Material Symbols",
+    "repository": "專案儲存庫",
+    "license": "授權許可",
+    "author": "專案作者"
+  },
+  "main": {
+    "pickSettings": "抽取設定",
+    "copyResult": "複製抽取結果",
+    "startStopPick": "開始 / 結束 抽取",
+    "labelNameContentRequired": "標籤名稱和內容不能為空",
+    "excludeLabelSaved": "排除標籤已保存",
+    "resultCopied": "結果已複製",
+    "numberOutOfRange": "錯誤：最後顯示的數字超出範圍",
+    "basic": "基本",
+    "exclusions": "排除項",
+    "minValue": "最小值",
+    "maxValue": "最大值",
+    "allowRepeat": "允許重複抽取",
+    "selectSavedLabel": "選擇已保存的標籤",
+    "none": "無",
+    "excludeNumbers": "排除數字(逗號分隔)",
+    "newExcludeLabel": "新建排除項標籤",
+    "labelName": "標籤名稱",
+    "excludeContent": "排除項內容",
+    "saveAsNewLabel": "將新建內容保存為新標籤"
+  }
+}
