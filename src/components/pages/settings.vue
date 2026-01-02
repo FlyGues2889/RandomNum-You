@@ -8,6 +8,9 @@ import { snackbar } from 'mdui';
 
 const { t } = useI18n();
 
+// 背景图片设置
+const backgroundImageEnabled = ref(localStorage.getItem('backgroundImageSwitch') === 'true');
+
 const defaultThemeColor = '#3a699c';
 const storedTheme = JSON.parse(localStorage.getItem('appTheme')) || {
   color: defaultThemeColor,
@@ -180,7 +183,24 @@ onMounted(() => {
             </mdui-segmented-button-group>
           </mdui-list-item>
         </div>
+
+        <mdui-list-item nonclickable>
+          <span slot="icon" class="material-symbols-rounded">image</span>
+          {{ t('app.backgroundImage') }}
+          <span slot="description">{{ t('app.backgroundImageDescription') }}</span>
+          <mdui-button slot="end-icon" variant="text" @click="theme.backgroundImageChoose()">
+            {{ t('app.selectImage') }}
+          </mdui-button>
+          <mdui-switch 
+            slot="end-icon" 
+            id="backgroundImage" 
+            v-model="backgroundImageEnabled"
+            @change="theme.backgroundImageSwitchChange()"
+          />
+        </mdui-list-item>
       </list-container>
+
+
 
       <list-container>
         <template v-slot:title>

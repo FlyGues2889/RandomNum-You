@@ -15,7 +15,15 @@
     "openSourceDescription": "Tauri - MDUI - Material Symbols",
     "repository": "Project repository",
     "license": "License",
-    "author": "Project author"
+    "author": "Project author",
+    "background": "Background",
+    "backgroundImage": "Background Image",
+    "backgroundImageDescription": "Change application background image, restart to apply settings",
+    "selectImage": "Select Image",
+    "backgroundOpacity": "Background Opacity",
+    "backgroundOpacityDescription": "Set background transparency (default: 80%)",
+    "backgroundBlur": "Background Blur",
+    "backgroundBlurDescription": "Set background blur intensity"
   },
   "main": {
     "pickSettings": "Settings",

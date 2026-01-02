@@ -15,7 +15,15 @@
     "openSourceDescription": "Tauri - MDUI - Material Symbols",
     "repository": "项目存储库",
     "license": "许可证",
-    "author": "项目作者"
+    "author": "项目作者",
+    "background": "背景",
+    "backgroundImage": "程序背景图片",
+    "backgroundImageDescription": "修改程序背景图片，重新打开以应用设置",
+    "selectImage": "选择图片",
+    "backgroundOpacity": "页面背景透明",
+    "backgroundOpacityDescription": "设置页面背景透明度(默认值:80%)",
+    "backgroundBlur": "背景磨砂",
+    "backgroundBlurDescription": "设置背景磨砂颗粒数"
   },
   "main": {
     "pickSettings": "抽取设置",
