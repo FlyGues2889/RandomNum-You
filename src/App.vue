@@ -112,11 +112,13 @@ function handleClose() { win.close() };
 
   </mdui-navigation-rail>
   <main>
-    <router-view v-slot="{ Component, route }">
-      <transition name="slide-fade" mode="out-in">
-        <component :is="Component" :key="route.path" class="view-container" />
-      </transition>
-    </router-view>
+    <div class="view-container">
+      <router-view v-slot="{ Component, route }">
+        <transition name="slide-fade" mode="out-in">
+          <component :is="Component" :key="route.path" class="view-content" />
+        </transition>
+      </router-view>
+    </div>
   </main>
 </template>
 
@@ -138,8 +140,16 @@ main {
     width: calc(100vw - 8rem);
     padding: 1.25rem;
 
+    /* 默认只保留半透明背景色与圆角，背景图片由脚本按需应用 */
     background-color: rgb(var(--mdui-color-surface), 0.7);
     border-radius: var(--mdui-shape-corner-medium);
+    overflow: hidden;
+  }
+
+  .view-content {
+    height: 100%;
+    width: 100%;
+    background: transparent;
   }
 }
 

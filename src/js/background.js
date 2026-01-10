@@ -110,18 +110,24 @@ export async function getBackgroundImage() {
  */
 export async function applyBackgroundImage() {
   const fileBlob = await getBackgroundImage();
-  const backgroundEnabled = localStorage.getItem("backgroundImageSwitch") === "true";
+  const backgroundEnabled =
+    localStorage.getItem("backgroundImageSwitch") === "true";
 
   if (fileBlob && backgroundEnabled) {
     const url = URL.createObjectURL(fileBlob);
-    const mainPage = document.body;
-    
-    mainPage.style.backgroundImage = `url('${url}')`;
-    mainPage.style.backgroundSize = "cover";
-    mainPage.style.backgroundAttachment = "fixed";
-    mainPage.style.backgroundPosition = "center";
-    
-    console.log("Background image applied successfully");
+    // 优先将背景应用到 .view-container（位于 <main> 内，带圆角），
+    // 这样图片会在圆角下面并被圆角遮盖（如果元素有 border-radius）
+    const target =
+      document.querySelector(".view-container") ||
+      document.querySelector("main") ||
+      document.body;
+
+    target.style.backgroundImage = `url('${url}')`;
+    target.style.backgroundSize = "cover";
+    target.style.backgroundPosition = "center";
+    target.style.backgroundRepeat = "no-repeat";
+
+    console.log("Background image applied successfully to", target);
   }
 }
 
@@ -129,6 +135,10 @@ export async function applyBackgroundImage() {
  * 清除背景图片
  */
 export function clearBackgroundImage() {
-  document.body.style.backgroundImage = "";
+  const target =
+    document.querySelector(".view-container") ||
+    document.querySelector("main") ||
+    document.body;
+  if (target) target.style.backgroundImage = "";
   localStorage.setItem("backgroundImageSwitch", "false");
 }
