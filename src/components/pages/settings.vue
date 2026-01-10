@@ -10,7 +10,6 @@ const { t } = useI18n();
 
 // 背景图片设置
 const backgroundImageEnabled = ref(localStorage.getItem('backgroundImageSwitch') === 'true');
-
 const defaultThemeColor = '#3a699c';
 const storedTheme = JSON.parse(localStorage.getItem('appTheme')) || {
   color: defaultThemeColor,
@@ -195,6 +194,7 @@ onMounted(() => {
             slot="end-icon" 
             id="backgroundImage" 
             v-model="backgroundImageEnabled"
+            :checked="backgroundImageEnabled"
             @change="theme.backgroundImageSwitchChange()"
           />
         </mdui-list-item>
