@@ -112,22 +112,37 @@ export async function applyBackgroundImage() {
   const fileBlob = await getBackgroundImage();
   const backgroundEnabled =
     localStorage.getItem("backgroundImageSwitch") === "true";
+  const position = localStorage.getItem("backgroundImagePosition") || "page";
+
+  // 先清除所有可能的背景
+  document.body.style.backgroundImage = "";
+  const viewContainer =
+    document.querySelector(".view-container") || document.querySelector("main");
+  if (viewContainer) viewContainer.style.backgroundImage = "";
 
   if (fileBlob && backgroundEnabled) {
     const url = URL.createObjectURL(fileBlob);
-    // 优先将背景应用到 .view-container（位于 <main> 内，带圆角），
-    // 这样图片会在圆角下面并被圆角遮盖（如果元素有 border-radius）
-    const target =
-      document.querySelector(".view-container") ||
-      document.querySelector("main") ||
-      document.body;
-
-    target.style.backgroundImage = `url('${url}')`;
-    target.style.backgroundSize = "cover";
-    target.style.backgroundPosition = "center";
-    target.style.backgroundRepeat = "no-repeat";
-
-    console.log("Background image applied successfully to", target);
+    document.getElementById("backgroundImage").setAttribute("checked", "true");
+    if (position === "html") {
+      // 应用到 body（整体/全屏）
+      document.body.style.backgroundImage = `url('${url}')`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundAttachment = "fixed";
+      document.body.style.backgroundPosition = "center";
+      console.log("Background image applied to body");
+    } else {
+      // 应用到页面的一部分（.view-container 或 main，带圆角）
+      const target =
+        document.querySelector(".view-container") ||
+        document.querySelector("main");
+      if (target) {
+        target.style.backgroundImage = `url('${url}')`;
+        target.style.backgroundSize = "cover";
+        target.style.backgroundPosition = "center";
+        target.style.backgroundRepeat = "no-repeat";
+        console.log("Background image applied to view-container");
+      }
+    }
   }
 }
 
@@ -135,10 +150,16 @@ export async function applyBackgroundImage() {
  * 清除背景图片
  */
 export function clearBackgroundImage() {
-  const target =
-    document.querySelector(".view-container") ||
-    document.querySelector("main") ||
-    document.body;
-  if (target) target.style.backgroundImage = "";
+  document.body.style.backgroundImage = "";
+  const viewContainer =
+    document.querySelector(".view-container") || document.querySelector("main");
+  if (viewContainer) viewContainer.style.backgroundImage = "";
   localStorage.setItem("backgroundImageSwitch", "false");
+}
+
+/**
+ * 导出背景位置获取函数供外部使用
+ */
+export function getBackgroundPosition() {
+  return localStorage.getItem("backgroundImagePosition") || "page";
 }

@@ -23,7 +23,12 @@
     "backgroundOpacity": "Background Opacity",
     "backgroundOpacityDescription": "Set background transparency (default: 80%)",
     "backgroundBlur": "Background Blur",
-    "backgroundBlurDescription": "Set background blur intensity"
+    "backgroundBlurDescription": "Set background blur intensity",
+    "backgroundPosition": "Background Position",
+    "backgroundPositionDescription": "Choose where to display the background image",
+    "appliedBackgroundPosition": "Background position has been applied",
+    "page": "In Page",
+    "html": "Full"
   },
   "main": {
     "pickSettings": "Settings",

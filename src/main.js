@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { getCurrentWindow } = await import("@tauri-apps/api/window");
     const win = getCurrentWindow();
     await win.show();
-    await win.setFocus();
+    // await win.setFocus();
   } catch (error) {
     console.error("Failed to show window:", error);
   }

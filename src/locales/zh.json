@@ -23,7 +23,12 @@
     "backgroundOpacity": "页面背景透明",
     "backgroundOpacityDescription": "设置页面背景透明度(默认值:80%)",
     "backgroundBlur": "背景磨砂",
-    "backgroundBlurDescription": "设置背景磨砂颗粒数"
+    "backgroundBlurDescription": "设置背景磨砂颗粒数",
+    "backgroundPosition": "背景位置",
+    "backgroundPositionDescription": "选择背景图片的显示位置",
+    "appliedBackgroundPosition": "背景位置已应用",
+    "page": "页面",
+    "html": "整体"
   },
   "main": {
     "pickSettings": "抽取设置",

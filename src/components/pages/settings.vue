@@ -10,6 +10,7 @@ const { t } = useI18n();
 
 // 背景图片设置
 const backgroundImageEnabled = ref(localStorage.getItem('backgroundImageSwitch') === 'true');
+const backgroundPosition = ref(localStorage.getItem('backgroundImagePosition') || 'page');
 const defaultThemeColor = '#3a699c';
 const storedTheme = JSON.parse(localStorage.getItem('appTheme')) || {
   color: defaultThemeColor,
@@ -50,17 +51,17 @@ function setColorTheme(color) {
 function resetTheme() {
   theme.setMode('auto');
   theme.setColor(defaultThemeColor);
-  
+
   themeColor.value = defaultThemeColor;
   customLight.value = defaultThemeColor;
   appliedMode.value = 'auto';
   uiSelectedMode.value = 'auto';
-  
+
   saveThemeToLocal();
 
   snackbar({
     message: t('app.resetTheme'),
-    
+
     timeout: 2000
   });
 }
@@ -72,7 +73,7 @@ function onCustomLightChange(e) {
 
   snackbar({
     message: t('app.appliedCustomColor'),
-    
+
     timeout: 2000
   });
 }
@@ -86,13 +87,23 @@ function openColorPicker() {
 function setThemeMode(mode) {
   theme.setMode(mode);
   appliedMode.value = mode;
-  
+
   if (lastClicked.value === mode && uiSelectedMode.value !== mode) {
     uiSelectedMode.value = mode;
   }
-  
+
   lastClicked.value = mode;
   saveThemeToLocal();
+}
+
+function setBackgroundPosition(position) {
+  theme.setBackgroundPosition(position);
+
+  snackbar({
+    message: t('app.appliedBackgroundPosition'),
+
+    timeout: 2000
+  });
 }
 
 onMounted(() => {
@@ -101,9 +112,16 @@ onMounted(() => {
   customLight.value = storedTheme.customColor || s.custom || s.color || defaultThemeColor;
   appliedMode.value = storedTheme.mode || s.mode || 'auto';
   uiSelectedMode.value = storedTheme.mode || s.mode || 'auto';
-  
+  backgroundPosition.value = theme.getBackgroundPosition();
+
   theme.setColor(themeColor.value);
   theme.setMode(appliedMode.value);
+
+  // 设置背景位置按钮状态
+  const bgPositionGroup = document.getElementById('background-position-toggle');
+  if (bgPositionGroup) {
+    bgPositionGroup.value = theme.getBackgroundPosition();
+  }
 });
 </script>
 
@@ -119,7 +137,8 @@ onMounted(() => {
         <mdui-list-item nonclickable>
           <span slot="icon" class="material-symbols-rounded">language</span>
           {{ t('app.language') }}
-          <mdui-select variant="outlined" slot="end-icon" :value="currentLocale" @change="setLocale($event.target.value)">
+          <mdui-select variant="outlined" slot="end-icon" :value="currentLocale"
+            @change="setLocale($event.target.value)">
             <span slot="end-icon" class="material-symbols-rounded">keyboard_arrow_down</span>
             <mdui-menu-item value="zh">简体中文</mdui-menu-item>
             <mdui-menu-item value="zh-Hant">繁體中文</mdui-menu-item>
@@ -151,22 +170,15 @@ onMounted(() => {
             <mdui-button variant="tonal" style="" @click="openColorPicker()">
               <span class="material-symbols-rounded">colorize</span>
             </mdui-button>
-            
-            <input 
-              type="color" 
-              id="customLight" 
-              ref="customColorInput"
-              v-model="customLight"
-              style="
+
+            <input type="color" id="customLight" ref="customColorInput" v-model="customLight" style="
                 position: absolute; 
                 width:0; 
                 height:0; 
                 opacity:0; 
                 z-index: -1; 
                 pointer-events:none;
-              "
-              @change="onCustomLightChange"
-            >
+              " @change="onCustomLightChange">
 
             <mdui-segmented-button-group slot="end-icon" style="width: 16rem" selects="single" :value="uiSelectedMode"
               id="theme-toggle">
@@ -190,13 +202,27 @@ onMounted(() => {
           <mdui-button slot="end-icon" variant="text" @click="theme.backgroundImageChoose()">
             {{ t('app.selectImage') }}
           </mdui-button>
-          <mdui-switch 
-            slot="end-icon" 
-            id="backgroundImage" 
-            v-model="backgroundImageEnabled"
-            :checked="backgroundImageEnabled"
-            @change="theme.backgroundImageSwitchChange()"
-          />
+          <mdui-switch slot="end-icon" id="backgroundImage" v-model="backgroundImageEnabled"
+            :checked="backgroundImageEnabled" @change="theme.backgroundImageSwitchChange()" />
+        </mdui-list-item>
+
+        <mdui-list-item nonclickable>
+          <span slot="icon" class="material-symbols-rounded">layers_clear</span>
+          {{ t('app.backgroundPosition') }}
+          <span slot="description">{{ t('app.backgroundPositionDescription') }}</span>
+
+
+          <mdui-segmented-button-group slot="end-icon" style="width: 12rem" selects="single"
+            id="background-position-toggle" @change="setBackgroundPosition($event.target.value)">
+            <mdui-segmented-button class="leftBtn" value="page">
+              {{ t('app.page') }}
+            </mdui-segmented-button>
+            <mdui-segmented-button class="rightBtn" value="html">
+              {{ t('app.html') }}
+            </mdui-segmented-button>
+
+          </mdui-segmented-button-group>
+
         </mdui-list-item>
       </list-container>
 

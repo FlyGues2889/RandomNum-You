@@ -1,12 +1,18 @@
 import { setColorScheme } from "mdui/functions/setColorScheme.js";
 import { setTheme as mduiSetTheme } from "mdui/functions/setTheme.js";
-import { applyBackgroundImage, saveBackgroundImage, clearBackgroundImage } from "./background.js";
+import {
+  applyBackgroundImage,
+  saveBackgroundImage,
+  clearBackgroundImage,
+} from "./background.js";
 
 const THEME_KEY = "rny.theme.mode";
 const COLOR_KEY = "rny.theme.color";
 const CUSTOM_KEY = "rny.theme.customLight";
 const BACKGROUND_IMAGE_SWITCH_KEY = "backgroundImageSwitch";
+const BACKGROUND_POSITION_KEY = "backgroundImagePosition";
 const DEFAULT_COLOR = "#6750a4";
+const DEFAULT_BACKGROUND_POSITION = "page";
 
 function getStored(key) {
   try {
@@ -71,10 +77,10 @@ function getCustom() {
  */
 async function backgroundImageChoose() {
   return new Promise((resolve) => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+
     input.onchange = async (event) => {
       const file = event.target.files[0];
       if (file) {
@@ -91,7 +97,7 @@ async function backgroundImageChoose() {
         resolve(false);
       }
     };
-    
+
     input.click();
   });
 }
@@ -100,17 +106,32 @@ async function backgroundImageChoose() {
  * 切换背景图片开关
  */
 function backgroundImageSwitchChange() {
-  const switchElement = document.getElementById('backgroundImage');
+  const switchElement = document.getElementById("backgroundImage");
   if (!switchElement) return;
-  
+
   const isChecked = switchElement.checked;
   localStorage.setItem(BACKGROUND_IMAGE_SWITCH_KEY, isChecked.toString());
-  
+
   if (isChecked) {
     applyBackgroundImage();
   } else {
     clearBackgroundImage();
   }
+}
+
+/**
+ * 获取背景位置
+ */
+function getBackgroundPosition() {
+  return getStored(BACKGROUND_POSITION_KEY) || DEFAULT_BACKGROUND_POSITION;
+}
+
+/**
+ * 设置背景位置
+ */
+function setBackgroundPosition(position) {
+  setStored(BACKGROUND_POSITION_KEY, position);
+  applyBackgroundImage();
 }
 
 /**
@@ -126,4 +147,6 @@ export default {
   getCustom,
   backgroundImageChoose,
   backgroundImageSwitchChange,
+  getBackgroundPosition,
+  setBackgroundPosition,
 };

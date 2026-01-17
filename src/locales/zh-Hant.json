@@ -15,7 +15,15 @@
     "openSourceDescription": "Tauri - MDUI - Material Symbols",
     "repository": "專案儲存庫",
     "license": "授權許可",
-    "author": "專案作者"
+    "author": "專案作者",
+    "backgroundImage": "程式背景圖片",
+    "backgroundImageDescription": "修改程式背景圖片，重新開啟以套用設定",
+    "selectImage": "選擇圖片",
+    "backgroundPosition": "背景位置",
+    "backgroundPositionDescription": "選擇背景圖片的顯示位置",
+    "appliedBackgroundPosition": "背景位置已套用",
+    "page": "頁面",
+    "html": "整體"
   },
   "main": {
     "pickSettings": "抽取設定",
