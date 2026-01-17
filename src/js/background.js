@@ -122,7 +122,8 @@ export async function applyBackgroundImage() {
 
   if (fileBlob && backgroundEnabled) {
     const url = URL.createObjectURL(fileBlob);
-    document.getElementById("backgroundImage").setAttribute("checked", "true");
+    const bgSwitchEl = document.getElementById("backgroundImage");
+    if (bgSwitchEl) bgSwitchEl.setAttribute("checked", "true");
     if (position === "html") {
       // 应用到 body（整体/全屏）
       document.body.style.backgroundImage = `url('${url}')`;
