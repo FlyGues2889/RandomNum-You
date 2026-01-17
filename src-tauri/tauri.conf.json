@@ -4,9 +4,9 @@
   "version": "2.0.0",
   "identifier": "com.flygues.randomnum-you",
   "build": {
-    "beforeDevCommand": "pnpm dev",
+    "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "npm run build",
     "frontendDist": "../dist"
   },
   "app": {
@@ -16,7 +16,7 @@
         "minWidth": 800,
         "minHeight": 600,
         "transparent": true,
-        "visible": true,
+        "visible": false,
         "decorations": false
       }
     ],
@@ -27,10 +27,7 @@
   "bundle": {
     "active": true,
     "targets": "nsis",
-    "icon": [
-      "icons/appIcon.ico",
-      "icons/appIcon.svg"
-    ],
+    "icon": ["icons/appIcon.ico", "icons/appIcon.svg"],
     "category": "Utility",
     "shortDescription": "随机数抽取器",
     "longDescription": "使用 Tauri 开发的 Material You 风格的随机数抽取器。",
@@ -39,10 +36,7 @@
         "language": "zh-CN"
       },
       "nsis": {
-        "languages": [
-          "SimpChinese",
-          "English"
-        ],
+        "languages": ["SimpChinese", "English"],
         "displayLanguageSelector": true
       }
     }

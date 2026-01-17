@@ -25,3 +25,15 @@ app.use(i18n);
 theme.init();
 
 app.mount("#app");
+
+// dom加载之后显示窗口
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const { getCurrentWindow } = await import("@tauri-apps/api/window");
+    const win = getCurrentWindow();
+    await win.show();
+    await win.setFocus();
+  } catch (error) {
+    console.error("Failed to show window:", error);
+  }
+});
